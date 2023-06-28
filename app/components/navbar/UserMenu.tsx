@@ -1,10 +1,11 @@
 "use client";
 
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   AiOutlineMenu,
   AiOutlineShoppingCart,
   AiOutlineHeart,
+  AiOutlineClose,
 } from "react-icons/ai";
 import { RiUserReceivedFill } from "react-icons/ri";
 import { LuIceCream, LuLogIn, LuLogOut, LuUserPlus } from "react-icons/lu";
@@ -166,6 +167,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           flex 
           flex-row 
           items-center 
+          justify-center
           gap-3 
           rounded-full 
           cursor-pointer 
@@ -173,7 +175,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           transition
           "
         >
-          <AiOutlineMenu />
+          {isOpen ?
+            <AiOutlineClose className="animation" />
+            : <AiOutlineMenu />}
           <div className="hidden md:block">
             <Avatar src={currentUser?.image} />
           </div>
@@ -186,7 +190,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             rounded-xl 
             shadow-md
             w-[40vw]
-            md:w-3/4 
+            md:w-3/4
             bg-white 
             overflow-hidden 
             right-0 
@@ -201,17 +205,17 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
                   <div key={it.label}>
                     {it.label.startsWith("Logout") ? <>
                       <hr />
-                      <MenuItem label={it.label} onClick={it.onClick} icon={it.icon} />
+                      <MenuItem label={it.label} onClick={() => { toggleOpen(); it.onClick(); }} icon={it.icon} />
                     </> :
-                      <MenuItem label={it.label} onClick={it.onClick} icon={it.icon} />
+                      <MenuItem label={it.label} onClick={() => { toggleOpen(); it.onClick(); }} icon={it.icon} />
                     }
                   </div>
                 ))}
               </>
             ) : (
               <>
-                  <MenuItem label="Login" onClick={loginModal.onOpen} icon={ LuLogIn} />
-                <MenuItem label="Sign up" onClick={registerModal.onOpen } icon={ LuUserPlus}/>
+                <MenuItem label="Login" onClick={() => { toggleOpen(); loginModal.onOpen(); }} icon={LuLogIn} />
+                <MenuItem label="Sign up" onClick={() => { toggleOpen(); registerModal.onOpen(); }} icon={LuUserPlus} />
               </>
             )}
           </div>

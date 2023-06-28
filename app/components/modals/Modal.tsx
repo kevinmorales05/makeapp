@@ -83,6 +83,7 @@ const Modal: React.FC<ModalProps> = ({
           focus:outline-none
           bg-neutral-800/70
         "
+        onClick={handleClose}
       >
         <div className="
           relative 

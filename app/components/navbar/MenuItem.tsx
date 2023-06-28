@@ -10,7 +10,7 @@ interface MenuItemProps {
 const MenuItem: React.FC<MenuItemProps> = ({
   onClick,
   label,
-  icon: Icon
+  icon: Icon,
 }) => {
   return (
     <div
@@ -27,8 +27,8 @@ const MenuItem: React.FC<MenuItemProps> = ({
 
       `}
     >
-      <Icon size={26} className={`${label.startsWith("Logout") ? "rotate-180": ""
-      } inline-flex mr-2`} /> <span>{label}</span>
+      <Icon size={26} className={`${label.startsWith("Logout") ? "rotate-180" : ""
+        } inline-flex mr-2`} /> <span>{label}</span>
     </div>
   );
 }
