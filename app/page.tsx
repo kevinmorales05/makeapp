@@ -8,6 +8,9 @@ import getListings, {
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
 import CarrouselInfo from "./components/carrousel/CarrouselInfo";
+import Carrousel from "./components/carrousel/Carrousel";
+import { EmblaOptionsType } from 'embla-carousel-react'
+import Menus from "./components/carrousel/Menus";
 
 interface HomeProps {
   searchParams: IListingsParams
@@ -24,11 +27,14 @@ const Home = async ({ searchParams }: HomeProps) => {
       </ClientOnly>
     );
   }
+  const OPTIONS: EmblaOptionsType = {}
+  const SLIDE_COUNT = 5
+  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
   return (
     <ClientOnly>
       <Container>
-        <CarrouselInfo thumbs={false} indicators={true} autoplay={true} />
+        <Carrousel slides={SLIDES} options={OPTIONS} />
       </Container>
       <Container>
         <div
@@ -52,6 +58,8 @@ const Home = async ({ searchParams }: HomeProps) => {
           ))}
         </div>
       </Container>
+      {/* <Menus/> */}
+
     </ClientOnly>
   )
 }

@@ -10,7 +10,6 @@ declare global {
 }
 
 const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME as string;
-console.log(uploadPreset);
 
 interface ImageUploadProps {
   onChange: (value: string) => void;

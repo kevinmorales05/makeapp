@@ -1,8 +1,6 @@
 import { Merienda, Roboto_Serif } from 'next/font/google'
 import localFont from 'next/font/local'
 
-
-
 import Navbar from '@/app/components/navbar/Navbar';
 import LoginModal from '@/app/components/modals/LoginModal';
 import RegisterModal from '@/app/components/modals/RegisterModal';
@@ -15,6 +13,7 @@ import './globals.css'
 import ClientOnly from './components/ClientOnly';
 import getCurrentUser from './actions/getCurrentUser';
 import Footer from './components/Footer';
+import ModalsProvider from './providers/ModalsProvider';
 
 export const metadata = {
   title: 'Korean Cosmetic',
@@ -22,12 +21,12 @@ export const metadata = {
 }
 
 const fontGandhiSerif = localFont({
-    src: "./fonts/GandhiSerif-Regular.otf",
-    weight: '400',
-    display: 'swap',
-    style: 'normal',
-    variable: '--font-gandhi-serif',
-  }
+  src: "./fonts/GandhiSerif-Regular.otf",
+  weight: '400',
+  display: 'swap',
+  style: 'normal',
+  variable: '--font-gandhi-serif',
+}
 )
 const fontMerienda = Merienda({
   subsets: ['latin'],
@@ -52,11 +51,10 @@ export default async function RootLayout({
       <body className={`${fontGandhiSerif.variable} ${fontAuxRoboto.variable}`}>
         <ClientOnly>
           <ToasterProvider />
-          <LoginModal />
-          <RegisterModal />
-          <SearchModal />
-          <RentModal />
+          <ModalsProvider />
+
           <Navbar currentUser={currentUser} />
+          
         </ClientOnly>
         <div className="pb-20 pt-28">
           {children}

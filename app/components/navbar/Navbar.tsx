@@ -5,6 +5,7 @@ import Container from "../Container";
 import Logo from "./Logo";
 import Search from "./Search";
 import UserMenu from "./UserMenu";
+import MegaMenu from "./MegaMenu";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
@@ -38,7 +39,8 @@ const Navbar: React.FC<NavbarProps> = ({
         </div>
       </Container>
     </div>
-    <Categories />
+      <Categories />
+      <MegaMenu />
   </div>
   );
 }

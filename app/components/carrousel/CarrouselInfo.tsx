@@ -3,6 +3,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a lo
 import { Carousel } from "react-responsive-carousel";
 import ClientOnly from "../ClientOnly";
 import Button from "../Button";
+import Image from "next/image";
 
 const images = [
     { url: "https://beshop-demo.vercel.app/assets/img/insta-photo6.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
@@ -46,17 +47,19 @@ export default function CarrouselInfo({ thumbs, indicators, autoplay }: Carrouse
 
                         </div>
                         <div className="hidden sm:basis-2/5 sm:flex">
-                            <img
+                            <Image
+                                fill={true}
                                 src={url}
                                 alt={header + index}
                                 className="
-                                object-cover
+                                object-contain
                                 "
                             /></div>
                     </div>
 
                 ))}
             </Carousel>
+
         </div>
     )
 }
