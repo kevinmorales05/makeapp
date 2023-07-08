@@ -1,4 +1,5 @@
 'use client';
+import { Menu } from "@headlessui/react";
 import { IconType } from "react-icons";
 
 interface MenuItemProps {
@@ -13,9 +14,21 @@ const MenuItem: React.FC<MenuItemProps> = ({
   icon: Icon,
 }) => {
   return (
-    <div
-      onClick={onClick}
-      className={`
+    <Menu.Item >
+      {({ active }) => (
+        <button
+          onClick={onClick}
+          className={`
+          ${label.startsWith("Logout") || label.startsWith('Sign') ? "hover:bg-secondary-dark/10  hover:text-secondary-dark" : ""}
+            ${active ? 'bg-red-dark/20 text-red-dark' : 'text-gray-900'
+            } text-start group flex w-full items-center rounded-md px-2 py-2 text-sm`}
+        >
+          <Icon size={26} className={`${label.startsWith("Logout") ? "rotate-180" : ""
+            } inline-flex mr-2`} /> <span>{label}</span>          </button>
+      )}
+      {/* <div
+        onClick={onClick}
+        className={`
         px-4 
         py-3 
         transition
@@ -23,13 +36,11 @@ const MenuItem: React.FC<MenuItemProps> = ({
         hover:bg-red-dark/10
         hover:text-red-dark
         ${label.startsWith("Logout") || label.startsWith('Sign') ? "hover:bg-secondary-dark/10  hover:text-secondary-dark" : ""}
-
-
       `}
-    >
-      <Icon size={26} className={`${label.startsWith("Logout") ? "rotate-180" : ""
-        } inline-flex mr-2`} /> <span>{label}</span>
-    </div>
+      >
+      </div> */}
+    </Menu.Item>
+
   );
 }
 

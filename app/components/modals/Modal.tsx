@@ -1,9 +1,10 @@
 'use client';
 
-import { useCallback, useEffect, useState } from "react";
+import { Fragment, useCallback, useEffect, useState } from "react";
 import { IoMdClose } from "react-icons/io";
 
 import Button from "../Button";
+import { Dialog, Transition } from "@headlessui/react";
 
 interface ModalProps {
   isOpen?: boolean;
@@ -18,14 +19,14 @@ interface ModalProps {
   secondaryActionLabel?: string;
 }
 
-const Modal: React.FC<ModalProps> = ({ 
-  isOpen, 
-  onClose, 
-  onSubmit, 
-  title, 
-  body, 
-  actionLabel, 
-  footer, 
+const Modal: React.FC<ModalProps> = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  title,
+  body,
+  actionLabel,
+  footer,
   disabled,
   secondaryAction,
   secondaryActionLabel
@@ -40,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({
     if (disabled) {
       return;
     }
-  
+
     setShowModal(false);
     setTimeout(() => {
       onClose();
@@ -68,9 +69,14 @@ const Modal: React.FC<ModalProps> = ({
   }
 
   return (
-    <>
-      <div
-        className="
+    <Transition show={showModal} as={Fragment}>
+      <Dialog
+        as="div"
+        className="relative z-10"
+        onClose={handleClose}
+      >
+        <div
+          className="
           justify-center 
           items-center 
           flex 
@@ -84,29 +90,33 @@ const Modal: React.FC<ModalProps> = ({
           bg-neutral-800/70
         "
         // onClick={handleClose}
-      >
-        <div className="
+        >
+          <div className="
           relative 
           w-full
           md:w-4/6
           lg:w-3/6
           xl:w-2/5
-          my-6
+          my-1
+          pt-6
           mx-auto 
           h-full 
           lg:h-auto
           md:h-auto
           "
-        >
-          {/*content*/}
-          <div className={`
-            translate
-            duration-300
-            h-full
-            ${showModal ? 'translate-y-0' : 'translate-y-full'}
-            ${showModal ? 'opacity-100' : 'opacity-0'}
-          `}>
-            <div className="
+          >
+            {/*content*/}
+            <Transition.Child
+              enter="translate duration-500 h-full"
+              enterFrom="translate-y-full opacity-0"
+              enterTo="translate-y-0 opacity-100"
+              leave="transform duration-300 "
+              leaveFrom="translate-y-0 opacity-100"
+              leaveTo="translate-y-full opacity-0"
+
+            >
+              <Dialog.Panel>
+                <div className="
               translate
               h-full
               lg:h-auto
@@ -122,9 +132,9 @@ const Modal: React.FC<ModalProps> = ({
               outline-none 
               focus:outline-none
             "
-            >
-              {/*header*/}
-              <div className="
+                >
+                  {/*header*/}
+                  <div className="
                 flex 
                 items-center 
                 p-6
@@ -133,9 +143,9 @@ const Modal: React.FC<ModalProps> = ({
                 relative
                 border-b-[1px]
                 "
-              >
-                <button
-                  className="
+                  >
+                    <button
+                      className="
                     p-1
                     border-0 
                     hover:opacity-70
@@ -143,50 +153,62 @@ const Modal: React.FC<ModalProps> = ({
                     absolute
                     left-9
                   "
-                  onClick={handleClose}
-                >
-                  <IoMdClose size={18} />
-                </button>
-                <div className="text-lg font-semibold">
-                  {title}
-                </div>
-              </div>
-              {/*body*/}
-              <div className="relative p-6 flex-auto">
-                {body}
-              </div>
-              {/*footer*/}
-              <div className="flex flex-col gap-2 p-6">
-                <div 
-                  className="
+                      onClick={handleClose}
+                    >
+                      <IoMdClose size={18} />
+                    </button>
+                    <Transition.Child
+                      enter="transform transition duration-1000 h-full"
+                      enterFrom="translate-y-full"
+                      enterTo="translate-y-0"
+                      leave="transform duration-1000 transition ease-in-out"
+                      leaveFrom="translate-y-0"
+                      leaveTo="scale-95 translate-y-full"
+
+                    >
+                      <div className={`text-lg font-semibold`}>
+                        {title}
+                      </div>
+                    </Transition.Child>
+                  </div>
+                  {/*body*/}
+                  <div className="relative p-6 flex-auto">
+                    {body}
+                  </div>
+                  {/*footer*/}
+                  <div className="flex flex-col gap-2 p-6">
+                    <div
+                      className="
                     flex 
                     flex-row 
                     items-center 
                     gap-4 
                     w-full
                   "
-                >
-                  {secondaryAction && secondaryActionLabel && (
-                    <Button 
-                      disabled={disabled} 
-                      label={secondaryActionLabel} 
-                      onClick={handleSecondaryAction}
-                      outline
-                    />  
-                  )}
-                  <Button 
-                    disabled={disabled} 
-                    label={actionLabel} 
-                    onClick={handleSubmit}
-                  />
+                    >
+                      {secondaryAction && secondaryActionLabel && (
+                        <Button
+                          disabled={disabled}
+                          label={secondaryActionLabel}
+                          onClick={handleSecondaryAction}
+                          outline
+                        />
+                      )}
+                      <Button
+                        disabled={disabled}
+                        label={actionLabel}
+                        onClick={handleSubmit}
+                      />
+                    </div>
+                    {footer}
+                  </div>
                 </div>
-                {footer}
-              </div>
-            </div>
+              </Dialog.Panel>
+            </Transition.Child>
           </div>
         </div>
-      </div>
-    </>
+      </Dialog>
+    </Transition>
   );
 }
 
