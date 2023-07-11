@@ -23,7 +23,6 @@ import Avatar from "../Avatar";
 import { BsHousesFill } from "react-icons/bs";
 
 import { Menu, Transition } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 
 
 interface UserMenuProps {

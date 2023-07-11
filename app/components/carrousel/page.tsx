@@ -33,7 +33,7 @@ export default function Carousels() {
           showThumbs={true}
           renderThumbs={() =>
             images.map(({ url, title }, index) => (
-              <div className="overe-there">
+              <div className="overe-there" key={index}>
                 <img key={index} src={url} alt={title} />
               </div>
             ))
@@ -41,7 +41,8 @@ export default function Carousels() {
           
         >
             {images.map(({ url, title }, index) => (
-                    <img
+              <img
+                key={index}
                       src={url}
                       alt={title}
                       className="group-hover:scale-110 transition             

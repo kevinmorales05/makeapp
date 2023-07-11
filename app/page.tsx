@@ -9,7 +9,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
 import CarrouselInfo from "./components/carrousel/CarrouselInfo";
 import Carrousel from "./components/carrousel/Carrousel";
-import { EmblaOptionsType } from 'embla-carousel-react'
+// import { EmblaOptionsType } from 'embla-carousel-react'
 import Menus from "./components/carrousel/Menus";
 import TestingModal from "./components/modals/TestingModal";
 
@@ -28,14 +28,14 @@ const Home = async ({ searchParams }: HomeProps) => {
       </ClientOnly>
     );
   }
-  const OPTIONS: EmblaOptionsType = {}
-  const SLIDE_COUNT = 5
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+  // const OPTIONS: EmblaOptionsType = {}
+  // const SLIDE_COUNT = 5
+  // const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
   return (
     <ClientOnly>
       <Container>
-        <Carrousel slides={SLIDES} options={OPTIONS} />
+        {/* <Carrousel slides={SLIDES} options={OPTIONS} /> */}
       </Container>
       <Container>
         <div
