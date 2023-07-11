@@ -6,7 +6,7 @@ interface ShopAsideProps {
 }
 export default function ShopAsideItem({ title, body }: ShopAsideProps) {
   return (
-    <div>
+    <div className='mb-8 p-4'>
       <HeadingAside title={title} />
       {body}
     </div>
