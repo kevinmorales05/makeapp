@@ -1,110 +1,140 @@
-// 'use client'
+'use client'
 
-// import React, { useState, useEffect, useCallback } from 'react'
-// import useEmblaCarousel, {
-//   EmblaCarouselType,
-//   EmblaOptionsType,
-// } from 'embla-carousel-react'
-// import {
-//   DotButton,
-//   PrevButton,
-//   NextButton,
-// } from './EmblaCarouselArrowsDotsButtons'
-// import imageByIndex from './imageByIndex'
-// import './carousel.css'
+import React, { useState, useEffect, useCallback } from 'react'
+import useEmblaCarousel, {
+  EmblaCarouselType,
+  EmblaOptionsType,
+} from 'embla-carousel-react'
+import {
+  DotButton,
+  PrevButton,
+  NextButton,
+} from './EmblaCarouselArrowsDotsButtons'
+import imageByIndex from './imageByIndex'
+import './embla-carousel.css'
+import Image from 'next/image'
+import Button from '../Button'
 
 
-// type PropType = {
-//   slides: number[]
-//   options?: EmblaOptionsType
-// }
+const images = [
+  { url: "https://beshop-demo.vercel.app/assets/img/insta-photo6.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
+  { url: "https://beshop-demo.vercel.app/assets/img/insta-photo3.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
+  { url: "https://beshop-demo.vercel.app/assets/img/insta-photo1.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
+  { url: "https://beshop-demo.vercel.app/assets/img/info-item-img2.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
+  { url: "https://beshop-demo.vercel.app/assets/img/top-categories-img3.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
+  { url: "https://beshop-demo.vercel.app/assets/img/top-categories-img1.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
+];
 
-// const EmblaCarousel: React.FC<PropType> = (props) => {
-//   const { slides, options } = props
-//   const [emblaRef, emblaApi] = useEmblaCarousel(options)
-//   const [prevBtnEnabled, setPrevBtnEnabled] = useState(false)
-//   const [nextBtnEnabled, setNextBtnEnabled] = useState(false)
-//   const [selectedIndex, setSelectedIndex] = useState(0)
-//   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
 
-//   const scrollPrev = useCallback(
-//     () => emblaApi && emblaApi.scrollPrev(),
-//     [emblaApi],
-//   )
-//   const scrollNext = useCallback(
-//     () => emblaApi && emblaApi.scrollNext(),
-//     [emblaApi],
-//   )
-//   const scrollTo = useCallback(
-//     (index: number) => emblaApi && emblaApi.scrollTo(index),
-//     [emblaApi],
-//   )
+type PropType = {
+  slides: number[]
+  options?: EmblaOptionsType
+}
 
-//   const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-//     setScrollSnaps(emblaApi.scrollSnapList())
-//   }, [])
+const EmblaCarousel: React.FC<PropType> = (props) => {
+  const { slides, options } = props
+  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
+  const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
+  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
 
-//   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-//     setSelectedIndex(emblaApi.selectedScrollSnap())
-//     setPrevBtnEnabled(emblaApi.canScrollPrev())
-//     setNextBtnEnabled(emblaApi.canScrollNext())
-//   }, [])
+  const scrollPrev = useCallback(
+    () => emblaApi && emblaApi.scrollPrev(),
+    [emblaApi]
+  )
+  const scrollNext = useCallback(
+    () => emblaApi && emblaApi.scrollNext(),
+    [emblaApi]
+  )
+  const scrollTo = useCallback(
+    (index: number) => emblaApi && emblaApi.scrollTo(index),
+    [emblaApi]
+  )
 
-//   useEffect(() => {
-//     if (!emblaApi) return
+  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+    setScrollSnaps(emblaApi.scrollSnapList())
+  }, [])
 
-//     onInit(emblaApi)
-//     onSelect(emblaApi)
-//     emblaApi.on('reInit', onInit)
-//     emblaApi.on('reInit', onSelect)
-//     emblaApi.on('select', onSelect)
-//   }, [emblaApi, onInit, onSelect])
+  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
+    setSelectedIndex(emblaApi.selectedScrollSnap())
+    setPrevBtnDisabled(!emblaApi.canScrollPrev())
+    setNextBtnDisabled(!emblaApi.canScrollNext())
+  }, [])
 
-//   return (
-//     <>
-//       <div className="embla">
-//         <div className="embla__viewport" ref={emblaRef}>
-//           <div className="embla__container">
-//             {slides.map((index) => (
-//               <div className="embla__slide" key={index}>
-//                 <div className="embla__slide__number">
-//                   <span>{index + 1}</span>
-//                 </div>
-//                 <img
-//                   className="embla__slide__img"
-//                   src={imageByIndex(index)}
-//                   alt="Your alt text"
-//                 />
-//               </div>
-//             ))}
-//           </div>
-//         </div>
+  useEffect(() => {
+    if (!emblaApi) return
 
-//         <PrevButton onClick={scrollPrev} enabled={prevBtnEnabled} />
-//         <NextButton onClick={scrollNext} enabled={nextBtnEnabled} />
-//       </div>
+    onInit(emblaApi)
+    onSelect(emblaApi)
+    emblaApi.on('reInit', onInit)
+    emblaApi.on('reInit', onSelect)
+    emblaApi.on('select', onSelect)
+  }, [emblaApi, onInit, onSelect])
 
-//       <div className="embla__dots">
-//         {scrollSnaps.map((_, index) => (
-//           <DotButton
-//             key={index}
-//             selected={index === selectedIndex}
-//             onClick={() => scrollTo(index)}
-//           />
-//         ))}
-//       </div>
-//     </>
-//   )
-// }
-
-// export default EmblaCarousel
-
-import React from 'react'
-
-export default function Carrousel() {
   return (
-    <div>
-      Carousel example
-    </div>
+    <section className="sandbox__carousel">
+      <div className="embla">
+        <div className="embla__viewport" ref={emblaRef}>
+          <div className="embla__container">
+            {slides.map((index) => (
+              <div className="embla__slide" key={index}>
+                <div className="embla__slide__number">
+                  <span>{index + 1}</span>
+                </div>
+                <div className="
+                    flex flex-row
+                    bg-black/10 text-start
+                    max-h-[830px]
+                    "
+                  key={index}>
+                  <div className="p-8 basis-full sm:basis-3/5 group">
+                    <p className="font-light font-gandhi text-4xl text-start">New Korean Philosophy and its beauty traditional habits to keep young and shining.</p>
+                    <p className="font-gandhi font-medium antialiased text-ellipsis py-6 text-start">{"Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula.".slice(0, 120)}...</p>
+                    <div className="h-24 w-24 items-start group-hover:scale-105 transition">
+                      <Button label="Read more" onClick={() => { }} disabled={true} />
+                    </div>
+
+                  </div>
+
+                  <div className="hidden sm:basis-2/5 sm:flex">
+                  <Image
+                      fill={true}
+                      src={imageByIndex(index)}
+                      alt="Your alt text" className="object-contain !relative"
+                      
+                    />
+                  </div>
+                </div>
+                {/* <img
+                  className="embla__slide__img"
+                  src={imageByIndex(index)}
+                  alt="Your alt text"
+                /> */}
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="embla__buttons">
+          <PrevButton onClick={scrollPrev} disabled={prevBtnDisabled} />
+          <NextButton onClick={scrollNext} disabled={nextBtnDisabled} />
+        </div>
+      </div>
+
+      <div className="embla__dots">
+        {scrollSnaps.map((_, index) => (
+          <DotButton
+            key={index}
+            onClick={() => scrollTo(index)}
+            className={'embla__dot'.concat(
+              index === selectedIndex ? ' embla__dot--selected' : ''
+            )}
+          />
+        ))}
+      </div>
+    </section>
   )
 }
+
+export default EmblaCarousel

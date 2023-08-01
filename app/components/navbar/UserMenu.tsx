@@ -65,7 +65,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     icon: RiUserReceivedFill,
   },
   {
-    label: "My properties",
+    label: "My voices home",
     onClick: () => router.push("/properties"),
     icon: BsHousesFill,
   },

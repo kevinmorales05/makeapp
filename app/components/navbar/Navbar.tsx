@@ -40,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({
       </Container>
     </div>
       <Categories />
-      <MegaMenu />
+      {/* <MegaMenu /> */}
   </div>
   );
 }

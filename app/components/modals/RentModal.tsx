@@ -163,7 +163,7 @@ const RentModal = () => {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Where is your place located?"
+          title="Where is your product located?"
           subtitle="Help guests find you!"
         />
         <CountrySelect 
