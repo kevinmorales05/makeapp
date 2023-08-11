@@ -1,0 +1,86 @@
+import { Merienda, Roboto_Serif } from 'next/font/google'
+import localFont from 'next/font/local'
+
+import Navbar from '@/app/components/navbar/Navbar';
+import LoginModal from '@/app/components/modals/LoginModal';
+import RegisterModal from '@/app/components/modals/RegisterModal';
+import SearchModal from '@/app/components/modals/SearchModal';
+import RentModal from '@/app/components/modals/RentModal';
+
+import ToasterProvider from '@/app/providers/ToasterProvider';
+
+import './globals.css'
+import ClientOnly from './components/ClientOnly';
+import getCurrentUser from './actions/getCurrentUser';
+import Footer from './components/Footer';
+import ModalsProvider from './providers/ModalsProvider';
+
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
+
+
+export const metadata = {
+  title: 'Korean Cosmetic',
+  description: 'Amazing Korean Cosmetics',
+}
+
+const gandhi = localFont({
+  src: "./fonts/GandhiSerif-Regular.otf",
+  weight: '400',
+  display: 'swap',
+  style: 'normal',
+  variable: '--font-gandhi-serif',
+}
+)
+const merienda = Merienda({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-merienda',
+})
+const roboto = Roboto_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-serif',
+})
+
+const htmlClasses = `${merienda.variable}  ${gandhi.variable} ${roboto.variable}`
+
+export default async function RootLayout({
+  children,
+  params: { locale }
+}: {
+  children: React.ReactNode,
+  params: any
+}) {
+  const currentUser = await getCurrentUser();
+
+  let messages;
+  try {
+    messages = (await import(`../../messages/${locale}.json`)).default;
+  } catch (error) {
+    notFound();
+  }
+
+  return (
+    <html lang="en" className={htmlClasses}>
+      <body >
+        <NextIntlClientProvider locale={locale} messages={messages}>
+          <ClientOnly>
+            <ToasterProvider />
+            <ModalsProvider />
+
+            <Navbar currentUser={currentUser} />
+
+          </ClientOnly>
+          <div className="pb-20 pt-32">
+            {children}
+          </div>
+          <ClientOnly>
+            <Footer />
+          </ClientOnly>
+        </NextIntlClientProvider>
+
+      </body>
+    </html>
+  )
+}
