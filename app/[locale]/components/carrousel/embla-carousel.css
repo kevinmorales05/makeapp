@@ -87,12 +87,14 @@
   margin: 0;
 }
 .embla__buttons {
+  width: 100%;
+  justify-content: space-between;
+  left: 0;
   display: flex;
   align-items: center;
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 1.6rem;
 }
 .embla__button {
   z-index: 1;

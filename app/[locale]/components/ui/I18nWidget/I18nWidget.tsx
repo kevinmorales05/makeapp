@@ -1,4 +1,61 @@
-// 'use client'
+'use client'
+
+import useCountries from "@/app/hooks/useCountries";
+import { useLocale } from "next-intl"
+
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
+
+function I18nWidget() {
+  const locale = useLocale();
+  const { getByFlag } = useCountries()
+  const Flag = getByFlag(locale)
+
+  const items = [
+    {
+      key: "es",
+      label: "Espaniol",
+    },
+    {
+      key: "en",
+      label: "Ingles",
+    },
+    {
+      key: "ko",
+      label: "Coreano",
+    },
+  ];
+
+  return (
+    <div className='fixed top-3 right-5'>
+
+      <Dropdown>
+        <DropdownTrigger>
+          <Button
+            variant="bordered"
+          >
+            <Flag />
+          </Button>
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Dynamic Actions" items={items}>
+          {(item: any) => (
+            <DropdownItem
+              key={item.key}
+              color={item.key === "ko" ? "danger" : "default"}
+              className={item.key === "ko" ? "text-danger" : ""}
+            >
+              {item.label}
+            </DropdownItem>
+          )}
+        </DropdownMenu>
+      </Dropdown>
+
+    </div>
+  )
+}
+
+export default I18nWidget
+
+
 // import cn from 'classnames'
 // import Link from 'next/link'
 // import { FC, useState } from 'react'
@@ -104,14 +161,3 @@
 // }
 
 // export default I18nWidget
-import React from 'react'
-
-function I18nWidget() {
-  return (
-    <div>
-      i18
-    </div>
-  )
-}
-
-export default I18nWidget

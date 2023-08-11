@@ -2,10 +2,6 @@ import { Merienda, Roboto_Serif } from 'next/font/google'
 import localFont from 'next/font/local'
 
 import Navbar from '@/app/components/navbar/Navbar';
-import LoginModal from '@/app/components/modals/LoginModal';
-import RegisterModal from '@/app/components/modals/RegisterModal';
-import SearchModal from '@/app/components/modals/SearchModal';
-import RentModal from '@/app/components/modals/RentModal';
 
 import ToasterProvider from '@/app/providers/ToasterProvider';
 
@@ -17,6 +13,8 @@ import ModalsProvider from './providers/ModalsProvider';
 
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
+import { NextUI } from './providers/NextUI';
+import Providers from './providers/Providers';
 
 
 export const metadata = {
@@ -66,16 +64,12 @@ export default async function RootLayout({
       <body >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ClientOnly>
-            <ToasterProvider />
-            <ModalsProvider />
-
             <Navbar currentUser={currentUser} />
-
-          </ClientOnly>
-          <div className="pb-20 pt-32">
-            {children}
-          </div>
-          <ClientOnly>
+            <Providers>
+              <div className="pb-20 pt-32">
+                {children}
+              </div>
+            </Providers>
             <Footer />
           </ClientOnly>
         </NextIntlClientProvider>

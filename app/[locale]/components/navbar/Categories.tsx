@@ -15,6 +15,7 @@ import {
   GiHealthPotion,
   GiIsland,
   GiLips,
+  GiPerfumeBottle,
   GiWindmill
 } from 'react-icons/gi';
 import { FaSkiing } from 'react-icons/fa';
@@ -57,12 +58,12 @@ export const categories = () => {
     },
     {
       label: t("lotion.label"),
-      icon: BsFillBagHeartFill,
+      icon: GiPerfumeBottle,
       description: t("lotion.description"),
     },
     {
       label: t("skin.label"),
-      icon: GiCeremonialMask,
+      icon: MdFace2,
       description: t("skin.description"),
     },
     {
@@ -72,7 +73,7 @@ export const categories = () => {
     },
     {
       label: t("mask-pack.label"),
-      icon: GiFingernail,
+      icon: GiCeremonialMask,
       description: t("mask-pack.description"),
     },
     {
@@ -82,7 +83,7 @@ export const categories = () => {
     },
     {
       label: t("all-in-one.label"),
-      icon: MdFace2,
+      icon: BsFillBagHeartFill,
       description: t("all-in-one.description"),
     },
     {

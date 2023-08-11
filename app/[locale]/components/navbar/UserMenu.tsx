@@ -84,16 +84,15 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
   return (
     <div className="relative">
-      <div className="flex flex-row items-center gap-3">
+      <div className="flex flex-row items-center sm:gap-3">
         <div
           onClick={() => router.push("/favorites")}
           className="
-            hidden
-            md:block
+            block
             text-sm 
             font-bold
             py-3 
-            px-4 
+            sm:px-4 
             rounded-full 
           hover:text-red-dark
           hover:bg-red-dark/10
@@ -126,8 +125,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         <div
           onClick={() => router.push("/trips")}
           className="
-          hidden
-          md:block
+          block
           text-sm 
           font-bold 
           py-3 
@@ -165,7 +163,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           className="  
           px-2
           py-3
-          border-[1px] 
+          //border-[1px] 
           flex 
           flex-row 
           items-center 

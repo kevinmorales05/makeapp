@@ -33,8 +33,10 @@ const Navbar: React.FC<NavbarProps> = ({
             justify-between
             gap-3
             md:gap-0
+            mt-2
           "
           >
+            <I18nWidget/>
             <Logo />
             {/* <Search /> */}
             <UserMenu currentUser={currentUser} />

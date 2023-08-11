@@ -26,6 +26,7 @@
       "@/app/*": ["app/[locale]/*"],
       "@/components/*": ["app/[locale]/components/*"],
       "@/public/*": ["public/*"],
+      "@*": ["*"],
       "@/*": ["./*"]
 
     }
