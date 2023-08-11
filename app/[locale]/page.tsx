@@ -36,7 +36,7 @@ const Home = async ({ searchParams }: HomeProps) => {
   return (
     <ClientOnly>
       <Container>
-        {/* <Carrousel slides={SLIDES} options={OPTIONS} /> */}
+        <Carrousel slides={SLIDES} options={OPTIONS} />
       </Container>
       <Container>
         <div
