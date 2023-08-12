@@ -76,8 +76,8 @@ function I18nWidget() {
           {(item: any) => (
             <DropdownItem
               key={item.key}
-              color={item.key === "ko" ? "danger" : "default"}
-              className={item.key === "ko" ? "text-danger" : ""}
+              color={item.key === locale ? "default" : "danger"}
+              className={item.key === locale ? "text-danger" : ""}
               onPress={item.onclick}
               startContent={<Button size="sm" startContent={<item.icon className={iconClasses} />} isIconOnly variant="light" aria-label={locale} />}
             >

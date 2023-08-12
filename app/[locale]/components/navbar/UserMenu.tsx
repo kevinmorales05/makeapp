@@ -50,36 +50,36 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     rentModal.onOpen();
   }, [loginModal, rentModal, currentUser]);
   const menuItems = [
-  //   {
-  //   label: "My shoppings",
-  //   onClick: () => router.push("/trips"),
-  //   icon: AiOutlineShoppingCart,
-  // },
-  // {
-  //   label: "My favorites",
-  //   onClick: () => router.push("/favorites"),
-  //   icon: AiOutlineHeart,
-  // },
-  {
-    label: "My invoices",
-    onClick: () => router.push("/reservations"),
-    icon: RiUserReceivedFill,
-  },
-  {
-    label: "My voices home",
-    onClick: () => router.push("/properties"),
-    icon: BsHousesFill,
-  },
-  {
-    label: "Korean Cosmetic your home",
-    onClick: rentModal.onOpen,
-    icon: LuIceCream,
-  },
-  {
-    label: "Logout",
-    onClick: () => signOut(),
-    icon: LuLogOut,
-  },
+    //   {
+    //   label: "My shoppings",
+    //   onClick: () => router.push("/trips"),
+    //   icon: AiOutlineShoppingCart,
+    // },
+    // {
+    //   label: "My favorites",
+    //   onClick: () => router.push("/favorites"),
+    //   icon: AiOutlineHeart,
+    // },
+    {
+      label: "My invoices",
+      onClick: () => router.push("/reservations"),
+      icon: RiUserReceivedFill,
+    },
+    {
+      label: "My voices home",
+      onClick: () => router.push("/properties"),
+      icon: BsHousesFill,
+    },
+    {
+      label: "Korean Cosmetic your home",
+      onClick: rentModal.onOpen,
+      icon: LuIceCream,
+    },
+    {
+      label: "Logout",
+      onClick: () => signOut(),
+      icon: LuLogOut,
+    },
   ]
 
   return (
@@ -193,9 +193,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             leaveTo="transform opacity-0 scale-95"
           >
             <Menu.Items
-            //   className="
-            // absolute right-0 mt-[330px] w-56 origin-top-right rounded-md
-            // bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+              //   className="
+              // absolute right-0 mt-[330px] w-56 origin-top-right rounded-md
+              // bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
               className="
             absolute 
             rounded-xl 
@@ -235,6 +235,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           </Transition>
 
         </Menu>
+
       </div>
     </div>
   );

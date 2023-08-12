@@ -1,7 +1,9 @@
 'use client';
 
 import { useCallback, useState } from "react";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
+import { toast } from 'sonner';
+
 import { signIn } from 'next-auth/react';
 import {
   FieldValues,
@@ -61,7 +63,7 @@ const LoginModal = () => {
 
           if (callback?.error) {
             // please review
-            toast.error(t(`toaster.error`, {error_msg: `${callback.error}`}));
+            toast.error(t(`toaster.error`, { error_msg: `${callback.error}` }));
           }
         });
     }
