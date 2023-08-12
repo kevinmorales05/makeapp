@@ -28,7 +28,6 @@ const useCountries = () => {
     if (locale === "es") flag = EC
     if (locale === "en") flag = US
     if (locale === "ko") flag = KR
-    console.log('what is this', locale, 'finale', flag)
     return flag
   }
 

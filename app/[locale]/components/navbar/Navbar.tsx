@@ -1,3 +1,4 @@
+'use client'
 import { SafeUser } from "@/app/types";
 
 import Categories from "./Categories";
@@ -7,6 +8,7 @@ import Search from "./Search";
 import UserMenu from "./UserMenu";
 import MegaMenu from "./MegaMenu";
 import I18nWidget from "../ui/I18nWidget";
+import { useRouter } from "next-intl/client";
 // import { SafeUser } from "@app/types";
 
 interface NavbarProps {
@@ -16,6 +18,9 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({
   currentUser,
 }) => {
+
+  const router = useRouter()
+
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div
@@ -40,7 +45,6 @@ const Navbar: React.FC<NavbarProps> = ({
             <Logo />
             {/* <Search /> */}
             <UserMenu currentUser={currentUser} />
-
           </div>
         </Container>
       </div>

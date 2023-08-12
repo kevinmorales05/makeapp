@@ -3,49 +3,92 @@
 import useCountries from "@/app/hooks/useCountries";
 import { useLocale } from "next-intl"
 
-import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button } from "@nextui-org/react";
+import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Button, User, Selection } from "@nextui-org/react";
+import React, { SetStateAction } from "react";
+import { US } from 'country-flag-icons/react/3x2'
+import { EC } from 'country-flag-icons/react/3x2'
+import { KR } from 'country-flag-icons/react/3x2'
+import { useRouter } from 'next-intl/client';
+
 
 function I18nWidget() {
   const locale = useLocale();
   const { getByFlag } = useCountries()
-  const Flag = getByFlag(locale)
+  const router = useRouter()
+
+  // const [selectedKeys, setSelectedKeys] = React.useState();
+  // // const selectedFlag = React.useMemo(
+  // //   () => Array.from(selectedKeys).join(", ").replaceAll("_", " "),
+  // //   [selectedKeys]
+  // //   );
+  let Flag = getByFlag(locale)
+
+  // console.log('selectedkeys', selectedKeys)
+  const iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0";
+
 
   const items = [
     {
       key: "es",
-      label: "Espaniol",
+      label: "Español",
+      icon: EC,
+      onclick: () => router.push('/', { locale: 'es' })
     },
     {
       key: "en",
       label: "Ingles",
+      icon: US,
+      onclick: () => router.push('/', { locale: 'en' })
+
     },
     {
       key: "ko",
       label: "Coreano",
+      icon: KR,
+      onclick: () => router.push('/', { locale: 'ko' })
     },
   ];
 
+
+  const onActionHanlder = (e: any) => {
+    console.log('action', e)
+
+  }
+  //aria-label="Dynamic Actions" items={items} onAction={onActionHanlder}
   return (
     <div className='fixed top-3 right-5'>
 
       <Dropdown>
         <DropdownTrigger>
-          <Button
-            variant="bordered"
-          >
-            <Flag />
-          </Button>
+          <Button size="sm" startContent={<Flag />} isIconOnly variant="light" aria-label={locale} />
         </DropdownTrigger>
-        <DropdownMenu aria-label="Dynamic Actions" items={items}>
+        <DropdownMenu
+          aria-label="Single selection actions"
+          variant="flat"
+          disallowEmptySelection
+          defaultSelectedKeys={[locale]}
+          disabledKeys={[locale]}
+          selectionMode="single"
+          // selectedKeys={selectedKeys}
+          // onSelectionChange={(keys: Selection | React.Key[] | any): void => setSelectedKeys(keys)}
+          items={items}
+        >
           {(item: any) => (
             <DropdownItem
               key={item.key}
               color={item.key === "ko" ? "danger" : "default"}
               className={item.key === "ko" ? "text-danger" : ""}
+              onPress={item.onclick}
+              startContent={<Button size="sm" startContent={<item.icon className={iconClasses} />} isIconOnly variant="light" aria-label={locale} />}
             >
               {item.label}
             </DropdownItem>
           )}
+          {/* <DropdownItem key="text">Text</DropdownItem>
+          <DropdownItem key="number">Number</DropdownItem>
+          <DropdownItem key="date">Date</DropdownItem>
+          <DropdownItem key="single_date">Single Date</DropdownItem>
+          <DropdownItem key="iteration">Iteration</DropdownItem> */}
         </DropdownMenu>
       </Dropdown>
 
