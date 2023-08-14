@@ -26,19 +26,6 @@ const MenuItem: React.FC<MenuItemProps> = ({
           <Icon size={26} className={`${label.startsWith("Logout") ? "rotate-180" : ""
             } inline-flex mr-2`} /> <span>{label}</span>          </button>
       )}
-      {/* <div
-        onClick={onClick}
-        className={`
-        px-4 
-        py-3 
-        transition
-        font-semibold
-        hover:bg-red-dark/10
-        hover:text-red-dark
-        ${label.startsWith("Logout") || label.startsWith('Sign') ? "hover:bg-secondary-dark/10  hover:text-secondary-dark" : ""}
-      `}
-      >
-      </div> */}
     </Menu.Item>
 
   );

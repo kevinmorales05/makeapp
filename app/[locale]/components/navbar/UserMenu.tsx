@@ -11,7 +11,7 @@ import { RiArrowDownSLine, RiArrowDropDownLine, RiUserReceivedFill } from "react
 import { LuIceCream, LuLogIn, LuLogOut, LuUserPlus } from "react-icons/lu";
 
 import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next-intl/client';
 
 import useLoginModal from "@/app/hooks/useLoginModal";
 import useRegisterModal from "@/app/hooks/useRegisterModal";
@@ -23,6 +23,12 @@ import Avatar from "../Avatar";
 import { BsHousesFill } from "react-icons/bs";
 
 import { Menu, Transition } from '@headlessui/react'
+import DropdownMain from "../dropdowns/DropdownMain";
+import { EC } from 'country-flag-icons/react/3x2'
+
+import { Avatar as Avatars, User } from "@nextui-org/react";
+import { useLocale } from "next-intl";
+import { stringify } from "querystring";
 
 
 interface UserMenuProps {
@@ -30,7 +36,8 @@ interface UserMenuProps {
 }
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
-  const router = useRouter();
+  const router = useRouter()
+  const locale = useLocale();
 
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
@@ -82,6 +89,97 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     },
   ]
 
+  const trigger = (<User
+    as="button"
+    avatarProps={{
+      isBordered: true,
+      src: currentUser?.image || '/img/placeholder.jpg'
+    }}
+    name={currentUser?.name}
+    description={currentUser?.email}
+    className="transition-transform"
+    classNames={{
+      name: "hidden truncate lg:block lg:max-w-[95px] xl:max-w-full",
+      description: "hidden truncate lg:block lg:max-w-[95px] xl:max-w-full ",
+    }}
+  />)
+
+  const itemsUser = [
+    {
+      children: <><p className="font-semibold">Signed in as</p>
+        <p className="font-semibold">{currentUser?.email}</p></>,
+      key: "profile",
+      className: "h-14 gap-2",
+      isIcon: false,
+      onclick: () => console.log('espaniol')
+    },
+    {
+      children: "My invoices",
+      key: "inovoices",
+      className: "",
+      isIcon: true,
+      icon: RiUserReceivedFill,
+      onclick: () => router.push('/reservations', { locale })
+    },
+    {
+      children: "My voices home",
+      key: "invoices_home",
+      className: "",
+      isIcon: true,
+      icon: BsHousesFill,
+      onclick: () => router.push("/properties", { locale })
+    },
+    {
+      children: "Korean Cosmetic your home",
+      key: "korean_cosmetic_your_home",
+      className: "",
+      isIcon: true,
+      icon: LuIceCream,
+      onclick: rentModal.onOpen,
+    },
+    {
+      children: <>Log Out</>,
+      key: "logout",
+      className: "",
+      isIcon: true,
+      icon: LuLogOut,
+      onclick: () => signOut(),
+    },
+    {
+      children: <><hr /><p>Configurations</p></>,
+      key: "configurations",
+      className: "",
+      isIcon: false,
+      onclick: () => console.log('configurations')
+    },
+    {
+      children: <>Help & Feedback</>,
+      key: "help_and_feedback",
+      className: "",
+      isIcon: false,
+      onclick: () => console.log('help_and_feedback')
+    },
+  ];
+
+  const itemsWithoutUser = [
+    {
+      children: "Login",
+      key: "login",
+      className: "",
+      isIcon: true,
+      icon: LuLogIn,
+      onclick: loginModal.onOpen
+    },
+    {
+      children: "Sign Up",
+      key: "sign_up",
+      className: "",
+      isIcon: true,
+      icon: LuUserPlus,
+      onclick: registerModal.onOpen
+    },
+
+  ];
   return (
     <div className="relative">
       <div className="flex flex-row items-center sm:gap-3">
@@ -117,7 +215,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             text-[.9em] 
             font-bold 
             leading-none 
-            text-secondary-800"
+            //text-secondary-800"
           >
             12
           </span>
@@ -154,87 +252,18 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             text-[.9em] 
             font-bold 
             leading-none 
-            text-secondary-800"
+            //text-secondary-800"
           >
             12
           </span>
         </div>
-        <Menu as="div"
-          className="  
-          px-2
-          py-3
-          //border-[1px] 
-          flex 
-          flex-row 
-          items-center 
-          justify-center
-          gap-2
-          rounded-full 
-          cursor-pointer 
-          hover:shadow-md 
-          transition
-          "
-        >
-          <Menu.Button
-            className="flex items-center"
-          >
-            <div>
-              <Avatar src={currentUser?.image} />
-            </div>
-            <RiArrowDownSLine />
-          </Menu.Button>
-          <Transition
-            as={Fragment}
-            enter="transition ease-out duration-100"
-            enterFrom="transform opacity-0 scale-95"
-            enterTo="transform opacity-100 scale-100"
-            leave="transition ease-in duration-75"
-            leaveFrom="transform opacity-100 scale-100"
-            leaveTo="transform opacity-0 scale-95"
-          >
-            <Menu.Items
-              //   className="
-              // absolute right-0 mt-[330px] w-56 origin-top-right rounded-md
-              // bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-              className="
-            absolute 
-            rounded-xl 
-            shadow-xl
-            //w-[40vw]
-            w-56
-            bg-white 
-            overflow-hidden 
-            right-0 
-            top-12 
-            text-sm
-            ring-1 ring-black ring-opacity-5 focus:outline-none
-          ">
-              <div className="px-1 py-1 ">
-                <>
-                  {currentUser ? (
-                    <>
-                      {
-                        menuItems.map((it: any) => (
-                          <div key={it.label}>
-                            {it.label.startsWith("Logout") ? <>
-                              <hr />
-                              <MenuItem label={it.label} onClick={it.onClick} icon={it.icon} />
-                            </> :
-                              <MenuItem label={it.label} onClick={it.onClick} icon={it.icon} />
-                            }
-                          </div>
-                        ))
-                      }
-                    </>
-                  ) : <>
-                    <MenuItem label="Login" onClick={loginModal.onOpen} icon={LuLogIn} />
-                    <MenuItem label="Sign up" onClick={registerModal.onOpen} icon={LuUserPlus} /></>}
-                </>
-              </div>
-            </Menu.Items>
-          </Transition>
 
-        </Menu>
+
+        {currentUser ? (
+          <DropdownMain trigger={trigger} items={itemsUser} />
+        ) : (
+          <DropdownMain trigger={trigger} items={itemsWithoutUser} />
+        )}
 
       </div>
     </div>
@@ -243,3 +272,80 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
 export default UserMenu;
 
+
+// <Menu as="div"
+// className="  
+// px-2
+// py-3
+// //border-[1px] 
+// flex 
+// flex-row 
+// items-center 
+// justify-center
+// gap-2
+// rounded-full 
+// cursor-pointer 
+// hover:shadow-md 
+// transition
+// "
+// >
+// <Menu.Button
+//   className="flex items-center"
+// >
+//   <div>
+//     <Avatar src={currentUser?.image} user={currentUser} />
+//   </div>
+//   {/* well {JSON.stringify(currentUser)} */}
+//   <RiArrowDownSLine />
+// </Menu.Button>
+// <Transition
+//   as={Fragment}
+//   enter="transition ease-out duration-100"
+//   enterFrom="transform opacity-0 scale-95"
+//   enterTo="transform opacity-100 scale-100"
+//   leave="transition ease-in duration-75"
+//   leaveFrom="transform opacity-100 scale-100"
+//   leaveTo="transform opacity-0 scale-95"
+// >
+//   <Menu.Items
+//     //   className="
+//     // absolute right-0 mt-[330px] w-56 origin-top-right rounded-md
+//     // bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+//     className="
+//   absolute 
+//   rounded-xl 
+//   shadow-xl
+//   //w-[40vw]
+//   w-56
+//   bg-white 
+//   overflow-hidden 
+//   right-0 
+//   top-12 
+//   text-sm
+//   ring-1 ring-black ring-opacity-5 focus:outline-none
+// ">
+//     <div className="px-1 py-1 ">
+//       <>
+//         {currentUser ? (
+//           <>
+//             {
+//               menuItems.map((it: any) => (
+//                 <div key={it.label}>
+//                   {it.label.startsWith("Logout") ? <>
+//                     <hr />
+//                     <MenuItem label={it.label} onClick={it.onClick} icon={it.icon} />
+//                   </> :
+//                     <MenuItem label={it.label} onClick={it.onClick} icon={it.icon} />
+//                   }
+//                 </div>
+//               ))
+//             }
+//           </>
+//         ) : <>
+//           <MenuItem label="Login" onClick={loginModal.onOpen} icon={LuLogIn} />
+//           <MenuItem label="Sign up" onClick={registerModal.onOpen} icon={LuUserPlus} /></>}
+//       </>
+//     </div>
+//   </Menu.Items>
+// </Transition>
+// </Menu>

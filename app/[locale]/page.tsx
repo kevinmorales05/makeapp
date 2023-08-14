@@ -13,6 +13,7 @@ import { EmblaOptionsType } from 'embla-carousel-react'
 import Menus from "./components/carrousel/Menus";
 import TestingModal from "./components/modals/TestingModal";
 import MantineCarousel from "./components/carrousel/mantine/MantineCarousel";
+import UIModal from "./components/modals/UIModal";
 
 interface HomeProps {
   searchParams: IListingsParams
@@ -61,9 +62,7 @@ const Home = async ({ searchParams }: HomeProps) => {
         </div>
 
 
-
-
-        {/* <TestingModal /> */}
+        <UIModal />
 
       </Container>
 

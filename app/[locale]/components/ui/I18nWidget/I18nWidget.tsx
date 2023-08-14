@@ -56,7 +56,7 @@ function I18nWidget() {
   }
   //aria-label="Dynamic Actions" items={items} onAction={onActionHanlder}
   return (
-    <div className='fixed top-3 right-5'>
+    <div className='fixed top-0 right-1 md:top-1 md:right-3'>
 
       <Dropdown>
         <DropdownTrigger>
