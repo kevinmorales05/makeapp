@@ -22,6 +22,10 @@ export const metadata = {
   description: 'Amazing Korean Cosmetics',
 }
 
+export function generateStaticParams() {
+  return [{ locale: 'es' }, { locale: 'en' }, { locale: 'ko' }];
+}
+
 const gandhi = localFont({
   src: "./fonts/GandhiSerif-Regular.otf",
   weight: '400',
@@ -60,7 +64,7 @@ export default async function RootLayout({
   }
 
   return (
-    <html lang="en" className={htmlClasses}>
+    <html lang={locale} className={htmlClasses}>
       <body >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ClientOnly>

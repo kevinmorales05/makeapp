@@ -1,9 +1,34 @@
-import products from "@/public/data/products.json"
+import products from "@/public/data/productsKorean.json"
 import { create } from "zustand";
+import {
+    GiBarn,
+    GiBoatFishing,
+    GiCactus,
+    GiCastle,
+    GiCaveEntrance,
+    GiCeremonialMask,
+    GiDelicatePerfume,
+    GiFingernail,
+    GiForestCamp,
+    GiHealthPotion,
+    GiIsland,
+    GiLips,
+    GiPerfumeBottle,
+    GiWindmill
+} from 'react-icons/gi';
+import { FaSkiing } from 'react-icons/fa';
+import { BsEmojiSunglasses, BsEyedropper, BsFillBagHeartFill, BsSnow } from 'react-icons/bs';
+import { IoBodySharp, IoDiamond } from 'react-icons/io5';
+import { MdCleanHands, MdFace2, MdFace3, MdOutlineVilla } from 'react-icons/md';
+
 import { Products } from "../types/products";
 import { useCallback, useMemo } from "react";
 
-import originals from "@/public/data/originals.json"
+import { useLocale, useTranslations } from 'next-intl';
+
+
+import { AiOutlineHighlight } from "react-icons/ai";
+import { TbHandThreeFingers } from "react-icons/tb";
 
 export interface ICategories {
     label: string;
@@ -28,15 +53,6 @@ interface currentProductsStore {
 
 }
 
-
-const formattedProducts = products.map((p) => ({
-    id: p.id,
-    price: p.price,
-    title: p.title,
-    category: p.category,
-    src: p.image
-}))
-
 // export const currentProducts = create<currentProductsStore>((set) => ({
 //     products: []
 // }));
@@ -57,28 +73,26 @@ export const useProducts = () => {
     return { getByPagination, getCount, getAll }
 }
 
-
-const formattedCategories = originals.map((c) => ({
-    name: c.name,
-    description: c.description,
-    category: c.category,
-    subCategory: c.subcategory,
-    cost: c.cost,
-    promoCost: c.promoCost,
-    bestSeller: c.bestSeller,
-    kit: c.kit,
-    weight: c.weight,
-    state: c.state,
-    presentation: c.presentation,
-    color: c.color,
-    src: c.imgUrl,
-    moreDetails: c.detailsUrl,
-}))
+const formattedProducts = products.map((p) => ({
+    title: p.title,
+    description: p.description,
+    category: p.category,
+    subCategory: p.subcategory,
+    cost: parseFloat(p.cost),
+    promoCost: parseFloat(p.promoCost),
+    bestSeller: p.bestSeller || p.bestSeller === "0" ? false : true,
+    kit: p.kit === "1" || p.kit.toUpperCase() === "KIT".toUpperCase() ? true : false,
+    weight: p.weight,
+    farmacState: p.farmacState,
+    presentation: p.presentation,
+    color: p.color,
+    src: p.imgUrl,
+  }))
 
 
 export const useCategories = () => {
 
-    const cate = formattedCategories.reduce((accumulator: any, current) => {
+    const cate = formattedProducts.reduce((accumulator: any, current) => {
 
         const { category, subCategory } = current;
 
@@ -119,7 +133,6 @@ export const useCategories = () => {
         }
         return accumulator
     }, new Map<string, string>())
-    console.log(cate)
 
     const categories = [
         {
@@ -345,7 +358,84 @@ export const useCategories = () => {
         },
     ]
 
-    return { categories }
+    const getAll = () => {
+        const t = useTranslations("navbar.categories")
+        return [
+            {
+                label: t("derma-plan.label"),
+                icon: GiLips,
+                description: t("derma-plan.description"),
+            },
+            {
+                label: t("skin-care.label"),
+                icon: AiOutlineHighlight,
+                description: t("skin-care.description"),
+            },
+            {
+                label: t("sun-care.label"),
+                icon: BsEmojiSunglasses,
+                description: t("sun-care.description"),
+            },
+            {
+                label: t("toner-skin.label"),
+                icon: MdCleanHands,
+                description: t("toner-skin.description"),
+            },
+            {
+                label: t("wrinkle-solution-toner.label"),
+                icon: GiHealthPotion,
+                description: t("wrinkle-solution-toner.description"),
+            },
+            {
+                label: t("lotion.label"),
+                icon: GiPerfumeBottle,
+                description: t("lotion.description"),
+            },
+            {
+                label: t("skin.label"),
+                icon: MdFace2,
+                description: t("skin.description"),
+            },
+            {
+                label: t("body-care.label"),
+                icon: IoBodySharp,
+                description: t("body-care.description"),
+            },
+            {
+                label: t("mask-pack.label"),
+                icon: GiCeremonialMask,
+                description: t("mask-pack.description"),
+            },
+            {
+                label: t("make-up.label"),
+                icon: BsEyedropper,
+                description: t("make-up.description"),
+            },
+            {
+                label: t("all-in-one.label"),
+                icon: BsFillBagHeartFill,
+                description: t("all-in-one.description"),
+            },
+            {
+                label: t("perfume.label"),
+                icon: GiDelicatePerfume,
+                description: t("perfume.description"),
+            },
+            {
+                label: t("nail-care.label"),
+                icon: TbHandThreeFingers,
+                description: t("nail-care.description"),
+            },
+        ]
+    }
+
+
+
+
+
+
+
+    return { categories, getAll }
 }
 
 // export default {useProducts};

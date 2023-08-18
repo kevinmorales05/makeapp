@@ -27,82 +27,84 @@ import CategoryBox from "../CategoryBox";
 import Container from '../Container';
 import { AiOutlineHighlight } from 'react-icons/ai';
 import { useLocale, useTranslations } from 'next-intl';
+import { useCategories } from '@/app/hooks/useCategories';
 
-export const categories = () => {
-  const t = useTranslations("navbar.categories")
-  return [
-    {
-      label: t("derma-plan.label"),
-      icon: GiLips,
-      description: t("derma-plan.description"),
-    },
-    {
-      label: t("skin-care.label"),
-      icon: AiOutlineHighlight,
-      description: t("skin-care.description"),
-    },
-    {
-      label: t("sun-care.label"),
-      icon: BsEmojiSunglasses,
-      description: t("sun-care.description"),
-    },
-    {
-      label: t("toner-skin.label"),
-      icon: MdCleanHands,
-      description: t("toner-skin.description"),
-    },
-    {
-      label: t("wrinkle-solution-toner.label"),
-      icon: GiHealthPotion,
-      description: t("wrinkle-solution-toner.description"),
-    },
-    {
-      label: t("lotion.label"),
-      icon: GiPerfumeBottle,
-      description: t("lotion.description"),
-    },
-    {
-      label: t("skin.label"),
-      icon: MdFace2,
-      description: t("skin.description"),
-    },
-    {
-      label: t("body-care.label"),
-      icon: IoBodySharp,
-      description: t("body-care.description"),
-    },
-    {
-      label: t("mask-pack.label"),
-      icon: GiCeremonialMask,
-      description: t("mask-pack.description"),
-    },
-    {
-      label: t("make-up.label"),
-      icon: BsEyedropper,
-      description: t("make-up.description"),
-    },
-    {
-      label: t("all-in-one.label"),
-      icon: BsFillBagHeartFill,
-      description: t("all-in-one.description"),
-    },
-    {
-      label: t("perfume.label"),
-      icon: GiDelicatePerfume,
-      description: t("perfume.description"),
-    },
-    {
-      label: t("nail-care.label"),
-      icon: TbHandThreeFingers,
-      description: t("nail-care.description"),
-    },
+// export const categories = () => {
+//   const t = useTranslations("navbar.categories")
+//   return [
+//     {
+//       label: t("derma-plan.label"),
+//       icon: GiLips,
+//       description: t("derma-plan.description"),
+//     },
+//     {
+//       label: t("skin-care.label"),
+//       icon: AiOutlineHighlight,
+//       description: t("skin-care.description"),
+//     },
+//     {
+//       label: t("sun-care.label"),
+//       icon: BsEmojiSunglasses,
+//       description: t("sun-care.description"),
+//     },
+//     {
+//       label: t("toner-skin.label"),
+//       icon: MdCleanHands,
+//       description: t("toner-skin.description"),
+//     },
+//     {
+//       label: t("wrinkle-solution-toner.label"),
+//       icon: GiHealthPotion,
+//       description: t("wrinkle-solution-toner.description"),
+//     },
+//     {
+//       label: t("lotion.label"),
+//       icon: GiPerfumeBottle,
+//       description: t("lotion.description"),
+//     },
+//     {
+//       label: t("skin.label"),
+//       icon: MdFace2,
+//       description: t("skin.description"),
+//     },
+//     {
+//       label: t("body-care.label"),
+//       icon: IoBodySharp,
+//       description: t("body-care.description"),
+//     },
+//     {
+//       label: t("mask-pack.label"),
+//       icon: GiCeremonialMask,
+//       description: t("mask-pack.description"),
+//     },
+//     {
+//       label: t("make-up.label"),
+//       icon: BsEyedropper,
+//       description: t("make-up.description"),
+//     },
+//     {
+//       label: t("all-in-one.label"),
+//       icon: BsFillBagHeartFill,
+//       description: t("all-in-one.description"),
+//     },
+//     {
+//       label: t("perfume.label"),
+//       icon: GiDelicatePerfume,
+//       description: t("perfume.description"),
+//     },
+//     {
+//       label: t("nail-care.label"),
+//       icon: TbHandThreeFingers,
+//       description: t("nail-care.description"),
+//     },
 
-  ]
-}
+//   ]
+// }
 
 
 
 const Categories = () => {
+  const { getAll } = useCategories()
   const params = useSearchParams();
   const locale = useLocale();
   const category = params?.get('category');
@@ -125,7 +127,7 @@ const Categories = () => {
           hover:overflow-x-auto
         "
       >
-        {categories().map((item) => (
+        {getAll().map((item) => (
           <CategoryBox
             key={item.label}
             label={item.label}

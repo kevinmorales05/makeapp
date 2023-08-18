@@ -22,13 +22,10 @@ import MenuItem from "./MenuItem";
 import Avatar from "../Avatar";
 import { BsHousesFill } from "react-icons/bs";
 
-import { Menu, Transition } from '@headlessui/react'
-import DropdownMain from "../dropdowns/DropdownMain";
-import { EC } from 'country-flag-icons/react/3x2'
+import DropdownMain from "../dropdowns/Dropdown";
 
 import { Avatar as Avatars, User } from "@nextui-org/react";
 import { useLocale } from "next-intl";
-import { stringify } from "querystring";
 
 
 interface UserMenuProps {
@@ -180,6 +177,15 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     },
 
   ];
+
+  const dropdownmenu = {
+    ariaLabel: "Profile Actions",
+    variant: "flat",
+    disallowEmptySelection: true,
+    defaultSelectedKeys: "",
+    disabledKeys: locale,
+    selectionMode: "single"
+  }
   return (
     <div className="relative">
       <div className="flex flex-row items-center sm:gap-3">
@@ -260,9 +266,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
 
         {currentUser ? (
-          <DropdownMain trigger={trigger} items={itemsUser} />
+          <DropdownMain trigger={trigger} items={itemsUser} propsMenu={dropdownmenu} />
         ) : (
-          <DropdownMain trigger={trigger} items={itemsWithoutUser} />
+          <DropdownMain trigger={trigger} items={itemsWithoutUser} propsMenu={dropdownmenu}/>
         )}
 
       </div>

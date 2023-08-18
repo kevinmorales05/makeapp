@@ -11,6 +11,8 @@ const nextConfig = {
       "lh3.googleusercontent.com",
       "beshop-demo.vercel.app",
       "fakestoreapi.com",
+      "d33wubrfki0l68.cloudfront.net",
+      "firebasestorage.googleapis.com"
     ],
   },
   // i18n: {

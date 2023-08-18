@@ -100,7 +100,7 @@ const LoginModal = () => {
   )
 
   const footerContent = (
-    <div className="flex flex-col gap-1 mt-1">
+    <div className="flex flex-col gap-4 mt-4">
       <hr />
       <Button
         outline
@@ -129,7 +129,7 @@ const LoginModal = () => {
       </div>
     </div>
   )
-
+  console.log("well")
   return (
     <Modal
       disabled={isLoading}

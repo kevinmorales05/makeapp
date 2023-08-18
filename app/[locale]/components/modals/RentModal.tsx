@@ -17,10 +17,11 @@ import Modal from "./Modal";
 import Counter from "../inputs/Counter";
 import CategoryInput from '../inputs/CategoryInput';
 import CountrySelect from "../inputs/CountrySelect";
-import { categories } from '../navbar/Categories';
+// import { categories } from '../navbar/Categories';
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Heading from '../Heading';
+import { useCategories } from '@/app/hooks/useCategories';
 
 enum STEPS {
   CATEGORY = 0,
@@ -32,6 +33,7 @@ enum STEPS {
 }
 
 const RentModal = () => {
+  const { getAll } = useCategories()
   const router = useRouter();
   const rentModal = useRentModal();
 
@@ -67,6 +69,8 @@ const RentModal = () => {
   const roomCount = watch('roomCount');
   const bathroomCount = watch('bathroomCount');
   const imageSrc = watch('imageSrc');
+
+
 
   const Map = useMemo(() => dynamic(() => import('../Map'), {
     ssr: false
@@ -144,7 +148,7 @@ const RentModal = () => {
           overflow-y-auto
         "
       >
-        {categories().map((item) => (
+        {getAll().map((item) => (
           <div key={item.label} className="col-span-1">
             <CategoryInput
               onClick={(category) =>

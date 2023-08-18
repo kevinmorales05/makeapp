@@ -6,8 +6,5 @@ import image33 from '@/public/mocking/creams.jpg'
 import image44 from '@/public/mocking/mizon.jpg'
 
 export const images: any[] = [image11, image22, image33, image44]
-console.log("images is this: ", images)
-
 const imageByIndex = (index: number): string => images[index % images.length].src
-
 export default imageByIndex

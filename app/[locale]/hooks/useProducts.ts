@@ -1,4 +1,4 @@
-import products from "@/public/data/products.json"
+import products from "@/public/data/productsKorean.json"
 import { create } from "zustand";
 import { Products } from "../types/products";
 import { useCallback, useMemo } from "react";
@@ -19,12 +19,20 @@ interface currentProductsStore {
 
 
 const formattedProducts = products.map((p) => ({
-    id: p.id,
-    price: p.price,
     title: p.title,
+    description: p.description,
     category: p.category,
-    src: p.image
-}))
+    subCategory: p.subcategory,
+    cost: parseFloat(p.cost),
+    promoCost: parseFloat(p.promoCost),
+    bestSeller: p.bestSeller || p.bestSeller === "0" ? false : true,
+    kit: p.kit === "1" || p.kit.toUpperCase() === "KIT".toUpperCase() ? true : false,
+    weight: p.weight,
+    farmacState: p.farmacState,
+    presentation: p.presentation,
+    color: p.color,
+    src: p.imgUrl,
+  }))
 
 // export const currentProducts = create<currentProductsStore>((set) => ({
 //     products: []

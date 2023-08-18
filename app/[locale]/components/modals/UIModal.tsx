@@ -12,7 +12,6 @@ export default function UIModal() {
         setBackdrop(backdrop)
         onOpen();
     }
-
     return (
         <>
             <div className="flex flex-wrap gap-3">

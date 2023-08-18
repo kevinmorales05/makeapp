@@ -1,18 +1,26 @@
 'use client'
 import React, { useState } from 'react'
-import Stack from '@mui/material/Stack';
+// import Stack from '@mui/material/Stack';
 // import Pagination from './Pagination';
-import { Pagination } from '@mui/material'
+// import { Pagination } from '@mui/material'
 import { Products } from '../types/products';
-import { useProducts } from '../hooks/useProducts';
 import Image from 'next/image';
+import { useProducts } from '../hooks/useProducts';
 
 
 interface formattedProductsProps {
-  id: number
-  price: number
   title: string
+  description: string
   category: string
+  subCategory: string
+  cost: number
+  promoCost: number
+  bestSeller: boolean
+  kit: boolean
+  weight: string
+  farmacState: string
+  presentation: string
+  color: string
   src: string
 }
 
@@ -42,7 +50,7 @@ export default function ShopMain() {
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2 text-center">{p.title}</div>
               <p className="text-gray-700 text-base text-center">
-                $ {p.price}
+                $ {p.cost}
               </p>
             </div>
             <div className="px-6 pt-4 pb-2">
@@ -57,12 +65,12 @@ export default function ShopMain() {
       </div>
 
       <div className='flex justify-center items-center py-2' >
-        <Stack spacing={10}>
+        {/* <Stack spacing={10}>
           <Pagination
             count={Math.ceil(getCount() / PAGESIZE)}
             onChange={handlePagination}
             color="secondary" />
-        </Stack>
+        </Stack> */}
       </div>
     </>
   )

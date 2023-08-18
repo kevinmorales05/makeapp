@@ -32,6 +32,7 @@ type PropType = {
 }
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
+
   const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options)
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
@@ -72,6 +73,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     emblaApi.on('select', onSelect)
   }, [emblaApi, onInit, onSelect])
 
+
+
   return (
     <section className="sandbox__carousel">
       <div className="embla">
@@ -86,34 +89,35 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     flex flex-row
                     bg-black/10 text-start
                     max-h-[830px]
+                    mt-10
                     "
                   key={index}>
-                  <div className="p-8 basis-full sm:basis-3/5 group">
+                  <div className="p-8 mt-8 basis-full sm:basis-3/5 group">
                     <p className="font-light font-gandhi text-4xl text-start">New Korean Philosophy and its beauty traditional habits to keep young and shining.</p>
-                    <p className="font-gandhi font-medium antialiased text-ellipsis py-6 text-start">{"Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula.".slice(0, 120)}...</p>
-                    <div className="h-24 w-24 items-start group-hover:scale-105 transition">
-                      <Button label="Read more" onClick={() => { }} disabled={true} />
+                    <div className='mt-8'>
+                      <p className="font-gandhi font-medium antialiased text-ellipsis py-6 text-start">{"Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula.".slice(0, 120)}...</p>
+                      <div className="h-24 w-[8rem] items-start group-hover:scale-105 transition">
+                        <Button label="Read more" onClick={() => { }} />
+                      </div>
                     </div>
 
                   </div>
 
                   <div className="hidden sm:basis-2/5 sm:flex">
-                  <Image
+                    <Image
                       fill={true}
                       src={imageByIndex(index)}
-                      alt="Your alt text" className="object-contain !relative"
-                      
+                      alt="Your alt text" className="object-cover !relative"
+
                     />
                   </div>
                 </div>
-                {/* <img
-                  className="embla__slide__img"
-                  src={imageByIndex(index)}
-                  alt="Your alt text"
-                /> */}
+
               </div>
             ))}
+
           </div>
+
         </div>
 
         <div className="embla__buttons">
@@ -133,6 +137,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
           />
         ))}
       </div>
+
     </section>
   )
 }
