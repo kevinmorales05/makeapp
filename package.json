@@ -30,7 +30,7 @@
     "framer-motion": "^10.15.1",
     "leaflet": "^1.9.4",
     "lodash": "^4.17.21",
-    "next": "13.4.6",
+    "next": "13.4.4",
     "next-auth": "^4.22.1",
     "next-cloudinary": "^4.13.0",
     "next-intl": "^3.0.0-beta.9",

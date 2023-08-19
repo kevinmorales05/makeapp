@@ -5,6 +5,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { wrap } from "popmotion";
 import "./next.css";
+import Image from "next/image";
 
 const images = [
     { url: "https://beshop-demo.vercel.app/assets/img/insta-photo6.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
@@ -95,11 +96,8 @@ const Galery = () => {
                             <button>CLICK BUTTON</button>
                         </div>
 
-                        <img src={images[imageIndex].url} alt="exactly" draggable="false" className=" relative w-full h-full" />
+                        <Image src={images[imageIndex].url} alt="exactly" draggable="false" className=" relative w-full h-full" />
                     </div>
-                    {/* <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi magni, aperiam quis nobis quasi cumque, commodi corrupti nesciunt assumenda, illum earum atque pariatur voluptas. Velit corrupti nemo non facilis quas?</p>
-                        
-                        <img src={images[imageIndex].url} alt="some text" /> */}
                 </motion.div>
                 
             </AnimatePresence>

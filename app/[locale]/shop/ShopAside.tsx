@@ -22,7 +22,7 @@ export default function ShopAside() {
             {categories.map(it => (
               <DisclosureItem label={it.label} isNested={'sub' in it} nested={'sub' in it ?
                 <>
-                  {it.sub?.map(secIt => (<DisclosureItem label={secIt.label} isNested={'sub' in secIt} />))}
+                  {it.sub?.map(secIt => (<DisclosureItem label={secIt.label} isNested={'sub' in secIt} key={secIt.label} />))}
                 </>
                 : <></>}
                 key={it.label} />
@@ -83,7 +83,7 @@ export default function ShopAside() {
         {categories.map(it => (
           <DisclosureItem label={it.label} isNested={'sub' in it} nested={'sub' in it ?
             <>
-              {it.sub?.map(secIt => (<DisclosureItem label={secIt.label} isNested={'sub' in secIt} />))}
+              {it.sub?.map(secIt => (<DisclosureItem key={secIt.label} label={secIt.label} isNested={'sub' in secIt} />))}
             </>
             : <></>}
             key={it.label} />

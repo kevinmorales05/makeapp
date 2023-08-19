@@ -3,27 +3,26 @@ import localFont from 'next/font/local'
 
 import Navbar from '@/app/components/navbar/Navbar';
 
-import ToasterProvider from '@/app/providers/ToasterProvider';
-
 import './globals.css'
 import ClientOnly from './components/ClientOnly';
 import getCurrentUser from './actions/getCurrentUser';
-import Footer from './components/Footer';
-import ModalsProvider from './providers/ModalsProvider';
+import Footer from './components/footer/Footer';
 
 import { NextIntlClientProvider } from 'next-intl';
-import { notFound } from 'next/navigation';
-import { NextUI } from './providers/NextUI';
 import Providers from './providers/Providers';
 
+import { notFound } from 'next/navigation'
 
-export const metadata = {
-  title: 'Korean Cosmetic',
-  description: 'Amazing Korean Cosmetics',
+async function getMessages(locale: string) {
+  try {
+    return (await import(`../../messages/${locale}.json`)).default
+  } catch (error) {
+    notFound()
+  }
 }
 
 export function generateStaticParams() {
-  return [{ locale: 'es' }, { locale: 'en' }, { locale: 'ko' }];
+  return ['es', 'en', 'ko'].map((locale) => ({ locale }))
 }
 
 const gandhi = localFont({
@@ -47,24 +46,26 @@ const roboto = Roboto_Serif({
 
 const htmlClasses = `${merienda.variable}  ${gandhi.variable} ${roboto.variable}`
 
+
+export const metadata = {
+  title: 'Korean Cosmetic',
+  description: 'Amazing Korean Cosmetics',
+}
+
+type RootProps = {
+  children: React.ReactNode
+  params: { locale: string }
+}
 export default async function RootLayout({
   children,
   params: { locale }
-}: {
-  children: React.ReactNode,
-  params: any
-}) {
+}: RootProps) {
+  
   const currentUser = await getCurrentUser();
-
-  let messages;
-  try {
-    messages = (await import(`../../messages/${locale}.json`)).default;
-  } catch (error) {
-    notFound();
-  }
+  const messages = await getMessages(locale)
 
   return (
-    <html lang={locale} className={htmlClasses}>
+    <html lang={"es"} className={htmlClasses}>
       <body >
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ClientOnly>
@@ -77,7 +78,6 @@ export default async function RootLayout({
             <Footer />
           </ClientOnly>
         </NextIntlClientProvider>
-
       </body>
     </html>
   )

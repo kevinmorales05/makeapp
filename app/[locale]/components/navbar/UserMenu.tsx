@@ -7,7 +7,7 @@ import {
   AiOutlineHeart,
   AiOutlineClose,
 } from "react-icons/ai";
-import { RiArrowDownSLine, RiArrowDropDownLine, RiUserReceivedFill } from "react-icons/ri";
+import { RiArrowDownSLine, RiArrowDropDownLine, RiFileSettingsFill, RiUserReceivedFill } from "react-icons/ri";
 import { LuIceCream, LuLogIn, LuLogOut, LuUserPlus } from "react-icons/lu";
 
 import { signOut } from "next-auth/react";
@@ -18,19 +18,20 @@ import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useRentModal from "@/app/hooks/useRentModal";
 import { SafeUser } from "@/app/types";
 
-import MenuItem from "./MenuItem";
-import Avatar from "../Avatar";
 import { BsHousesFill } from "react-icons/bs";
 
-import DropdownMain from "../dropdowns/Dropdown";
+import Dropdown, { IDropdownProps } from "../dropdowns/Dropdown";
 
-import { Avatar as Avatars, User } from "@nextui-org/react";
+import { Button, User, cn } from "@nextui-org/react";
 import { useLocale } from "next-intl";
-
+import { FaHandsHelping } from "react-icons/fa";
+import { ICON_CLASES_DROPDOWN } from "@/app/constants/constants";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
 }
+
+const iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0";
 
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const router = useRouter()
@@ -101,90 +102,113 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     }}
   />)
 
-  const itemsUser = [
-    {
-      children: <><p className="font-semibold">Signed in as</p>
-        <p className="font-semibold">{currentUser?.email}</p></>,
-      key: "profile",
-      className: "h-14 gap-2",
-      isIcon: false,
-      onclick: () => console.log('espaniol')
-    },
-    {
-      children: "My invoices",
-      key: "inovoices",
-      className: "",
-      isIcon: true,
-      icon: RiUserReceivedFill,
-      onclick: () => router.push('/reservations', { locale })
-    },
-    {
-      children: "My voices home",
-      key: "invoices_home",
-      className: "",
-      isIcon: true,
-      icon: BsHousesFill,
-      onclick: () => router.push("/properties", { locale })
-    },
-    {
-      children: "Korean Cosmetic your home",
-      key: "korean_cosmetic_your_home",
-      className: "",
-      isIcon: true,
-      icon: LuIceCream,
-      onclick: rentModal.onOpen,
-    },
-    {
-      children: <>Log Out</>,
-      key: "logout",
-      className: "",
-      isIcon: true,
-      icon: LuLogOut,
-      onclick: () => signOut(),
-    },
-    {
-      children: <><hr /><p>Configurations</p></>,
-      key: "configurations",
-      className: "",
-      isIcon: false,
-      onclick: () => console.log('configurations')
-    },
-    {
-      children: <>Help & Feedback</>,
-      key: "help_and_feedback",
-      className: "",
-      isIcon: false,
-      onclick: () => console.log('help_and_feedback')
-    },
-  ];
+  const sectionsMenu: IDropdownProps = {
+    variant: "bordered",
+    ariaLabel: "User Menu Actions",
+    disabledKeys: ["signed_in_as"],
+    sections: [
+      {
+        title: "My profile",
+        xkey: "my_profile",
+        showDivider: true,
+        content: [
+          {
+            xkey: "signed_in_as",
+            title: "Signed in as",
+            description: "aguilakrakatoa@gmail.com",
+            color: "primary",
+            onClick: () => { },
+            startContent: <></>,
+            className: "h-14 gap-2 font-bold opacity-90",
+          },
+          {
+            xkey: "my_invoices",
+            title: "My invoices",
+            description: "See my invoices pendent",
+            color: "primary",
+            onClick: () => router.push("/trips", { locale }),
+            startContent: <Button size="sm" variant="light" startContent={<RiUserReceivedFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+          },
+          {
+            xkey: "my_curiosities",
+            title: "My curiosities",
+            description: "Discover my amazing beauty products",
+            color: "primary",
+            onClick: () => router.push("/favorites", { locale }),
+            startContent: <Button size="sm" variant="light" startContent={<BsHousesFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+          },
+          {
+            xkey: "korean_cosmetic_your_home",
+            title: "Korean Cosmetic your home",
+            description: "See some tips for my beauty",
+            color: "primary",
+            onClick: () => router.push("/properties", { locale }),
+            startContent: <Button size="sm" variant="light" startContent={<LuIceCream className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+          }
+        ]
+      },
+      {
+        title: "Discover more",
+        xkey: "disvover_more",
+        content: [
+          {
+            xkey: "log_out",
+            title: "Log Out",
+            description: "Goint out of my account",
+            color: "danger",
+            onClick: () => signOut(),
+            startContent: <Button size="sm" variant="light" startContent={<LuLogOut className={cn(ICON_CLASES_DROPDOWN, "rotate-180")} />} isIconOnly />,
+          },
+          {
+            xkey: "configurations",
+            title: "Configurations",
+            description: "Manage my account",
+            color: "danger",
+            onClick: () => alert("configurations"),
+            startContent: <Button size="sm" variant="light" startContent={<RiFileSettingsFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+          },
+          {
+            xkey: "help_and_feedback",
+            title: "Help & Feedback",
+            description: "Help to improve this application",
+            color: "danger",
+            onClick: () => alert("help_and_feedback"),
+            startContent: <Button size="sm" variant="light" startContent={<FaHandsHelping className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+          },
 
-  const itemsWithoutUser = [
-    {
-      children: "Login",
-      key: "login",
-      className: "",
-      isIcon: true,
-      icon: LuLogIn,
-      onclick: loginModal.onOpen
-    },
-    {
-      children: "Sign Up",
-      key: "sign_up",
-      className: "",
-      isIcon: true,
-      icon: LuUserPlus,
-      onclick: registerModal.onOpen
-    },
+        ]
+      }
+    ]
+  }
 
-  ];
-
-  const dropdownmenu = {
-    ariaLabel: "Profile Actions",
-    variant: "flat",
-    disallowEmptySelection: true,
-    defaultSelectedKeys: "",
-    disabledKeys: locale,
-    selectionMode: "single"
+  const sectionGuest: IDropdownProps = {
+    variant: "bordered",
+    ariaLabel: "User Guest Menu Actions",
+    sections: [
+      {
+        xkey: "my_profile",
+        title: "Welcome",
+        showDivider: false,
+        content: [
+          {
+            xkey: "login",
+            title: "Login",
+            description: "Enter to your account",
+            color: "primary",
+            onClick: () => loginModal.onOpen(),
+            startContent: <Button size="sm" variant="light" startContent={<LuLogIn className={iconClasses} />} isIconOnly />,
+          },
+          {
+            xkey: "sign_up",
+            title: "Sign Up",
+            description: "Register to my new account",
+            color: "primary",
+            onClick: () => registerModal.onOpen(),
+            startContent: <Button size="sm" variant="light" startContent={<LuUserPlus className={iconClasses} />} isIconOnly />,
+          },
+        ]
+      }
+    ]
   }
   return (
     <div className="relative">
@@ -264,11 +288,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           </span>
         </div>
 
-
         {currentUser ? (
-          <DropdownMain trigger={trigger} items={itemsUser} propsMenu={dropdownmenu} />
+          <Dropdown trigger={trigger} items={sectionsMenu} />
         ) : (
-          <DropdownMain trigger={trigger} items={itemsWithoutUser} propsMenu={dropdownmenu}/>
+          <Dropdown trigger={trigger} items={sectionGuest} />
         )}
 
       </div>
@@ -277,81 +300,3 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 };
 
 export default UserMenu;
-
-
-// <Menu as="div"
-// className="  
-// px-2
-// py-3
-// //border-[1px] 
-// flex 
-// flex-row 
-// items-center 
-// justify-center
-// gap-2
-// rounded-full 
-// cursor-pointer 
-// hover:shadow-md 
-// transition
-// "
-// >
-// <Menu.Button
-//   className="flex items-center"
-// >
-//   <div>
-//     <Avatar src={currentUser?.image} user={currentUser} />
-//   </div>
-//   {/* well {JSON.stringify(currentUser)} */}
-//   <RiArrowDownSLine />
-// </Menu.Button>
-// <Transition
-//   as={Fragment}
-//   enter="transition ease-out duration-100"
-//   enterFrom="transform opacity-0 scale-95"
-//   enterTo="transform opacity-100 scale-100"
-//   leave="transition ease-in duration-75"
-//   leaveFrom="transform opacity-100 scale-100"
-//   leaveTo="transform opacity-0 scale-95"
-// >
-//   <Menu.Items
-//     //   className="
-//     // absolute right-0 mt-[330px] w-56 origin-top-right rounded-md
-//     // bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-//     className="
-//   absolute 
-//   rounded-xl 
-//   shadow-xl
-//   //w-[40vw]
-//   w-56
-//   bg-white 
-//   overflow-hidden 
-//   right-0 
-//   top-12 
-//   text-sm
-//   ring-1 ring-black ring-opacity-5 focus:outline-none
-// ">
-//     <div className="px-1 py-1 ">
-//       <>
-//         {currentUser ? (
-//           <>
-//             {
-//               menuItems.map((it: any) => (
-//                 <div key={it.label}>
-//                   {it.label.startsWith("Logout") ? <>
-//                     <hr />
-//                     <MenuItem label={it.label} onClick={it.onClick} icon={it.icon} />
-//                   </> :
-//                     <MenuItem label={it.label} onClick={it.onClick} icon={it.icon} />
-//                   }
-//                 </div>
-//               ))
-//             }
-//           </>
-//         ) : <>
-//           <MenuItem label="Login" onClick={loginModal.onOpen} icon={LuLogIn} />
-//           <MenuItem label="Sign up" onClick={registerModal.onOpen} icon={LuUserPlus} /></>}
-//       </>
-//     </div>
-//   </Menu.Items>
-// </Transition>
-// </Menu>

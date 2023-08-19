@@ -2,6 +2,7 @@ import countries from 'world-countries';
 import { US } from 'country-flag-icons/react/3x2'
 import { EC } from 'country-flag-icons/react/3x2'
 import { KR } from 'country-flag-icons/react/3x2'
+import { LOCALE_EN, LOCALE_ES, LOCALE_KO } from '../constants/constants';
 
 
 const formattedCountries = countries.map((country) => ({
@@ -23,11 +24,10 @@ const useCountries = () => {
   }
 
   const getByFlag = (locale: string) => {
-    //default flag
     let flag = EC
-    if (locale === "es") flag = EC
-    if (locale === "en") flag = US
-    if (locale === "ko") flag = KR
+    if (locale === LOCALE_ES) flag = EC
+    if (locale === LOCALE_EN) flag = US
+    if (locale === LOCALE_KO) flag = KR
     return flag
   }
 

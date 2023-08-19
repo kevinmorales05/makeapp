@@ -1,4 +1,9 @@
 {
+  "LocaleSwitcher": {
+    "titleModal": "Select a language",
+    "title": "{locale, select, es {Spanish} en {English} ko {Korean} other {Unknown}}",
+    "description": "{locale, select, es {Vibrant and melodic} en {Global and connected} ko {Fascinating and enigmatic} other {Unknown}}"
+  },
   "navbar": {
     "title": "Hello world!",
     "subtitle": "Hello world!",
