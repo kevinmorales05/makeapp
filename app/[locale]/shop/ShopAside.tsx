@@ -9,7 +9,7 @@ import Image from 'next/image'
 import { useCategories } from '../hooks/useCategories'
 
 
-export default function ShopAside() {
+export default function ShopAside({ categories:anl }: {categories: any[]}) {
 
   const { categories } = useCategories();
 

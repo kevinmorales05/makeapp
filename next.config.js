@@ -12,7 +12,10 @@ const nextConfig = {
       "beshop-demo.vercel.app",
       "fakestoreapi.com",
       "d33wubrfki0l68.cloudfront.net",
-      "firebasestorage.googleapis.com"
+      "firebasestorage.googleapis.com",
+      "console.firebase.google.com",
+      "healivemall.com",
+      "healivemall-com.translate.goog"
     ],
   },
   // i18n: {

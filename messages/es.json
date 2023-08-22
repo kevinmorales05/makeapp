@@ -5,8 +5,6 @@
     "description": "{locale, select, es {Vibrante y melódico} en {Global y conectado} ko {Fascinante y enigmático} other {Desconocido}}"
   },
   "navbar": {
-    "title": "Hello world!",
-    "subtitle": "Hello world!",
     "userMenu": {
       "invoices": "My invoices",
       "details": "My invoices",
@@ -15,63 +13,64 @@
     },
     "categories": {
       "derma-plan": {
-        "label": "Derma Plan",
-        "description": "This cream protects the skin against the sun!"
+        "label": "Plan Derma",
+        "description": "¡Esta crema protege la piel contra el sol!"
       },
       "skin-care": {
-        "label": "Skin Care",
-        "description": "This property heps your skin!"
+        "label": "Cuidado de la Piel",
+        "description": "¡Esta propiedad ayuda a tu piel!"
       },
       "sun-care": {
-        "label": "Sun Care",
-        "description": "This cream protects the skin against the sun!"
+        "label": "Cuidado Solar",
+        "description": "¡Esta crema protege la piel contra el sol!"
       },
       "toner-skin": {
-        "label": "Toner/Skin",
-        "description": "These products protect to you and provides a shining face!"
+        "label": "Tónico/Piel",
+        "description": "¡Estos productos te protegen y brindan un rostro radiante!"
       },
       "wrinkle-solution-toner": {
-        "label": "Wrinkle Solution Toner",
-        "description": "These products provides to you so vitamins and antioxidants!"
+        "label": "Tónico Solución de Arrugas",
+        "description": "¡Estos productos te proporcionan vitaminas y antioxidantes!"
       },
       "lotion": {
-        "label": "Lotion",
-        "description": "These products provides to you so some benefits!"
+        "label": "Loción",
+        "description": "¡Estos productos te proporcionan algunos beneficios!"
       },
       "skin": {
-        "label": "Skin",
-        "description": "These products provides ancient secrets!"
+        "label": "Piel",
+        "description": "¡Estos productos brindan secretos ancestrales!"
       },
       "body-care": {
-        "label": "Body Care",
-        "description": "These products provides cleansing, exfoliating, and hair removal to nail care and body brushing!"
+        "label": "Cuidado Corporal",
+        "description": "¡Estos productos ofrecen limpieza, exfoliación, eliminación de vello, cuidado de uñas y cepillado corporal!"
       },
       "mask-pack": {
-        "label": "Mask Pack",
-        "description": "These masks are formulated with various ingredients that cater to different skincare needs, such as hydration, brightening, pore refinement, soothing, and more.!"
+        "label": "Mascarillas",
+        "description": "Estas mascarillas están formuladas con diversos ingredientes que satisfacen diferentes necesidades de cuidado de la piel, como hidratación, luminosidad, refinamiento de poros, calmante y más."
       },
       "make-up": {
-        "label": "Make Up",
-        "description": "These products have enhancing natural features, concealing imperfections, expressing creativity, and achieving specific looks never seen before !"
+        "label": "Maquillaje",
+        "description": "¡Estos productos realzan rasgos naturales, ocultan imperfecciones, expresan la creatividad y logran looks específicos nunca antes vistos!"
       },
       "all-in-one": {
-        "label": "All in one",
-        "description": "These products are especially popular for their convenience and time-saving properties, making them ideal for individuals looking to achieve a complete look with minimal effort or for those on the go, and achieve a flawless complexion in a single step."
+        "label": "Todo en uno",
+        "description": "Estos productos son especialmente populares por su conveniencia y propiedades que ahorran tiempo, lo que los hace ideales para personas que buscan lograr un aspecto completo con un esfuerzo mínimo o para aquellos que están en movimiento, y lograr una tez impecable en un solo paso."
       },
       "perfume": {
         "label": "Perfume",
-        "description": "These are created through a careful blending of various aromatic ingredients, resulting in a unique and distinctive fragrance that can evoke emotions, memories, style, personal associations, and an individual's personality."
+        "description": "Estos se crean mediante una cuidadosa mezcla de varios ingredientes aromáticos, dando como resultado una fragancia única y distintiva que puede evocar emociones, recuerdos, estilo, asociaciones personales y la personalidad de cada individuo."
       },
       "nail-care": {
-        "label": "Cuidado de uñas",
-        "description": "These products encompasses a range of practices and products aimed at maintaining the health, strength, and appearance of the nails."
+        "label": "Cuidado de Uñas",
+        "description": "Estos productos abarcan una variedad de prácticas y productos destinados a mantener la salud, fuerza y apariencia de las uñas."
       }
     }
   },
   "carousel": {
     "title": "{data, select, 1 {K-Beauty 360: La Evolución Total de la Rutina de Belleza Coreana} 2 {TechStyle: La Fusión Vanguardista entre Moda y Tecnología en Corea} 3 {Gastronomía Gangnam: La Escena Culinaria de Lujo que Marca Tendencia en Seúl} 4 {Hallyu Wave 2.0: La Nueva Era del Entretenimiento Coreano Global} 5 {Slow Life Hanok: Redescubriendo la Tranquilidad a Través de la Vida Tradicional Coreana} 6 {Sustainable Seoul: El Impulso de Corea hacia un Futuro Eco-Consciente} other {lorem ipsum}}",
     "subtitle": "{data, select, 1 {Descubre las Últimas Tendencias en Cuidado de la Piel y Maquillaje que Están Revolucionando la Industria de la Belleza} 2 {Explora la Intersección de la Moda Innovadora y la Tecnología de Vanguardia que Define el Estilo de Vida en Corea del Sur} 3 {Sumérgete en la Exquisita Gastronomía de Gangnam, Donde la Comida se Convierte en una Experiencia de Estilo de Vida} 4 {Desde K-Dramas Adictivos hasta K-Pop Rompedor, Explora cómo la Ola Hallyu Está Tomando Nuevas Dimensiones y Conquistando Corazones en Todo el Mundo} 5 {Abraza la Serenidad de los Hanoks y las Prácticas Tradicionales en un Mundo Moderno, Encontrando Equilibrio en la Vida Cotidiana} 6 {Explora cómo la Innovación Sostenible y la Conciencia Ambiental están Definiendo las Prácticas Empresariales y el Estilo de Vida en la Capital Coreana} other {lorem ipsum}}",
-    "slide_count": "6"
+    "slide_count": "6",
+    "button": "{locale, select, es {Leer más} en {Read more} ko {더 읽기} other {Read more}}"
   },
   "footer": {
     "title": "Secure payment guarantee",

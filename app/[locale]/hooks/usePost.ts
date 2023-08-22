@@ -107,7 +107,7 @@ const useTestPrima = () => {
 
 
     let request;
-    let postOrGet = false
+    let postOrGet = true
     let deleteAll = false
     const locale = 'en'
 

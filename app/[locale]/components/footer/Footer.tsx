@@ -11,7 +11,7 @@ export default function Footer() {
   const t = useTranslations("footer")
   return (
     <div className="flex items-center justify-center flex-col my-2">
-      <Image src="/img/logo.png" alt="Korean Cosmetic" width="50" height="50" />
+      <Image src="/img/logo.png" alt="Makeapp" width="50" height="50" />
       <p className="text-gray-400">{t('title')} </p>
       <p className="w-[50%] text-sm">{t('subtitle')}</p>
       <div className="icons flex items-center justify-around flex-wrap w-full md:w-1/4  my-2">

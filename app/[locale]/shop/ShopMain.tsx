@@ -5,10 +5,12 @@ import React, { useState } from 'react'
 // import { Pagination } from '@mui/material'
 import { Products } from '../types/products';
 import Image from 'next/image';
-import { useProducts } from '../hooks/useProducts';
+import { IProductProps, useProducts } from '../hooks/useProducts';
+import { PRODUCTS_PEER_PAGE } from '../constants/constants';
+import { Pagination } from '@nextui-org/react';
 
 
-interface formattedProductsProps {
+interface IShopProps {
   title: string
   description: string
   category: string
@@ -23,21 +25,18 @@ interface formattedProductsProps {
   color: string
   src: string
 }
+export const dynamic = 'force-dynamic'
+
+export default function ShopMain({ data }: {data: IShopProps[] }) {
 
 
-const PAGESIZE = 6;
+  const { getByPagination } = useProducts();
+  const [products, setProducts] = useState<IShopProps[]>(getByPagination(0, PRODUCTS_PEER_PAGE, data));
 
-
-export default function ShopMain() {
-
-
-  const { getByPagination, getCount } = useProducts();
-  const [products, setProducts] = useState<formattedProductsProps[]>(getByPagination(0, PAGESIZE))
-
-  const handlePagination = (event: React.ChangeEvent<unknown>, page: number) => {
-    const from = (page - 1) * PAGESIZE;
-    const to = (page - 1) * PAGESIZE + PAGESIZE;
-    const filteredProducts = getByPagination(from, to)
+  const handlePagination = (page: number) => {
+    const from = (page - 1) * PRODUCTS_PEER_PAGE;
+    const to = (page - 1) * PRODUCTS_PEER_PAGE + PRODUCTS_PEER_PAGE;
+    const filteredProducts = getByPagination(from, to, data)
     setProducts(filteredProducts)
   }
   return (
@@ -45,8 +44,8 @@ export default function ShopMain() {
       <div className='inline-grid grid-cols-3 gap-6 py-2 max-[480px]:grid-cols-1'>
 
         {products.map(p => (
-          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white" key={p.title}>
-            <Image className='w-full' src={p.src} width={100} height={100} alt={p.title} />
+          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white" key={p.title} onClick={()=> alert(p.title)}>
+            <Image className='w-full' src={p.src} width={100} height={100} alt={p.src} />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2 text-center">{p.title}</div>
               <p className="text-gray-700 text-base text-center">
@@ -71,6 +70,13 @@ export default function ShopMain() {
             onChange={handlePagination}
             color="secondary" />
         </Stack> */}
+
+        <Pagination key={"lg"}
+          initialPage={1} size='lg'
+          total={Math.ceil(data.length / PRODUCTS_PEER_PAGE)}
+          onChange={(number) => handlePagination(number)}
+        />
+        {Math.ceil(data.length / PRODUCTS_PEER_PAGE)}
       </div>
     </>
   )

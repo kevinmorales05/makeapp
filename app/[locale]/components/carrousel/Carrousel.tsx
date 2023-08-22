@@ -14,17 +14,8 @@ import imageByIndex from './imageByIndex'
 import './embla-carousel.css'
 import Image from 'next/image'
 import Button from '../Button'
-import { useTranslations } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { OPTIONS_CAROUSEL } from '@/app/constants/constants'
-
-
-
-
-type PropType = {
-  slides: number[]
-  options?: EmblaOptionsType
-}
-
 
 
 const EmblaCarousel: React.FC = () => {
@@ -37,10 +28,10 @@ const EmblaCarousel: React.FC = () => {
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
+  const locale = useLocale();
   const t = useTranslations("carousel")
 
   const SLIDE_COUNT = parseFloat(t("slide_count"));
-  console.log("SLIDE_COUNT", SLIDE_COUNT)
   const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
   const scrollPrev = useCallback(
@@ -76,18 +67,6 @@ const EmblaCarousel: React.FC = () => {
     emblaApi.on('select', onSelect)
   }, [emblaApi, onInit, onSelect])
 
-
-  const images = [
-    {
-      url: "https://beshop-demo.vercel.app/assets/img/insta-photo6.jpg",
-      header: parseFloat(t("title")),
-      paragraph: t("")
-    },
-
-  ];
-
-
-
   return (
     <section className="sandbox__carousel">
       <div className="embla mt-10">
@@ -105,14 +84,13 @@ const EmblaCarousel: React.FC = () => {
                     "
                   key={index}>
                   <div className="p-8 mt-8 basis-full sm:basis-3/5">
-                    <p className="font-light font-gandhi text-4xl text-start">{t("title", { data: index + 1 })}</p>
+                    <p className="font-light font-gandhi text-4xl text-start font-merienda">{t("title", { data: index + 1 })}</p>
                     <div className='mt-8'>
                       <p className="font-gandhi font-medium antialiased text-ellipsis py-6 text-start">{t("subtitle", { data: index + 1 })}</p>
                       <div className="w-[8rem] items-start group">
-                        <Button label="Read more" onClick={() => { }} className='group-hover:scale-105 transition'/>
+                        <Button label={t("button", { locale })} onClick={() => { }} className='group-hover:scale-105 transition' />
                       </div>
                     </div>
-
                   </div>
 
                   <div className="hidden sm:basis-2/5 sm:flex">
@@ -120,7 +98,6 @@ const EmblaCarousel: React.FC = () => {
                       fill={true}
                       src={imageByIndex(index)}
                       alt="Your alt text" className="object-cover !relative"
-
                     />
                   </div>
                 </div>

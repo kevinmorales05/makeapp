@@ -21,7 +21,7 @@ const Logo = () => {
     // width="50" 
     // alt="Logo" 
     >
-      {"Korean Cosmetic"}
+      {"Make App"}
     </p>
   );
 }

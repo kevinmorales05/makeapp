@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-const {nextui} = require("@nextui-org/react");
+const { nextui } = require("@nextui-org/react");
 
 const colors = {
   blue: "#2882ef",
@@ -66,7 +66,6 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
     "./node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}",
-
   ],
   theme: {
     extend: {
@@ -94,10 +93,11 @@ module.exports = {
         },
       },
       fontFamily: {
-        merienda: ["var(--font-merienda)"],
+        merienda: ["var(--font-merienda)", "cursive"],
         gandhi: ["var(--font-gandhi-serif)", "var(--font-roboto-serif)"],
       },
     },
   },
   darkMode: "class",
-  plugins: [nextui()]};
+  plugins: [nextui()],
+};

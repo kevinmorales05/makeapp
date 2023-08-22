@@ -20,10 +20,23 @@ async function getMessages(locale: string) {
     notFound()
   }
 }
+// be carefull not using when it's dynamic server usage be careful
+// export function generateStaticParams() {
+//   return ['es', 'en', 'ko'].map((locale) => ({ locale }))
+// }
 
-export function generateStaticParams() {
-  return ['es', 'en', 'ko'].map((locale) => ({ locale }))
-}
+const merienda = Merienda({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-merienda',
+  // fallback: [ "Times New Roman" ],
+  adjustFontFallback: true
+})
+const roboto = Roboto_Serif({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-serif',
+})
 
 const gandhi = localFont({
   src: "./fonts/GandhiSerif-Regular.otf",
@@ -33,24 +46,13 @@ const gandhi = localFont({
   variable: '--font-gandhi-serif',
 }
 )
-const merienda = Merienda({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-merienda',
-})
-const roboto = Roboto_Serif({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-serif',
-})
-
-const htmlClasses = `${merienda.variable}  ${gandhi.variable} ${roboto.variable}`
-
 
 export const metadata = {
-  title: 'Korean Cosmetic',
+  title: 'Makeapp',
   description: 'Amazing Korean Cosmetics',
 }
+
+export const dynamic = 'force-dynamic'
 
 type RootProps = {
   children: React.ReactNode
@@ -60,13 +62,14 @@ export default async function RootLayout({
   children,
   params: { locale }
 }: RootProps) {
-  
+
   const currentUser = await getCurrentUser();
   const messages = await getMessages(locale)
+  const htmlClasses = `${merienda.variable} ${gandhi.variable}`
 
   return (
-    <html lang={"es"} className={htmlClasses}>
-      <body >
+    <html lang={locale} className={htmlClasses}>
+      <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ClientOnly>
             <Navbar currentUser={currentUser} />
