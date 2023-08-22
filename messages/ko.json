@@ -68,6 +68,11 @@
       }
     }
   },
+  "carousel": {
+    "title": "{data, select, 1 {K-뷰티 360: 한국 뷰티 루틴의 완벽한 진화} 2{테크스타일: 패션과 기술의 절정적 융합, 한국에서} 3{가스트로놈이 강남: 서울의 트렌드 세터 식품 문화} 4{할류 웨이브 2.0: 글로벌 한국 엔터테인먼트의 새로운 시대} 5{슬로 라이프 한옥: 전통적인 한국 생활을 통해 평온을 재발견} 6{지속 가능한 서울: 한국의 친환경적 미래 구상} other{lorem ipsum}}",
+    "subtitle": "{data, select, 1 {뷰티 산업을 혁신하는 최신 스킨케어 및 메이크업 트렌드를 발견해보세요} 2{혁신적인 패션과 첨단 기술이 만나는 곳, 한국 라이프스타일을 정의합니다} 3{강남의 절묘한 미식을 경험해보세요, 음식이 라이프스타일 경험으로 변모합니다} 4{중독성 있는 K-드라마부터 혁신적인 K-팝까지, 할류 웨이브가 새로운 차원을 만들며 전 세계적으로 사랑받고 있습니다} 5{한옥과 전통적인 생활 방식의 평온을 현대 세계에서 찾아보며 일상 생활에서 균형을 찾아보세요} 6{지속 가능한 혁신과 환경 인식이 한국 수도에서 비즈니스 실천과 라이프스타일을 형성하는 방향을 탐구해보세요} other{lorem ipsum}}",
+    "slide_count":"6"
+  },
   "footer": {
     "title": "Secure payment guarantee",
     "subtitle": "All the data entered in the forms of our online store are stored securely encrypted under the SSL certified security protocol. In the same way, the payment system is carried out through a secure bank gateway.",

@@ -14,16 +14,10 @@ import imageByIndex from './imageByIndex'
 import './embla-carousel.css'
 import Image from 'next/image'
 import Button from '../Button'
+import { useTranslations } from 'next-intl'
+import { OPTIONS_CAROUSEL } from '@/app/constants/constants'
 
 
-const images = [
-  { url: "https://beshop-demo.vercel.app/assets/img/insta-photo6.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
-  { url: "https://beshop-demo.vercel.app/assets/img/insta-photo3.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
-  { url: "https://beshop-demo.vercel.app/assets/img/insta-photo1.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
-  { url: "https://beshop-demo.vercel.app/assets/img/info-item-img2.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
-  { url: "https://beshop-demo.vercel.app/assets/img/top-categories-img3.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
-  { url: "https://beshop-demo.vercel.app/assets/img/top-categories-img1.jpg", header: "New Korean Philosophy and its beauty traditional habits to keep young and shining.", paragraph: "Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula." },
-];
 
 
 type PropType = {
@@ -31,14 +25,23 @@ type PropType = {
   options?: EmblaOptionsType
 }
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
 
-  const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(options)
+
+const EmblaCarousel: React.FC = () => {
+
+
+
+  // const { slides, options } = props
+  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS_CAROUSEL)
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
+  const t = useTranslations("carousel")
+
+  const SLIDE_COUNT = parseFloat(t("slide_count"));
+  console.log("SLIDE_COUNT", SLIDE_COUNT)
+  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
@@ -74,14 +77,24 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   }, [emblaApi, onInit, onSelect])
 
 
+  const images = [
+    {
+      url: "https://beshop-demo.vercel.app/assets/img/insta-photo6.jpg",
+      header: parseFloat(t("title")),
+      paragraph: t("")
+    },
+
+  ];
+
+
 
   return (
     <section className="sandbox__carousel">
-      <div className="embla">
-        <div className="embla__viewport" ref={emblaRef}>
+      <div className="embla mt-10">
+        <div className="overflow-hidden" ref={emblaRef}>
           <div className="embla__container">
-            {slides.map((index) => (
-              <div className="embla__slide" key={index}>
+            {SLIDES.map((index) => (
+              <div className="embla__slide justify-center items-start " key={index}>
                 <div className="embla__slide__number">
                   <span>{index + 1}</span>
                 </div>
@@ -89,15 +102,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     flex flex-row
                     bg-black/10 text-start
                     max-h-[830px]
-                    mt-10
                     "
                   key={index}>
-                  <div className="p-8 mt-8 basis-full sm:basis-3/5 group">
-                    <p className="font-light font-gandhi text-4xl text-start">New Korean Philosophy and its beauty traditional habits to keep young and shining.</p>
+                  <div className="p-8 mt-8 basis-full sm:basis-3/5">
+                    <p className="font-light font-gandhi text-4xl text-start">{t("title", { data: index + 1 })}</p>
                     <div className='mt-8'>
-                      <p className="font-gandhi font-medium antialiased text-ellipsis py-6 text-start">{"Koreans gave many importance to beauty ritual habit every morning and night to care their face and skin. Over there put a set of products following a strict order to keep more younger. In that daily routine has never forget putting a double clean about on their eyes through serum, hydrant and solar cream. South Korean keeps trends and innovations. Applying about many technology packs with high ingredients specialized to care the skin without use con-servants and anti age peptides inside of their formula.".slice(0, 120)}...</p>
-                      <div className="h-24 w-[8rem] items-start group-hover:scale-105 transition">
-                        <Button label="Read more" onClick={() => { }} />
+                      <p className="font-gandhi font-medium antialiased text-ellipsis py-6 text-start">{t("subtitle", { data: index + 1 })}</p>
+                      <div className="w-[8rem] items-start group">
+                        <Button label="Read more" onClick={() => { }} className='group-hover:scale-105 transition'/>
                       </div>
                     </div>
 
@@ -120,7 +132,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
         </div>
 
-        <div className="embla__buttons">
+        <div className="embla__buttons scale-[1.14] sm:scale-[1.04]">
           <PrevButton onClick={scrollPrev} disabled={prevBtnDisabled} />
           <NextButton onClick={scrollNext} disabled={nextBtnDisabled} />
         </div>

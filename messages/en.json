@@ -68,6 +68,11 @@
       }
     }
   },
+  "carousel": {
+    "title": "{data, select, 1 {K-Beauty 360: The Complete Evolution of the Korean Beauty Routine} 2{TechStyle: The Cutting-Edge Fusion of Fashion and Technology in Korea} 3{Gastronomy Gangnam: The Trendsetting Culinary Scene in Seoul} 4{Hallyu Wave 2.0: The New Era of Global Korean Entertainment} 5{Slow Life Hanok: Rediscovering Tranquility Through Traditional Korean Living} 6{Sustainable Seoul: Korea's Drive Towards an Eco-Conscious Future} other{lorem ipsum}}",
+    "subtitle": "{data, select, 1 {Discover the Latest Trends in Skincare and Makeup that are Revolutionizing the Beauty Industry} 2{Explore the Intersection of Innovative Fashion and Cutting-Edge Technology that Defines the Lifestyle in South Korea} 3{Immerse Yourself in Gangnam's Exquisite Gastronomy, Where Food Turns into a Lifestyle Experience} 4{From Addictive K-Dramas to Groundbreaking K-Pop, Explore How the Hallyu Wave is Taking New Dimensions and Winning Hearts Worldwide} 5{Embrace the Serenity of Hanoks and Traditional Practices in a Modern World, Finding Balance in Everyday Life} 6{Explore How Sustainable Innovation and Environmental Awareness are Shaping Business Practices and Lifestyle in the Korean Capital} other{lorem ipsum}}",
+    "slide_count":"6"
+  },
   "footer": {
     "title": "Secure payment guarantee",
     "subtitle": "All the data entered in the forms of our online store are stored securely encrypted under the SSL certified security protocol. In the same way, the payment system is carried out through a secure bank gateway.",

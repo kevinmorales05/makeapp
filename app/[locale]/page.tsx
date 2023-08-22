@@ -7,8 +7,8 @@ import { IListingsParams } from "@/app/actions/getListings";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
 import Carrousel from "./components/carrousel/Carrousel";
-import { EmblaOptionsType } from 'embla-carousel-react'
 import TestButton from "./TestButton";
+
 
 interface HomeProps {
   searchParams: IListingsParams
@@ -18,6 +18,7 @@ const Home = async ({ searchParams }: HomeProps) => {
   // const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
 
+
   // if (listings.length === 0) {
   //   return (
   //     <ClientOnly>
@@ -25,14 +26,11 @@ const Home = async ({ searchParams }: HomeProps) => {
   //     </ClientOnly>
   //   );
   // }
-  const OPTIONS: EmblaOptionsType = {}
-  const SLIDE_COUNT = 5
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
   return (
     <ClientOnly>
       <Container>
-        <Carrousel slides={SLIDES} options={OPTIONS} />
+        <Carrousel />
       </Container>
       <Container>
         <div
