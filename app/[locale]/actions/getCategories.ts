@@ -63,7 +63,6 @@ export default async function getCategories(params: IGetCategoriesProps) {
     // }));
 
     // return safeListings;
-    console.log("listings", listings);
 
 
     const uniqueFileds = listings?.reduce((acc: any, listing: ICategory) => {
@@ -92,8 +91,15 @@ export default async function getCategories(params: IGetCategoriesProps) {
 
       return acc;
     }, {});
-    console.log("uniques", uniqueFileds)
-    return listings
+
+    const readableCategories = Array.from(uniqueFileds["categories"]).reduce((acc: any, category: any) => {
+      const values = Array.from(uniqueFileds[category])
+      acc.push({ category: category, values: values });
+      return acc;
+
+    }, [])
+
+    return readableCategories;
   } catch (error: any) {
     throw new Error(error);
   }

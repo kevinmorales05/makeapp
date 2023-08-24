@@ -1,4 +1,4 @@
-import { Dropdown as DropdownUI, DropdownTrigger, DropdownMenu, DropdownItem, Button, Avatar, User, DropdownSection } from "@nextui-org/react";
+import { Dropdown as DropdownUI, DropdownTrigger, DropdownMenu, DropdownItem, DropdownSection } from "@nextui-org/react";
 
 export interface IDropdownProps {
   variant: "solid" | "bordered" | "light" | "flat" | "faded" | "shadow",

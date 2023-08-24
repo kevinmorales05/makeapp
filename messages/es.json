@@ -73,17 +73,19 @@
     "button": "{locale, select, es {Leer más} en {Read more} ko {더 읽기} other {Read more}}"
   },
   "footer": {
-    "title": "Secure payment guarantee",
-    "subtitle": "All the data entered in the forms of our online store are stored securely encrypted under the SSL certified security protocol. In the same way, the payment system is carried out through a secure bank gateway.",
-    "networks": "Follow us on social networks"
+    "title": "Garantía de pago seguro",
+    "subtitle": "Todos los datos ingresados en los formularios de nuestra tienda en línea se almacenan de manera segura y encriptada bajo el protocolo de seguridad certificado SSL. De igual manera, el sistema de pago se realiza a través de una pasarela bancaria segura.",
+    "networks": "Síguenos en redes sociales"
   },
   "homepage": {
     "title": "Hello world!",
     "subtitle": "Hello world!"
   },
   "shoppage": {
-    "title": "Hello world!",
-    "subtitle": "Hello world!"
+    "aside": {
+      "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",
+      "tops3": "{locale, select, es {Top 3 Para Hoy} en {Top 3 For Today} ko {오늘의 상위 3개} other {Top 3 For Today}}"
+    }
   },
   "categories": {
     "title": "Hello world!",

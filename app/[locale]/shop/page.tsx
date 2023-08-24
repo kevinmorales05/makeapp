@@ -57,7 +57,7 @@ export default async function page(
                             size={100}
                             color="red"
                         />}>
-                            <ShopAside categories={["any"]} />
+                            <ShopAside categories={categories} />
                         </Suspense>
                     </div>
                     <div className='w-full md:w-auto xl:auto flex flex-col'>

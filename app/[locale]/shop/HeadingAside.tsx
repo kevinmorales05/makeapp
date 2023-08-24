@@ -12,6 +12,7 @@ export default function HeadingAside({ title }: HeadingShopAsideProps) {
                         border-black
                         border-b-2	
                         mb-4
+                        font-merienda
         ">
             {title}
         </div>
