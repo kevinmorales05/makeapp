@@ -8,9 +8,12 @@ import Image from 'next/image';
 import { IProductProps, useProducts } from '../hooks/useProducts';
 import { PRODUCTS_PEER_PAGE } from '../constants/constants';
 import { Pagination } from '@nextui-org/react';
+import { useRouter } from 'next-intl/client';
+import { useLocale } from 'next-intl';
 
 
 interface IShopProps {
+  id: number;
   title: string
   description: string
   category: string
@@ -27,11 +30,13 @@ interface IShopProps {
 }
 export const dynamic = 'force-dynamic'
 
-export default function ShopMain({ data }: {data: IShopProps[] }) {
+export default function ShopMain({ data }: { data: IShopProps[] }) {
 
 
   const { getByPagination } = useProducts();
   const [products, setProducts] = useState<IShopProps[]>(getByPagination(0, PRODUCTS_PEER_PAGE, data));
+  const locale = useLocale()
+  const router = useRouter()
 
   const handlePagination = (page: number) => {
     const from = (page - 1) * PRODUCTS_PEER_PAGE;
@@ -44,7 +49,8 @@ export default function ShopMain({ data }: {data: IShopProps[] }) {
       <div className='inline-grid grid-cols-3 gap-6 py-2 max-[480px]:grid-cols-1'>
 
         {products.map(p => (
-          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white" key={p.title} onClick={()=> alert(p.title)}>
+          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white" key={p.title} onClick={() =>
+            router.push(`/shop/${p.id}`, { locale })}>
             <Image className='w-full' src={p.src} width={100} height={100} alt={p.src} />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2 text-center">{p.title}</div>

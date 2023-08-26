@@ -38,7 +38,7 @@ export default async function page(
 ) {
     const { searchParams, locale } = params
     // const t = await getTranslator(locale, "categories")
-    console.log("searchParams", searchParams, "all", params)
+    // console.log("searchParams", searchParams, "all", params)
     const currentUser = await getCurrentUser();
     const products = await getProducts(PRODUCTS_PEER_PAGE, searchParams?.category, searchParams?.subCategory);
     // console.log("searchParams", searchParams, "params", params);

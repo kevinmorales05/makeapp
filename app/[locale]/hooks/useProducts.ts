@@ -55,6 +55,7 @@ export interface IProductProps {
 
 
 export const formattedProducts = (products: IProductProps[]) => products.map((p) => ({
+    id: p.id,
     title: p.title,
     description: p.description,
     category: p.category,

@@ -52,7 +52,6 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
     const formData = new FormData(form) as unknown as Iterable<
       [RequestData, FormDataEntryValue]
     >;
-
     const requestData: RequestData = Object.fromEntries(formData);
     if (!requestData.description) {
       toast.error(`Please provide a description`);
@@ -63,7 +62,6 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
       return
     }
     toast(`${starsSelected} stars in description ${description}`);
-
   }
 
   return (
@@ -79,9 +77,10 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
             gap-2
           "
         >
-          <div>Hosted by {user?.name}</div>
+          <div>Category</div>
           {/* <Avatar src={user?.image} /> */}
         </div>
+        <hr />
         <div className="
             flex 
             flex-row 
@@ -92,25 +91,14 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
           "
         >
           <div>
-            {guestCount} guests
-          </div>
-          <div>
-            {roomCount} rooms
-          </div>
-          <div>
-            {bathroomCount} bathrooms
+            category description
           </div>
         </div>
       </div>
       <hr />
 
-      <div className="
-      text-lg font-light text-neutral-500">
-        {description}
-      </div>
       <div className="flex justify-center">
         <div className="flex w-full flex-col">
-
           {/* TABS */}
           <Tabs
             aria-label="Options"
@@ -130,28 +118,8 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
                 <span>Description</span>
                 <Chip size="sm" variant="faded">1</Chip>
               </div>}
-              children={<AnimationTab key={"description_tab_content"}>
-                <form
-                  className="flex flex-col gap-4">
-                  <Input isRequired label="Email" placeholder="Enter your email" type="email" />
-                  <Input
-                    isRequired
-                    label="Password"
-                    placeholder="Enter your password"
-                    type="password" />
-                  <p className="text-center text-small">
-                    Need to create an account?{" "}
-                    <Link size="sm" onPress={() => setSelected("sign-up")}>
-                      Sign up
-                    </Link>
-                  </p>
-                  <div className="flex gap-2 justify-end">
-                    <Button fullWidth color="primary">
-                      Login
-                    </Button>
-                  </div>
-                </form>
-              </AnimationTab>} />
+              children={<AnimationTab key={"description_tab_content"} children={<>{description}</>} />}
+            />
 
             <Tab
               aria-disabled
@@ -162,7 +130,7 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
                 <Chip size="sm" variant="faded">1</Chip>
               </div>}
               children={<>
-                <AnimationTab key="ingredients_tab_content" className="py-4 justify-start">No ingredients</AnimationTab>
+                <AnimationTab key="ingredients_tab_content" className="py-4 !justify-start">No ingredients</AnimationTab>
               </>} />
 
             <Tab

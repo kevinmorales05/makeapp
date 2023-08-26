@@ -100,14 +100,8 @@ const formattedProductsToDB = originals.map((p) => ({
 const useTestPrima = () => {
   async function query() {
 
-
-    const p = await fetch("https://pokeapi.co/api/v2/pokemon/ditto")
-    const r = await p.json()
-    console.log("poke", r)
-
-
     let request;
-    let postOrGet = true
+    let postOrGet = true;
     let deleteAll = false
     const locale = 'en'
 
@@ -130,7 +124,7 @@ const useTestPrima = () => {
       console.log('resultFinalData', data)
 
     } catch (e) {
-      console.log('over error', e)
+      // console.log('over error', e)
     }
 
   }

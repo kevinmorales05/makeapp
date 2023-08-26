@@ -1,6 +1,5 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
+// useful npx prisma migrate dev --name init 
+// npx prisma studio
 generator client {
   provider      = "prisma-client-js"
   binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x"]
@@ -11,47 +10,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Post {
-//   id        Int      @id @default(autoincrement())
-//   createdAt DateTime @default(now())
-//   updatedAt DateTime @updatedAt
-//   title     String   @db.VarChar(255)
-//   content   String?
-//   published Boolean  @default(false)
-//   author    User     @relation(fields: [authorId], references: [id])
-//   authorId  Int
-// }
-
-model Profile {
-  id     Int     @id @default(autoincrement())
-  bio    String?
-  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId Int     @unique
-}
-
 model User {
-  id             Int       @id @default(autoincrement())
-  name           String?
-  email          String?   @unique
-  emailVerified  DateTime?
+  id            Int       @id @default(autoincrement())
+  name          String?
+  bio           String?
+  email         String?   @unique
+  emailVerified DateTime?
+
   image          String?
   hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @default(now()) @updatedAt
-  favoriteIds    String[]
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @default(now()) @updatedAt
 
-  accounts Account[]
-  profile  Profile?
-
-  // posts   Post[]
-  // ratings Rating[]
-  // listings     Listing[]
-  // reservations Reservation[]
+  favoriteIds Int[]
+  accounts    Account[]
+  carts       Cart[]
+  reviews     Review[]
 }
 
 model Account {
   id                Int     @id @default(autoincrement())
-  // userId            String  
   type              String
   provider          String
   providerAccountId String
@@ -65,8 +43,6 @@ model Account {
 
   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId Int
-  // user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-  // @@unique([provider, providerAccountId])
 }
 
 model Product {
@@ -87,52 +63,28 @@ model Product {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 
-  // category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  // categoryId Int
+  carts  Cart[] // deleting the Product record will also delete all related Cart records.
+  Review Review[] // deleting the Product record will also delete all related Review records.
 }
 
-model Category {
-  id            Int    @id @default(autoincrement())
-  title         String
-  subCategories Json
-  // Product       Product[]
+model Cart {
+  id Int @id @default(autoincrement())
+
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int     @unique
+  quantity  Int
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
 }
 
-// model Articles {
-//   id            Int    @id @default(autoincrement())
-//   title         String
-//   content         String
-//   // a relation much to much with category and articles
-//   // Product       Product[]
-// }
+model Review {
+  id          Int    @id @default(autoincrement())
+  rating      Int    @default(0)
+  title       String @db.VarChar(100)
+  description String @db.VarChar(150)
 
-// model Listing {
-//   id            String   @id @default(auto()) @map("_id") @db.ObjectId
-//   title         String
-//   description   String
-//   imageSrc      String
-//   createdAt     DateTime @default(now())
-//   category      String
-//   roomCount     Int
-//   bathroomCount Int
-//   guestCount    Int
-//   locationValue String
-//   userId        String   @db.ObjectId
-//   price         Int
-
-//   user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   reservations Reservation[]
-// }
-
-// model Reservation {
-//   id         String   @id @default(auto()) @map("_id") @db.ObjectId
-//   userId     String   @db.ObjectId
-//   listingId  String   @db.ObjectId
-//   startDate  DateTime
-//   endDate    DateTime
-//   totalPrice Int
-//   createdAt  DateTime @default(now())
-
-//   user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-//   listing Listing @relation(fields: [listingId], references: [id], onDelete: Cascade)
-// }
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    Int
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  productId Int     @unique
+}

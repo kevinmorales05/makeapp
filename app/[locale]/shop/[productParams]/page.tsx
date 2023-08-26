@@ -18,22 +18,22 @@ const DynamicProductDetails = dynamic(() => import("./ProductDetail"),
 
 async function pageShop({ params }: { params: IPageProps }) {
     const { locale, productParams } = params
-    
+
     const product = await getProductById(productParams);
-        // const product = await getCurrentUser(productParams);
+    // const product = await getCurrentUser(productParams);
 
     if (!product) {
         return (
-          <ClientOnly>
-            <EmptyState  />
-          </ClientOnly>
+            <ClientOnly>
+                <EmptyState />
+            </ClientOnly>
         );
-      }
+    }
 
 
     return (
         // <ClientOnly>
-            <DynamicProductDetails product={product} />
+        <DynamicProductDetails product={product} locale={locale} />
         // </ClientOnly>
     )
 }

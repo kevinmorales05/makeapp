@@ -10,8 +10,6 @@ export async function POST(request: Request, { params }: { params: IParams }) {
 
   const body = await request.json();
 
-  console.dir(body)
-
   const result = await prisma.product.createMany({
     data: body
   })

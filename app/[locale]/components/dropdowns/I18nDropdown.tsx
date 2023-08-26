@@ -17,7 +17,7 @@ function I18nDropdown({ trigger, items }: { trigger: React.ReactNode, items: IDr
   }
 
   return (
-    <div className='fixed top-0 right-1 lg:top-1 lg:right-3'>
+    <div className='fixed top-0 right-1 xl:top-1 xl:right-3'>
       <DropdownUI>
         <DropdownTrigger>
           {trigger}
