@@ -15,23 +15,19 @@ interface RequestData {
 
 
 export interface IListingInfoProps {
-  user: SafeUser,
+  // user: SafeUser,
   description: string;
-  guestCount: number;
-  roomCount: number;
-  bathroomCount: number;
   // category: {
   // icon: IconType,
   // label: string;
   // description: string;
   // } | undefined
-  locationValue: string;
 }
 
 export const ListingProductInfo: React.FC<IListingInfoProps> = ({
-  user, description, guestCount, roomCount, bathroomCount,
+  // user,
+  description,
   // category,
-  locationValue,
 }) => {
   // const { getByValue } = useCountries();
   // const coordinates = getByValue(locationValue)?.latlng

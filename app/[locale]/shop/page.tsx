@@ -13,7 +13,6 @@ import { PRODUCTS_PEER_PAGE } from '../constants/constants'
 import { formattedProducts } from '../hooks/useProducts'
 // import { useTranslations } from 'next-intl'
 import getCategories from '../actions/getCategories'
-import { getTranslator } from 'next-intl/server'
 import Loading from '../loading'
 import { MoonLoader, PropagateLoader } from 'react-spinners'
 
@@ -37,7 +36,6 @@ export default async function page(
 
 ) {
     const { searchParams, locale } = params
-    // const t = await getTranslator(locale, "categories")
     // console.log("searchParams", searchParams, "all", params)
     const currentUser = await getCurrentUser();
     const products = await getProducts(PRODUCTS_PEER_PAGE, searchParams?.category, searchParams?.subCategory);

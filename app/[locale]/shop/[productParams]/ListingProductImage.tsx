@@ -10,7 +10,7 @@ import HeartButton from "@/app/components/HeartButton";
 
 interface ListingHeadProps {
   imageSrc: string;
-  id: string;
+  id: number;
   currentUser?: SafeUser | null
 }
 
@@ -46,7 +46,7 @@ const ListingProductImage: React.FC<ListingHeadProps> = ({
           "
         >
           <HeartButton
-            listingId={id}
+            listingId={id.toString()}
             currentUser={currentUser}
           />
         </div>

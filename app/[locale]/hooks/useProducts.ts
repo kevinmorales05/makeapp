@@ -71,6 +71,25 @@ export const formattedProducts = (products: IProductProps[]) => products.map((p)
     src: p.imageSrc,
 }))
 
+export const formattedProductById = (product: IProductProps) => {
+    return {
+        id: product.id,
+        title: product.title,
+        description: product.description,
+        category: product.category,
+        subCategory: product.subCategory,
+        cost: product.cost,
+        promoCost: product.promoCost,
+        bestSeller: product.bestSeller,
+        kit: product.kit,
+        weight: product.weight,
+        farmacState: product.farmacState,
+        presentation: product.presentation,
+        color: product.color,
+        src: product.imageSrc
+    }
+}
+
 export const useProducts = () => {
 
 

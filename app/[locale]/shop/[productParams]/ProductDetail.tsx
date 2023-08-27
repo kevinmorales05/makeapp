@@ -17,6 +17,8 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useLocale } from "next-intl";
 import { apix } from "@/app/constants/axios-instance";
+import { formattedProductById } from "@/app/hooks/useProducts";
+import useCart from "@/app/hooks/useCart";
 // import { apix } from "@/app/constants/axios-instance";
 
 interface IProductDetailProps {
@@ -25,18 +27,30 @@ interface IProductDetailProps {
   locale: string
 }
 
-const ProductDetail: React.FC<IProductDetailProps> = ({ product: listing, locale }) => {
-
+const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale }) => {
+  const listing = formattedProductById(product)
   const [hasUser, setHasUser] = useState<boolean>(false)
+  const cart = useCart()
+
 
   const handlerAddCart = async () => {
-    const p = await apix(locale).get("https://pokeapi.co/api/v2/pokemon/ditto")
-    console.log(p)
 
-    // if (!hasUser) {
-      
-    //   localStorage.setItem("", JSON.stringify())
-    // }
+    if (!hasUser) {
+      // console.log("items", cart.items)
+      // console.log("totalPrice", cart.totalPrice())
+      cart.addItem({
+        id: listing.id,
+        cost: listing.cost,
+        src: listing.src,
+        title: listing.title,
+      })
+
+      localStorage.setItem("cart", JSON.stringify(
+        cart.items))
+      const text: any = localStorage.getItem('cart')
+      const data = JSON.parse(text)
+      console.log("data", data)
+    }
 
 
     if (hasUser) {
@@ -70,7 +84,7 @@ const ProductDetail: React.FC<IProductDetailProps> = ({ product: listing, locale
           <div className="flex flex-wrap flex-col">
 
             <ListingProductImage
-              imageSrc={listing.imageSrc}
+              imageSrc={listing.src}
               id={listing.id}
             // currentUser={currentUser}
             />
@@ -82,13 +96,7 @@ const ProductDetail: React.FC<IProductDetailProps> = ({ product: listing, locale
 
             <ListingProductRequest price={listing.cost} handlerButton={handlerAddCart} />
             <ListingProductInfo
-              user={listing.user}
-              // category={["category"]}
               description={listing.description}
-              roomCount={listing.roomCount}
-              guestCount={listing.guestCount}
-              bathroomCount={listing.bathroomCount}
-              locationValue={listing.locationValue}
             />
 
           </div>

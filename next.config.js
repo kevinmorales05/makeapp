@@ -15,9 +15,26 @@ const nextConfig = {
       "firebasestorage.googleapis.com",
       "console.firebase.google.com",
       "healivemall.com",
-      "healivemall-com.translate.goog"
+      "healivemall-com.translate.goog",
     ],
   },
+  // experimental: {
+  //   turbo: {
+  //     loaders: {
+  //       // Option format
+  //       "*.md": [
+  //         {
+  //           loader: "@mdx-js/loader",
+  //           options: {
+  //             format: "md",
+  //           },
+  //         },
+  //       ],
+  //       // Option-less format
+  //       "*.mdx": ["@mdx-js/loader"],
+  //     },
+  //   },
+  // },
   // i18n: {
   //   locales: ['en', 'ru', 'tm'],
   //   defaultLocale: 'en',
@@ -45,8 +62,7 @@ const nextConfig = {
   //   ],
   // },
 };
-const withNextIntl = require("next-intl/plugin")("./i18n.ts");
+// const withNextIntl = require("next-intl/plugin")("./i18n.ts");
 
-module.exports = withNextIntl(
-  nextConfig
-);
+// module.exports = withNextIntl(nextConfig);
+module.exports = nextConfig;

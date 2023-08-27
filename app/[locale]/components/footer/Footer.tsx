@@ -4,7 +4,6 @@ import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { AiOutlineInstagram } from 'react-icons/ai'
 import { FaFacebookSquare } from 'react-icons/fa'
-import { getTranslator } from 'next-intl/server';
 import FooterLinks from './FooterLinks';
 export default function Footer() {
   const locale = useLocale();

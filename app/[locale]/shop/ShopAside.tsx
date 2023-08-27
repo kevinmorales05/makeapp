@@ -1,12 +1,7 @@
 'use client'
 import React, { Fragment } from 'react'
-import ShopAsideItem from './ShopAsideItem'
 import HeadingAside from './HeadingAside'
-import { Disclosure, Transition } from '@headlessui/react'
-import { RiArrowRightSLine, RiArrowUpSLine } from 'react-icons/ri'
-import DisclosureItem from './DisclosureItem'
 import Image from 'next/image'
-import { useCategories } from '../hooks/useCategories'
 import { Accordion, AccordionItem, Link, cn } from '@nextui-org/react'
 import { useLocale, useTranslations } from 'next-intl'
 
