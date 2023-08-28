@@ -8,7 +8,7 @@ import ClientOnly from './components/ClientOnly';
 import getCurrentUser from './actions/getCurrentUser';
 import Footer from './components/footer/Footer';
 
-import { NextIntlClientProvider } from 'next-intl';
+import { NextIntlClientProvider, useLocale } from 'next-intl';
 import Providers from './providers/Providers';
 
 import { notFound } from 'next/navigation'
@@ -63,6 +63,16 @@ export default async function RootLayout({
   params: { locale }
 }: RootProps) {
 
+  const currentLocale = useLocale();
+
+
+  if (locale !== currentLocale) {
+    console.log("current locale is not found in the config file")
+    
+    notFound();
+  }
+
+
   const currentUser = await getCurrentUser();
   const messages = await getMessages(locale)
   const htmlClasses = `${merienda.variable} ${gandhi.variable}`
@@ -78,8 +88,8 @@ export default async function RootLayout({
                 {children}
               </div>
             </Providers>
-            <Footer />
           </ClientOnly>
+            <Footer />
         </NextIntlClientProvider>
       </body>
     </html>

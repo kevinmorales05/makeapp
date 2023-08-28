@@ -1,8 +1,24 @@
 /** @type {import('next').NextConfig} */
+const withNextIntl = require("next-intl/plugin")("./i18n.ts");
 
 const nextConfig = {
   experimental: {
     appDir: true,
+    //   turbo: {
+    //     loaders: {
+    //       // Option format
+    //       "*.md": [
+    //         {
+    //           loader: "@mdx-js/loader",
+    //           options: {
+    //             format: "md",
+    //           },
+    //         },
+    //       ],
+    //       // Option-less format
+    //       "*.mdx": ["@mdx-js/loader"],
+    //     },
+    //   },
   },
   images: {
     domains: [
@@ -18,23 +34,6 @@ const nextConfig = {
       "healivemall-com.translate.goog",
     ],
   },
-  // experimental: {
-  //   turbo: {
-  //     loaders: {
-  //       // Option format
-  //       "*.md": [
-  //         {
-  //           loader: "@mdx-js/loader",
-  //           options: {
-  //             format: "md",
-  //           },
-  //         },
-  //       ],
-  //       // Option-less format
-  //       "*.mdx": ["@mdx-js/loader"],
-  //     },
-  //   },
-  // },
   // i18n: {
   //   locales: ['en', 'ru', 'tm'],
   //   defaultLocale: 'en',
@@ -62,7 +61,6 @@ const nextConfig = {
   //   ],
   // },
 };
-// const withNextIntl = require("next-intl/plugin")("./i18n.ts");
 
-// module.exports = withNextIntl(nextConfig);
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);
+// module.exports = nextConfig;

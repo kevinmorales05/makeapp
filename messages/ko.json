@@ -12,60 +12,6 @@
       "details": "My invoices",
       "korean": "Korean Cosmetic your home",
       "logout": "Logout"
-    },
-    "categories": {
-      "derma-plan": {
-        "label": "더마 플랜",
-        "description": "이 크림은 피부를 햇볕으로부터 보호합니다!"
-      },
-      "skin-care": {
-        "label": "스킨 케어",
-        "description": "이 속성은 피부를 돕습니다!"
-      },
-      "sun-care": {
-        "label": "선 케어",
-        "description": "이 크림은 피부를 햇볕으로부터 보호합니다!"
-      },
-      "toner-skin": {
-        "label": "토너/피부",
-        "description": "이 제품은 당신을 보호하고 빛나는 얼굴을 제공합니다!"
-      },
-      "wrinkle-solution-toner": {
-        "label": "주름 해결 토너",
-        "description": "이 제품은 비타민과 항산화 물질을 제공합니다!"
-      },
-      "lotion": {
-        "label": "로션",
-        "description": "이 제품은 여러 가지 혜택을 제공합니다!"
-      },
-      "skin": {
-        "label": "피부",
-        "description": "이 제품은 고대의 비밀을 제공합니다!"
-      },
-      "body-care": {
-        "label": "바디 케어",
-        "description": "이 제품은 클렌징, 각질 제거, 털 제거, 네일 케어 및 바디 브러싱을 제공합니다!"
-      },
-      "mask-pack": {
-        "label": "마스크 팩",
-        "description": "이 마스크는 수분 공급, 화사함, 모공 개선, 진정 및 기타 다양한 피부 관리 요구에 맞는 다양한 성분으로 제조됩니다."
-      },
-      "make-up": {
-        "label": "메이크업",
-        "description": "이 제품은 자연스러운 특징을 강화하며 흠을 가려내고 창의성을 표현하며 이전에 본 적 없는 특정한 룩을 완성하는 데 사용됩니다!"
-      },
-      "all-in-one": {
-        "label": "올인원",
-        "description": "이 제품은 편리성과 시간 절약성으로 특히 인기 있으며 노력을 최소한으로 하거나 바쁜 사람들에게 완벽한 피부조합을 단 한 단계로 얻을 수 있도록 이상적입니다."
-      },
-      "perfume": {
-        "label": "향수",
-        "description": "이것들은 다양한 향료 성분을 세심하게 혼합하여 독특하고 독보적인 향기를 만들어 내어 감정, 기억, 스타일, 개인 연관 및 개인성을 불러일으킬 수 있습니다."
-      },
-      "nail-care": {
-        "label": "네일 케어",
-        "description": "이 제품은 손톱의 건강, 강도 및 모양을 유지하기 위한 다양한 관행과 제품을 포괄합니다."
-      }
     }
   },
   "carousel": {
@@ -79,6 +25,60 @@
     "subtitle": "저희 온라인 스토어의 양식에 입력된 모든 데이터는 SSL 인증된 보안 프로토콜 하에 안전하게 암호화되어 저장됩니다. 마찬가지로 결제 시스템은 안전한 은행 게이트웨이를 통해 이루어집니다.",
     "networks": "소셜 네트워크에서 저희를 팔로우하세요"
   },
+  "categories": {
+    "derma-plan": {
+      "label": "더마 플랜",
+      "description": "이 크림은 피부를 햇볕으로부터 보호합니다!"
+    },
+    "skin-care": {
+      "label": "스킨 케어",
+      "description": "이 속성은 피부를 돕습니다!"
+    },
+    "sun-care": {
+      "label": "선 케어",
+      "description": "이 크림은 피부를 햇볕으로부터 보호합니다!"
+    },
+    "toner-skin": {
+      "label": "토너/피부",
+      "description": "이 제품은 당신을 보호하고 빛나는 얼굴을 제공합니다!"
+    },
+    "wrinkle-solution-toner": {
+      "label": "주름 해결 토너",
+      "description": "이 제품은 비타민과 항산화 물질을 제공합니다!"
+    },
+    "lotion": {
+      "label": "로션",
+      "description": "이 제품은 여러 가지 혜택을 제공합니다!"
+    },
+    "skin": {
+      "label": "피부",
+      "description": "이 제품은 고대의 비밀을 제공합니다!"
+    },
+    "body-care": {
+      "label": "바디 케어",
+      "description": "이 제품은 클렌징, 각질 제거, 털 제거, 네일 케어 및 바디 브러싱을 제공합니다!"
+    },
+    "mask-pack": {
+      "label": "마스크 팩",
+      "description": "이 마스크는 수분 공급, 화사함, 모공 개선, 진정 및 기타 다양한 피부 관리 요구에 맞는 다양한 성분으로 제조됩니다."
+    },
+    "make-up": {
+      "label": "메이크업",
+      "description": "이 제품은 자연스러운 특징을 강화하며 흠을 가려내고 창의성을 표현하며 이전에 본 적 없는 특정한 룩을 완성하는 데 사용됩니다!"
+    },
+    "all-in-one": {
+      "label": "올인원",
+      "description": "이 제품은 편리성과 시간 절약성으로 특히 인기 있으며 노력을 최소한으로 하거나 바쁜 사람들에게 완벽한 피부조합을 단 한 단계로 얻을 수 있도록 이상적입니다."
+    },
+    "perfume": {
+      "label": "향수",
+      "description": "이것들은 다양한 향료 성분을 세심하게 혼합하여 독특하고 독보적인 향기를 만들어 내어 감정, 기억, 스타일, 개인 연관 및 개인성을 불러일으킬 수 있습니다."
+    },
+    "nail-care": {
+      "label": "네일 케어",
+      "description": "이 제품은 손톱의 건강, 강도 및 모양을 유지하기 위한 다양한 관행과 제품을 포괄합니다."
+    }
+  },
   "homepage": {
     "title": "Hello world!",
     "subtitle": "Hello world!"
@@ -88,10 +88,6 @@
       "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",
       "tops3": "{locale, select, es {Top 3 Para Hoy} en {Top 3 For Today} ko {오늘의 상위 3개} other {Top 3 For Today}}"
     }
-  },
-  "categories": {
-    "title": "Hello world!",
-    "subtitle": "Hello world!"
   },
   "login": {
     "title": "Login",

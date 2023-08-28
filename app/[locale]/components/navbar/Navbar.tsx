@@ -1,7 +1,6 @@
 'use client'
 import { SafeUser } from "@/app/types";
 
-import Categories from "./Categories";
 import Container from "../Container";
 import Logo from "./Logo";
 import Search from "./Search";
@@ -14,10 +13,16 @@ import useCountries from "@/app/hooks/useCountries";
 import { IDropdownProps } from "../dropdowns/Dropdown";
 import { ICON_CLASES_DROPDOWN, LOCALE_EN, LOCALE_ES, LOCALE_KO } from "@/app/constants/constants";
 import { EC, KR, US } from "country-flag-icons/react/3x2";
+import dynamic from "next/dynamic";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
 }
+
+const DynamicCategories = dynamic(() => import('./Categories'), { 
+  ssr: true 
+});
+
 
 const Navbar: React.FC<NavbarProps> = ({
   currentUser,
@@ -92,7 +97,7 @@ const Navbar: React.FC<NavbarProps> = ({
           </div>
         </Container>
       </div>
-      <Categories />
+      <DynamicCategories />
       {/* <MegaMenu /> */}
     </div>
   );

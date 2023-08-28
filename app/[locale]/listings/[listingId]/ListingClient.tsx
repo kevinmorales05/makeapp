@@ -36,10 +36,10 @@ const ListingClient: React.FC<ListingClientProps> = ({
   reservations = [],
   currentUser
 }) => {
+  const { allCategories } = useCategories()
   const loginModal = useLoginModal();
   const router = useRouter();
 
-  const { getAll } = useCategories()
 
 
   const disabledDates = useMemo(() => {
@@ -58,7 +58,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
   }, [reservations]);
 
   const category = useMemo(() => {
-    return getAll().find((items) =>
+    return allCategories.find((items) =>
       items.label === listing.category);
   }, [listing.category]);
 

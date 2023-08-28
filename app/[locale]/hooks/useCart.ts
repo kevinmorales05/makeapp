@@ -21,7 +21,7 @@ interface CartStore {
 
 
 const url = "https://pokeapi.co/api/v2/pokemon/ditto"
-const useCart = create<CartStore>()(
+const useCartStore = create<CartStore>()(
     devtools(
         persist(
             (set, get) => ({
@@ -51,47 +51,4 @@ const useCart = create<CartStore>()(
 
 // useCart.persist.clearStorage()
 
-export default useCart
-
-interface Item {
-    id: number
-    name: string
-    price: number
-}
-
-interface Store {
-    items: Item[]
-    addItem: (item: Item) => void
-    removeItem: (id: number) => void
-    totalPrice: () => number
-}
-
-export const useCartStore = create<Store>((set, get) => ({
-    items: [],
-    addItem: (item: Item) => set((state) => ({ items: [...state.items, item] })),
-    removeItem: (id: number) =>
-        set((state) => ({ items: state.items.filter((item) => item.id !== id) })),
-    totalPrice: () =>
-        get().items.reduce((total, item) => total + item.price, 0)
-}))
-
-
-
-interface BearState {
-    bears: number
-    increase: (by: number) => void
-}
-
-const useBearStore = create<BearState>()(
-    devtools(
-        persist(
-            (set) => ({
-                bears: 0,
-                increase: (by) => set((state) => ({ bears: state.bears + by })),
-            }),
-            {
-                name: 'bear-storage',
-            }
-        )
-    )
-)
+export default useCartStore

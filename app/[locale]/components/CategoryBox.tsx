@@ -4,6 +4,7 @@ import qs from 'query-string';
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { IconType } from "react-icons";
+import { useTranslations } from 'next-intl';
 
 interface CategoryBoxProps {
   icon: IconType,
@@ -16,12 +17,13 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
   label,
   selected,
 }) => {
+  const t = useTranslations("categories")
   const router = useRouter();
   const params = useSearchParams();
 
   const handleClick = useCallback(() => {
     let currentQuery = {};
-    
+
     if (params) {
       currentQuery = qs.parse(params.toString())
     }
@@ -36,14 +38,14 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
     }
 
     const url = qs.stringifyUrl({
-      url: '/',
+      url: '/shop/',
       query: updatedQuery
     }, { skipNull: true });
 
     router.push(url);
   }, [label, router, params]);
 
-  return ( 
+  return (
     <div
       onClick={handleClick}
       className={`
@@ -65,10 +67,10 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
     >
       <Icon size={26} />
       <div className="font-medium text-sm whitespace-nowrap">
-        {label}
+        {t(`${label}.label`)}
       </div>
     </div>
-   );
+  );
 }
- 
+
 export default CategoryBox;

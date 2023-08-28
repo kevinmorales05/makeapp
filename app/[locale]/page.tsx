@@ -6,17 +6,31 @@ import EmptyState from "@/app/components/EmptyState";
 import { IListingsParams } from "@/app/actions/getListings";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
-import Carrousel from "./components/carrousel/Carrousel";
-import TestButton from "./TestButton";
+import Carousel from "./components/carousel/Carousel";
+import { GiLips } from "react-icons/gi";
+import { AiOutlineHighlight } from "react-icons/ai";
+import { useTranslations } from "next-intl";
+import React from "react";
 
 
 interface HomeProps {
   searchParams: IListingsParams
 };
 
+// const Testing: React.FC = () => {
+//   const t = useTranslations();
+
+//   return (
+//     <div>
+//       <h1>{t("testing")}</h1>
+//     </div>
+//   );
+// }
+
 const Home = async ({ searchParams }: HomeProps) => {
   // const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
+
 
 
   // if (listings.length === 0) {
@@ -28,16 +42,18 @@ const Home = async ({ searchParams }: HomeProps) => {
   // }
 
   return (
-    <ClientOnly>
+    <>
       <Container>
-        <Carrousel />
+        <ClientOnly>
+          <Carousel />
+        </ClientOnly >
       </Container>
       <Container>
         <div
           className="
-            grid 
-            grid-cols-1 
-            sm:grid-cols-2 
+          grid 
+          grid-cols-1 
+          sm:grid-cols-2 
             md:grid-cols-3 
             lg:grid-cols-4
             xl:grid-cols-5
@@ -45,21 +61,21 @@ const Home = async ({ searchParams }: HomeProps) => {
             gap-8
           "
         >
-          <TestButton />
 
           {/* {listings.map((listing: any) => (
             <ListingCard
-              currentUser={currentUser}
+            currentUser={currentUser}
               key={listing.id}
               data={listing}
-            />
+              />
           ))} */}
+
         </div>
 
 
 
       </Container>
-    </ClientOnly >
+    </>
   )
 }
 

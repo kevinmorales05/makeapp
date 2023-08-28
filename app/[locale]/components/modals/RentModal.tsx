@@ -22,6 +22,7 @@ import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Heading from '../Heading';
 import { useCategories } from '@/app/hooks/useCategories';
+import { useTranslations } from 'next-intl';
 
 enum STEPS {
   CATEGORY = 0,
@@ -33,12 +34,12 @@ enum STEPS {
 }
 
 const RentModal = () => {
-  const { getAll } = useCategories()
   const router = useRouter();
   const rentModal = useRentModal();
-
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.CATEGORY);
+  const t = useTranslations("categories")
+  const { allCategories } = useCategories()
 
   const {
     register,
@@ -148,13 +149,13 @@ const RentModal = () => {
           overflow-y-auto
         "
       >
-        {getAll().map((item) => (
+        {allCategories.map((item) => (
           <div key={item.label} className="col-span-1">
             <CategoryInput
               onClick={(category) =>
                 setCustomValue('category', category)}
               selected={category === item.label}
-              label={item.label}
+              label={t(`${item.label}.label`)}
               icon={item.icon}
             />
           </div>

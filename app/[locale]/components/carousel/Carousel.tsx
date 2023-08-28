@@ -18,10 +18,8 @@ import { useLocale, useTranslations } from 'next-intl'
 import { OPTIONS_CAROUSEL } from '@/app/constants/constants'
 
 
-const EmblaCarousel: React.FC = () => {
-
-
-
+const Carousel: React.FC = () => {
+  const t = useTranslations("carousel")
   // const { slides, options } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS_CAROUSEL)
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
@@ -29,10 +27,8 @@ const EmblaCarousel: React.FC = () => {
   const [selectedIndex, setSelectedIndex] = useState(0)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
   const locale = useLocale();
-  const t = useTranslations("carousel")
 
-  const SLIDE_COUNT = parseFloat(t("slide_count"));
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
@@ -57,6 +53,7 @@ const EmblaCarousel: React.FC = () => {
     setNextBtnDisabled(!emblaApi.canScrollNext())
   }, [])
 
+
   useEffect(() => {
     if (!emblaApi) return
 
@@ -66,6 +63,9 @@ const EmblaCarousel: React.FC = () => {
     emblaApi.on('reInit', onSelect)
     emblaApi.on('select', onSelect)
   }, [emblaApi, onInit, onSelect])
+
+  const SLIDE_COUNT = parseFloat(t("slide_count"));
+  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
   return (
     <section className="sandbox__carousel">
@@ -84,7 +84,7 @@ const EmblaCarousel: React.FC = () => {
                     "
                   key={index}>
                   <div className="p-8 mt-8 basis-full sm:basis-3/5">
-                    <p className="font-light font-gandhi text-4xl text-start font-merienda">{t("title", { data: index + 1 })}</p>
+                    <p className="font-light font-gandhi text-4xl text-start">{t("title", { data: index + 1 })}</p>
                     <div className='mt-8'>
                       <p className="font-gandhi font-medium antialiased text-ellipsis py-6 text-start">{t("subtitle", { data: index + 1 })}</p>
                       <div className="w-[8rem] items-start group">
@@ -131,4 +131,4 @@ const EmblaCarousel: React.FC = () => {
   )
 }
 
-export default EmblaCarousel
+export default Carousel

@@ -16,8 +16,6 @@ export interface IListingsParamsShop {
   nameProduct?: string;
 }
 
-export const dynamic = 'force-dynamic'
-
 export default async function getProducts(
   // params: IListingsParams
   page_peer_size: number,
@@ -37,31 +35,32 @@ export default async function getProducts(
     // } = params;
 
     let query: any = {};
-
+    let listings;
     if (category) {
       query.category = category;
     }
+
     if (subCategory) {
       query.subCategory = subCategory;
     }
 
-    let listings;
+    if (category) {
+      listings = await prisma.product.findMany({
+        where: query
+      })
+    }
+    else {
+      listings = await prisma.product.findMany()
+    }
 
-    if (category) listings = await prisma.product.findMany({
-      where: query,
-      // orderBy: {
-      //   createdAt: 'desc'
-      // }
-    })
-    else listings = await prisma.product.findMany();
+
+    return listings;
 
     // const safeListings = listings.map((listing) => ({
     //   ...listing,
     //   createdAt: listing.createdAt.toISOString(),
     // }));
-
     // return safeListings;
-    return listings
   } catch (error: any) {
     throw new Error(error);
   }

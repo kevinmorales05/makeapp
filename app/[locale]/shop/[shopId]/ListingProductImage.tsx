@@ -46,7 +46,7 @@ const ListingProductImage: React.FC<ListingHeadProps> = ({
           "
         >
           <HeartButton
-            listingId={id.toString()}
+            listingId={id}
             currentUser={currentUser}
           />
         </div>

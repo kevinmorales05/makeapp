@@ -3,10 +3,11 @@ import ClientOnly from "@/app/components/ClientOnly";
 import EmptyState from "@/app/components/EmptyState";
 import dynamic from "next/dynamic";
 import { formattedProductById } from "@/app/hooks/useProducts";
+import getCurrentUser from "@/app/actions/getCurrentUser";
 
 interface IPageProps {
     locale: string
-    productParams: string
+    shopId: string
 }
 
 const DynamicProductDetails = dynamic(() => import("./ProductDetail"),
@@ -17,10 +18,10 @@ const DynamicProductDetails = dynamic(() => import("./ProductDetail"),
 )
 
 async function pageShop({ params }: { params: IPageProps }) {
-    const { locale, productParams } = params
+    const { locale, shopId } = params
 
-    const product = await getProductById(productParams);
-    // const product = await getCurrentUser(productParams);
+    const product = await getProductById(shopId);
+    const currentUser = await getCurrentUser();
 
     if (!product || Object.keys(product).length === 0 || JSON.stringify(product) === '{}'
     ) {
@@ -34,7 +35,7 @@ async function pageShop({ params }: { params: IPageProps }) {
 
     return (
         <ClientOnly>
-            <DynamicProductDetails product={product} locale={locale} />
+            <DynamicProductDetails product={product} locale={locale} currentUser={currentUser}/>
         </ClientOnly>
     )
 }

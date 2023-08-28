@@ -1,5 +1,3 @@
-'use client'
-
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 import { AiOutlineInstagram } from 'react-icons/ai'

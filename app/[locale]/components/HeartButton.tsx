@@ -4,15 +4,15 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 import useFavorite from "@/app/hooks/useFavorite";
 import { SafeUser } from "@/app/types";
-
+import { motion } from "framer-motion"
 import ClientOnly from "./ClientOnly";
 
 interface HeartButtonProps {
-  listingId: string
+  listingId: number
   currentUser?: SafeUser | null
 }
 
-const HeartButton: React.FC<HeartButtonProps> = ({ 
+const HeartButton: React.FC<HeartButtonProps> = ({
   listingId,
   currentUser
 }) => {
@@ -21,9 +21,12 @@ const HeartButton: React.FC<HeartButtonProps> = ({
     currentUser
   });
 
+
   return (
-    <div 
+    <motion.div
       onClick={toggleFavorite}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
       className="
         relative
         hover:opacity-80
@@ -44,10 +47,11 @@ const HeartButton: React.FC<HeartButtonProps> = ({
         size={24}
         className={
           hasFavorited ? 'fill-rose-500' : 'fill-neutral-500/70'
+          // ""
         }
       />
-    </div>
-   );
+    </motion.div>
+  );
 }
- 
+
 export default HeartButton;

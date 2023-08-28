@@ -10,60 +10,6 @@
       "details": "My invoices",
       "korean": "Korean Cosmetic your home",
       "logout": "Logout"
-    },
-    "categories": {
-      "derma-plan": {
-        "label": "Plan Derma",
-        "description": "¡Esta crema protege la piel contra el sol!"
-      },
-      "skin-care": {
-        "label": "Cuidado de la Piel",
-        "description": "¡Esta propiedad ayuda a tu piel!"
-      },
-      "sun-care": {
-        "label": "Cuidado Solar",
-        "description": "¡Esta crema protege la piel contra el sol!"
-      },
-      "toner-skin": {
-        "label": "Tónico/Piel",
-        "description": "¡Estos productos te protegen y brindan un rostro radiante!"
-      },
-      "wrinkle-solution-toner": {
-        "label": "Tónico Solución de Arrugas",
-        "description": "¡Estos productos te proporcionan vitaminas y antioxidantes!"
-      },
-      "lotion": {
-        "label": "Loción",
-        "description": "¡Estos productos te proporcionan algunos beneficios!"
-      },
-      "skin": {
-        "label": "Piel",
-        "description": "¡Estos productos brindan secretos ancestrales!"
-      },
-      "body-care": {
-        "label": "Cuidado Corporal",
-        "description": "¡Estos productos ofrecen limpieza, exfoliación, eliminación de vello, cuidado de uñas y cepillado corporal!"
-      },
-      "mask-pack": {
-        "label": "Mascarillas",
-        "description": "Estas mascarillas están formuladas con diversos ingredientes que satisfacen diferentes necesidades de cuidado de la piel, como hidratación, luminosidad, refinamiento de poros, calmante y más."
-      },
-      "make-up": {
-        "label": "Maquillaje",
-        "description": "¡Estos productos realzan rasgos naturales, ocultan imperfecciones, expresan la creatividad y logran looks específicos nunca antes vistos!"
-      },
-      "all-in-one": {
-        "label": "Todo en uno",
-        "description": "Estos productos son especialmente populares por su conveniencia y propiedades que ahorran tiempo, lo que los hace ideales para personas que buscan lograr un aspecto completo con un esfuerzo mínimo o para aquellos que están en movimiento, y lograr una tez impecable en un solo paso."
-      },
-      "perfume": {
-        "label": "Perfume",
-        "description": "Estos se crean mediante una cuidadosa mezcla de varios ingredientes aromáticos, dando como resultado una fragancia única y distintiva que puede evocar emociones, recuerdos, estilo, asociaciones personales y la personalidad de cada individuo."
-      },
-      "nail-care": {
-        "label": "Cuidado de Uñas",
-        "description": "Estos productos abarcan una variedad de prácticas y productos destinados a mantener la salud, fuerza y apariencia de las uñas."
-      }
     }
   },
   "carousel": {
@@ -77,6 +23,60 @@
     "subtitle": "Todos los datos ingresados en los formularios de nuestra tienda en línea se almacenan de manera segura y encriptada bajo el protocolo de seguridad certificado SSL. De igual manera, el sistema de pago se realiza a través de una pasarela bancaria segura.",
     "networks": "Síguenos en redes sociales"
   },
+  "categories": {
+    "derma-plan": {
+      "label": "Plan Derma",
+      "description": "¡Esta crema protege la piel contra el sol!"
+    },
+    "skin-care": {
+      "label": "Cuidado de la Piel",
+      "description": "¡Esta propiedad ayuda a tu piel!"
+    },
+    "sun-care": {
+      "label": "Cuidado Solar",
+      "description": "¡Esta crema protege la piel contra el sol!"
+    },
+    "toner-skin": {
+      "label": "Tónico/Piel",
+      "description": "¡Estos productos te protegen y brindan un rostro radiante!"
+    },
+    "wrinkle-solution-toner": {
+      "label": "Tónico Solución de Arrugas",
+      "description": "¡Estos productos te proporcionan vitaminas y antioxidantes!"
+    },
+    "lotion": {
+      "label": "Loción",
+      "description": "¡Estos productos te proporcionan algunos beneficios!"
+    },
+    "skin": {
+      "label": "Piel",
+      "description": "¡Estos productos brindan secretos ancestrales!"
+    },
+    "body-care": {
+      "label": "Cuidado Corporal",
+      "description": "¡Estos productos ofrecen limpieza, exfoliación, eliminación de vello, cuidado de uñas y cepillado corporal!"
+    },
+    "mask-pack": {
+      "label": "Mascarillas",
+      "description": "Estas mascarillas están formuladas con diversos ingredientes que satisfacen diferentes necesidades de cuidado de la piel, como hidratación, luminosidad, refinamiento de poros, calmante y más."
+    },
+    "make-up": {
+      "label": "Maquillaje",
+      "description": "¡Estos productos realzan rasgos naturales, ocultan imperfecciones, expresan la creatividad y logran looks específicos nunca antes vistos!"
+    },
+    "all-in-one": {
+      "label": "Todo en uno",
+      "description": "Estos productos son especialmente populares por su conveniencia y propiedades que ahorran tiempo, lo que los hace ideales para personas que buscan lograr un aspecto completo con un esfuerzo mínimo o para aquellos que están en movimiento, y lograr una tez impecable en un solo paso."
+    },
+    "perfume": {
+      "label": "Perfume",
+      "description": "Estos se crean mediante una cuidadosa mezcla de varios ingredientes aromáticos, dando como resultado una fragancia única y distintiva que puede evocar emociones, recuerdos, estilo, asociaciones personales y la personalidad de cada individuo."
+    },
+    "nail-care": {
+      "label": "Cuidado de Uñas",
+      "description": "Estos productos abarcan una variedad de prácticas y productos destinados a mantener la salud, fuerza y apariencia de las uñas."
+    }
+  },
   "homepage": {
     "title": "Hello world!",
     "subtitle": "Hello world!"
@@ -86,10 +86,6 @@
       "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",
       "tops3": "{locale, select, es {Top 3 Para Hoy} en {Top 3 For Today} ko {오늘의 상위 3개} other {Top 3 For Today}}"
     }
-  },
-  "categories": {
-    "title": "Hello world!",
-    "subtitle": "Hello world!"
   },
   "login": {
     "title": "Ingresar",

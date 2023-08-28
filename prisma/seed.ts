@@ -1,12 +1,8 @@
 // useful command to run this
 // npm i - D tsx.
 // in package.json prisma.seed: tsx prisma/seed.ts
-
 import { PrismaClient } from '@prisma/client'
 import products from "../public/data/productsKorean.json";
-
-
-// const products = require("../public/data/productsKorean.json")
 const prisma = new PrismaClient()
 
 const formattedProductsToDB = products.map((p: any) => ({
@@ -27,17 +23,12 @@ const formattedProductsToDB = products.map((p: any) => ({
     updatedAt: new Date(),
 }))
 
-
 const load = async () => {
     try {
-
         await prisma.product.createMany({
             data: formattedProductsToDB
         })
-
         // await prisma.$queryRaw`ALTER TABLE Product AUTO_INCREMENT = 1`
-
-
         console.log('Added category data')
     } catch (e) {
         console.error(e)

@@ -12,7 +12,7 @@ interface ICategory {
 
 export const dynamic = 'force-dynamic'
 
-export default async function getCategories(params: IGetCategoriesProps) {
+export default async function getCategories(category: string, subCategory: string) {
   try {
     // const {
     //   userId,
@@ -25,7 +25,6 @@ export default async function getCategories(params: IGetCategoriesProps) {
     //   category,
     // } = params;
 
-    const { category, subCategory } = params;
 
     let query: any = {};
 

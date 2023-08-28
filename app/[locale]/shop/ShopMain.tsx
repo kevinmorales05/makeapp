@@ -1,16 +1,16 @@
 'use client'
-import React, { useState } from 'react'
-// import Stack from '@mui/material/Stack';
-// import Pagination from './Pagination';
-// import { Pagination } from '@mui/material'
+
+import React, { useEffect, useState } from 'react'
 import { Products } from '../types/products';
-import Image from 'next/image';
-import { IProductProps, useProducts } from '../hooks/useProducts';
-import { PRODUCTS_PEER_PAGE } from '../constants/constants';
+import { useProducts } from '../hooks/useProducts';
 import { Pagination } from '@nextui-org/react';
 import { useRouter } from 'next-intl/client';
 import { useLocale } from 'next-intl';
+import HeartButton from '../components/HeartButton';
 
+import { motion } from "framer-motion"
+import { PRODUCTS_PEER_PAGE } from '../constants/constants';
+import Image from 'next/image';
 
 interface IShopProps {
   id: number;
@@ -28,9 +28,11 @@ interface IShopProps {
   color: string
   src: string
 }
-export const dynamic = 'force-dynamic'
+interface ICurrentUser {
 
-export default function ShopMain({ data }: { data: IShopProps[] }) {
+}
+
+export default function ShopMain({ data, currentUser }: { data: IShopProps[], currentUser: any }) {
 
 
   const { getByPagination } = useProducts();
@@ -38,20 +40,35 @@ export default function ShopMain({ data }: { data: IShopProps[] }) {
   const locale = useLocale()
   const router = useRouter()
 
+
+  useEffect(() => {
+    console.log("times")
+    setProducts(getByPagination(0, PRODUCTS_PEER_PAGE, data))
+  }, [data])
+
   const handlePagination = (page: number) => {
     const from = (page - 1) * PRODUCTS_PEER_PAGE;
     const to = (page - 1) * PRODUCTS_PEER_PAGE + PRODUCTS_PEER_PAGE;
     const filteredProducts = getByPagination(from, to, data)
     setProducts(filteredProducts)
   }
+  console.log("current DATA: ", data)
+  console.log("current PRODUCT: ", products)
+  console.log("current PAGINATION: ", getByPagination(0, PRODUCTS_PEER_PAGE, data))
   return (
     <>
       <div className='inline-grid grid-cols-3 gap-6 py-2 max-[480px]:grid-cols-1'>
 
         {products.map(p => (
-          <div className="max-w-sm rounded overflow-hidden shadow-lg bg-white" key={p.title} onClick={() =>
-            router.push(`/shop/${p.id}`, { locale })}>
-            <Image className='w-full' src={p.src} width={100} height={100} alt={p.src} />
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileDrag={{ scale: 0.9 }}
+            
+            className="max-w-sm rounded overflow-hidden shadow-lg bg-white relative group" key={p.title}
+            onClick={() => router.push(`/shop/${p.id}`, { locale })}
+
+          >
+            <Image className='w-full' src={p.src} width={100} height={80} alt={p.src} />
             <div className="px-6 py-4">
               <div className="font-bold text-xl mb-2 text-center">{p.title}</div>
               <p className="text-gray-700 text-base text-center">
@@ -59,11 +76,23 @@ export default function ShopMain({ data }: { data: IShopProps[] }) {
               </p>
             </div>
             <div className="px-6 pt-4 pb-2">
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#cosmetic</span>
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#skin care</span>
-              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#solar skin</span>
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{`#${p.subCategory}`}</span>
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{p.cost < 20000 && "#best price"}</span>
+              <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{`#${p.color}`}</span>
             </div>
-          </div>
+            <div
+              className="
+            absolute
+            top-5
+            right-5
+          "
+            >
+              <HeartButton
+                listingId={p.id}
+                currentUser={currentUser}
+              />
+            </div>
+          </motion.div>
 
         ))}
 
@@ -82,7 +111,6 @@ export default function ShopMain({ data }: { data: IShopProps[] }) {
           total={Math.ceil(data.length / PRODUCTS_PEER_PAGE)}
           onChange={(number) => handlePagination(number)}
         />
-        {Math.ceil(data.length / PRODUCTS_PEER_PAGE)}
       </div>
     </>
   )

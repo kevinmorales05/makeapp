@@ -6,7 +6,6 @@ import Container from "@/app/components/Container";
 import EmptyState from "@/app/components/EmptyState";
 import ListingHead from "@/app/components/listings/ListingHead";
 import ListingInfo from "@/app/components/listings/ListingInfo";
-import { useCategories } from "@/app/hooks/useCategories";
 import { useMemo, useState } from "react";
 import ListingProductHead from "./ListingProductImage";
 import ListingProductImage from "./ListingProductImage";
@@ -27,7 +26,7 @@ interface IProductDetailProps {
   locale: string
 }
 
-const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale }) => {
+const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale, currentUser }) => {
   const listing = formattedProductById(product)
   const [hasUser, setHasUser] = useState<boolean>(false)
   const cart = useCart()
@@ -86,7 +85,7 @@ const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale }) => {
             <ListingProductImage
               imageSrc={listing.src}
               id={listing.id}
-            // currentUser={currentUser}
+              currentUser={currentUser}
             />
 
             <Heading

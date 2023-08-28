@@ -15,10 +15,13 @@ import { formattedProducts } from '../hooks/useProducts'
 import getCategories from '../actions/getCategories'
 import Loading from '../loading'
 import { MoonLoader, PropagateLoader } from 'react-spinners'
+// import { getTranslator } from 'next-intl/server';
+import { useLocale } from 'next-intl'
+import { categoriesFormattedShop } from '../hooks/useFormatters'
 
 interface ISearchParams {
-    category: string;
-    subCategory: string;
+    category?: string;
+    subCategory?: string;
 }
 
 interface ShopProps {
@@ -27,48 +30,51 @@ interface ShopProps {
     locale: string;
 };
 
-export const dynamic = 'auto'
+export const dynamic = "force-dynamic";
 
 
 export default async function page(
     // { searchParams, locale }: ShopProps
-    params:any
+    params: any
 
 ) {
     const { searchParams, locale } = params
+    const currentLocale = useLocale()
+    console.log(searchParams, locale)
+    // const t = await getTranslator("en", "categories")
+    // console.log("xttt", t(`${searchParams.category}.label`))
+    // const categoryParam: string = t(`${searchParams.category}.label`)
+    // console.log(categoryParam.toLocaleLowerCase())
     // console.log("searchParams", searchParams, "all", params)
     const currentUser = await getCurrentUser();
-    const products = await getProducts(PRODUCTS_PEER_PAGE, searchParams?.category, searchParams?.subCategory);
-    // console.log("searchParams", searchParams, "params", params);
-    // console.log("tranalator", t("title"));
-
-    const categories = await getCategories(searchParams);
-    // console.log("categories", categories)
 
 
+    console.log("categoryParam", searchParams?.category.split('-').join(' '))
+
+    const products = await getProducts(PRODUCTS_PEER_PAGE, searchParams?.category.split('-').join(' '), searchParams?.subCategory);
+
+    const categories = await getCategories("", "");
+    const allCategories = categoriesFormattedShop(categories)
+
+    const categoryByName = { category: searchParams.category, subCategory: searchParams?.subCategory || "" }
+
+console.log("what is the product category", products, products.length)
     return (
-        <ClientOnly>
-            <Container>
-                <div className='flex flex-wrap md:flex-nowrap justify-start'>
-                    <div className='w-full md:w-[480px] xl:w-[232px]'>
-                        <Suspense fallback={<PropagateLoader
-                            size={100}
-                            color="red"
-                        />}>
-                            <ShopAside categories={categories} />
-                        </Suspense>
-                    </div>
-                    <div className='w-full md:w-auto xl:auto flex flex-col'>
-                        <Suspense fallback={<MoonLoader
-                            size={100}
-                            color="red"
-                        />}>
-                            <ShopMain data={formattedProducts(products)} />
-                        </Suspense>
+        <Container>
+            <div className='flex flex-wrap md:flex-nowrap justify-start'>
 
-                    </div>
+                <div className='w-full md:w-[480px] xl:w-[232px]'>
+                    <ClientOnly>
+                        <ShopAside allCategories={allCategories} categoryByName={categoryByName} />
+                    </ClientOnly>
                 </div>
-            </Container>
-        </ClientOnly>
+                <div className='w-full md:w-auto xl:auto flex flex-col'>
+                    <ClientOnly>
+                        <ShopMain data={formattedProducts(products)} currentUser={currentUser} />
+                    </ClientOnly>
+
+                </div>
+            </div>
+        </Container>
     )
 }

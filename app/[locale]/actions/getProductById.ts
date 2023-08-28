@@ -7,7 +7,6 @@ export default async function getProductById(
   try {
 
     const id = parseInt(productId) ? parseInt(productId) : -1;
-    console.log(id, "id")
     
     if (id < 0) return null;
 
@@ -39,7 +38,6 @@ export default async function getProductById(
     if (!listing) {
       return null;
     }
-
     return listing;
     return {
       // ...listing,

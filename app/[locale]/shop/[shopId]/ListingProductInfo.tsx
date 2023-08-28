@@ -114,7 +114,7 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
                 <span>Description</span>
                 <Chip size="sm" variant="faded">1</Chip>
               </div>}
-              children={<AnimationTab key={"description_tab_content"} children={<>{description}</>} />}
+              children={<AnimationTab key={"description_tab_content"} id={"description_tab_content"} children={<>{description}</>} />}
             />
 
             <Tab
@@ -126,7 +126,7 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
                 <Chip size="sm" variant="faded">1</Chip>
               </div>}
               children={<>
-                <AnimationTab key="ingredients_tab_content" className="py-4 !justify-start">No ingredients</AnimationTab>
+                <AnimationTab key="ingredients_tab_content" id="ingredients_tab_content" className="py-4 !justify-start">No ingredients</AnimationTab>
               </>} />
 
             <Tab
@@ -137,7 +137,7 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
                 <Chip size="sm" variant="faded">0</Chip>
               </div>}
               children={
-                <AnimationTab key={"review_tab_content"}>
+                <AnimationTab key={"review_tab_content"} id={"review_tab_content"}>
                   <div className="w-full grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
                     <section className={cn("flex justify-start items-start flex-col gap-6", false && "justify-center items-center")}>
                       {hasReviews ?
@@ -239,8 +239,6 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
 
                     </section>
                   </div>
-
-
                 </AnimationTab>} />
           </Tabs>
         </div>

@@ -8,10 +8,15 @@ import getFavoriteListings from "@/app/actions/getFavoriteListings";
 import FavoritesClient from "./FavoritesClient";
 
 const ListingPage = async () => {
-  const listings = await getFavoriteListings();
+  // const listings = await getFavoriteListings();
+  const favorites = await getFavoriteListings();
   const currentUser = await getCurrentUser();
 
-  if (listings.length === 0) {
+  console.log("carts", favorites)
+
+
+
+  if (favorites.length === 0) {
     return (
       <ClientOnly>
         <EmptyState
@@ -25,11 +30,11 @@ const ListingPage = async () => {
   return (
     <ClientOnly>
       <FavoritesClient
-        listings={listings}
+        listings={favorites}
         currentUser={currentUser}
       />
     </ClientOnly>
   );
 }
- 
+
 export default ListingPage;
