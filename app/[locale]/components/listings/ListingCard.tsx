@@ -2,19 +2,23 @@
 
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { useCallback, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { format } from 'date-fns';
 
 import useCountries from "@/app/hooks/useCountries";
-import { 
-  SafeListing, 
-  SafeReservation, 
-  SafeUser 
+import {
+  SafeListing,
+  SafeReservation,
+  SafeUser
 } from "@/app/types";
 
 import HeartButton from "../HeartButton";
 import Button from "../Button";
 import ClientOnly from "../ClientOnly";
+import useFavorite, { useFavoriteStore } from "@/app/hooks/useFavorite";
+import axios from "axios";
+import { apix } from "@/app/constants/axios-instance";
+import { useLocale } from "next-intl";
 
 interface ListingCardProps {
   data: SafeListing;
@@ -27,7 +31,7 @@ interface ListingCardProps {
 };
 
 const ListingCard: React.FC<ListingCardProps> = ({
-  data,
+  data: dataServer,
   reservation,
   onAction,
   disabled,
@@ -36,20 +40,35 @@ const ListingCard: React.FC<ListingCardProps> = ({
   currentUser,
 }) => {
   const router = useRouter();
-  const { getByValue } = useCountries();
 
-  const location = getByValue(data.locationValue);
+  const { currentFavorites } = useFavoriteStore()
+  const locale = useLocale()
+  const [data, setData] = useState()
+  useEffect(() => {
+    if (currentFavorites().length) {
+      (async () => {
+        const favorites = await apix(locale).post(`favorites`, currentFavorites());
+
+        console.log("axios response: ", favorites)
+      })();
+    }
+  }, [currentFavorites()])
+
+  // const { getByValue } = useCountries();
+  // const location = getByValue(data.locationValue);
+
+
 
   const handleCancel = useCallback(
     (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.stopPropagation();
+      e.stopPropagation();
 
-    if (disabled) {
-      return;
-    }
+      if (disabled) {
+        return;
+      }
 
-    onAction?.(actionId)
-  }, [disabled, onAction, actionId]);
+      onAction?.(actionId)
+    }, [disabled, onAction, actionId]);
 
   const price = useMemo(() => {
     if (reservation) {
@@ -63,7 +82,7 @@ const ListingCard: React.FC<ListingCardProps> = ({
     if (!reservation) {
       return null;
     }
-  
+
     const start = new Date(reservation.startDate);
     const end = new Date(reservation.endDate);
 
@@ -71,12 +90,12 @@ const ListingCard: React.FC<ListingCardProps> = ({
   }, [reservation]);
 
   return (
-    <div 
-      onClick={() => router.push(`/listings/${data.id}`)} 
+    <div
+      onClick={() => router.push(`/listings/${data.id}`)}
       className="col-span-1 cursor-pointer group"
     >
       <div className="flex flex-col gap-2 w-full">
-        <div 
+        <div
           className="
             aspect-square 
             w-full 
@@ -102,14 +121,14 @@ const ListingCard: React.FC<ListingCardProps> = ({
             top-3
             right-3
           ">
-            <HeartButton 
-              listingId={data.id} 
+            <HeartButton
+              listingId={data.id}
               currentUser={currentUser}
             />
           </div>
         </div>
         <div className="font-semibold text-lg">
-          {location?.region}, {location?.label}
+          {/* {location?.region}, {location?.label} */}
         </div>
         <div className="font-light text-neutral-500">
           {reservationDate || data.category}
@@ -126,13 +145,13 @@ const ListingCard: React.FC<ListingCardProps> = ({
           <Button
             disabled={disabled}
             small
-            label={actionLabel} 
+            label={actionLabel}
             onClick={handleCancel}
           />
         )}
       </div>
     </div>
-   );
+  );
 }
- 
+
 export default ListingCard;

@@ -66,11 +66,11 @@ export default async function RootLayout({
   const currentLocale = useLocale();
 
 
-  if (locale !== currentLocale) {
-    console.log("current locale is not found in the config file")
+  // if (locale !== currentLocale) {
+  //   console.log("current locale is not found in the config file")
     
-    notFound();
-  }
+  //   notFound();
+  // }
 
 
   const currentUser = await getCurrentUser();

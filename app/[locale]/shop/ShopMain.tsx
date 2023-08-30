@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { Products } from '../types/products';
 import { useProducts } from '../hooks/useProducts';
 import { Pagination } from '@nextui-org/react';
@@ -11,6 +11,11 @@ import HeartButton from '../components/HeartButton';
 import { motion } from "framer-motion"
 import { PRODUCTS_PEER_PAGE } from '../constants/constants';
 import Image from 'next/image';
+import { useSession } from 'next-auth/react';
+import { SafeUser } from '../types';
+import useFavorite, { useFavoriteStore } from '../hooks/useFavorite';
+import { useRef } from 'react';
+
 
 interface IShopProps {
   id: number;
@@ -28,17 +33,26 @@ interface IShopProps {
   color: string
   src: string
 }
-interface ICurrentUser {
 
-}
+export default function ShopMain({ data, currentUser }: { data: IShopProps[], currentUser: SafeUser }) {
 
-export default function ShopMain({ data, currentUser }: { data: IShopProps[], currentUser: any }) {
-
+  const { mergeLocalandDB, currentFavorites } = useFavoriteStore()
 
   const { getByPagination } = useProducts();
   const [products, setProducts] = useState<IShopProps[]>(getByPagination(0, PRODUCTS_PEER_PAGE, data));
   const locale = useLocale()
   const router = useRouter()
+
+  const refMerge = React.useRef<number>(0);
+
+  useEffect(() => {
+    if (refMerge?.current === 0 && currentUser) {
+      mergeLocalandDB(currentFavorites(), currentUser?.favoriteIds, locale)
+      refMerge.current++;
+    }
+  }, [currentUser])
+
+
 
 
   useEffect(() => {
@@ -52,18 +66,18 @@ export default function ShopMain({ data, currentUser }: { data: IShopProps[], cu
     const filteredProducts = getByPagination(from, to, data)
     setProducts(filteredProducts)
   }
-  console.log("current DATA: ", data)
-  console.log("current PRODUCT: ", products)
-  console.log("current PAGINATION: ", getByPagination(0, PRODUCTS_PEER_PAGE, data))
+
+
+
   return (
     <>
       <div className='inline-grid grid-cols-3 gap-6 py-2 max-[480px]:grid-cols-1'>
 
-        {products.map(p => (
+        {products.length > 0 && products.map(p => (
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileDrag={{ scale: 0.9 }}
-            
+
             className="max-w-sm rounded overflow-hidden shadow-lg bg-white relative group" key={p.title}
             onClick={() => router.push(`/shop/${p.id}`, { locale })}
 
@@ -88,7 +102,7 @@ export default function ShopMain({ data, currentUser }: { data: IShopProps[], cu
           "
             >
               <HeartButton
-                listingId={p.id}
+                listing={p}
                 currentUser={currentUser}
               />
             </div>

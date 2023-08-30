@@ -6,21 +6,23 @@ import useFavorite from "@/app/hooks/useFavorite";
 import { SafeUser } from "@/app/types";
 import { motion } from "framer-motion"
 import ClientOnly from "./ClientOnly";
+import { IProductFormatted } from "../hooks/useProducts";
 
 interface HeartButtonProps {
-  listingId: number
+  listing: IProductFormatted,
   currentUser?: SafeUser | null
 }
 
 const HeartButton: React.FC<HeartButtonProps> = ({
-  listingId,
+  listing,
   currentUser
 }) => {
   const { hasFavorited, toggleFavorite } = useFavorite({
-    listingId,
+    listing,
     currentUser
   });
 
+  console.log("hasFavorite", hasFavorited);
 
   return (
     <motion.div

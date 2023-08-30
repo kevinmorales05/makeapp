@@ -24,10 +24,9 @@ export default function ShopAside({ allCategories, categoryByName }: {
   const locale = useLocale()
   const t = useTranslations("categories")
   const tshop = useTranslations("shoppage")
-  const subCategory = "eyes"
 
-  console.log(categoryByName, "categoryByName")
-  console.log(allCategories, "allCategories")
+  // console.log(categoryByName, "categoryByName")
+  // console.log(allCategories, "allCategories")
 
   return (
 

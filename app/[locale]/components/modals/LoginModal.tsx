@@ -48,26 +48,43 @@ const LoginModal = () => {
     (data) => {
       setIsLoading(true);
 
-      signIn('credentials', {
+      toast.promise(signIn('credentials', {
         ...data,
         redirect: false,
-      })
-        .then((callback) => {
+      }), {
+        loading: 'Loading...',
+        success: (callback) => {
+          console.log("when callback is ok", callback);
           setIsLoading(false);
+          
+          router.refresh();
+          loginModal.onClose();
+          return `${t("toaster.success")}`;
+        },
+        error: (callbackError) => {
+          setIsLoading(false);
+          toast.error(t(`toaster.error`, { error_msg: `${callbackError?.error}` }));
+          return `${t(`toaster.error`, { error_msg: `${callbackError?.error}` })}`
+        },
+      });
 
-          if (callback?.ok) {
-            console.log("when callback is ok", callback);
-            toast.success(t("toaster.success"));
-            router.refresh();
-            loginModal.onClose();
-          }
+      //   .then((callback) => {
+      //   setIsLoading(false);
 
-          if (callback?.error) {
-            // please review
-            console.log("this is the callback error", callback);
-            toast.error(t(`toaster.error`, { error_msg: `${callback?.error}` }));
-          }
-        });
+      //   if (callback?.ok) {
+      //     console.log("when callback is ok", callback);
+      //     console.log("Process credentials I can ")
+      //     toast.success(t("toaster.success"));
+      //     router.refresh();
+      //     loginModal.onClose();
+      //   }
+
+      //   if (callback?.error) {
+      //     // please review
+      //     console.log("this is the callback error", callback);
+      //     toast.error(t(`toaster.error`, { error_msg: `${callback?.error}` }));
+      //   }
+      // });
     }
 
   const onToggle = useCallback(() => {
@@ -108,7 +125,10 @@ const LoginModal = () => {
         outline
         label={t("content.footer.button-google")}
         icon={FcGoogle}
-        onClick={() => signIn('google')}
+        onClick={() => {
+          signIn('google')
+          console.log("Process google I can ")
+        }}
       />
       {/* <Button
         outline
@@ -131,7 +151,6 @@ const LoginModal = () => {
       </div>
     </div>
   )
-  console.log("well")
   return (
     <Modal
       disabled={isLoading}

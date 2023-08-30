@@ -10,16 +10,16 @@ import TripsClient from "./TripsClient";
 const TripsPage = async () => {
   const currentUser = await getCurrentUser();
 
-  if (!currentUser) {
-    return (
-      <ClientOnly>
-        <EmptyState
-          title="Unauthorized"
-          subtitle="Please login"
-        />
-      </ClientOnly>
-    );
-  }
+  // if (!currentUser) {
+  //   return (
+  //     <ClientOnly>
+  //       <EmptyState
+  //         title="Unauthorized"
+  //         subtitle="Please login"
+  //       />
+  //     </ClientOnly>
+  //   );
+  // }
 
   const reservations = await getReservations({ userId: currentUser.id });
 

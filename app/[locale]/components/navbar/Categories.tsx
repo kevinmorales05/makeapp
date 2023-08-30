@@ -11,8 +11,8 @@ const Categories = () => {
   const locale = useLocale();
   const category = params?.get('category');
   const pathname = usePathname();
-  console.log("pathnames", pathname);
-  console.log("params: ", params);
+  // console.log("pathnames", pathname); //  /en/favorites
+  // console.log("params: ", params); // readonlySearchparams
   const isMainPage = pathname === '/' || pathname === `/${locale}`;
   const { allCategories } = useCategories()
 

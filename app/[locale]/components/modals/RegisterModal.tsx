@@ -20,6 +20,7 @@ import Input from "../inputs/Input";
 import Heading from "../Heading";
 import Button from "../Button";
 import { useLocale, useTranslations } from "next-intl";
+import { apix } from "@/app/constants/axios-instance";
 
 const RegisterModal = () => {
   const locale = useLocale()
@@ -47,8 +48,9 @@ const RegisterModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-    axios.post(`/${locale}/api/register`, data)
-      .then(() => {
+    apix(locale).post(`register`, data)
+      .then((callback) => {
+        console.log("tell me callback", callback);
         toast.success(t("toaster.success"));
         registerModal.onClose();
         loginModal.onOpen();

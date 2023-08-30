@@ -39,17 +39,14 @@ export default async function page(
 
 ) {
     const { searchParams, locale } = params
-    const currentLocale = useLocale()
-    console.log(searchParams, locale)
     // const t = await getTranslator("en", "categories")
     // console.log("xttt", t(`${searchParams.category}.label`))
     // const categoryParam: string = t(`${searchParams.category}.label`)
     // console.log(categoryParam.toLocaleLowerCase())
     // console.log("searchParams", searchParams, "all", params)
     const currentUser = await getCurrentUser();
+    console.log(currentUser)
 
-
-    console.log("categoryParam", searchParams?.category.split('-').join(' '))
 
     const products = await getProducts(PRODUCTS_PEER_PAGE, searchParams?.category.split('-').join(' '), searchParams?.subCategory);
 
@@ -58,7 +55,7 @@ export default async function page(
 
     const categoryByName = { category: searchParams.category, subCategory: searchParams?.subCategory || "" }
 
-console.log("what is the product category", products, products.length)
+    // console.log("what is the product category", products, products.length)
     return (
         <Container>
             <div className='flex flex-wrap md:flex-nowrap justify-start'>

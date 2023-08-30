@@ -16,16 +16,16 @@ const ListingPage = async () => {
 
 
 
-  if (favorites.length === 0) {
-    return (
-      <ClientOnly>
-        <EmptyState
-          title="No favorites found"
-          subtitle="Looks like you have no favorite listings."
-        />
-      </ClientOnly>
-    );
-  }
+  // if (favorites.length === 0) {
+  //   return (
+  //     <ClientOnly>
+  //       <EmptyState
+  //         title="No favorites found"
+  //         subtitle="Looks like you have no favorite listings."
+  //       />
+  //     </ClientOnly>
+  //   );
+  // }
 
   return (
     <ClientOnly>

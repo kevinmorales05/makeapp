@@ -53,6 +53,23 @@ export interface IProductProps {
     updatedAt: Date;
 }
 
+export interface IProductFormatted {
+    id: number;
+    title: string;
+    description: string;
+    src: string;
+    cost: number;
+    promoCost: number;
+    bestSeller: boolean;
+    kit: boolean;
+    weight: string;
+    farmacState: string;
+    presentation: string;
+    category: string;
+    subCategory: string;
+    color: string;
+}
+
 
 export const formattedProducts = (products: IProductProps[]) => products.map((p) => ({
     id: p.id,
@@ -69,7 +86,7 @@ export const formattedProducts = (products: IProductProps[]) => products.map((p)
     presentation: p.presentation,
     color: p.color,
     src: p.imageSrc,
-}))
+})) as IProductFormatted[];
 
 export const formattedProductById = (product: IProductProps) => {
     return {
@@ -88,7 +105,7 @@ export const formattedProductById = (product: IProductProps) => {
         color: product.color,
         src: product.imageSrc
     }
-}
+}  
 
 export const useProducts = () => {
 

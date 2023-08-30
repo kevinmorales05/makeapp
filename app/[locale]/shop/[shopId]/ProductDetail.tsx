@@ -17,7 +17,7 @@ import { toast } from "sonner";
 import { useLocale } from "next-intl";
 import { apix } from "@/app/constants/axios-instance";
 import { formattedProductById } from "@/app/hooks/useProducts";
-import useCart from "@/app/hooks/useCart";
+import { useCartStore } from "@/app/hooks/useCart";
 // import { apix } from "@/app/constants/axios-instance";
 
 interface IProductDetailProps {
@@ -29,7 +29,7 @@ interface IProductDetailProps {
 const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale, currentUser }) => {
   const listing = formattedProductById(product)
   const [hasUser, setHasUser] = useState<boolean>(false)
-  const cart = useCart()
+  const cart = useCartStore()
 
 
   const handlerAddCart = async () => {

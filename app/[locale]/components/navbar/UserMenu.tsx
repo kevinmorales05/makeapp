@@ -251,7 +251,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           </span>
         </div>
         <div
-          onClick={() => router.push("/trips")}
+          onClick={() => router.push("/cart")}
           className="
           block
           text-sm 

@@ -38,6 +38,8 @@ export const authOptions: AuthOptions = {
           }
         });
 
+        // console.log("nextusejs", user)
+
         if (!user || !user?.hashedPassword) {
           throw new Error('Invalid credentials');
         }
@@ -50,7 +52,7 @@ export const authOptions: AuthOptions = {
         if (!isCorrectPassword) {
           throw new Error('Invalid credentials');
         }
-        console.log("confirmed user", user, "and credentials", credentials);
+        // console.log("confirmed user", user, "and credentials", credentials);
 
         return user;
       }
