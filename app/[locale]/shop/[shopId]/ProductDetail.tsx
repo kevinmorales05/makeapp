@@ -16,8 +16,9 @@ import axios from "axios";
 import { toast } from "sonner";
 import { useLocale } from "next-intl";
 import { apix } from "@/app/constants/axios-instance";
-import { formattedProductById } from "@/app/hooks/useProducts";
+import { IProductFormatted, formattedProductById } from "@/app/hooks/useProducts";
 import { useCartStore } from "@/app/hooks/useCart";
+import Breadcrumbs from "@/app/carts/Breadcrumbs";
 // import { apix } from "@/app/constants/axios-instance";
 
 interface IProductDetailProps {
@@ -29,48 +30,18 @@ interface IProductDetailProps {
 const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale, currentUser }) => {
   const listing = formattedProductById(product)
   const [hasUser, setHasUser] = useState<boolean>(false)
-  const cart = useCartStore()
+  const { currentCarts, addCart } = useCartStore()
 
 
-  const handlerAddCart = async () => {
-
-    if (!hasUser) {
-      // console.log("items", cart.items)
-      // console.log("totalPrice", cart.totalPrice())
-      cart.addItem({
-        id: listing.id,
-        cost: listing.cost,
-        src: listing.src,
-        title: listing.title,
-      })
-
-      localStorage.setItem("cart", JSON.stringify(
-        cart.items))
-      const text: any = localStorage.getItem('cart')
-      const data = JSON.parse(text)
-      console.log("data", data)
-    }
-
-
-    if (hasUser) {
-      apix(locale).post(`cart`, { data: listing })
-        .then((e) => {
-          console.log(e)
-          toast.success("toaster.success");
-        })
-        .catch((error) => {
-          toast.error("toaster.error");
-        })
-        .finally(() => {
-        })
-    }
+  const handlerAddCart = async (currentListing: IProductFormatted) => {
+    addCart(currentListing, currentUser, locale)
   }
 
 
   return (
     <Container>
       <div className="flex justify-center flex-col">
-
+        <Breadcrumbs/>
         <div>btn</div>
         <div
           className="
@@ -85,6 +56,7 @@ const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale, current
             <ListingProductImage
               imageSrc={listing.src}
               id={listing.id}
+              listing={listing}
               currentUser={currentUser}
             />
 
@@ -93,7 +65,7 @@ const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale, current
               subtitle={listing.description}
             />
 
-            <ListingProductRequest price={listing.cost} handlerButton={handlerAddCart} />
+            <ListingProductRequest price={listing.cost} handlerButton={handlerAddCart} listing={listing} />
             <ListingProductInfo
               description={listing.description}
             />

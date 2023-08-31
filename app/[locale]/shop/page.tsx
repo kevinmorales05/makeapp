@@ -18,6 +18,7 @@ import { MoonLoader, PropagateLoader } from 'react-spinners'
 // import { getTranslator } from 'next-intl/server';
 import { useLocale } from 'next-intl'
 import { categoriesFormattedShop } from '../hooks/useFormatters'
+import Breadcrumbs from '../carts/Breadcrumbs'
 
 interface ISearchParams {
     category?: string;
@@ -48,7 +49,7 @@ export default async function page(
     console.log(currentUser)
 
 
-    const products = await getProducts(PRODUCTS_PEER_PAGE, searchParams?.category.split('-').join(' '), searchParams?.subCategory);
+    const products = await getProducts(PRODUCTS_PEER_PAGE, searchParams?.category?.split('-').join(' ') || "skin-care", searchParams?.subCategory);
 
     const categories = await getCategories("", "");
     const allCategories = categoriesFormattedShop(categories)
@@ -59,7 +60,7 @@ export default async function page(
     return (
         <Container>
             <div className='flex flex-wrap md:flex-nowrap justify-start'>
-
+            <Breadcrumbs/>
                 <div className='w-full md:w-[480px] xl:w-[232px]'>
                     <ClientOnly>
                         <ShopAside allCategories={allCategories} categoryByName={categoryByName} />

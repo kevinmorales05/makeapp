@@ -88,6 +88,7 @@ export const formattedProducts = (products: IProductProps[]) => products.map((p)
     src: p.imageSrc,
 })) as IProductFormatted[];
 
+
 export const formattedProductById = (product: IProductProps) => {
     return {
         id: product.id,

@@ -6,17 +6,20 @@ import useCountries from "@/app/hooks/useCountries";
 import { SafeUser } from "@/app/types";
 import Heading from "@/app/components/Heading";
 import HeartButton from "@/app/components/HeartButton";
+import { IProductFormatted } from "@/app/hooks/useProducts";
 
 
 interface ListingHeadProps {
   imageSrc: string;
   id: number;
+  listing: IProductFormatted;
   currentUser?: SafeUser | null
 }
 
 const ListingProductImage: React.FC<ListingHeadProps> = ({
   imageSrc,
   id,
+  listing,
   currentUser
 }) => {
 
@@ -46,7 +49,7 @@ const ListingProductImage: React.FC<ListingHeadProps> = ({
           "
         >
           <HeartButton
-            listingId={id}
+            listing={listing}
             currentUser={currentUser}
           />
         </div>

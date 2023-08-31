@@ -117,7 +117,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             title: "Signed in as",
             description: currentUser?.email || "",
             color: "primary",
-            onClick: () => { alert("development")},
+            onClick: () => { alert("development") },
             startContent: <></>,
             className: "h-14 gap-2 font-bold opacity-90",
           },
@@ -214,7 +214,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     <div className="relative">
       <div className="flex flex-row items-center sm:gap-3">
         <div
-          onClick={() => router.push("/favorites")}
+          onClick={() => router.push("/favorites", { locale })}
           className="
             block
             text-sm 
@@ -251,7 +251,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           </span>
         </div>
         <div
-          onClick={() => router.push("/cart")}
+          onClick={() => router.push("/carts", { locale })}
           className="
           block
           text-sm 

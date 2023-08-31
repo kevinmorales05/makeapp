@@ -77,7 +77,7 @@ model Product {
   color        String   @default("default")
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  carts        Cart?
+  carts        Cart[]
   Review       Review?
 }
 

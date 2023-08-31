@@ -11,6 +11,7 @@ import { GiLips } from "react-icons/gi";
 import { AiOutlineHighlight } from "react-icons/ai";
 import { useTranslations } from "next-intl";
 import React from "react";
+import Breadcrumbs from "./carts/Breadcrumbs";
 
 
 interface HomeProps {
@@ -48,6 +49,7 @@ const Home = async ({ searchParams }: HomeProps) => {
           <Carousel />
         </ClientOnly >
       </Container>
+      <Breadcrumbs />
       <Container>
         <div
           className="

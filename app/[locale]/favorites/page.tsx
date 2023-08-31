@@ -7,14 +7,12 @@ import getFavoriteListings from "@/app/actions/getFavoriteListings";
 
 import FavoritesClient from "./FavoritesClient";
 
-const ListingPage = async () => {
+const page = async () => {
   // const listings = await getFavoriteListings();
   const favorites = await getFavoriteListings();
   const currentUser = await getCurrentUser();
 
   console.log("carts", favorites)
-
-
 
   // if (favorites.length === 0) {
   //   return (
@@ -28,13 +26,13 @@ const ListingPage = async () => {
   // }
 
   return (
-    <ClientOnly>
-      <FavoritesClient
-        listings={favorites}
-        currentUser={currentUser}
-      />
-    </ClientOnly>
+      <ClientOnly>
+        <FavoritesClient
+          listings={favorites}
+          currentUser={currentUser}
+        />
+      </ClientOnly>
   );
 }
 
-export default ListingPage;
+export default page;
