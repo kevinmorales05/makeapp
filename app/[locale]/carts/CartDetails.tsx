@@ -10,6 +10,10 @@ import Image from 'next/image'
 import { IconHome } from './IconHome'
 import { usePathname } from 'next/navigation'
 import { useLocale } from 'next-intl'
+import TableCart from './TableCart'
+import { AiOutlineShopping } from 'react-icons/ai'
+import Heading from '../components/Heading'
+import { Button } from '@nextui-org/react'
 
 export interface ICart {
     quantity: number;
@@ -37,23 +41,24 @@ type Props = {
 }
 
 const CartDetails = (props: Props) => {
-    const pathname = usePathname();
-    const locale = useLocale();
-
-    console.log("pathname: ", pathname)
-
     const { carts, currentUser } = props
-    console.log("carts", carts, currentUser)
+    const loginModal = useLoginModal()
 
     return (
         <div>
             <div className='flex justify-between items-center'>
-                <Breadcrumbs/>
-
-                <div className='block'>Already have an account? <span className='text-'>Login</span></div>
+                <Breadcrumbs />
+                {currentUser &&
+                    <span className='block'>Already have an account?<Button onPress={() => loginModal.onOpen()} disableAnimation className='underline decoration-1 bg-transparent font-bold gap-1 p-0' endContent={<AiOutlineShopping className='font-bold text-base' />}>Login</Button></span>
+                }
             </div>
-
-        </div>
+            <Heading
+                title="Cart"
+                subtitle="List of products you shopping!"
+                center
+            />
+            <TableCart data={carts} />
+        </div >
     )
 }
 
