@@ -9,7 +9,7 @@ const DividerCarousel = (props: Props) => {
     return (
         <div className="relative flex items-center">
             <div className="flex-grow border-t border-neutral-500"></div>
-            <span className="flex-shrink mx-4 text-neutral-500">
+            <span className="flex-shrink mx-4 font-bold">
                 {title}
             </span>
             <div className="flex-grow border-t border-neutral-500"></div>
