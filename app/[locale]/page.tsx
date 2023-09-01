@@ -48,7 +48,7 @@ const Home = async ({ searchParams }: HomeProps) => {
       <Container>
         <ClientOnly>
           <Carousel />
-          <ProductCarousel title="top products"/>
+          <ProductCarousel title="top products" autoPlayProp/>
         </ClientOnly >
       </Container>
       <Container>

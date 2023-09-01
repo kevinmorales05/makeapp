@@ -60,7 +60,7 @@ const CartDetails = (props: Props) => {
             />
             <TableCart data={carts} />
             <div className='relative w-full '>
-                <ProductCarousel/>
+                <ProductCarousel title='recommended' dots/>
             </div>
         </div >
     )

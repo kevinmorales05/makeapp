@@ -1,77 +1,77 @@
 'use client'
+import React, {
+  useCallback,
+} from 'react'
 
-import React, { useState, useEffect, useCallback } from 'react'
 import useEmblaCarousel, {
-  EmblaCarouselType,
   EmblaOptionsType,
+  EmblaCarouselType
 } from 'embla-carousel-react'
 
 import imageByIndex from './imageByIndex'
+
 import './embla-carousel.css'
-import Image from 'next/image'
+import {cn } from '@nextui-org/react'
 import Button from '../Button'
+
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import { BsSearch } from 'react-icons/bs'
+import { RiShoppingBasketLine } from "react-icons/ri"
+import DividerCarousel from "./DividerCarousel"
+import { DotButton, NextButton, PrevButton, PropType, useDotButton, usePrevNextButtons } from "./ButtonsCarousel"
+
+import Autoplay from 'embla-carousel-autoplay'
 import { useLocale, useTranslations } from 'next-intl'
-import { OPTIONS_CAROUSEL } from '@/app/constants/constants'
-import { DotButton, NextButton, PrevButton } from './ButtonsCarousel'
+import Image from 'next/image'
 
 
-const Carousel: React.FC = () => {
+interface ProductCarouselProps {
+  title?: string
+}
+
+const OPTIONS: EmblaOptionsType = { align: 'start', loop: true, }
+const SLIDE_COUNT = 6
+const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+
+const Carousel: React.FC<PropType> = (props: ProductCarouselProps) => {
+  const { title } = props
+
   const t = useTranslations("carousel")
-  // const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel(OPTIONS_CAROUSEL)
-  const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
-  const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
-  const [selectedIndex, setSelectedIndex] = useState(0)
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
   const locale = useLocale();
 
 
-
-  const scrollPrev = useCallback(
-    () => emblaApi && emblaApi.scrollPrev(),
-    [emblaApi]
-  )
-  const scrollNext = useCallback(
-    () => emblaApi && emblaApi.scrollNext(),
-    [emblaApi]
-  )
-  const scrollTo = useCallback(
-    (index: number) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi]
+  const slides = SLIDES
+  const options = OPTIONS
+  const [emblaRef, emblaApi] = useEmblaCarousel(options,
+    [Autoplay()]
   )
 
-  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-    setScrollSnaps(emblaApi.scrollSnapList())
+  const onButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
+    const { autoplay } = emblaApi.plugins()
+    if (!autoplay) return
+    if (autoplay.options.stopOnInteraction !== false) autoplay.stop()
   }, [])
 
-  const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-    setSelectedIndex(emblaApi.selectedScrollSnap())
-    setPrevBtnDisabled(!emblaApi.canScrollPrev())
-    setNextBtnDisabled(!emblaApi.canScrollNext())
-  }, [])
+  const { selectedIndex, scrollSnaps, onDotButtonClick } = useDotButton(
+    emblaApi,
+    onButtonClick
+  )
 
-
-  useEffect(() => {
-    if (!emblaApi) return
-
-    onInit(emblaApi)
-    onSelect(emblaApi)
-    emblaApi.on('reInit', onInit)
-    emblaApi.on('reInit', onSelect)
-    emblaApi.on('select', onSelect)
-  }, [emblaApi, onInit, onSelect])
-
-  const SLIDE_COUNT = parseFloat(t("slide_count"));
-  const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
+  const {
+    prevBtnDisabled,
+    nextBtnDisabled,
+    onPrevButtonClick,
+    onNextButtonClick
+  } = usePrevNextButtons(emblaApi, onButtonClick)
 
   return (
-    <section className="sandbox__carousel">
-      <div className="embla mt-10">
-        <div className="overflow-hidden" ref={emblaRef}>
+    <div className="embla theme-mix mt-8 lg:mt-10">
+      <div className="relative">
+        <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
-            {SLIDES.map((index) => (
+          {SLIDES.map((index) => (
               <div className="embla__slide justify-center items-start " key={index}>
-                <div className="embla__slide__number">
+                <div className={cn("embla__slide__number")}>
                   <span>{index + 1}</span>
                 </div>
                 <div className="
@@ -101,30 +101,23 @@ const Carousel: React.FC = () => {
 
               </div>
             ))}
-
           </div>
-
+          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
         </div>
-
-        <div className="embla__buttons scale-[1.14] sm:scale-[1.04]">
-          <PrevButton onClick={scrollPrev} disabled={prevBtnDisabled} />
-          <NextButton onClick={scrollNext} disabled={nextBtnDisabled} />
+        <div className="embla__dots">
+          {scrollSnaps.map((_, index) => (
+            <DotButton
+              key={index}
+              onClick={() => onDotButtonClick(index)}
+              className={'embla__dot'.concat(
+                index === selectedIndex ? ' embla__dot--selected !w-11' : ''
+              )}
+            />
+          ))}
         </div>
       </div>
-
-      <div className="embla__dots">
-        {scrollSnaps.map((_, index) => (
-          <DotButton
-            key={index}
-            onClick={() => scrollTo(index)}
-            className={'embla__dot'.concat(
-              index === selectedIndex ? ' embla__dot--selected' : ''
-            )}
-          />
-        ))}
-      </div>
-
-    </section>
+    </div>
   )
 }
 
