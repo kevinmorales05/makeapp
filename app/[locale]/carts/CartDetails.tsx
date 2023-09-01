@@ -14,6 +14,7 @@ import TableCart from './TableCart'
 import { AiOutlineShopping } from 'react-icons/ai'
 import Heading from '../components/Heading'
 import { Button } from '@nextui-org/react'
+import ProductCarousel from '../components/carousel/ProductCarousel'
 
 export interface ICart {
     quantity: number;
@@ -58,6 +59,9 @@ const CartDetails = (props: Props) => {
                 center
             />
             <TableCart data={carts} />
+            <div className='relative w-full '>
+                <ProductCarousel/>
+            </div>
         </div >
     )
 }
