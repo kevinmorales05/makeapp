@@ -1,14 +1,7 @@
-import { motion } from "framer-motion"
-
+'use client'
 import React, {
-    PropsWithChildren,
     useCallback,
-    useEffect,
-    useState
 } from 'react'
-
-import Autoplay from 'embla-carousel-autoplay'
-
 
 import useEmblaCarousel, {
     EmblaOptionsType,
@@ -18,186 +11,32 @@ import useEmblaCarousel, {
 import imageByIndex from './imageByIndex'
 
 import './embla-carousel.css'
-import { Button, Divider, cn } from '@nextui-org/react'
-import { AiOutlineApple } from 'react-icons/ai'
-import { BsDot } from 'react-icons/bs'
-import { BiSolidArrowToRight } from 'react-icons/bi'
-import { RiArrowLeftSLine, RiArrowRightSLine } from "react-icons/ri"
-import Heading from "../Heading"
+import { Button, cn } from '@nextui-org/react'
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
+import { BsSearch } from 'react-icons/bs'
+import { RiShoppingBasketLine } from "react-icons/ri"
 import DividerCarousel from "./DividerCarousel"
+import { DotButton, NextButton, PrevButton, PropType, useDotButton, usePrevNextButtons } from "./ButtonsCarousel"
 
-type UsePrevNextButtonsType = {
-    prevBtnDisabled: boolean
-    nextBtnDisabled: boolean
-    onPrevButtonClick: () => void
-    onNextButtonClick: () => void
+import Autoplay from 'embla-carousel-autoplay'
+
+
+interface ProductCarouselProps {
+    title?: string
 }
 
-export const usePrevNextButtons = (
-    emblaApi: EmblaCarouselType | undefined,
-    onButtonClick?: (emblaApi: EmblaCarouselType) => void
-): UsePrevNextButtonsType => {
-    const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
-    const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
-
-    const onPrevButtonClick = useCallback(() => {
-        if (!emblaApi) return
-        emblaApi.scrollPrev()
-        if (onButtonClick) onButtonClick(emblaApi)
-    }, [emblaApi, onButtonClick])
-
-    const onNextButtonClick = useCallback(() => {
-        if (!emblaApi) return
-        emblaApi.scrollNext()
-        if (onButtonClick) onButtonClick(emblaApi)
-    }, [emblaApi, onButtonClick])
-
-    const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-        setPrevBtnDisabled(!emblaApi.canScrollPrev())
-        setNextBtnDisabled(!emblaApi.canScrollNext())
-    }, [])
-
-    useEffect(() => {
-        if (!emblaApi) return
-
-        onSelect(emblaApi)
-        emblaApi.on('reInit', onSelect)
-        emblaApi.on('select', onSelect)
-    }, [emblaApi, onSelect])
-
-    return {
-        prevBtnDisabled,
-        nextBtnDisabled,
-        onPrevButtonClick,
-        onNextButtonClick
-    }
-}
-
-type PropType = PropsWithChildren<
-    React.DetailedHTMLProps<
-        React.ButtonHTMLAttributes<HTMLButtonElement>,
-        HTMLButtonElement
-    >
->
-
-export const PrevButton: React.FC<PropType> = (props) => {
-    const { onClick, disabled } = props
-
-    return (
-        <motion.button
-            className="embla__button"
-            type="button"
-            onClick={onClick}
-            disabled={disabled}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-        >
-            <RiArrowLeftSLine size={"2rem"} />
-
-        </motion.button>
-    )
-}
-
-export const NextButton: React.FC<PropType> = (props) => {
-    const { onClick, disabled } = props
-
-    return (
-        <motion.button
-            className="embla__button"
-            type="button"
-            onClick={onClick}
-            disabled={disabled}
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-        >
-            <RiArrowRightSLine size={"2rem"} />
-        </motion.button>
-    )
-}
-
-
-type UseDotButtonType = {
-    selectedIndex: number
-    scrollSnaps: number[]
-    onDotButtonClick: (index: number) => void
-}
-
-export const useDotButton = (
-    emblaApi: EmblaCarouselType | undefined,
-    onButtonClick?: (emblaApi: EmblaCarouselType) => void
-): UseDotButtonType => {
-    const [selectedIndex, setSelectedIndex] = useState(0)
-    const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
-
-    const onDotButtonClick = useCallback(
-        (index: number) => {
-            if (!emblaApi) return
-            emblaApi.scrollTo(index)
-            if (onButtonClick) onButtonClick(emblaApi)
-        },
-        [emblaApi, onButtonClick]
-    )
-
-    const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-        setScrollSnaps(emblaApi.scrollSnapList())
-    }, [])
-
-    const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
-        setSelectedIndex(emblaApi.selectedScrollSnap())
-    }, [])
-
-    useEffect(() => {
-        if (!emblaApi) return
-
-        onInit(emblaApi)
-        onSelect(emblaApi)
-        emblaApi.on('reInit', onInit)
-        emblaApi.on('reInit', onSelect)
-        emblaApi.on('select', onSelect)
-    }, [emblaApi, onInit, onSelect])
-
-    return {
-        selectedIndex,
-        scrollSnaps,
-        onDotButtonClick
-    }
-}
-
-type PropTypeDotButton = PropsWithChildren<
-    React.DetailedHTMLProps<
-        React.ButtonHTMLAttributes<HTMLButtonElement>,
-        HTMLButtonElement
-    >
->
-
-export const DotButton: React.FC<PropTypeDotButton> = (props) => {
-    const { key, onClick, className } = props
-
-    return (
-        <motion.button
-            key={key}
-            onClick={onClick}
-            className={cn(className,)}
-            whileHover={{ scale: 1.1, width: "2.5rem" }}
-            whileTap={{ scale: 0.9 }}
-            initial={{ opacity: 0, scale: 0.5 }}
-            animate={{ opacity: 1, scale: 1 }}
-            type="button"
-        />
-    )
-}
-// {/* </motion.button> */}
-// {/* {children} */}
-
-
-const OPTIONS: EmblaOptionsType = { align: 'start', loop: true }
-const SLIDE_COUNT = 5
+const OPTIONS: EmblaOptionsType = { align: 'start', loop: true, }
+const SLIDE_COUNT = 6
 const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
+const ProductCarousel: React.FC<PropType> = (props) => {
+    const { title } = props
+
     const slides = SLIDES
     const options = OPTIONS
-    const [emblaRef, emblaApi] = useEmblaCarousel(options, [Autoplay()])
+    const [emblaRef, emblaApi] = useEmblaCarousel(options,
+        [Autoplay()]
+    )
 
     const onButtonClick = useCallback((emblaApi: EmblaCarouselType) => {
         const { autoplay } = emblaApi.plugins()
@@ -218,40 +57,61 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     } = usePrevNextButtons(emblaApi, onButtonClick)
 
     return (
-        <div className="embla theme-mix">
-            <DividerCarousel title="List of products you shopping!" />
-            <div className="embla__viewport" ref={emblaRef}>
-                <div className="embla__container">
-                    {slides.map((index) => (
-                        <div className={cn("embla__slide", "!shrink-0 !grow-0 !basis-1/3")} key={index}>
-                            <img
-                                className="embla__slide__img"
-                                src={imageByIndex(index)}
-                                alt="Your alt text"
-                            />
-                        </div>
+        <div className="embla theme-mix mt-8 lg:mt-10">
+            <DividerCarousel title={title ? title.toLocaleUpperCase() : ""} />
+            <div className="relative">
+                <div className="embla__viewport" ref={emblaRef}>
+                    <div className="embla__container">
+                        {slides.map((index) => (
+                            <div className={cn("embla__slide", "!shrink-0 !grow-0", "!basis-full sm:!basis-1/2 md:!basis-1/3 xl:!basis-1/5 relative")} key={index}>
+                                <div className="sm:h-[435px] w-full relative group">
+                                    <img
+                                        src={imageByIndex(index)}
+                                        alt="Your alt text"
+                                        className="w-full h-auto transition-transform transform scale-100 group-hover:scale-102"
+                                    />
+                                    <div onClick={() => alert("send this product")} className="flex flex-col gap-8 lg:gap-14 opacity-0 absolute top-0 left-0 w-full h-full transition-opacity bg-[#222] bg-opacity-10 p-30 flex items-center justify-center opacity-0 transition-all duration-300 ease-linear group-hover:opacity-100 cursor-pointer">
+                                        <BsSearch className="text-white/90 h-[250px] w-full flex justify-center items-center opacity-100 z-400 p-20 md:py-10 xl:py-0" />
+                                        <div className="flex gap-8">
+                                            <Button onPress={() => alert("send this favorite")} isIconOnly radius="full" className="w-16 h-16 md:w-14 md:h-14 shadow-md text-white cursor-pointer transition-all duration-300 ease-linear group-hover:text-white bg-red-dark hover:opacity-80 transition-opacity">
+                                                {false ? <AiFillHeart className="w-8 h-8 md:w-6 md:h-6 text-white" /> : <AiOutlineHeart className="w-8 h-8 md:w-6 md:h-6 text-white" />}
+
+                                            </Button>
+                                            <Button onPress={() => alert("send this cart")} isIconOnly radius="full" className="w-16 h-16 md:w-14 md:h-14 relative shadow-md text-[#222] cursor-pointer transition-all duration-300 ease-linear group-hover:text-black bg-white hover:opacity-80 transition-opacity">
+                                                <RiShoppingBasketLine className="w-8 h-8 md:w-6 md:h-6 text-[#222]" />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="flex flex-col items-center justify-center">
+                                    <p onClick={() => alert("send this category")} className="cursor-pointer hover:text-black/80">Mascarillas</p>
+                                    <p onClick={() => alert("send this product")} className="font-bold cursor-pointer hover:text-black/80">SKEDERM PEPTIDE LIFTING BAND {"(1 UNIDAD)"}</p>
+                                    <div className="flex-grow border-t border-neutral-500"></div>
+                                    <div className="flex justify-between gap-6 items-end">
+                                        <p className="text-base border-neutral-500">25,80€</p>
+                                        <p className="line-through text-lg font-semibold">22,80€</p>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                    <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
+                    <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
+                </div>
+                <div className="embla__dots">
+                    {scrollSnaps.map((_, index) => (
+                        <DotButton
+                            key={index}
+                            onClick={() => onDotButtonClick(index)}
+                            className={'embla__dot'.concat(
+                                index === selectedIndex ? ' embla__dot--selected !w-11' : ''
+                            )}
+                        />
                     ))}
                 </div>
-            </div>
-
-            <div className="embla__buttons">
-                <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-                <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-            </div>
-
-            <div className="embla__dots">
-                {scrollSnaps.map((_, index) => (
-                    <DotButton
-                        key={index}
-                        onClick={() => onDotButtonClick(index)}
-                        className={'embla__dot'.concat(
-                            index === selectedIndex ? ' embla__dot--selected !w-11' : ''
-                        )}
-                    />
-                ))}
             </div>
         </div>
     )
 }
 
-export default EmblaCarousel
+export default ProductCarousel

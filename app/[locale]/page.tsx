@@ -12,6 +12,7 @@ import { AiOutlineHighlight } from "react-icons/ai";
 import { useTranslations } from "next-intl";
 import React from "react";
 import Breadcrumbs from "./carts/Breadcrumbs";
+import ProductCarousel from "./components/carousel/ProductCarousel";
 
 
 interface HomeProps {
@@ -47,9 +48,9 @@ const Home = async ({ searchParams }: HomeProps) => {
       <Container>
         <ClientOnly>
           <Carousel />
+          <ProductCarousel title="top products"/>
         </ClientOnly >
       </Container>
-      <Breadcrumbs />
       <Container>
         <div
           className="

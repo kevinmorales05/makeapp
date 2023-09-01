@@ -5,17 +5,14 @@ import useEmblaCarousel, {
   EmblaCarouselType,
   EmblaOptionsType,
 } from 'embla-carousel-react'
-import {
-  DotButton,
-  PrevButton,
-  NextButton,
-} from './EmblaCarouselArrowsDotsButtons'
+
 import imageByIndex from './imageByIndex'
 import './embla-carousel.css'
 import Image from 'next/image'
 import Button from '../Button'
 import { useLocale, useTranslations } from 'next-intl'
 import { OPTIONS_CAROUSEL } from '@/app/constants/constants'
+import { DotButton, NextButton, PrevButton } from './ButtonsCarousel'
 
 
 const Carousel: React.FC = () => {
