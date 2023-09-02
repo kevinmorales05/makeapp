@@ -44,10 +44,10 @@ const authMiddleware = withAuth(
     // Note that this callback is only invoked if
     // the `authorized` callback has returned `true`
     // and not for pages listed in `pages`.
-    // function onSuccess(req) {
-    //     return intlMiddleware(req);
-    // },
-    (req) => intlMiddleware(req),
+    function onSuccess(req) {
+        return intlMiddleware(req);
+    },
+    // (req) => intlMiddleware(req),
     {
         callbacks: {
             authorized: ({ token }) => {
@@ -81,8 +81,8 @@ export default function middleware(req: NextRequest) {
 
 export const config = {
     matcher: [
-        // '/((?!api|_next|.*\\..*).*)'
-        '/((?!api|_next/static|_next/img|img|favicon.ico).*)',
+        '/((?!api|_next|.*\\..*).*)'
+        // '/((?!api|_next/static|_next/img|img|favicon.ico).*)',
     ]
 
 };

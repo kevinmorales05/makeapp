@@ -9,7 +9,7 @@ interface SummaryCounterProps {
   title: string;
   total: number;
   value: number;
-  src?: string,
+  src: string,
   onChange: (value: number) => void;
 }
 
@@ -42,7 +42,7 @@ const SummaryCounter: React.FC<SummaryCounterProps> = ({
           width="90px"
           alt={title}
           className="object-cover w-full h-full"
-          src={image44.src}
+          src={src}
         />
         <div className="flex gap-2 flex-col justify-center text-start">
           <p className="font-medium">{title}</p>

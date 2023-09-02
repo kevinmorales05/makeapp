@@ -34,6 +34,12 @@ import { motion } from 'framer-motion'
 import { AiOutlineShoppingCart } from 'react-icons/ai';
 import SummaryCounter from '../inputs/SummaryCounter';
 
+// image sample
+import image11 from '@/public/mocking/banila.jpg'
+import image22 from '@/public/mocking/chamos.jpg'
+import image33 from '@/public/mocking/creams.jpg'
+import image44 from '@/public/mocking/mizon.jpg'
+
 enum STEPS {
   DELIVERY = 0,
   CONTACT = 1,
@@ -500,19 +506,33 @@ const CheckoutModal = () => {
               className='flex flex-col gap-4'
             >
               <SummaryCounter
-                src='/public/mocking/mizon.jpg'
+                src={image11.src}
                 onChange={(value) => setCustomValue('items.0.count', value)}
                 value={items[0].count}
                 title="TOUCH ON BODY COTTON BODY WASH + LOTION"
                 total={items[0].count * items[0].price}
               />
-
-              {/* <Counter
-                onChange={(value) => setCustomValue('guestCount', value)}
-                value={guestCount}
-                title="Guests"
-                subtitle="How many guests do you allow?"
-              /> */}
+              <SummaryCounter
+                src={image22.src}
+                onChange={(value) => setCustomValue('items.0.count', value)}
+                value={items[0].count}
+                title="URBAN DELIGHT BODY SHOWER GEL"
+                total={items[0].count * items[0].price}
+              />
+              <SummaryCounter
+                src={image33.src}
+                onChange={(value) => setCustomValue('items.0.count', value)}
+                value={items[0].count}
+                title="URBAN ECO HARAKEKE TONER"
+                total={items[0].count * items[0].price}
+              />
+              <SummaryCounter
+                src={image44.src}
+                onChange={(value) => setCustomValue('items.0.count', value)}
+                value={items[0].count}
+                title="TOUCH ON BODY  WASH + LOTION"
+                total={items[0].count * items[0].price}
+              />
 
             </motion.div>
           </AccordionItem>
