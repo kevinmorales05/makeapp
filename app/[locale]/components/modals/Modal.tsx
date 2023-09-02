@@ -1,6 +1,6 @@
 'use client';
 
-import {  useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 // import { IoMdClose } from "react-icons/io";
 
 import Button from "../Button";
@@ -119,13 +119,19 @@ const Modal: React.FC<ModalProps> = ({
             <ModalBody className="relative p-6 flex-auto">
               {body}
             </ModalBody>
-            <ModalFooter className="grid  grid-cols-1 py-8">
+            <ModalFooter className="grid  grid-cols-1 py-8 gap-3">
               <div
                 className="
                   grid grid-cols-1
                   w-full
+                  gap-2
                   "
               >
+                <Button
+                  disabled={disabled}
+                  label={actionLabel}
+                  onClick={handleSubmit}
+                />
                 {secondaryAction && secondaryActionLabel && (
                   <Button
                     disabled={disabled}
@@ -134,11 +140,6 @@ const Modal: React.FC<ModalProps> = ({
                     outline
                   />
                 )}
-                <Button
-                  disabled={disabled}
-                  label={actionLabel}
-                  onClick={handleSubmit}
-                />
                 {footer}
               </div></ModalFooter>
           </>

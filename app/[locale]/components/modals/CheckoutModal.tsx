@@ -32,6 +32,12 @@ import { Input as InputUI } from "@nextui-org/react";
 import { motion } from 'framer-motion'
 
 enum STEPS {
+  DELIVERY = 0,
+  CONTACT = 1,
+  SUMMARY = 2,
+  PAYMENT = 3
+}
+enum STOMPS {
   CATEGORY = 0,
   LOCATION = 1,
   INFO = 2,
@@ -39,14 +45,6 @@ enum STEPS {
   DESCRIPTION = 4,
   PRICE = 5,
 }
-// enum STEPS {
-//   INFORMATION = 0,
-//   SHIPPING = 1,
-//   SUMMARY = 2,
-//   IMAGES = 3,
-//   DESCRIPTION = 4,
-//   PRICE = 5,
-// }
 
 enum DELIVERY_MODE {
   PICKUP = "pick_up",
@@ -57,10 +55,9 @@ const CheckoutModal = () => {
   const checkoutModal = useCheckoutModal();
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
-  const [step, setStep] = useState(STEPS.CATEGORY);
+  const [step, setStep] = useState(STEPS.DELIVERY);
   const t = useTranslations("categories")
   const { allCategories } = useCategories()
-
 
   const [deliveryMethod, setDeliveryMethod] = React.useState<string[]>([""]);
 
@@ -70,8 +67,6 @@ const CheckoutModal = () => {
       setDeliveryMethod([getLastCheckBox])
     }
   }
-
-
 
   const {
     register,
@@ -127,18 +122,20 @@ const CheckoutModal = () => {
   }
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    if (step !== STEPS.PRICE) {
+    if (step !== STEPS.PAYMENT) {
       return onNext();
     }
 
     setIsLoading(true);
 
-    axios.post('/api/listings', data)
+    console.log("all data", data)
+    axios.post('/api/payments', data)
       .then(() => {
         toast.success('Listing created!');
+        //reseting
         router.refresh();
         reset();
-        setStep(STEPS.CATEGORY)
+        setStep(STEPS.DELIVERY)
         checkoutModal.onClose();
       })
       .catch(() => {
@@ -150,7 +147,7 @@ const CheckoutModal = () => {
   }
 
   const actionLabel = useMemo(() => {
-    if (step === STEPS.PRICE) {
+    if (step === STEPS.PAYMENT) {
       return 'Create'
     }
 
@@ -158,7 +155,7 @@ const CheckoutModal = () => {
   }, [step]);
 
   const secondaryActionLabel = useMemo(() => {
-    if (step === STEPS.CATEGORY) {
+    if (step === STEPS.DELIVERY) {
       return undefined
     }
 
@@ -166,10 +163,10 @@ const CheckoutModal = () => {
   }, [step]);
 
 
-  // starts with category
+  // CATEGORY STEP 1
   let bodyContent = (
     <div className="flex flex-col gap-2">
-      <HasAccount onOpenModal={loginModal.onOpen} endText />
+      {/* <HasAccount onOpenModal={loginModal.onOpen} endText /> */}
       <Heading
         title="Describe your shipping?"
       />
@@ -205,10 +202,11 @@ const CheckoutModal = () => {
               variant="bordered"
               classNames={{ base: cn("hover:bg-content2") }}
               label="Country/Region"
+              placeholder='Enter your country name or region'
               radius='sm'
               disabled={isLoading}
               color={errors["country"] ? "danger" : "primary"}
-              errorMessage={errors["country"] && "Please enter a valid email"}
+              errorMessage={errors["country"] && "Please enter a valid country name"}
 
               {...register("country", { required: true })}
             />
@@ -219,10 +217,11 @@ const CheckoutModal = () => {
               classNames={{ base: cn("hover:bg-content2") }}
               variant="bordered"
               label="City"
+              placeholder='Enter your city name'
               radius='sm'
               disabled={isLoading}
               color={errors["city"] ? "danger" : "primary"}
-              errorMessage={errors["city"] && "Please enter a valid email"}
+              errorMessage={errors["city"] && "Please enter a valid city name"}
 
               {...register("city", { required: true })}
             />
@@ -233,10 +232,11 @@ const CheckoutModal = () => {
               type="text"
               variant="bordered"
               label="Neighborhood"
+              placeholder='Enter your neighborhood name'
               radius='sm'
               disabled={isLoading}
               color={errors["neighborhood"] ? "danger" : "primary"}
-              errorMessage={errors["neighborhood"] && "Please enter a valid email"}
+              errorMessage={errors["neighborhood"] && "Please enter a valid neighborhood name"}
 
               {...register("neighborhood", { required: true })}
             />
@@ -247,10 +247,11 @@ const CheckoutModal = () => {
               type="text"
               variant="bordered"
               label="Address"
+              placeholder='Enter your address'
               radius='sm'
               disabled={isLoading}
               color={errors["address"] ? "danger" : "primary"}
-              errorMessage={errors["address"] && "Please enter a valid email"}
+              errorMessage={errors["address"] && "Please enter a valid address"}
 
               {...register("address", { required: true })}
             />
@@ -260,11 +261,12 @@ const CheckoutModal = () => {
               size='lg'
               type="text"
               variant="bordered"
-              label="Apartment, suite, #casa etc. (optional)"
+              label="Apartment/suite/#home"
+              placeholder='Enter your specific location (optional)'
               radius='sm'
               disabled={isLoading}
               color={errors["apartment"] ? "danger" : "primary"}
-              errorMessage={errors["apartment"] && "Please enter a valid email"}
+              errorMessage={errors["apartment"] && "Please enter a valid apartment number"}
 
               {...register("apartment", { required: false })}
             />
@@ -272,13 +274,14 @@ const CheckoutModal = () => {
               id='postal_code'
               classNames={{ base: cn("hover:bg-content2") }}
               size='lg'
-              type="text"
+              type="number"
               variant="bordered"
-              label="Postal code (optional)"
+              label="Postal code"
+              placeholder='Enter your postal code (optional)'
               radius='sm'
               disabled={isLoading}
               color={errors["postal_code"] ? "danger" : "primary"}
-              errorMessage={errors["apartmpostal_codeent"] && "Please enter a valid email"}
+              errorMessage={errors["apartmpostal_codeent"] && "Please enter a valid postal code"}
               {...register("postal_code", { required: false })}
             />
           </motion.div>
@@ -302,6 +305,7 @@ const CheckoutModal = () => {
               size='lg'
               variant="bordered"
               label="N954 Av. Padre Luis Vaccari y Galo Plaza Lasso"
+              placeholder='Store location'
               defaultValue="Quito, Ecuador"
               radius='sm'
               disabled={isLoading}
@@ -310,8 +314,6 @@ const CheckoutModal = () => {
           </motion.div>
         </ScrollShadow>
       }
-
-
       {/* {allCategories.map((item) => (
           <div key={item.label} className="col-span-1">
             <CategoryInput
@@ -326,28 +328,93 @@ const CheckoutModal = () => {
     </div>
   )
 
-  if (step === STEPS.LOCATION) {
+
+  if (step === STEPS.CONTACT) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
         <Heading
-          title="Where is your product located?"
-          subtitle="Help guests find you!"
+          title="Where are you located?"
+          subtitle="Help delivers find you!"
         />
-        <CountrySelect
-          value={location}
-          onChange={(value) => setCustomValue('location', value)}
-        />
-        <Map center={location?.latlng} />
+        <ScrollShadow className="w-full h-[300px]" size={0}>
+          <motion.div
+            key="pick_up_container"
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: .2 }}
+            className='flex flex-col gap-4'
+          >
+            <span className='text-[#71717a] font-base'>Contact</span>
+            <InputUI
+              id='email'
+              classNames={{ base: cn("hover:bg-content2") }}
+              type="email"
+              size='lg'
+              variant="bordered"
+              label="Email"
+              placeholder='Enter your email address'
+              labelPlacement='inside'
+              radius='sm'
+              disabled={isLoading}
+              color={errors["email"] ? "danger" : "primary"}
+              errorMessage={errors["email"] && "Please enter a valid email"}
+              {...register("email", { required: true })}
+
+            />
+            <InputUI
+              id='phone'
+              classNames={{ base: cn("hover:bg-content2") }}
+              type="text"
+              size='lg'
+              variant="bordered"
+              label="Phone Number"
+              placeholder='Enter your phone number'
+              radius='sm'
+              disabled={isLoading}
+              color={errors["phone"] ? "danger" : "primary"}
+              errorMessage={errors["phone"] && "Please enter a valid number"}
+              {...register("phone", { required: true })}
+            />
+            <InputUI
+              id='first_name'
+              classNames={{ base: cn("hover:bg-content2") }}
+              type="text"
+              size='lg'
+              variant="bordered"
+              label="First Name"
+              placeholder='Enter your first name here'
+              radius='sm'
+              disabled={isLoading}
+              color={errors["first_name"] ? "danger" : "primary"}
+              errorMessage={errors["first_name"] && "Please enter a valid text"}
+              {...register("first_name", { required: true })}
+            />
+            <InputUI
+              id='last_name'
+              classNames={{ base: cn("hover:bg-content2") }}
+              type="text"
+              size='lg'
+              variant="bordered"
+              label="Last Name"
+              placeholder='Enter your last name here'
+              radius='sm'
+              disabled={isLoading}
+              color={errors["last_name"] ? "danger" : "primary"}
+              errorMessage={errors["last_name"] && "Please enter a valid text"}
+              {...register("last_name", { required: true })}
+            />
+          </motion.div>
+        </ScrollShadow>
       </div>
     );
   }
 
-  if (step === STEPS.INFO) {
+  if (step === STEPS.SUMMARY) {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
-          title="Share some basics about your place"
-          subtitle="What amenitis do you have?"
+          title="Resume shipping process"
+          subtitle="Your skin always looks radiant and well-cared-for"
         />
         <Counter
           onChange={(value) => setCustomValue('guestCount', value)}
@@ -369,11 +436,18 @@ const CheckoutModal = () => {
           title="Bathrooms"
           subtitle="How many bathrooms do you have?"
         />
+        <hr />
+        <Counter
+          onChange={(value) => setCustomValue('bathroomCount', value)}
+          value={bathroomCount}
+          title="Bathrooms"
+          subtitle="How many bathrooms do you have?"
+        />
       </div>
     )
   }
 
-  if (step === STEPS.IMAGES) {
+  if (step === STEPS.PAYMENT) {
     bodyContent = (
       <div className="flex flex-col gap-8">
         <Heading
@@ -388,54 +462,54 @@ const CheckoutModal = () => {
     )
   }
 
-  if (step === STEPS.DESCRIPTION) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="How would you describe your place?"
-          subtitle="Short and sweet works best!"
-        />
-        <Input
-          id="title"
-          label="Title"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-        <hr />
-        <Input
-          id="description"
-          label="Description"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-      </div>
-    )
-  }
+  // if (step === STEPS.DESCRIPTION) {
+  //   bodyContent = (
+  //     <div className="flex flex-col gap-8">
+  //       <Heading
+  //         title="How would you describe your place?"
+  //         subtitle="Short and sweet works best!"
+  //       />
+  //       <Input
+  //         id="title"
+  //         label="Title"
+  //         disabled={isLoading}
+  //         register={register}
+  //         errors={errors}
+  //         required
+  //       />
+  //       <hr />
+  //       <Input
+  //         id="description"
+  //         label="Description"
+  //         disabled={isLoading}
+  //         register={register}
+  //         errors={errors}
+  //         required
+  //       />
+  //     </div>
+  //   )
+  // }
 
-  if (step === STEPS.PRICE) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="Now, set your price"
-          subtitle="How much do you charge per night?"
-        />
-        <Input
-          id="price"
-          label="Price"
-          formatPrice
-          type="number"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
-          required
-        />
-      </div>
-    )
-  }
+  // if (step === STEPS.PRICE) {
+  //   bodyContent = (
+  //     <div className="flex flex-col gap-8">
+  //       <Heading
+  //         title="Now, set your price"
+  //         subtitle="How much do you charge per night?"
+  //       />
+  //       <Input
+  //         id="price"
+  //         label="Price"
+  //         formatPrice
+  //         type="number"
+  //         disabled={isLoading}
+  //         register={register}
+  //         errors={errors}
+  //         required
+  //       />
+  //     </div>
+  //   )
+  // }
 
   return (
     <Modal
@@ -445,7 +519,7 @@ const CheckoutModal = () => {
       actionLabel={actionLabel}
       onSubmit={handleSubmit(onSubmit)}
       secondaryActionLabel={secondaryActionLabel}
-      secondaryAction={step === STEPS.CATEGORY ? undefined : onBack}
+      secondaryAction={step === STEPS.DELIVERY ? undefined : onBack}
       onClose={checkoutModal.onClose}
       body={bodyContent}
     />
