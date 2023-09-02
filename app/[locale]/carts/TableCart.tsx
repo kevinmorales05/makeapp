@@ -2,7 +2,7 @@ import React from 'react'
 import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Radio, RadioGroup, ChipProps, Tooltip, Chip, User, Button, ButtonGroup, Image, cn } from "@nextui-org/react";
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineRest, AiOutlineShopping } from 'react-icons/ai';
 import { TbMoodEmpty, TbTruckDelivery } from 'react-icons/tb';
-import useRentModal from '../hooks/useRentModal';
+import useCheckoutModal from '../hooks/useCheckoutModal';
 
 interface ICartProduct {
     id: number;
@@ -103,7 +103,7 @@ type User = typeof users[0];
 
 const TableCart = (props: Props) => {
 
-    const rentModal = useRentModal();
+    const checkoutModal = useCheckoutModal();
 
     const { data } = props;
     const dataParse = data.map(it => {
@@ -231,8 +231,8 @@ const TableCart = (props: Props) => {
                     <span>$ {total}</span>
                 </div>
                 <div className='flex flex-col w-full gap-2 py-4 '>
-                    <Button onPress={() => rentModal.onOpen()} fullWidth color="primary" radius="none" startContent={<TbTruckDelivery />}>PROCEED TO CHECKOUT</Button>
-                    <Button fullWidth color="danger" radius="none" startContent={<AiOutlineShopping />}>CONTINUE TO SHOPPING</Button>
+                    <Button onPress={checkoutModal.onOpen} fullWidth color="primary" radius="none" startContent={<TbTruckDelivery />}>PROCEED TO CHECKOUT</Button>
+                    <Button onPress={() => { }} fullWidth color="danger" radius="none" startContent={<AiOutlineShopping />}>CONTINUE TO SHOPPING</Button>
                 </div>
             </div>
         </div>

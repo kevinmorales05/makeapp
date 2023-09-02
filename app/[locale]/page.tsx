@@ -11,7 +11,7 @@ import { GiLips } from "react-icons/gi";
 import { AiOutlineHighlight } from "react-icons/ai";
 import { useTranslations } from "next-intl";
 import React from "react";
-import Breadcrumbs from "./carts/Breadcrumbs";
+import Breadcrumbs from "./components/Breadcrumbs";
 import ProductCarousel from "./components/carousel/ProductCarousel";
 
 

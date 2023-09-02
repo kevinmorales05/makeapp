@@ -18,7 +18,7 @@ import { useLocale } from "next-intl";
 import { apix } from "@/app/constants/axios-instance";
 import { IProductFormatted, formattedProductById } from "@/app/hooks/useProducts";
 import { useCartStore } from "@/app/hooks/useCart";
-import Breadcrumbs from "@/app/carts/Breadcrumbs";
+import Breadcrumbs from "@/app/components/Breadcrumbs";
 // import { apix } from "@/app/constants/axios-instance";
 
 interface IProductDetailProps {

@@ -93,7 +93,7 @@ const ProductCarousel
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="flex flex-col items-center justify-center">
+                                    <div className="flex flex-col items-center justify-center text-center">
                                         <p onClick={() => alert("send this category")} className="cursor-pointer hover:text-black/80">Mascarillas</p>
                                         <p onClick={() => alert("send this product")} className="font-bold cursor-pointer hover:text-black/80">SKEDERM PEPTIDE LIFTING BAND {"(1 UNIDAD)"}</p>
                                         <div className="flex-grow border-t border-neutral-500"></div>

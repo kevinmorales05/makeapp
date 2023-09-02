@@ -18,7 +18,7 @@ import { MoonLoader, PropagateLoader } from 'react-spinners'
 // import { getTranslator } from 'next-intl/server';
 import { useLocale } from 'next-intl'
 import { categoriesFormattedShop } from '../hooks/useFormatters'
-import Breadcrumbs from '../carts/Breadcrumbs'
+import Breadcrumbs from '../components/Breadcrumbs'
 
 interface ISearchParams {
     category?: string;

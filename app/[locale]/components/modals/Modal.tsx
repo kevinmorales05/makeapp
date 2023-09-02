@@ -112,7 +112,7 @@ const Modal: React.FC<ModalProps> = ({
                 border-b-[1px]
                 "
               >
-                <div className={`text-lg font-semibold`}>
+                <div className={`text-lg font-semibold font-merienda`}>
                   {title}
                 </div>
               </div></ModalHeader>
