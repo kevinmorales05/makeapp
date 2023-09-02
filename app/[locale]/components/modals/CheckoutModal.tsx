@@ -5,6 +5,7 @@ import { toast } from 'react-hot-toast';
 import {
   FieldValues,
   SubmitHandler,
+  UseFormRegister,
   useForm
 } from 'react-hook-form';
 import dynamic from 'next/dynamic'
@@ -24,12 +25,14 @@ import { useTranslations } from 'next-intl';
 import useCheckoutModal from '@/app/hooks/useCheckoutModal';
 import HasAccount from '@/app/carts/HasAccount';
 import useLoginModal from '@/app/hooks/useLoginModal';
-import { Button, ButtonGroup, Checkbox, CheckboxGroup, Chip, Link, Listbox, ListboxItem, ScrollShadow, User, cn } from '@nextui-org/react';
+import { Accordion, AccordionItem, Button, ButtonGroup, Card, CardBody, Checkbox, CheckboxGroup, Chip, Link, Listbox, ListboxItem, ScrollShadow, User, cn } from '@nextui-org/react';
 import { RiCheckboxBlankCircleFill } from 'react-icons/ri';
 import { MdOutlineLocalShipping } from 'react-icons/md';
 import { FaMotorcycle } from 'react-icons/fa';
 import { Input as InputUI } from "@nextui-org/react";
 import { motion } from 'framer-motion'
+import { AiOutlineShoppingCart } from 'react-icons/ai';
+import SummaryCounter from '../inputs/SummaryCounter';
 
 enum STEPS {
   DELIVERY = 0,
@@ -50,6 +53,10 @@ enum DELIVERY_MODE {
   PICKUP = "pick_up",
   SHIP = "ship",
 }
+enum CONTACTS_MODE {
+  contact = "contact",
+}
+
 const CheckoutModal = () => {
   const router = useRouter();
   const checkoutModal = useCheckoutModal();
@@ -65,6 +72,17 @@ const CheckoutModal = () => {
     if (e.length !== 0) {
       const getLastCheckBox: string = e[e.length - 1];
       setDeliveryMethod([getLastCheckBox])
+
+      // put value to react-hook-form
+      if (DELIVERY_MODE.PICKUP === getLastCheckBox) {
+        setValue(`deliveryMethods`, "PICKUP");
+        // clear supposed errors
+        clearErrors('deliveryShip');
+
+      }
+      if (DELIVERY_MODE.SHIP === getLastCheckBox) {
+        setValue(`deliveryMethods`, 'SHIP')
+      }
     }
   }
 
@@ -73,6 +91,7 @@ const CheckoutModal = () => {
     handleSubmit,
     setValue,
     watch,
+    clearErrors,
     formState: {
       errors,
     },
@@ -80,14 +99,36 @@ const CheckoutModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       category: '',
-      location: null,
+      // location: null,
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
-      imageSrc: '',
+      // imageSrc: '',
       price: 1,
       title: '',
+      deliveryMethods: '',
+      deliveryPickup: 'Quito, Ecuador',
+      deliveryShip: {
+        country: '',
+        city: '',
+        neighborhood: '',
+        address: '',
+        apartment: '',
+        postal_code: '',
+      },
+      contact: {
+        email: '',
+        phone: '',
+        first_name: '',
+        last_name: '',
+      },
       description: '',
+      somethingforlife: 1,
+      items: [{
+        title: 'TOUCH ON BODY COTTON BODY WASH + LOTION',
+        price: 5,
+        count: 1,
+      }],
     }
   });
 
@@ -96,7 +137,11 @@ const CheckoutModal = () => {
   const guestCount = watch('guestCount');
   const roomCount = watch('roomCount');
   const bathroomCount = watch('bathroomCount');
+  const items = watch('items');
   const imageSrc = watch('imageSrc');
+  const currentDeliveryMethod = watch().deliveryMethods;
+  console.log('everything', watch())
+
 
 
 
@@ -179,9 +224,11 @@ const CheckoutModal = () => {
           classNames={{
             base: "w-full"
           }}
+
+
         >
-          <CustomCheckbox value="ship" text="Ship" icon={<FaMotorcycle />} />
-          <CustomCheckbox value="pick_up" text="Pick Up" icon={<MdOutlineLocalShipping />}
+          <CustomCheckbox register={register} value={DELIVERY_MODE.SHIP} text="Ship" icon={<FaMotorcycle />} />
+          <CustomCheckbox register={register} value={DELIVERY_MODE.PICKUP} text="Pick Up" icon={<MdOutlineLocalShipping />}
           />
         </CheckboxGroup>
       </div>
@@ -196,7 +243,7 @@ const CheckoutModal = () => {
           >
             <span className='text-[#71717a] font-base'>Shipping Address</span>
             <InputUI
-              id='country'
+              id={`country`}
               size='lg'
               type="text"
               variant="bordered"
@@ -205,10 +252,10 @@ const CheckoutModal = () => {
               placeholder='Enter your country name or region'
               radius='sm'
               disabled={isLoading}
-              color={errors["country"] ? "danger" : "primary"}
-              errorMessage={errors["country"] && "Please enter a valid country name"}
+              color={errors.deliveryShip && 'country' in errors.deliveryShip ? "danger" : 'primary'}
+              errorMessage={errors.deliveryShip && 'country' in errors.deliveryShip && "Please enter a valid country name"}
 
-              {...register("country", { required: true })}
+              {...register(`deliveryShip.country`, { required: true })}
             />
             <InputUI
               id='city'
@@ -220,10 +267,10 @@ const CheckoutModal = () => {
               placeholder='Enter your city name'
               radius='sm'
               disabled={isLoading}
-              color={errors["city"] ? "danger" : "primary"}
-              errorMessage={errors["city"] && "Please enter a valid city name"}
+              color={errors.deliveryShip && 'city' in errors.deliveryShip ? "danger" : 'primary'}
+              errorMessage={errors.deliveryShip && 'city' in errors.deliveryShip && "Please enter a valid country name"}
 
-              {...register("city", { required: true })}
+              {...register("deliveryShip.city", { required: true })}
             />
             <InputUI
               id='neighborhood'
@@ -235,10 +282,10 @@ const CheckoutModal = () => {
               placeholder='Enter your neighborhood name'
               radius='sm'
               disabled={isLoading}
-              color={errors["neighborhood"] ? "danger" : "primary"}
-              errorMessage={errors["neighborhood"] && "Please enter a valid neighborhood name"}
+              color={errors.deliveryShip && 'neighborhood' in errors.deliveryShip ? "danger" : 'primary'}
+              errorMessage={errors.deliveryShip && 'neighborhood' in errors.deliveryShip && "Please enter a valid country name"}
 
-              {...register("neighborhood", { required: true })}
+              {...register("deliveryShip.neighborhood", { required: true })}
             />
             <InputUI
               id='address'
@@ -250,10 +297,10 @@ const CheckoutModal = () => {
               placeholder='Enter your address'
               radius='sm'
               disabled={isLoading}
-              color={errors["address"] ? "danger" : "primary"}
-              errorMessage={errors["address"] && "Please enter a valid address"}
+              color={errors.deliveryShip && 'address' in errors.deliveryShip ? "danger" : 'primary'}
+              errorMessage={errors.deliveryShip && 'address' in errors.deliveryShip && "Please enter a valid country name"}
 
-              {...register("address", { required: true })}
+              {...register("deliveryShip.address", { required: true })}
             />
             <InputUI
               id='apartment'
@@ -265,10 +312,10 @@ const CheckoutModal = () => {
               placeholder='Enter your specific location (optional)'
               radius='sm'
               disabled={isLoading}
-              color={errors["apartment"] ? "danger" : "primary"}
-              errorMessage={errors["apartment"] && "Please enter a valid apartment number"}
+              color={errors.deliveryShip && 'apartment' in errors.deliveryShip ? "danger" : 'primary'}
+              errorMessage={errors.deliveryShip && 'apartment' in errors.deliveryShip && "Please enter a valid country name"}
 
-              {...register("apartment", { required: false })}
+              {...register("deliveryShip.apartment", { required: false })}
             />
             <InputUI
               id='postal_code'
@@ -280,9 +327,10 @@ const CheckoutModal = () => {
               placeholder='Enter your postal code (optional)'
               radius='sm'
               disabled={isLoading}
-              color={errors["postal_code"] ? "danger" : "primary"}
-              errorMessage={errors["apartmpostal_codeent"] && "Please enter a valid postal code"}
-              {...register("postal_code", { required: false })}
+              color={errors.deliveryShip && 'postal_code' in errors.deliveryShip ? "danger" : 'primary'}
+              errorMessage={errors.deliveryShip && 'postal_code' in errors.deliveryShip && "Please enter a valid country name"}
+
+              {...register("deliveryShip.postal_code", { required: false })}
             />
           </motion.div>
         </ScrollShadow>
@@ -298,18 +346,19 @@ const CheckoutModal = () => {
           >
             <span className='text-[#71717a] font-base'>PickUp Location</span>
             <InputUI
-              id='local_store'
+              id='deliveryPickup'
               classNames={{ base: cn("hover:bg-content2 hover:border-primary border-2 border-transparent rounded-lg") }}
               isReadOnly
               type="email"
               size='lg'
               variant="bordered"
               label="N954 Av. Padre Luis Vaccari y Galo Plaza Lasso"
-              placeholder='Store location'
+              placeholder='Quito, Ecuador'
               defaultValue="Quito, Ecuador"
               radius='sm'
               disabled={isLoading}
-              color={errors["local_store"] ? "danger" : "primary"}
+              {...register("deliveryPickup", { required: false, value: 'Quito, Ecuador' })}
+
             />
           </motion.div>
         </ScrollShadow>
@@ -356,10 +405,10 @@ const CheckoutModal = () => {
               labelPlacement='inside'
               radius='sm'
               disabled={isLoading}
-              color={errors["email"] ? "danger" : "primary"}
-              errorMessage={errors["email"] && "Please enter a valid email"}
-              {...register("email", { required: true })}
+              color={errors.contact && 'email' in errors.contact ? "danger" : 'primary'}
+              errorMessage={errors.contact && 'email' in errors.contact && "Please enter a valid country name"}
 
+              {...register("contact.email", { required: true })}
             />
             <InputUI
               id='phone'
@@ -371,9 +420,10 @@ const CheckoutModal = () => {
               placeholder='Enter your phone number'
               radius='sm'
               disabled={isLoading}
-              color={errors["phone"] ? "danger" : "primary"}
-              errorMessage={errors["phone"] && "Please enter a valid number"}
-              {...register("phone", { required: true })}
+              color={errors.contact && 'phone' in errors.contact ? "danger" : 'primary'}
+              errorMessage={errors.contact && 'phone' in errors.contact && "Please enter a valid country name"}
+
+              {...register("contact.phone", { required: true })}
             />
             <InputUI
               id='first_name'
@@ -385,9 +435,10 @@ const CheckoutModal = () => {
               placeholder='Enter your first name here'
               radius='sm'
               disabled={isLoading}
-              color={errors["first_name"] ? "danger" : "primary"}
-              errorMessage={errors["first_name"] && "Please enter a valid text"}
-              {...register("first_name", { required: true })}
+              color={errors.contact && 'first_name' in errors.contact ? "danger" : 'primary'}
+              errorMessage={errors.contact && 'first_name' in errors.contact && "Please enter a valid country name"}
+
+              {...register("contact.first_name", { required: true })}
             />
             <InputUI
               id='last_name'
@@ -399,9 +450,10 @@ const CheckoutModal = () => {
               placeholder='Enter your last name here'
               radius='sm'
               disabled={isLoading}
-              color={errors["last_name"] ? "danger" : "primary"}
-              errorMessage={errors["last_name"] && "Please enter a valid text"}
-              {...register("last_name", { required: true })}
+              color={errors.contact && 'last_name' in errors.contact ? "danger" : 'primary'}
+              errorMessage={errors.contact && 'last_name' in errors.contact && "Please enter a valid country name"}
+
+              {...register("contact.last_name", { required: true })}
             />
           </motion.div>
         </ScrollShadow>
@@ -409,40 +461,85 @@ const CheckoutModal = () => {
     );
   }
 
+  const itemClasses = {
+    base: "py-0 w-full",
+    title: "font-normal text-medium",
+    trigger: "px-2 py-0 data-[hover=true]:bg-default-100 rounded-lg h-14 flex items-center",
+    indicator: "text-medium",
+    content: "text-small px-2",
+  };
+  const defaultContent =
+    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.";
+
   if (step === STEPS.SUMMARY) {
     bodyContent = (
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-2">
         <Heading
-          title="Resume shipping process"
+          title="Resume your shipping process"
           subtitle="Your skin always looks radiant and well-cared-for"
         />
-        <Counter
-          onChange={(value) => setCustomValue('guestCount', value)}
-          value={guestCount}
-          title="Guests"
-          subtitle="How many guests do you allow?"
-        />
-        <hr />
-        <Counter
-          onChange={(value) => setCustomValue('roomCount', value)}
-          value={roomCount}
-          title="Rooms"
-          subtitle="How many rooms do you have?"
-        />
-        <hr />
-        <Counter
-          onChange={(value) => setCustomValue('bathroomCount', value)}
-          value={bathroomCount}
-          title="Bathrooms"
-          subtitle="How many bathrooms do you have?"
-        />
-        <hr />
-        <Counter
-          onChange={(value) => setCustomValue('bathroomCount', value)}
-          value={bathroomCount}
-          title="Bathrooms"
-          subtitle="How many bathrooms do you have?"
-        />
+        <Accordion
+          showDivider={true}
+          className="p-2 w-full -w-[300px]"
+          variant="shadow"
+          itemClasses={itemClasses}
+        >
+          <AccordionItem
+            key="order_summary"
+            aria-label="order_summary"
+            startContent={<AiOutlineShoppingCart className="text-primary text-xl" />}
+            classNames={{ title: 'text-primary ml-1' }}
+            title="Show order summary"
+            className='flex flex-col gap-4'
+          >
+            <motion.div
+              key="order_summary_container"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: .15 }}
+              className='flex flex-col gap-4'
+            >
+              <SummaryCounter
+                src='/public/mocking/mizon.jpg'
+                onChange={(value) => setCustomValue('items.0.count', value)}
+                value={items[0].count}
+                title="TOUCH ON BODY COTTON BODY WASH + LOTION"
+                total={items[0].count * items[0].price}
+              />
+
+              {/* <Counter
+                onChange={(value) => setCustomValue('guestCount', value)}
+                value={guestCount}
+                title="Guests"
+                subtitle="How many guests do you allow?"
+              /> */}
+
+            </motion.div>
+          </AccordionItem>
+        </Accordion>
+        <Card>
+          <CardBody>
+            <div className='flex justify-between'>
+              <p className='font-bold'>Contact</p>
+              <span className='underline cursor-pointer'>Change</span>
+            </div>
+            <p>{Object.values(watch('contact')).join(', ')}</p>
+          </CardBody>
+        </Card>
+        <Card>
+          <CardBody>
+            <div className='flex justify-between'>
+              <p className='font-bold'>Shipping method</p>
+              <span className='underline cursor-pointer'>Change</span>
+            </div>
+            <div>
+              {currentDeliveryMethod}
+              <p>{deliveryMethod[0] === DELIVERY_MODE.PICKUP && watch('deliveryPickup')}</p>
+              <p>{deliveryMethod[0] === DELIVERY_MODE.SHIP && Object.values(watch('deliveryShip')).join(', ')}</p>
+
+            </div>
+          </CardBody>
+        </Card>
       </div>
     )
   }
@@ -527,9 +624,10 @@ const CheckoutModal = () => {
 }
 
 export default CheckoutModal;
-export const CustomCheckbox = ({ value, icon, text }: { value: string, icon: React.ReactNode, text: string }) => {
+export const CustomCheckbox = ({ value, icon, text, register }: { value: string, icon: React.ReactNode, text: string, register: UseFormRegister<FieldValues>, }) => {
   return (
     <Checkbox
+      id={value}
       aria-label={value}
       classNames={{
         base: cn(
@@ -542,6 +640,7 @@ export const CustomCheckbox = ({ value, icon, text }: { value: string, icon: Rea
         label: "w-full text-start",
       }}
       value={value}
+      {...register(`deliveryMethods`, { required: true, })}
     >
       <div className="w-full flex text-start gap-2 items-center">
         {icon} {text}
@@ -549,3 +648,59 @@ export const CustomCheckbox = ({ value, icon, text }: { value: string, icon: Rea
     </Checkbox>
   );
 };
+
+export const MonitorMobileIcon = (props: any) => (
+  <svg
+    aria-hidden="true"
+    fill="none"
+    focusable="false"
+    height="24"
+    role="presentation"
+    viewBox="0 0 24 24"
+    width="24"
+    {...props}
+  >
+    <path
+      d="M10 16.95H6.21C2.84 16.95 2 16.11 2 12.74V6.74003C2 3.37003 2.84 2.53003 6.21 2.53003H16.74C20.11 2.53003 20.95 3.37003 20.95 6.74003"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M10 21.4699V16.95"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M2 12.95H10"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M6.73999 21.47H9.99999"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M22 12.8V18.51C22 20.88 21.41 21.47 19.04 21.47H15.49C13.12 21.47 12.53 20.88 12.53 18.51V12.8C12.53 10.43 13.12 9.83997 15.49 9.83997H19.04C21.41 9.83997 22 10.43 22 12.8Z"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1.5"
+    />
+    <path
+      d="M17.2445 18.25H17.2535"
+      stroke="currentColor"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="2"
+    />
+  </svg>
+);
