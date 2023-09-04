@@ -88,7 +88,9 @@ const Modal: React.FC<ModalProps> = ({
           },
         },
       }
-    }}>
+    }}
+      classNames={{wrapper: "items-center"}}
+    >
       <ModalContent className="
           w-full
           md:max-w-4/6

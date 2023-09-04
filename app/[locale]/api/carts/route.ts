@@ -16,11 +16,6 @@ export async function POST(request: Request, props: IParams) {
         const body = await request.json();
         const { data } = body
 
-
-
-
-
-
         return NextResponse.json({}, { status: 201 });
     } catch (e) {
         return NextResponse.error();

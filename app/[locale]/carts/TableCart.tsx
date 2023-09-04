@@ -217,24 +217,27 @@ const TableCart = (props: Props) => {
                     )}
                 </TableBody>
             </Table>
-            <div className='max-w-full w-full sm:max-w-lg md:max-w-md  flex justify-end flex-col items-end py-4 gap-1'>
-                <div className='flex justify-between w-full'>
-                    <span>Subtotal: </span>
-                    <span>$ {total}</span>
+            {dataParse.length !== 0 &&
+                <div className='max-w-full w-full sm:max-w-lg md:max-w-md  flex justify-end flex-col items-end py-4 gap-1'>
+                    <div className='flex justify-between w-full'>
+                        <span>Subtotal: </span>
+                        <span>$ {total}</span>
+                    </div>
+                    <div className='flex justify-between w-full'>
+                        <span>{`Shipping :(default)`}</span>
+                        <span>Free</span>
+                    </div>
+                    <div className='flex justify-between w-full'>
+                        <span className='font-bold'>Total</span>
+                        <span>$ {total}</span>
+                    </div>
+                    <div className='flex flex-col w-full gap-2 py-4 '>
+                        <Button onPress={checkoutModal.onOpen} fullWidth color="primary" radius="none" startContent={<TbTruckDelivery />}>PROCEED TO CHECKOUT</Button>
+                        <Button onPress={() => { }} fullWidth color="danger" radius="none" startContent={<AiOutlineShopping />}>CONTINUE TO SHOPPING</Button>
+                    </div>
                 </div>
-                <div className='flex justify-between w-full'>
-                    <span>{`Shipping :(default)`}</span>
-                    <span>Free</span>
-                </div>
-                <div className='flex justify-between w-full'>
-                    <span className='font-bold'>Total</span>
-                    <span>$ {total}</span>
-                </div>
-                <div className='flex flex-col w-full gap-2 py-4 '>
-                    <Button onPress={checkoutModal.onOpen} fullWidth color="primary" radius="none" startContent={<TbTruckDelivery />}>PROCEED TO CHECKOUT</Button>
-                    <Button onPress={() => { }} fullWidth color="danger" radius="none" startContent={<AiOutlineShopping />}>CONTINUE TO SHOPPING</Button>
-                </div>
-            </div>
+            }
+
         </div>
 
     );

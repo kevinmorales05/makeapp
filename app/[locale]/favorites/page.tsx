@@ -3,16 +3,14 @@ import EmptyState from "@/app/components/EmptyState";
 import ClientOnly from "@/app/components/ClientOnly";
 
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import getFavoriteListings from "@/app/actions/getFavoriteListings";
+import getFavorites from "@/app/actions/getFavorites";
 
 import FavoritesClient from "./FavoritesClient";
 
 const page = async () => {
   // const listings = await getFavoriteListings();
-  const favorites = await getFavoriteListings();
+  const favorites = await getFavorites();
   const currentUser = await getCurrentUser();
-
-  console.log("carts", favorites)
 
   // if (favorites.length === 0) {
   //   return (
@@ -28,7 +26,7 @@ const page = async () => {
   return (
       <ClientOnly>
         <FavoritesClient
-          listings={favorites}
+          favorites={favorites}
           currentUser={currentUser}
         />
       </ClientOnly>

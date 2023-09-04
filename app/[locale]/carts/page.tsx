@@ -1,6 +1,6 @@
 import React from 'react'
 import Container from '../components/Container'
-import CartDetails from './CartDetails'
+import CartClient from './CartClient'
 import ClientOnly from '../components/ClientOnly'
 import Heading from '../components/Heading'
 import getCurrentUser from '../actions/getCurrentUser'
@@ -17,7 +17,7 @@ async function page({ }: Props) {
   return (
     <Container>
         <ClientOnly>
-          <CartDetails currentUser={currentUser} carts={carts} />
+          <CartClient currentUser={currentUser} carts={carts} />
         </ClientOnly>
     </Container>
   )

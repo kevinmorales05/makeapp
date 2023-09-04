@@ -33,7 +33,7 @@ import createIntlMiddleware from 'next-intl/middleware';
 import { NextRequest } from 'next/server';
 
 const locales = ['es', 'en', 'ko'];
-const publicPages = ['/*', '/shop', '/cart', "/shop/*", "/favorites", "/listings"];
+const publicPages = ['/*', '/shop', '/carts', "/shop/", "/favorites", "/listings"];
 
 const intlMiddleware = createIntlMiddleware({
     locales,
@@ -51,7 +51,8 @@ const authMiddleware = withAuth(
     {
         callbacks: {
             authorized: ({ token }) => {
-                // console.log("this token is: ", token, token != null)
+                return true;
+                console.log("this token is: ", token, token != null)
                 return token != null
             }
         },
@@ -70,8 +71,11 @@ export default function middleware(req: NextRequest) {
         `^(/(${locales.join('|')}))?(${publicPages.join('|')})?/?$`,
         'i'
     );
-    const isPublicPage = publicPathnameRegex.test(req.nextUrl.pathname);
 
+    // Permitir que /shop/[shopId] sea pública si [shopId] es un número
+    const shopIdRegex = /^\/shop\/\d+$/;
+
+    const isPublicPage = shopIdRegex.test(req.nextUrl.pathname) || publicPathnameRegex.test(req.nextUrl.pathname);
     if (isPublicPage) {
         return intlMiddleware(req);
     } else {

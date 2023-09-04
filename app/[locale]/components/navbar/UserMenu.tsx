@@ -26,6 +26,8 @@ import { Button, User, cn } from "@nextui-org/react";
 import { useLocale } from "next-intl";
 import { FaHandsHelping } from "react-icons/fa";
 import { ICON_CLASES_DROPDOWN } from "@/app/constants/constants";
+import { useCartStore } from "@/app/hooks/useCart";
+import { useFavoriteStore } from "@/app/hooks/useFavorite";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -36,6 +38,8 @@ const iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0"
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const router = useRouter()
   const locale = useLocale();
+  const { totalCart } = useCartStore()
+  const { totalFavorite } = useFavoriteStore()
 
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
@@ -229,26 +233,29 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           "
         >
           <AiOutlineHeart size={30} />
-          <span
-            className="
-            absolute
-          bg-red-dark
-          text-white
-            bottom-0
-            ml-4
-            inline-block whitespace-nowrap rounded-full 
-            px-[0.60em] 
-            pb-[0.25em]
-            pt-[0.35em]
-            text-center 
-            align-baseline 
-            text-[.9em] 
-            font-bold 
-            leading-none 
-            //text-secondary-800"
-          >
-            12
-          </span>
+          {totalFavorite() !== 0 &&
+            <span
+              className="
+          absolute
+        bg-red-dark
+        text-white
+          bottom-0
+          ml-4
+          inline-block whitespace-nowrap rounded-full 
+          px-[0.60em] 
+          pb-[0.25em]
+          pt-[0.35em]
+          text-center 
+          align-baseline 
+          text-[.9em] 
+          font-bold 
+          leading-none 
+          //text-secondary-800"
+            >
+              {totalFavorite()}
+            </span>
+          }
+
         </div>
         <div
           onClick={() => router.push("/carts", { locale })}
@@ -266,26 +273,30 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           "
         >
           <AiOutlineShoppingCart size={30} />
-          <span
-            className="
-          absolute
-          bottom-0
-          bg-red-dark
-           text-white
-            ml-4
-            inline-block whitespace-nowrap rounded-full 
-            px-[0.60em] 
-            pb-[0.25em]
-            pt-[0.35em]
-            text-center 
-            align-baseline 
-            text-[.9em] 
-            font-bold 
-            leading-none 
-            //text-secondary-800"
-          >
-            12
-          </span>
+          {totalCart() !== 0 &&
+            <span
+              className="
+                  absolute
+                  bottom-0
+                  bg-red-dark
+                   text-white
+                    ml-4
+                    inline-block whitespace-nowrap rounded-full 
+                    px-[0.60em] 
+                    pb-[0.25em]
+                    pt-[0.35em]
+                    text-center 
+                    align-baseline 
+                    text-[.9em] 
+                    font-bold 
+                    leading-none 
+                    //text-secondary-800"
+            >
+              {totalCart()}
+            </span>
+          }
+
+
         </div>
 
         {currentUser ? (

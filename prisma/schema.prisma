@@ -10,20 +10,21 @@ datasource db {
 }
 
 model User {
-  id             String    @id @default(cuid())
+  id             String     @id @default(cuid())
   name           String?
   bio            String?
-  email          String?   @unique
+  email          String?    @unique
   emailVerified  DateTime?
   image          String?
   hashedPassword String?
-  createdAt      DateTime  @default(now())
-  updatedAt      DateTime  @default(now()) @updatedAt
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @default(now()) @updatedAt
   favoriteIds    Int[]
   accounts       Account[]
   carts          Cart[]
   reviews        Review[]
   sessions       Session[]
+  checkkouts     Checkout[]
 }
 
 model Account {
@@ -99,4 +100,17 @@ model Review {
   productId   Int     @unique
   product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
   user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Checkout {
+  id              Int    @id @default(autoincrement())
+  contact         Json?
+  deliveryMethods String
+  deliveryShip    Json?
+  deliveryPickup  Json?
+  items           Json
+  methodPayment   Json?
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
 }

@@ -42,7 +42,7 @@ type Props = {
     currentUser: SafeUser | null,
 }
 
-const CartDetails = (props: Props) => {
+const CartClient = (props: Props) => {
     const { carts, currentUser } = props
     const loginModal = useLoginModal()
 
@@ -65,4 +65,4 @@ const CartDetails = (props: Props) => {
     )
 }
 
-export default CartDetails
+export default CartClient

@@ -2,7 +2,7 @@ import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
-import { SafeUser } from "@/app/types";
+import { SafeUser, safeFavoritesProducts } from "@/app/types";
 
 import useLoginModal from "./useLoginModal";
 import { create } from "zustand";
@@ -14,9 +14,9 @@ import { toast } from "sonner";
 import { apix } from "../constants/axios-instance";
 
 interface FavoriteStore {
-  favoriteItems: IProductFormatted[] | never,
+  favoriteItems: IProductFormatted[] | never[],
   addFavorite: (
-    item: IProductFormatted,
+    item: IProductFormatted | never,
     currentUser: SafeUser | null | undefined,
     locale: string
   ) => Promise<void>,
@@ -26,10 +26,12 @@ interface FavoriteStore {
     locale: string
   ) => Promise<void>,
   totalFavorite: () => number,
-  mergeLocalandDB: (localObjIds: IProductFormatted[], userIds: number[], locale: string) => Promise<void>,
+  mergeLocalandDB: (currentUser?: SafeUser | null, favoritesServer?: safeFavoritesProducts[] | null, locale?: string) => Promise<void>,
   currentFavorites: () => IProductFormatted[]
   clear: () => void
 }
+
+const mergingBoth = () => { }
 
 export const useFavoriteStore = create<FavoriteStore>()(
   devtools(
@@ -80,24 +82,50 @@ export const useFavoriteStore = create<FavoriteStore>()(
             }
           },
           totalFavorite: () => get().favoriteItems.length,
-          mergeLocalandDB: async (localObjIds, userIds, locale) => {
-            const localIds = localObjIds.map(it => it.id);
-            const uniqueIds = Array.from(([...localIds, ...userIds]));
-            // console.log("uniqueIds: ", uniqueIds)
-            toast.promise(apix(locale).post(`favorites`, uniqueIds), {
-              loading: 'Loading...',
-              success: (data) => {
-                console.log("data", data)
-                set(produce((draft) => ({
-                  ...draft, favoriteItems: data.data
-                })))
-                return `Favorites syncronized`;
-              },
-              error: (error: any) => {
-                return `Failed to syncronized favorites: ${error.message}`;
-              }
-            })
+          mergeLocalandDB: async (currentUser, favoritesServer, locale) => {
 
+            if (currentUser && favoritesServer && locale) {
+
+              const favoritesLocal = get().favoriteItems
+
+              // nothing to db and local
+              if (favoritesLocal.length === 0) {
+                set(produce(draft => {
+                  draft.favoriteItems = favoritesServer
+                }))
+              } else {
+
+                // merge both to find differences between db and localStorage
+                const both = [...favoritesLocal, ...favoritesServer]
+
+                // ids which are not in server
+                const mergeToServer = both.filter(all => favoritesServer.every(fserver => fserver.id !== all.id))
+
+                const uniqueIds = mergeToServer.map(f => f.id)
+
+                console.log('server', favoritesServer)
+                console.log('local', favoritesLocal)
+                console.log('total both ', both)
+                console.log('merger to server ', mergeToServer)
+                console.log('unique ids: ', uniqueIds)
+
+                // if existe ids to update then update them
+                if (uniqueIds.length > 0) {
+                  toast.promise(apix(locale).put("favorites/merging", uniqueIds), {
+                    loading: 'Loading...',
+                    success: ({ data }) => {
+                      set(produce((draft) => ({
+                        ...draft, favoriteItems: data
+                      })))
+                      return `favorites sync has been added`;
+                    },
+                    error: (error: any) => {
+                      return `Failed to sync: ${error.message}`;
+                    }
+                  })
+                }
+              }
+            }
           },
           currentFavorites: () => get().favoriteItems,
           clear: () => set(produce((draft) => { draft.favoriteItems = [] })),

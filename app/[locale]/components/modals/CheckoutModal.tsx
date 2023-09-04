@@ -21,7 +21,7 @@ import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Heading from '../Heading';
 import { useCategories } from '@/app/hooks/useCategories';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import useCheckoutModal from '@/app/hooks/useCheckoutModal';
 import HasAccount from '@/app/carts/HasAccount';
 import useLoginModal from '@/app/hooks/useLoginModal';
@@ -39,26 +39,21 @@ import image11 from '@/public/mocking/banila.jpg'
 import image22 from '@/public/mocking/chamos.jpg'
 import image33 from '@/public/mocking/creams.jpg'
 import image44 from '@/public/mocking/mizon.jpg'
+import useCart, { useCartStore } from '@/app/hooks/useCart';
+import { apix } from '@/app/constants/axios-instance';
 
 enum STEPS {
   DELIVERY = 0,
   CONTACT = 1,
   SUMMARY = 2,
-  PAYMENT = 3
-}
-enum STOMPS {
-  CATEGORY = 0,
-  LOCATION = 1,
-  INFO = 2,
-  IMAGES = 3,
-  DESCRIPTION = 4,
-  PRICE = 5,
+  PAYMENT = 3// actually don' implemented
 }
 
 enum DELIVERY_MODE {
   PICKUP = "pick_up",
   SHIP = "ship",
 }
+
 enum CONTACTS_MODE {
   contact = "contact",
 }
@@ -69,28 +64,12 @@ const CheckoutModal = () => {
   const loginModal = useLoginModal();
   const [isLoading, setIsLoading] = useState(false);
   const [step, setStep] = useState(STEPS.DELIVERY);
+
+  const locale = useLocale();
   const t = useTranslations("categories")
-  const { allCategories } = useCategories()
 
+  const { currentCarts } = useCartStore()
   const [deliveryMethod, setDeliveryMethod] = React.useState<string[]>([""]);
-
-  const handlerDeliveryMethod = (e: any) => {
-    if (e.length !== 0) {
-      const getLastCheckBox: string = e[e.length - 1];
-      setDeliveryMethod([getLastCheckBox])
-
-      // put value to react-hook-form
-      if (DELIVERY_MODE.PICKUP === getLastCheckBox) {
-        setValue(`deliveryMethods`, "PICKUP");
-        // clear supposed errors
-        clearErrors('deliveryShip');
-
-      }
-      if (DELIVERY_MODE.SHIP === getLastCheckBox) {
-        setValue(`deliveryMethods`, 'SHIP')
-      }
-    }
-  }
 
   const {
     register,
@@ -105,11 +84,9 @@ const CheckoutModal = () => {
   } = useForm<FieldValues>({
     defaultValues: {
       category: '',
-      // location: null,
       guestCount: 1,
       roomCount: 1,
       bathroomCount: 1,
-      // imageSrc: '',
       price: 1,
       title: '',
       deliveryMethods: '',
@@ -130,11 +107,12 @@ const CheckoutModal = () => {
       },
       description: '',
       somethingforlife: 1,
-      items: [{
-        title: 'TOUCH ON BODY COTTON BODY WASH + LOTION',
-        price: 5,
-        count: 1,
-      }],
+      // items: [{
+      //   title: 'TOUCH ON BODY COTTON BODY WASH + LOTION',
+      //   price: 5,
+      //   count: 1,
+      // }],
+      items: currentCarts
     }
   });
 
@@ -179,10 +157,11 @@ const CheckoutModal = () => {
 
     setIsLoading(true);
 
-    console.log("all data", data)
-    axios.post('/api/payments', data)
+    console.log("all data values", data)
+
+    apix(locale).post('checkouts', data)
       .then(() => {
-        toast.success('Listing created!');
+        toast.success('checkout created!');
         //reseting
         router.refresh();
         reset();
@@ -213,6 +192,23 @@ const CheckoutModal = () => {
     return 'Back'
   }, [step]);
 
+  const handlerDeliveryMethod = (e: any) => {
+    if (e.length !== 0) {
+      const getLastCheckBox: string = e[e.length - 1];
+      setDeliveryMethod([getLastCheckBox])
+
+      // put value to react-hook-form
+      if (DELIVERY_MODE.PICKUP === getLastCheckBox) {
+        setValue(`deliveryMethods`, "PICKUP");
+        // clear supposed errors
+        clearErrors('deliveryShip');
+
+      }
+      if (DELIVERY_MODE.SHIP === getLastCheckBox) {
+        setValue(`deliveryMethods`, 'SHIP')
+      }
+    }
+  }
 
   // CATEGORY STEP 1
   let bodyContent = (

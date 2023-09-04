@@ -3,19 +3,15 @@ import prisma from "@/app/libs/prismadb";
 import { produce } from "immer";
 import { NextResponse } from "next/server";
 
-
-
 interface IParams {
-    paymentId?: string;
+    listingId?: string;
 }
 
-
-export async function POST(
-    request: Request,
-    { params }: { params: IParams }
-) {
+export async function PUT(request: Request) {
     try {
+
         const currentUser = await getCurrentUser();
+
 
         if (!currentUser) {
             return NextResponse.error();
@@ -23,24 +19,27 @@ export async function POST(
 
         const body = await request.json();
 
-        // something here
-        const favoriteIds = body.map((item: string) => parseInt(item))
-        const user = await prisma.user.update({
+        const parserIds = body.map((b: string) => parseInt(b))
+
+        const userUpdated = await prisma.user.update({
             where: {
                 id: currentUser.id,
             },
             data: {
-                favoriteIds
+                favoriteIds: parserIds
             }
         })
-        const userFavoritesChoice = await prisma.product.findMany({
+
+        const userFavoritesUser = await prisma.product.findMany({
             where: {
                 id: {
-                    in: user.favoriteIds,
+                    in: userUpdated.favoriteIds,
                 }
             }
         })
-        return NextResponse.json(userFavoritesChoice);
+
+        console.log("final update", userFavoritesUser)
+        return NextResponse.json(userFavoritesUser);
     } catch (e) {
         return NextResponse.error();
     }
