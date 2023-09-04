@@ -13,7 +13,6 @@ const page = async () => {
   const favorites = await getFavorites();
   const currentUser = await getCurrentUser();
   const formattedFavorites = formattedProducts(favorites || []);
-console.log("formate", formattedFavorites)
   // if (favorites.length === 0) {
   //   return (
   //     <ClientOnly>

@@ -68,7 +68,6 @@ export interface IProductFormatted {
     category: string;
     subCategory: string;
     color: string;
-    imageSrc: string;
 }
 
 
@@ -90,7 +89,10 @@ export const formattedProducts = (products: IProductProps[] | []) => products.ma
 })) as IProductFormatted[];
 
 
-export const formattedProductById = (product: IProductProps) => {
+export const formattedProductById = (product: IProductProps | any): IProductFormatted | {} => {
+    if (JSON.stringify(product) === '{}') {
+        return {}
+    }
     return {
         id: product.id,
         title: product.title,

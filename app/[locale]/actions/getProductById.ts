@@ -8,7 +8,7 @@ export default async function getProductById(
 
     const id = parseInt(productId) ? parseInt(productId) : -1;
     
-    if (id < 0) return [];
+    if (id < 0) return {};
 
     const listing = await prisma.product.findUnique({
       where: {
@@ -36,7 +36,7 @@ export default async function getProductById(
     });
 
     if (!listing) {
-      return [];
+      return {};
     }
     return listing;
     return {

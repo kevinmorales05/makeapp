@@ -3,6 +3,10 @@ import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKey
 import { AiOutlineMinus, AiOutlinePlus, AiOutlineRest, AiOutlineShopping } from 'react-icons/ai';
 import { TbMoodEmpty, TbTruckDelivery } from 'react-icons/tb';
 import useCheckoutModal from '../hooks/useCheckoutModal';
+import { IProductFormatted } from '../hooks/useProducts';
+import { useCartStore } from '../hooks/useCart';
+import { SafeUser } from '../types';
+import { BsTrash3 } from 'react-icons/bs';
 
 interface ICartProduct {
     id: number;
@@ -24,14 +28,10 @@ interface ICartProduct {
     quantity: number;
 }
 type Props = {
-    data: ICartProduct[]
+    data: IProductFormatted[],
+    currentUser?: SafeUser | null;
+    locale: string;
 }
-
-const statusColorMap: Record<string, ChipProps["color"]> = {
-    active: "success",
-    paused: "danger",
-    vacation: "warning",
-};
 
 const columns = [
     { name: "PRODUCT", uid: "product" },
@@ -40,76 +40,20 @@ const columns = [
     { name: "TOTAL", uid: "total" },
 ];
 
-const users = [
-    {
-        id: 1,
-        product: "Tony Reichert",
-        role: "CEO",
-        team: "Management",
-        unit_price: 28.90,
-        total: 28.90,
-        age: "29",
-        avatar: "https://healivemall.com/web/product/big/202305/c2aa480102589e92f38be31f299a9f7c.png",
-        email: "tony.reichert@example.com",
-    },
-    {
-        id: 2,
-        name: "Zoey Lang",
-        role: "Technical Lead",
-        team: "Development",
-        unit_price: 28.90,
-        total: 28.90,
-        age: "25",
-        avatar: "https://healivemall.com/web/product/big/202305/c2aa480102589e92f38be31f299a9f7c.png",
-        email: "zoey.lang@example.com",
-    },
-    {
-        id: 3,
-        name: "Jane Fisher",
-        role: "Senior Developer",
-        team: "Development",
-        unit_price: 28.90,
-        total: 28.90,
-        age: "22",
-        avatar: "https://healivemall.com/web/product/big/202305/c2aa480102589e92f38be31f299a9f7c.png",
-        email: "jane.fisher@example.com",
-    },
-    {
-        id: 4,
-        name: "William Howard",
-        role: "Community Manager",
-        team: "Marketing",
-        unit_price: 28.90,
-        total: 28.90,
-        age: "28",
-        avatar: "https://healivemall.com/web/product/big/202305/c2aa480102589e92f38be31f299a9f7c.png",
-        email: "william.howard@example.com",
-    },
-    {
-        id: 5,
-        name: "Kristen Copper",
-        role: "Sales Manager",
-        team: "Sales",
-        unit_price: 28.90,
-        total: 28.90,
-        age: "24",
-        avatar: "https://healivemall.com/web/product/big/202305/c2aa480102589e92f38be31f299a9f7c.png",
-        email: "kristen.cooper@example.com",
-    },
-];
-
-type User = typeof users[0];
+// type Cart = typeof data[0];
 
 
 const TableCart = (props: Props) => {
 
     const checkoutModal = useCheckoutModal();
 
-    const { data } = props;
+    const { incrementCart, decrementCart, removeCart } = useCartStore()
+
+    const { data, currentUser, locale } = props;
     const dataParse = data.map(it => {
         return {
             id: it.id,
-            src: it.imageSrc,
+            src: it.src,
             product: it.title,
             unit_price: it.cost,
             count: it.quantity,
@@ -121,6 +65,7 @@ const TableCart = (props: Props) => {
 
     const renderCell = React.useCallback((cart: Cart, columnKey: React.Key) => {
         const cellValue = cart["product" as keyof Cart];
+        const idValue = cart["id" as keyof Cart];
 
         switch (columnKey) {
             case "product":
@@ -143,7 +88,7 @@ const TableCart = (props: Props) => {
                     <div className="flex flex-col justify-center items-center">
                         <ButtonGroup>
                             <Tooltip content="Minus" closeDelay={200}>
-                                <Button isIconOnly aria-label="remove" className='bg-white border border-r-0 border-neutral-500' onPress={() => handlerMinus(cellValue)}>
+                                <Button isIconOnly aria-label="remove" className='bg-white border border-r-0 border-neutral-500' onPress={() => handlerMinus(idValue)}>
                                     <AiOutlineMinus />
                                 </Button>
                             </Tooltip>
@@ -151,13 +96,13 @@ const TableCart = (props: Props) => {
                                 {cart.count}
                             </Button>
                             <Tooltip content="Plus" closeDelay={200}>
-                                <Button isIconOnly aria-label="add" className='bg-white border border-l-0 border-neutral-500' onPress={() => handlerPlus(cellValue)}>
+                                <Button isIconOnly aria-label="add" className='bg-white border border-l-0 border-neutral-500' onPress={() => handlerPlus(idValue)}>
                                     <AiOutlinePlus />
                                 </Button>
                             </Tooltip>
                         </ButtonGroup>
                         <ButtonGroup>
-                            <Button aria-label="delete" className='bg-white underline decoration-1' disableAnimation onPress={() => handlerRemove(cellValue)}>
+                            <Button startContent={<BsTrash3/>} aria-label="delete" className='bg-white underline decoration-1' disableAnimation onPress={() => handlerRemove(idValue)}>
                                 Delete
                             </Button>
                         </ButtonGroup>
@@ -181,17 +126,17 @@ const TableCart = (props: Props) => {
         }
     }, []);
 
-    const handlerMinus = (keyElement: string | undefined | number) => {
-        // console.log('this:', keyElement)
-    }
-
-    const handlerPlus = (keyElement: string | undefined | number) => {
-        // console.log('this:', keyElement)
+    const handlerMinus = (keyId: number) => {
+        decrementCart(currentUser, keyId, locale)
 
     }
 
-    const handlerRemove = (keyElement: string | undefined | number) => {
-        // console.log('this:', keyElement)
+    const handlerPlus = (keyId: number) => {
+        incrementCart(currentUser, keyId, locale)
+    }
+
+    const handlerRemove = (keyId: number) => {
+        removeCart(currentUser, keyId, locale)
 
     }
 

@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Breadcrumbs from '../components/Breadcrumbs'
 import Link from 'next-intl/dist/link'
 import useLoginModal from '../hooks/useLoginModal'
@@ -16,6 +16,7 @@ import Heading from '../components/Heading'
 import { Button } from '@nextui-org/react'
 import ProductCarousel from '../components/carousel/ProductCarousel'
 import HasAccount from './HasAccount'
+import { useCartStore } from '../hooks/useCart'
 
 export interface ICart {
     quantity: number;
@@ -47,6 +48,19 @@ type Props = {
 const CartClient = (props: Props) => {
     const { carts, currentUser, itemsCarousel } = props
     const loginModal = useLoginModal()
+    const locale = useLocale()
+    const { currentCarts, mergeLocalandDB } = useCartStore()
+    const [data, setData] = useState<IProductFormatted[]>([])
+    useEffect(() => {
+        mergeLocalandDB(currentUser, carts, locale)
+    }, [])
+
+    useEffect(() => {
+        setData(currentCarts())
+    }, [currentCarts()])
+
+
+    if (!data) return (<>Loading...</>)
 
     return (
         <div>
@@ -59,7 +73,7 @@ const CartClient = (props: Props) => {
                 subtitle="List of products you shopping!"
                 center
             />
-            <TableCart data={carts} />
+            <TableCart data={data} currentUser={currentUser} locale={locale} />
             <div className='relative w-full '>
                 <ProductCarousel
                     title='recommended'

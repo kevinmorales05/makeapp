@@ -150,20 +150,6 @@ const useFavorite = ({ listing, currentUser }: IUseFavorite) => {
 
   const hasFavorited = useMemo(() => {
     // const list = currentUser?.favoriteIds || [];
-
-    // if (list.length > 0) {
-    //   mergeLocalandDB(currentFavorites(), list, locale)
-    // }
-    // list.forEach(item => {addFavorite(item)});
-    // return list.includes(listingId);
-
-    // if (currentFavorites().length === 0) {
-    //   console.log("why number times")
-    //   if (currentUser?.email) {
-    //     mergeLocalandDB(currentFavorites(), currentUser?.favoriteIds, locale)
-    //   }
-    //   return false;
-    // }
     return currentFavorites().some((it) => it.id === listing.id);
   }, [currentFavorites()]);
 

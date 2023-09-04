@@ -12,31 +12,49 @@ import { IProductFormatted } from "./useProducts";
 import { toast } from "sonner";
 import { apix } from "../constants/axios-instance";
 
+interface ICartItemState {
+    id: number;
+    title: string;
+    description: string;
+    src: string;
+    cost: number;
+    promoCost: number;
+    bestSeller: boolean;
+    kit: boolean;
+    weight: string;
+    farmacState: string;
+    presentation: string;
+    category: string;
+    subCategory: string;
+    color: string;
+    quantity: number;
+}
+
 interface CartStore {
-    CartItems: IProductFormatted[] | never,
+    CartItems: ICartItemState[] | never,
     addCart: (
-        item: IProductFormatted,
         currentUser: SafeUser | null | undefined,
+        item: IProductFormatted,
         locale: string
     ) => Promise<void>,
 
     removeCart: (
-        item: IProductFormatted,
         currentUser: SafeUser | null | undefined,
+        itemId: number,
         locale: string
     ) => Promise<void>,
     incrementCart: (
-        item: IProductFormatted,
         currentUser: SafeUser | null | undefined,
+        itemId: number,
         locale: string
     ) => Promise<void>,
     decrementCart: (
-        item: IProductFormatted,
         currentUser: SafeUser | null | undefined,
+        itemId: number,
         locale: string
     ) => Promise<void>,
     totalCart: () => number,
-    mergeLocalandDB: (localObjIds: IProductFormatted[], userIds: number[], locale: string) => Promise<void>,
+    mergeLocalandDB: (currentUser?: SafeUser | null, cartsServer?: IProductFormatted[] | null, locale?: string) => Promise<void>,
     currentCarts: () => IProductFormatted[]
     clear: () => void
 }
@@ -47,9 +65,9 @@ export const useCartStore = create<CartStore>()(
             (set, get) => (
                 {
                     cartItems: [],
-                    incrementCart: async (item, currentUser, locale) => {
+                    incrementCart: async (currentUser, itemId, locale) => {
                         if (currentUser) {
-                            toast.promise(apix(locale).put("carts", item), {
+                            toast.promise(apix(locale).put("carts/reducers/", itemId), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
                                     // console.log("data increment", data)
@@ -63,27 +81,28 @@ export const useCartStore = create<CartStore>()(
                                 }
                             })
                         } else {
-                            set(produce(draft => {
-                                const isPresentAdded = draft?.cartItems.map((it: IProductFormatted) => {
-                                    if (it.id === item.id) {
-                                        return {
-                                            ...it,
-                                            quantity: it.quantity + 1
-                                        }
-                                    } else {
-                                        return it
+                            const currentCarts = get().cartItems
+                            const addedItem = currentCarts.map((it: IProductFormatted) => {
+                                if (it.id === itemId) {
+                                    return {
+                                        ...it,
+                                        quantity: it.quantity + 1
                                     }
-                                })
-                                draft.cartItems = isPresentAdded ? isPresentAdded : []
+                                } else {
+                                    return it
+                                }
+                            })
+                            set(produce(draft => {
+                                draft.cartItems = addedItem
                             }))
                         }
                     },
-                    decrementCart: async (item, currentUser, locale) => {
+                    decrementCart: async (currentUser, itemId, locale) => {
                         if (currentUser) {
-                            toast.promise(apix(locale).delete(`carts/${item.id}`,), {
+                            toast.promise(apix(locale).delete(`carts/reducers/${itemId}`,), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
-                                    // console.log("date decrement", data)
+                                    console.log("date decrement", data)
                                     // set(produce((draft) => ({
                                     //     ...draft, cartItems: data.data
                                     // })))
@@ -94,27 +113,24 @@ export const useCartStore = create<CartStore>()(
                                 }
                             })
                         } else {
-                            set(state => {
-                                const isPresent = state.cart.findIndex(it => it.id === item.id);
-
-                                if (isPresent === -1) {
+                            const currentCarts = get().cartItems
+                            const minusItem = currentCarts.map((it: IProductFormatted) => {
+                                if (it.id === itemId) {
                                     return {
-                                        ...state
-                                    };
+                                        ...it,
+                                        quantity: Math.max(it.quantity - 1, 1)
+                                    }
+                                } else {
+                                    return it
                                 }
-
-                                const updatedCart = state.cart
-                                    .map(it => (it.id === item.id ? { ...it, count: Math.max(it.quantity - 1, 0) } : it))
-                                    .filter(it => it.quantity);
-
-                                return {
-                                    ...state,
-                                    cartItems: updatedCart
-                                };
                             })
+                            set(produce(draft => {
+                                draft.cartItems = minusItem
+                            }))
                         }
                     },
-                    addCart: async (item, currentUser, locale) => {
+                    addCart: async (currentUser, item, locale) => {
+                        console.log("you call me", item)
                         if (currentUser) {
                             toast.promise(apix(locale).put(`carts/${item.id}`), {
                                 loading: 'Loading...',
@@ -129,26 +145,22 @@ export const useCartStore = create<CartStore>()(
                                 }
                             })
                         } else {
-                            set(produce(draft => {
-                                const isPresentAdded = draft?.cartItems.map((it: IProductFormatted) => {
-                                    if (it.id === item.id) {
-                                        return {
-                                            ...it,
-                                            quantity: it.quantity + 1
-                                        }
-                                    } else {
-                                        return it
-                                    }
-                                })
-                                draft.cartItems = isPresentAdded ? isPresentAdded : []
-                            }))
+                            const currentCart = get().cartItems
+                            const isPresent = currentCart.some((it: IProductFormatted) => it.id === item.id);
+                            if (!isPresent) {
+                                set(produce(draft => {
+                                    const withQty = { ...item, quantity: 1 };
+                                    draft.cartItems.push(withQty);
+                                }))
+                            }
                         }
                     },
-                    removeCart: async (item, currentUser, locale) => {
+                    removeCart: async (currentUser, itemId, locale) => {
                         if (currentUser) {
-                            toast.promise(apix(locale).delete(`carts/${item.id}`), {
+                            toast.promise(apix(locale).delete(`carts/${itemId}`), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
+                                    console.log("removed item", data)
                                     set(produce((draft) => ({
                                         ...draft, cartItems: data
                                     })))
@@ -159,40 +171,52 @@ export const useCartStore = create<CartStore>()(
                                 }
                             })
                         } else {
+                            const currentCarts = get().cartItems
+                            console.log("tell me", itemId)
+                            const deletedItem = currentCarts.filter((it: IProductFormatted) => it.id !== itemId)
+                            console.log("and", deletedItem)
+
+                            console.log("tell me", itemId, deletedItem)
+
                             set(produce(draft => {
-                                const isPresentAdded = draft?.cartItems.map((it: IProductFormatted) => {
-                                    if (it.id === item.id) {
-                                        return {
-                                            ...it,
-                                            quantity: it.quantity + 1
-                                        }
-                                    } else {
-                                        return it
-                                    }
-                                })
-                                draft.cartItems = isPresentAdded ? isPresentAdded : []
+                                draft.cartItems = deletedItem
                             }))
                         }
                     },
                     totalCart: () => get().cartItems.length,
-                    mergeLocalandDB: async (localObjIds, userIds, locale) => {
-                        const localIds = localObjIds.map(it => it.id);
-                        const uniqueIds = Array.from(([...localIds, ...userIds]));
-                        // console.log("uniqueIds: ", uniqueIds)
-                        toast.promise(apix(locale).post(`carts`, uniqueIds), {
-                            loading: 'Loading...',
-                            success: ({ data }) => {
-                                // console.log("merger", data)
-                                set(produce((draft) => ({
-                                    ...draft, cartItems: data
-                                })))
-                                return `Carts synchronized`;
-                            },
-                            error: (error: any) => {
-                                return `Failed to synchronize carts: ${error.message}`;
-                            }
-                        })
+                    mergeLocalandDB: async (currentUser, cartsServer, locale) => {
+                        if (currentUser && cartsServer && locale) {
 
+                            const cartsLocal = get().cartsItems
+
+                            if (cartsLocal.length !== 0) {
+                                // merge both to find differences between db and localStorage
+                                const both = [...cartsLocal, ...cartsServer]
+
+                                // ids which are not in server
+                                const mergeToServer = both.filter(all => cartsServer.every(cserver => cserver.id !== all.id))
+
+                                // const uniqueIds = mergeToServer.map(c => c.id)
+
+                                // if existe ids to update then update them
+                                if (uniqueIds.length > 0) {
+                                    toast.promise(apix(locale).put("carts/merging", mergeToServer), {
+                                        loading: 'Loading...',
+                                        success: ({ data }) => {
+
+                                            console.log("sync data", data)
+                                            set(produce((draft) => ({
+                                                ...draft, favoriteItems: data
+                                            })))
+                                            return `favorites sync has been added`;
+                                        },
+                                        error: (error: any) => {
+                                            return `Failed to sync: ${error.message}`;
+                                        }
+                                    })
+                                }
+                            }
+                        }
                     },
                     currentCarts: () => get().cartItems,
                     clear: () => set(produce((draft) => { draft.cartItems = [] })),
@@ -226,9 +250,9 @@ export const useCarouselCart = ({ listing, currentUser, locale }: IUseCart) => {
 
         try {
             if (hasCarted) {
-                removeCart(listing, currentUser, locale);
+                removeCart(currentUser, listing.id, locale);
             } else {
-                addCart(listing, currentUser, locale)
+                addCart(currentUser, listing, locale)
             }
             // router.refresh();
         } catch (error) {
@@ -265,15 +289,13 @@ const useCart = ({ listing, currentUser, locale }: IUseCart) => {
         e.stopPropagation();
 
         try {
-            let request;
             if (hasCarted) {
                 // request = () => axios.delete(`/${locale}/api/carts/${listingId}`);
-                removeCart(listing, currentUser, locale);
+                removeCart(currentUser, listing.id, locale);
             } else {
-                addCart(listing, currentUser, locale)
+                addCart(currentUser, listing, locale)
                 // request = () => axios.post(`/${locale}/api/carts/${listingId}`);
             }
-            // await request();
             // router.refresh();
         } catch (error) {
             toast.error('Something went wrong.');

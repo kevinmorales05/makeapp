@@ -2,7 +2,7 @@ import getProductById from "@/app/actions/getProductById";
 import ClientOnly from "@/app/components/ClientOnly";
 import EmptyState from "@/app/components/EmptyState";
 import dynamic from "next/dynamic";
-import { formattedProductById } from "@/app/hooks/useProducts";
+import { formattedProductById, formattedProducts } from "@/app/hooks/useProducts";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 
 interface IPageProps {
@@ -10,7 +10,7 @@ interface IPageProps {
     shopId: string
 }
 
-const DynamicProductDetails = dynamic(() => import("./ProductDetail"),
+const DynamicShopClient = dynamic(() => import("./ShopClient"),
     {
         ssr: true,
         loading: () => <div>Loading...</div>
@@ -35,7 +35,7 @@ async function pageShop({ params }: { params: IPageProps }) {
 
     return (
         <ClientOnly>
-            <DynamicProductDetails product={product} locale={locale} currentUser={currentUser}/>
+            <DynamicShopClient  product={formattedProductById(product)} locale={locale} currentUser={currentUser} />
         </ClientOnly>
     )
 }

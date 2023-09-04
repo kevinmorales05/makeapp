@@ -21,14 +21,14 @@ import { useCartStore } from "@/app/hooks/useCart";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
 // import { apix } from "@/app/constants/axios-instance";
 
-interface IProductDetailProps {
+interface IShopClientProps {
   currentUser?: any;
-  product: any
+  product: IProductFormatted | any
   locale: string
 }
 
-const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale, currentUser }) => {
-  const listing = formattedProductById(product)
+const ShopClient: React.FC<IShopClientProps> = ({ product, locale, currentUser }) => {
+  const listing = product
   const [hasUser, setHasUser] = useState<boolean>(false)
   const { currentCarts, addCart } = useCartStore()
 
@@ -41,7 +41,7 @@ const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale, current
   return (
     <Container>
       <div className="flex justify-center flex-col">
-        <Breadcrumbs/>
+        <Breadcrumbs />
         <div>btn</div>
         <div
           className="
@@ -80,4 +80,4 @@ const ProductDetail: React.FC<IProductDetailProps> = ({ product, locale, current
   )
 }
 
-export default ProductDetail
+export default ShopClient
