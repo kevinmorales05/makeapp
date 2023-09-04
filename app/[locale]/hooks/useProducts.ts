@@ -49,8 +49,8 @@ export interface IProductProps {
     category: string;
     subCategory: string;
     color: string;
-    createdAt: Date;
-    updatedAt: Date;
+    createdAt: string;
+    updatedAt: string;
 }
 
 export interface IProductFormatted {
@@ -68,10 +68,11 @@ export interface IProductFormatted {
     category: string;
     subCategory: string;
     color: string;
+    imageSrc: string;
 }
 
 
-export const formattedProducts = (products: IProductProps[]) => products.map((p) => ({
+export const formattedProducts = (products: IProductProps[] | []) => products.map((p) => ({
     id: p.id,
     title: p.title,
     description: p.description,
@@ -106,7 +107,7 @@ export const formattedProductById = (product: IProductProps) => {
         color: product.color,
         src: product.imageSrc
     }
-}  
+}
 
 export const useProducts = () => {
 

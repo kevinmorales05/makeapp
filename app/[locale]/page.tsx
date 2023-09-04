@@ -13,26 +13,20 @@ import { useTranslations } from "next-intl";
 import React from "react";
 import Breadcrumbs from "./components/Breadcrumbs";
 import ProductCarousel from "./components/carousel/ProductCarousel";
+import getItemsCarousel from "./actions/getItemsCarousel";
+import { formattedProducts } from "./hooks/useProducts";
 
 
 interface HomeProps {
   searchParams: IListingsParams
 };
 
-// const Testing: React.FC = () => {
-//   const t = useTranslations();
-
-//   return (
-//     <div>
-//       <h1>{t("testing")}</h1>
-//     </div>
-//   );
-// }
 
 const Home = async ({ searchParams }: HomeProps) => {
   // const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
-
+  const slides_count = 10;
+  const itemsCarousel = await getItemsCarousel(slides_count);
 
 
   // if (listings.length === 0) {
@@ -48,7 +42,12 @@ const Home = async ({ searchParams }: HomeProps) => {
       <Container>
         <ClientOnly>
           <Carousel />
-          <ProductCarousel title="top products" autoPlayProp/>
+          <ProductCarousel
+            title="top products"
+            autoPlayProp
+            items={formattedProducts(itemsCarousel)}
+            currentUser={currentUser}
+          />
         </ClientOnly >
       </Container>
       <Container>

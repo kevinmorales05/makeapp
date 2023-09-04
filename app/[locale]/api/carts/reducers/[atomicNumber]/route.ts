@@ -5,7 +5,7 @@ import prisma from "@/app/libs/prismadb";
 import { produce } from "immer";
 
 interface IParams {
-    cartId?: number;
+    atomicNumber?: number;
 }
 
 export async function DELETE(
@@ -20,38 +20,19 @@ export async function DELETE(
             return NextResponse.error();
         }
 
-        const { cartId } = params;
+        const { atomicNumber } = params;
 
-        if (!cartId || typeof cartId !== 'string') {
+        if (!atomicNumber || typeof atomicNumber !== 'string') {
             throw new Error('Invalid ID');
         }
 
 
-        const findCart = prisma.cart.findUnique({
+        const cartDeleted = await prisma.cart.delete({
             where: {
                 userId: currentUser.id,
-                productId: cartId
+                productId: parseInt(atomicNumber)
             },
-            include: {
-                product: true,
-            }
         })
-
-        console.log(findCart)
-
-        // const reduceQuantity = produce(findCart, draft => {
-        //     draft.quantity = Math.max(draft.quantity - 1, 0)
-        // })
-
-        // if (reduceQuantity.quantity === 0) {
-        //     const removeCart = prisma.cart.delete({
-        //         where: {
-        //             userId: currentUser.id,
-        //             productId: cartId
-        //         }
-        //     })
-        // }
-
 
         const allCarts = await prisma.cart.findMany({
             where: {
@@ -68,6 +49,7 @@ export async function DELETE(
                 quantity: c.quantity
             }
         })
+
         return NextResponse.json(cartFormattedResponse);
     } catch (e) {
         return NextResponse.error();

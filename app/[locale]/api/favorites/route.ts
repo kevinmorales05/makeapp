@@ -86,8 +86,6 @@ export async function PUT(
                 }
             }
         })
-
-        console.log("final", userFavoritesChoice)
         return NextResponse.json(userFavoritesChoice);
     } catch (e) {
         return NextResponse.error();

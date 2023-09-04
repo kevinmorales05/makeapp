@@ -12,8 +12,8 @@ import {
   SafeUser 
 } from "@/app/types";
 
-import HeartButton from "../HeartButton";
-import Button from "../Button";
+import HeartButton from "../buttons/HeartButton";
+import Button from "../buttons/Button";
 import ClientOnly from "../ClientOnly";
 
 interface ListingCardProps {

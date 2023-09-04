@@ -19,7 +19,18 @@ interface CartStore {
         currentUser: SafeUser | null | undefined,
         locale: string
     ) => Promise<void>,
+
     removeCart: (
+        item: IProductFormatted,
+        currentUser: SafeUser | null | undefined,
+        locale: string
+    ) => Promise<void>,
+    incrementCart: (
+        item: IProductFormatted,
+        currentUser: SafeUser | null | undefined,
+        locale: string
+    ) => Promise<void>,
+    decrementCart: (
         item: IProductFormatted,
         currentUser: SafeUser | null | undefined,
         locale: string
@@ -36,11 +47,12 @@ export const useCartStore = create<CartStore>()(
             (set, get) => (
                 {
                     cartItems: [],
-                    addCart: async (item, currentUser, locale) => {
+                    incrementCart: async (item, currentUser, locale) => {
                         if (currentUser) {
                             toast.promise(apix(locale).put("carts", item), {
                                 loading: 'Loading...',
-                                success: (data) => {
+                                success: ({ data }) => {
+                                    // console.log("data increment", data)
                                     set(produce((draft) => ({
                                         ...draft, cartItems: data.data
                                     })))
@@ -66,15 +78,15 @@ export const useCartStore = create<CartStore>()(
                             }))
                         }
                     },
-                    removeCart: async (item, currentUser, locale) => {
+                    decrementCart: async (item, currentUser, locale) => {
                         if (currentUser) {
                             toast.promise(apix(locale).delete(`carts/${item.id}`,), {
                                 loading: 'Loading...',
-                                success: (data) => {
-                                    // console.log("data", data)
-                                    set(produce((draft) => ({
-                                        ...draft, cartItems: data.data
-                                    })))
+                                success: ({ data }) => {
+                                    // console.log("date decrement", data)
+                                    // set(produce((draft) => ({
+                                    //     ...draft, cartItems: data.data
+                                    // })))
                                     return `Item deleted`;
                                 },
                                 error: (error: any) => {
@@ -102,6 +114,66 @@ export const useCartStore = create<CartStore>()(
                             })
                         }
                     },
+                    addCart: async (item, currentUser, locale) => {
+                        if (currentUser) {
+                            toast.promise(apix(locale).put(`carts/${item.id}`), {
+                                loading: 'Loading...',
+                                success: ({ data }) => {
+                                    set(produce((draft) => ({
+                                        ...draft, cartItems: data
+                                    })))
+                                    return `Item added`;
+                                },
+                                error: (error: any) => {
+                                    return `Failed to add item: ${error.message}`;
+                                }
+                            })
+                        } else {
+                            set(produce(draft => {
+                                const isPresentAdded = draft?.cartItems.map((it: IProductFormatted) => {
+                                    if (it.id === item.id) {
+                                        return {
+                                            ...it,
+                                            quantity: it.quantity + 1
+                                        }
+                                    } else {
+                                        return it
+                                    }
+                                })
+                                draft.cartItems = isPresentAdded ? isPresentAdded : []
+                            }))
+                        }
+                    },
+                    removeCart: async (item, currentUser, locale) => {
+                        if (currentUser) {
+                            toast.promise(apix(locale).delete(`carts/${item.id}`), {
+                                loading: 'Loading...',
+                                success: ({ data }) => {
+                                    set(produce((draft) => ({
+                                        ...draft, cartItems: data
+                                    })))
+                                    return `Item added`;
+                                },
+                                error: (error: any) => {
+                                    return `Failed to add item: ${error.message}`;
+                                }
+                            })
+                        } else {
+                            set(produce(draft => {
+                                const isPresentAdded = draft?.cartItems.map((it: IProductFormatted) => {
+                                    if (it.id === item.id) {
+                                        return {
+                                            ...it,
+                                            quantity: it.quantity + 1
+                                        }
+                                    } else {
+                                        return it
+                                    }
+                                })
+                                draft.cartItems = isPresentAdded ? isPresentAdded : []
+                            }))
+                        }
+                    },
                     totalCart: () => get().cartItems.length,
                     mergeLocalandDB: async (localObjIds, userIds, locale) => {
                         const localIds = localObjIds.map(it => it.id);
@@ -109,10 +181,10 @@ export const useCartStore = create<CartStore>()(
                         // console.log("uniqueIds: ", uniqueIds)
                         toast.promise(apix(locale).post(`carts`, uniqueIds), {
                             loading: 'Loading...',
-                            success: (data) => {
-                                console.log("data", data)
+                            success: ({ data }) => {
+                                // console.log("merger", data)
                                 set(produce((draft) => ({
-                                    ...draft, cartItems: data.data
+                                    ...draft, cartItems: data
                                 })))
                                 return `Carts synchronized`;
                             },
@@ -136,32 +208,57 @@ export const useCartStore = create<CartStore>()(
 
 interface IUseCart {
     listing: IProductFormatted;
-    currentUser?: SafeUser | null
+    currentUser?: SafeUser | null;
+    locale: string;
 }
 
-const useCart = ({ listing, currentUser }: IUseCart) => {
+export const useCarouselCart = ({ listing, currentUser, locale }: IUseCart) => {
     const router = useRouter();
 
-    const { addCart, removeCart, currentCarts, mergeLocalandDB } = useCartStore()
-    const locale = useLocale()
+    const { addCart, removeCart, currentCarts } = useCartStore()
 
     const hasCarted = useMemo(() => {
-        // const list = currentUser?.cartIds || [];
+        const val = currentCarts().some((it) => it.id === listing.id);
+        return val
+    }, [currentCarts()]);
 
-        // if (list.length > 0) {
-        //   mergeLocalandDB(currentCarts(), list, locale)
-        // }
-        // list.forEach(item => {addCart(item)});
-        // return list.includes(listingId);
+    const toggleCart = useCallback(async () => {
 
-        // if (currentCarts().length === 0) {
-        //   console.log("why number times")
-        //   if (currentUser?.email) {
-        //     mergeLocalandDB(currentCarts(), currentUser?.cartIds, locale)
-        //   }
-        //   return false;
-        // }
-        return currentCarts().some((it) => it.id === listing.id);
+        try {
+            if (hasCarted) {
+                removeCart(listing, currentUser, locale);
+            } else {
+                addCart(listing, currentUser, locale)
+            }
+            // router.refresh();
+        } catch (error) {
+            toast.error('Something went wrong.');
+        }
+    },
+        [
+            currentUser,
+            hasCarted,
+            listing,
+            addCart,
+            removeCart,
+            locale,
+            router,
+        ]);
+
+    return {
+        hasCarted,
+        toggleCart,
+    }
+}
+
+const useCart = ({ listing, currentUser, locale }: IUseCart) => {
+    const router = useRouter();
+
+    const { addCart, removeCart, currentCarts } = useCartStore()
+
+    const hasCarted = useMemo(() => {
+        const val = currentCarts().some((it) => it.id === listing.id);
+        return val
     }, [currentCarts()]);
 
     const toggleCart = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
@@ -199,4 +296,6 @@ const useCart = ({ listing, currentUser }: IUseCart) => {
 }
 
 export default useCart;
+
+
 

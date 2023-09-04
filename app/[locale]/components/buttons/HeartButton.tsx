@@ -5,8 +5,8 @@ import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 import useFavorite from "@/app/hooks/useFavorite";
 import { SafeUser } from "@/app/types";
 import { motion } from "framer-motion"
-import ClientOnly from "./ClientOnly";
-import { IProductFormatted } from "../hooks/useProducts";
+import ClientOnly from "../ClientOnly";
+import { IProductFormatted } from "../../hooks/useProducts";
 
 interface HeartButtonProps {
   listing: IProductFormatted,
@@ -21,8 +21,6 @@ const HeartButton: React.FC<HeartButtonProps> = ({
     listing,
     currentUser
   });
-
-  console.log("hasFavorite", hasFavorited);
 
   return (
     <motion.div

@@ -18,7 +18,7 @@ import useRegisterModal from "@/app/hooks/useRegisterModal";
 import Modal from "./Modal";
 import Input from "../inputs/Input";
 import Heading from "../Heading";
-import Button from "../Button";
+import Button from "../buttons/Button";
 import { useLocale, useTranslations } from "next-intl";
 import { apix } from "@/app/constants/axios-instance";
 
@@ -50,7 +50,7 @@ const RegisterModal = () => {
 
     apix(locale).post(`register`, data)
       .then((callback) => {
-        console.log("tell me callback", callback);
+        // console.log("tell me callback", callback);
         toast.success(t("toaster.success"));
         registerModal.onClose();
         loginModal.onOpen();

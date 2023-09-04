@@ -7,7 +7,7 @@ export default async function getFavorites() {
     const currentUser = await getCurrentUser();
 
     if (!currentUser) {
-      return null;
+      return [];
     }
 
     const favoriteProducts = await prisma.product.findMany({
@@ -26,7 +26,7 @@ export default async function getFavorites() {
       }));
       return safeFavorites;
     }
-    else return null;
+    else return [];
 
   } catch (error: any) {
     throw new Error(error);

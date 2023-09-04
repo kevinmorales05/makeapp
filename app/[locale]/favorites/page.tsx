@@ -6,12 +6,14 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import getFavorites from "@/app/actions/getFavorites";
 
 import FavoritesClient from "./FavoritesClient";
+import { formattedProducts } from "../hooks/useProducts";
 
 const page = async () => {
   // const listings = await getFavoriteListings();
   const favorites = await getFavorites();
   const currentUser = await getCurrentUser();
-
+  const formattedFavorites = formattedProducts(favorites || []);
+console.log("formate", formattedFavorites)
   // if (favorites.length === 0) {
   //   return (
   //     <ClientOnly>
@@ -24,12 +26,12 @@ const page = async () => {
   // }
 
   return (
-      <ClientOnly>
-        <FavoritesClient
-          favorites={favorites}
-          currentUser={currentUser}
-        />
-      </ClientOnly>
+    <ClientOnly>
+      <FavoritesClient
+        favorites={formattedFavorites}
+        currentUser={currentUser}
+      />
+    </ClientOnly>
   );
 }
 

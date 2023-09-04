@@ -4,7 +4,7 @@ import React from 'react'
 import Breadcrumbs from '../components/Breadcrumbs'
 import Link from 'next-intl/dist/link'
 import useLoginModal from '../hooks/useLoginModal'
-import { IProductFormatted } from '../hooks/useProducts'
+import { IProductFormatted, formattedProducts } from '../hooks/useProducts'
 import { SafeUser } from '../types'
 import Image from 'next/image'
 import { IconHome } from '../components/IconHome'
@@ -40,10 +40,12 @@ export interface ICart {
 type Props = {
     carts: ICart[],
     currentUser: SafeUser | null,
+    itemsCarousel: IProductFormatted[],
+
 }
 
 const CartClient = (props: Props) => {
-    const { carts, currentUser } = props
+    const { carts, currentUser, itemsCarousel } = props
     const loginModal = useLoginModal()
 
     return (
@@ -59,7 +61,13 @@ const CartClient = (props: Props) => {
             />
             <TableCart data={carts} />
             <div className='relative w-full '>
-                <ProductCarousel title='recommended' dots />
+                <ProductCarousel
+                    title='recommended'
+                    dots
+                    autoPlayProp
+                    items={itemsCarousel}
+                    currentUser={currentUser}
+                />
             </div>
         </div >
     )

@@ -14,7 +14,7 @@ import { toast } from "sonner";
 import { apix } from "../constants/axios-instance";
 
 interface FavoriteStore {
-  favoriteItems: IProductFormatted[] | never[],
+  favoriteItems: IProductFormatted[],
   addFavorite: (
     item: IProductFormatted | never,
     currentUser: SafeUser | null | undefined,
@@ -26,12 +26,10 @@ interface FavoriteStore {
     locale: string
   ) => Promise<void>,
   totalFavorite: () => number,
-  mergeLocalandDB: (currentUser?: SafeUser | null, favoritesServer?: safeFavoritesProducts[] | null, locale?: string) => Promise<void>,
+  mergeLocalandDB: (currentUser?: SafeUser | null, favoritesServer?: IProductFormatted[] | null, locale?: string) => Promise<void>,
   currentFavorites: () => IProductFormatted[]
   clear: () => void
 }
-
-const mergingBoth = () => { }
 
 export const useFavoriteStore = create<FavoriteStore>()(
   devtools(
@@ -103,12 +101,6 @@ export const useFavoriteStore = create<FavoriteStore>()(
 
                 const uniqueIds = mergeToServer.map(f => f.id)
 
-                console.log('server', favoritesServer)
-                console.log('local', favoritesLocal)
-                console.log('total both ', both)
-                console.log('merger to server ', mergeToServer)
-                console.log('unique ids: ', uniqueIds)
-
                 // if existe ids to update then update them
                 if (uniqueIds.length > 0) {
                   toast.promise(apix(locale).put("favorites/merging", uniqueIds), {
@@ -138,9 +130,6 @@ export const useFavoriteStore = create<FavoriteStore>()(
     )
   )
 )
-
-
-
 
 interface IUseFavorite {
   listing: IProductFormatted;
@@ -180,8 +169,7 @@ const useFavorite = ({ listing, currentUser }: IUseFavorite) => {
 
 
   const toggleFavorite = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
-
+    e?.stopPropagation();
     try {
       let request;
       if (hasFavorited) {
@@ -193,6 +181,49 @@ const useFavorite = ({ listing, currentUser }: IUseFavorite) => {
         // request = () => axios.post(`/${locale}/api/favorites/${listingId}`);
       }
       // await request();
+      // router.refresh();
+    } catch (error) {
+      toast.error('Something went wrong.');
+    }
+  },
+    [
+      currentUser,
+      hasFavorited,
+      listing,
+      addFavorite,
+      removeFavorite,
+      locale,
+      router,
+    ]);
+
+  return {
+    hasFavorited,
+    toggleFavorite,
+  }
+}
+
+export const useCarouselFavorite = ({ listing, currentUser }: IUseFavorite) => {
+  const router = useRouter();
+
+  const { addFavorite, removeFavorite, currentFavorites, mergeLocalandDB } = useFavoriteStore()
+  const locale = useLocale()
+
+  const hasFavorited = useMemo(() => {
+
+    return currentFavorites().some((it) => it.id === listing.id);
+  }, [currentFavorites()]);
+
+
+  const toggleFavorite = useCallback(async () => {
+
+    console.log("what")
+    try {
+      if (hasFavorited) {
+        removeFavorite(listing, currentUser, locale);
+      } else {
+
+        addFavorite(listing, currentUser, locale)
+      }
       // router.refresh();
     } catch (error) {
       toast.error('Something went wrong.');

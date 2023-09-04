@@ -124,7 +124,7 @@ const CheckoutModal = () => {
   const items = watch('items');
   const imageSrc = watch('imageSrc');
   const currentDeliveryMethod = watch().deliveryMethods;
-  console.log('everything', watch())
+  // console.log('everything', watch())
 
 
 
@@ -157,7 +157,7 @@ const CheckoutModal = () => {
 
     setIsLoading(true);
 
-    console.log("all data values", data)
+    console.log("all data to checkout", data)
 
     apix(locale).post('checkouts', data)
       .then(() => {

@@ -6,7 +6,7 @@ import { useProducts } from '../hooks/useProducts';
 import { Pagination } from '@nextui-org/react';
 import { useRouter } from 'next-intl/client';
 import { useLocale } from 'next-intl';
-import HeartButton from '../components/HeartButton';
+import HeartButton from '../components/buttons/HeartButton';
 
 import { motion } from "framer-motion"
 import { PRODUCTS_PEER_PAGE } from '../constants/constants';
@@ -56,7 +56,6 @@ export default function ShopMain({ data, currentUser }: { data: IShopProps[], cu
 
 
   useEffect(() => {
-    console.log("times")
     setProducts(getByPagination(0, PRODUCTS_PEER_PAGE, data))
   }, [data])
 

@@ -4,24 +4,9 @@ import { produce } from "immer";
 import { NextResponse } from 'next/server';
 
 interface IParams {
-    // id?: string;
-    params?: {
-        locale?: string;
-    }
-
+    cartId: string;
 }
-
-export async function POST(request: Request, props: IParams) {
-    try {
-        const body = await request.json();
-        const { data } = body
-
-        return NextResponse.json({}, { status: 201 });
-    } catch (e) {
-        return NextResponse.error();
-    }
-}
-
+// add
 export async function PUT(
     request: Request,
     { params }: { params: IParams }
@@ -33,12 +18,11 @@ export async function PUT(
             return NextResponse.error();
         }
 
-        const bodyItem = await request.json();
-        // console.log(bodyItem);
+        const { cartId } = params;
 
         const findCart = await prisma.cart.findUnique({
             where: {
-                productId: bodyItem.id,
+                productId: parseInt(cartId),
                 userId: currentUser.id
             }
         })
@@ -48,7 +32,7 @@ export async function PUT(
         if (!findCart) {
             requesting = await prisma.cart.create({
                 data: {
-                    productId: bodyItem.id,
+                    productId: parseInt(cartId),
                     userId: currentUser.id,
                     quantity: 1
                 },
@@ -56,36 +40,52 @@ export async function PUT(
                     product: true
                 }
             })
-
-            // return NextResponse.json({
-            //     ...requesting.product,
-            //     quantity: requesting.quantity
-            // })
-
         }
 
+        const allCarts = await prisma.cart.findMany({
+            where: {
+                userId: currentUser.id,
+            },
+            include: {
+                product: true
+            }
+        })
+        const cartFormattedResponse = allCarts.map(c => {
+            return {
+                ...c.product,
+                quantity: c.quantity
+            }
+        })
+        return NextResponse.json(cartFormattedResponse, { status: 201 })
+    } catch (e) {
+        return NextResponse.error();
+    }
+}
+// remove
+export async function DELETE(
+    request: Request,
+    { params }: { params: IParams }
+) {
+    try {
 
-        if (findCart) {
-            requesting = await prisma.cart.update({
-                where: {
-                    productId: bodyItem.id,
-                    userId: currentUser.id
-                },
-                data: {
-                    quantity: findCart.quantity + 1
-                },
-                include: {
-                    product: true
-                }
-            })
+        const currentUser = await getCurrentUser();
 
-            // return NextResponse.json({
-            //     ...requesting.product,
-            //     quantity: requesting.quantity
-            // })
-
+        if (!currentUser) {
+            return NextResponse.error();
         }
-        // console.log(requesting)
+
+        const { cartId } = params;
+
+        if (!cartId || typeof cartId !== 'string') {
+            throw new Error('Invalid ID');
+        }
+
+        await prisma.cart.delete({
+            where: {
+                userId: currentUser.id,
+                productId: parseInt(cartId)
+            },
+        })
 
         const allCarts = await prisma.cart.findMany({
             where: {
@@ -103,7 +103,7 @@ export async function PUT(
             }
         })
 
-        return NextResponse.json(cartFormattedResponse, { status: 201 })
+        return NextResponse.json(cartFormattedResponse);
     } catch (e) {
         return NextResponse.error();
     }

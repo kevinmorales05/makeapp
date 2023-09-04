@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from "react";
 // import { IoMdClose } from "react-icons/io";
 
-import Button from "../Button";
+import Button from "../buttons/Button";
 import { ModalBody, ModalContent, ModalFooter, ModalHeader, Modal as ModalUI, useDisclosure, } from "@nextui-org/react";
 
 interface ModalProps {

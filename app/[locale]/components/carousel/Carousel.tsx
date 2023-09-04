@@ -11,8 +11,8 @@ import useEmblaCarousel, {
 import imageByIndex from './imageByIndex'
 
 import './embla-carousel.css'
-import {cn } from '@nextui-org/react'
-import Button from '../Button'
+import { cn } from '@nextui-org/react'
+import Button from '../buttons/Button'
 
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 import { BsSearch } from 'react-icons/bs'
@@ -69,7 +69,7 @@ const Carousel: React.FC<PropType> = (props: ProductCarouselProps) => {
       <div className="relative">
         <div className="embla__viewport" ref={emblaRef}>
           <div className="embla__container">
-          {SLIDES.map((index) => (
+            {SLIDES.map((index) => (
               <div className="embla__slide justify-center items-start " key={index}>
                 <div className={cn("embla__slide__number")}>
                   <span>{index + 1}</span>
@@ -94,7 +94,8 @@ const Carousel: React.FC<PropType> = (props: ProductCarouselProps) => {
                     <Image
                       fill={true}
                       src={imageByIndex(index)}
-                      alt="Your alt text" className="object-cover !relative"
+                      alt={t("title", { data: index + 1 })}
+                      className="object-cover !relative"
                     />
                   </div>
                 </div>
@@ -108,7 +109,7 @@ const Carousel: React.FC<PropType> = (props: ProductCarouselProps) => {
         <div className="embla__dots">
           {scrollSnaps.map((_, index) => (
             <DotButton
-              key={index}
+              id={index.toString()}
               onClick={() => onDotButtonClick(index)}
               className={'embla__dot'.concat(
                 index === selectedIndex ? ' embla__dot--selected !w-11' : ''

@@ -152,19 +152,19 @@ export const useDotButton = (
     }
 }
 
-type PropTypeDotButton = PropsWithChildren<
-    React.DetailedHTMLProps<
-        React.ButtonHTMLAttributes<HTMLButtonElement>,
-        HTMLButtonElement
-    >
+type PropTypeDotButton = PropsWithChildren<React.DetailedHTMLProps<
+    React.ButtonHTMLAttributes<
+        HTMLButtonElement>,
+    HTMLButtonElement
+>
 >
 
 export const DotButton: React.FC<PropTypeDotButton> = (props) => {
-    const { key, onClick, className } = props
+    const { id, onClick, className } = props
 
     return (
         <motion.button
-            key={key}
+            key={id}
             onClick={onClick}
             className={cn(className,)}
             whileHover={{ scale: 1.1, width: "2.5rem" }}

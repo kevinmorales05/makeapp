@@ -38,7 +38,6 @@ export async function PUT(request: Request) {
             }
         })
 
-        console.log("final update", userFavoritesUser)
         return NextResponse.json(userFavoritesUser);
     } catch (e) {
         return NextResponse.error();

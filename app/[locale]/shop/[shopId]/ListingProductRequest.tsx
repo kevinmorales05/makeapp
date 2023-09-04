@@ -1,4 +1,6 @@
-import Button from '@/app/components/Button'
+
+import Button from '@/app/components/buttons/Button'
+
 import { IProductFormatted } from '@/app/hooks/useProducts'
 import React from 'react'
 

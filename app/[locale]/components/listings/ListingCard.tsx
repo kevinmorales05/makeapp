@@ -12,8 +12,8 @@ import {
   SafeUser
 } from "@/app/types";
 
-import HeartButton from "../HeartButton";
-import Button from "../Button";
+import HeartButton from "../buttons/HeartButton";
+import Button from "../buttons/Button";
 import ClientOnly from "../ClientOnly";
 import useFavorite, { useFavoriteStore } from "@/app/hooks/useFavorite";
 import axios from "axios";
@@ -48,8 +48,6 @@ const ListingCard: React.FC<ListingCardProps> = ({
     if (currentFavorites().length) {
       (async () => {
         const favorites = await apix(locale).post(`favorites`, currentFavorites());
-
-        console.log("axios response: ", favorites)
       })();
     }
   }, [currentFavorites()])

@@ -41,6 +41,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const { totalCart } = useCartStore()
   const { totalFavorite } = useFavoriteStore()
 
+
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
   const rentModal = useRentModal();
@@ -58,38 +59,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
     rentModal.onOpen();
   }, [loginModal, rentModal, currentUser]);
-  const menuItems = [
-    //   {
-    //   label: "My shoppings",
-    //   onClick: () => router.push("/trips"),
-    //   icon: AiOutlineShoppingCart,
-    // },
-    // {
-    //   label: "My favorites",
-    //   onClick: () => router.push("/favorites"),
-    //   icon: AiOutlineHeart,
-    // },
-    {
-      label: "My profile",
-      onClick: () => router.push("/reservations"),
-      icon: RiUserReceivedFill,
-    },
-    {
-      label: "My voices home",
-      onClick: () => router.push("/properties"),
-      icon: BsHousesFill,
-    },
-    {
-      label: "Korean Cosmetic your home",
-      onClick: rentModal.onOpen,
-      icon: LuIceCream,
-    },
-    {
-      label: "Logout",
-      onClick: () => signOut(),
-      icon: LuLogOut,
-    },
-  ]
+
+  const signOutAndClear = () => {
+    useCartStore.persist.clearStorage()
+    useFavoriteStore.persist.clearStorage()
+    signOut()
+  }
 
   const trigger = (<User
     as="button"
@@ -160,7 +135,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             title: "Log Out",
             description: "Goint out of my account",
             color: "danger",
-            onClick: () => signOut(),
+            onClick: () => signOutAndClear(),
             startContent: <Button size="sm" variant="light" startContent={<LuLogOut className={cn(ICON_CLASES_DROPDOWN, "rotate-180")} />} isIconOnly />,
           },
           {

@@ -25,9 +25,6 @@ export default function ShopAside({ allCategories, categoryByName }: {
   const t = useTranslations("categories")
   const tshop = useTranslations("shoppage")
 
-  // console.log(categoryByName, "categoryByName")
-  // console.log(allCategories, "allCategories")
-
   return (
 
     <div className='

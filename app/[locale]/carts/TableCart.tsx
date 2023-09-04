@@ -182,16 +182,16 @@ const TableCart = (props: Props) => {
     }, []);
 
     const handlerMinus = (keyElement: string | undefined | number) => {
-        console.log('this:', keyElement)
+        // console.log('this:', keyElement)
     }
 
     const handlerPlus = (keyElement: string | undefined | number) => {
-        console.log('this:', keyElement)
+        // console.log('this:', keyElement)
 
     }
 
     const handlerRemove = (keyElement: string | undefined | number) => {
-        console.log('this:', keyElement)
+        // console.log('this:', keyElement)
 
     }
 

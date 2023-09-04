@@ -5,7 +5,7 @@ import Image from "next/image";
 import useCountries from "@/app/hooks/useCountries";
 import { SafeUser } from "@/app/types";
 import Heading from "@/app/components/Heading";
-import HeartButton from "@/app/components/HeartButton";
+import HeartButton from "@/app/components/buttons/HeartButton";
 import { IProductFormatted } from "@/app/hooks/useProducts";
 
 
