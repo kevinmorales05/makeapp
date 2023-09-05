@@ -21,6 +21,8 @@ export default async function getCarts() {
 
         const safeCarts = carts.map((cart) => ({
             ...cart.product,
+            createdAt: cart.product.createdAt.toString(),
+            updatedAt: cart.product.createdAt.toString(),
             quantity: cart.quantity
         }));
 

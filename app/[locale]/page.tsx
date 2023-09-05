@@ -3,7 +3,7 @@ import Container from "@/app/components/Container";
 import EmptyState from "@/app/components/EmptyState";
 
 // import getListings, {IListingsParams} from "@/app/actions/getListings";
-import { IListingsParams } from "@/app/actions/getListings";
+// import { IListingsParams } from "@/app/actions/getListings";
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
 import Carousel from "./components/carousel/Carousel";
@@ -17,12 +17,14 @@ import getItemsCarousel from "./actions/getItemsCarousel";
 import { formattedProducts } from "./hooks/useProducts";
 
 
-interface HomeProps {
-  searchParams: IListingsParams
-};
+// interface HomeProps {
+// searchParams: IListingsParams
+// };
 
 
-const Home = async ({ searchParams }: HomeProps) => {
+const Home = async (
+  // { searchParams }: HomeProps
+) => {
   // const listings = await getListings(searchParams);
   const currentUser = await getCurrentUser();
   const slides_count = 10;

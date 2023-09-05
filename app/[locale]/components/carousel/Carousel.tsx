@@ -110,6 +110,7 @@ const Carousel: React.FC<PropType> = (props: ProductCarouselProps) => {
           {scrollSnaps.map((_, index) => (
             <DotButton
               id={index.toString()}
+              key={index.toString()}
               onClick={() => onDotButtonClick(index)}
               className={'embla__dot'.concat(
                 index === selectedIndex ? ' embla__dot--selected !w-11' : ''

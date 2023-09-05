@@ -1,18 +1,16 @@
-import axios from "axios";
+import { SafeUser } from "@/app/types";
+
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
-
-import { SafeUser } from "@/app/types";
 
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { produce } from "immer";
-import { useLocale } from "next-intl";
 import { IProductFormatted } from "./useProducts";
 import { toast } from "sonner";
 import { apix } from "../constants/axios-instance";
 
-interface ICartItemState {
+export interface ICartItemState {
     id: number;
     title: string;
     description: string;
@@ -31,7 +29,7 @@ interface ICartItemState {
 }
 
 interface CartStore {
-    CartItems: ICartItemState[] | never,
+    cartItems: ICartItemState[],
     addCart: (
         currentUser: SafeUser | null | undefined,
         item: IProductFormatted,
@@ -55,8 +53,7 @@ interface CartStore {
     ) => Promise<void>,
     totalCart: () => number,
     mergeLocalandDB: (currentUser?: SafeUser | null, cartsServer?: IProductFormatted[] | null, locale?: string) => Promise<void>,
-    currentCarts: () => IProductFormatted[]
-    clear: () => void
+    currentCarts: () => ICartItemState[]
 }
 
 export const useCartStore = create<CartStore>()(
@@ -82,7 +79,7 @@ export const useCartStore = create<CartStore>()(
                             })
                         } else {
                             const currentCarts = get().cartItems
-                            const addedItem = currentCarts.map((it: IProductFormatted) => {
+                            const addedItem = currentCarts.map((it) => {
                                 if (it.id === itemId) {
                                     return {
                                         ...it,
@@ -114,7 +111,7 @@ export const useCartStore = create<CartStore>()(
                             })
                         } else {
                             const currentCarts = get().cartItems
-                            const minusItem = currentCarts.map((it: IProductFormatted) => {
+                            const minusItem = currentCarts.map((it) => {
                                 if (it.id === itemId) {
                                     return {
                                         ...it,
@@ -172,12 +169,7 @@ export const useCartStore = create<CartStore>()(
                             })
                         } else {
                             const currentCarts = get().cartItems
-                            console.log("tell me", itemId)
                             const deletedItem = currentCarts.filter((it: IProductFormatted) => it.id !== itemId)
-                            console.log("and", deletedItem)
-
-                            console.log("tell me", itemId, deletedItem)
-
                             set(produce(draft => {
                                 draft.cartItems = deletedItem
                             }))
@@ -187,7 +179,7 @@ export const useCartStore = create<CartStore>()(
                     mergeLocalandDB: async (currentUser, cartsServer, locale) => {
                         if (currentUser && cartsServer && locale) {
 
-                            const cartsLocal = get().cartsItems
+                            const cartsLocal = get().cartItems
 
                             if (cartsLocal.length !== 0) {
                                 // merge both to find differences between db and localStorage
@@ -196,7 +188,7 @@ export const useCartStore = create<CartStore>()(
                                 // ids which are not in server
                                 const mergeToServer = both.filter(all => cartsServer.every(cserver => cserver.id !== all.id))
 
-                                // const uniqueIds = mergeToServer.map(c => c.id)
+                                const uniqueIds = mergeToServer.map(c => c.id)
 
                                 // if existe ids to update then update them
                                 if (uniqueIds.length > 0) {
@@ -219,7 +211,6 @@ export const useCartStore = create<CartStore>()(
                         }
                     },
                     currentCarts: () => get().cartItems,
-                    clear: () => set(produce((draft) => { draft.cartItems = [] })),
                 }
             ),
             {

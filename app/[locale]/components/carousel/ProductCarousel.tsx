@@ -25,6 +25,7 @@ import { SafeUser } from '@/app/types'
 import CarouselCartButton from '../buttons/CarouselCartButton'
 import { useLocale } from 'next-intl'
 import { useRouter } from 'next-intl/client'
+import { ICartItemState } from '@/app/hooks/useCart'
 
 
 interface ProductCarouselProps {

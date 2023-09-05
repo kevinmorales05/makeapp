@@ -4,7 +4,7 @@ import getProductById from "@/app/actions/getProductById";
 import ClientOnly from "@/app/components/ClientOnly";
 import Container from "@/app/components/Container";
 import EmptyState from "@/app/components/EmptyState";
-import ListingHead from "@/app/components/listings/ListingHead";
+// import ListingHead from "@/app/components/listings/ListingHead";
 import ListingInfo from "@/app/components/listings/ListingInfo";
 import { useMemo, useState } from "react";
 import ListingProductHead from "./ListingProductImage";
@@ -30,11 +30,11 @@ interface IShopClientProps {
 const ShopClient: React.FC<IShopClientProps> = ({ product, locale, currentUser }) => {
   const listing = product
   const [hasUser, setHasUser] = useState<boolean>(false)
-  const { currentCarts, addCart } = useCartStore()
+  const {  addCart } = useCartStore()
 
 
   const handlerAddCart = async (currentListing: IProductFormatted) => {
-    addCart(currentListing, currentUser, locale)
+    addCart(currentUser, currentListing, locale)
   }
 
 

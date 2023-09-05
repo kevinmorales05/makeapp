@@ -6,9 +6,10 @@ import { Card, CardBody } from '@nextui-org/react';
 import { IProductFormatted } from '../hooks/useProducts';
 import { SafeUser } from '../types';
 import { IconType } from 'react-icons';
+import { ICartItemState } from '../hooks/useCart';
 
 type Props = {
-    item: IProductFormatted;
+    item: ICartItemState;
     currentUser?: SafeUser | null,
     locale: string,
     allCategories: {

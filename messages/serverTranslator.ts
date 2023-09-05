@@ -11,7 +11,7 @@ const messages = {
 
 export const useTranslatorServer = (locale = "es",) => {
 
-    const t = createTranslator({ locale: 'en', messages: spanish });
+    const t = createTranslator({ locale: 'es', messages: spanish });
     return t
 
 }

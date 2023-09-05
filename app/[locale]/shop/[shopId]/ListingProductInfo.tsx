@@ -1,9 +1,9 @@
 'use client';
-import { Button, Chip, Input, Link, Tab, Tabs, Textarea, User, cn } from "@nextui-org/react";
+
+import { Button, Chip, Tab, Tabs, Textarea, User, cn } from "@nextui-org/react";
 import { TbFileDescription, TbListDetails } from "react-icons/tb";
 import { MdOutlineReviews } from "react-icons/md";
-import { useEffect, useState } from "react";
-import { SafeUser } from "@/app/types";
+import { useState } from "react";
 import { AnimationTab } from "./AnimationTab";
 import { AiOutlineStar, AiTwotoneStar } from "react-icons/ai";
 import { toast } from "sonner";
@@ -15,32 +15,19 @@ interface RequestData {
 
 
 export interface IListingInfoProps {
-  // user: SafeUser,
   description: string;
-  // category: {
-  // icon: IconType,
-  // label: string;
-  // description: string;
-  // } | undefined
 }
 
 export const ListingProductInfo: React.FC<IListingInfoProps> = ({
-  // user,
   description,
-  // category,
 }) => {
-  // const { getByValue } = useCountries();
-  // const coordinates = getByValue(locationValue)?.latlng
   const [selected, setSelected] = useState("login");
   const [hasReviews, setHasReviews] = useState(true);
   const [hasReviewUser, setHasReviewUser] = useState(true);
   const [hoverStarts, setHoverStarts] = useState(0);
   const [starsSelected, setStarsSelected] = useState(0);
 
-  // const [showReviewForm, setShowReviewForm] = useState(false);
-
   const class_tab_btn = "flex items-center space-x-2"
-
 
   const handleSubmitReview = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -114,8 +101,10 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
                 <span>Description</span>
                 <Chip size="sm" variant="faded">1</Chip>
               </div>}
-              children={<AnimationTab key={"description_tab_content"} id={"description_tab_content"} children={<>{description}</>} />}
-            />
+
+            >
+              <AnimationTab key={"description_tab_content"} id={"description_tab_content"} ><>{description}</></AnimationTab>
+            </Tab>
 
             <Tab
               aria-disabled
@@ -125,9 +114,9 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
                 <span>Ingredients</span>
                 <Chip size="sm" variant="faded">1</Chip>
               </div>}
-              children={<>
-                <AnimationTab key="ingredients_tab_content" id="ingredients_tab_content" className="py-4 !justify-start">No ingredients</AnimationTab>
-              </>} />
+            >
+              <AnimationTab key={"ingredients_tab_content"} id={"ingredients_tab_content"} className="py-4 !justify-start"><>No ingredients</></AnimationTab>
+            </Tab>
 
             <Tab
               key="review_tab"
@@ -136,110 +125,111 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
                 <span>Reviews</span>
                 <Chip size="sm" variant="faded">0</Chip>
               </div>}
-              children={
-                <AnimationTab key={"review_tab_content"} id={"review_tab_content"}>
-                  <div className="w-full grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
-                    <section className={cn("flex justify-start items-start flex-col gap-6", false && "justify-center items-center")}>
-                      {hasReviews ?
-                        <>
-                          <div>
-                            <User
-                              as="button"
-                              avatarProps={{
-                                isBordered: true,
-                                src: false || '/img/placeholder.jpg'
-                              }}
-                              name={"Christian Soledispa"}
-                              description={"chris@gmail.com"}
-                              className="transition-transform"
-                              classNames={{
-                                name: "max-w-full",
-                                description: "max-w-full ",
-                              }}
-                            />
-                            <div className="flex flex-row items-center space-x-1 ">
-                              <AiTwotoneStar className="text-yellow-400" />
-                              <AiTwotoneStar className="text-yellow-400" />
-                              <AiTwotoneStar className="text-yellow-400" />
-                              <AiOutlineStar />
-                              <AiOutlineStar />
-                              <span className="text-small font-medium">recomended</span>
-                            </div>
-                            <div className="flex flex-col ">
-                              <p className="text-tiny">Reviewed in Japan on July 2, 2023</p>
-                              <p className="font-normal">Great quality and fast shipping.</p>
-                            </div>
-                          </div>
-                          <div>
-                            <User
-                              as="button"
-                              avatarProps={{
-                                isBordered: true,
-                                src: false || '/img/placeholder.jpg'
-                              }}
-                              name={"Christian Soledispa"}
-                              description={"chris@gmail.com"}
-                              className="transition-transform"
-                              classNames={{
-                                name: "max-w-full",
-                                description: "max-w-full ",
-                              }}
-                            />
-                            <div className="flex flex-row items-center space-x-1 ">
-                              <AiTwotoneStar className="text-yellow-400" />
-                              <AiTwotoneStar className="text-yellow-400" />
-                              <AiTwotoneStar className="text-yellow-400" />
-                              <AiOutlineStar />
-                              <AiOutlineStar />
-                              <span className="text-small font-medium">recomended</span>
-                            </div>
-                            <div className="flex flex-col ">
-                              <p className="text-tiny">Reviewed in Japan on July 2, 2023</p>
-                              <p className="font-normal">Great quality and fast shipping.</p>
-                            </div>
-                          </div>
-                        </> : <>
-                          <p className="font-bold py-4 sm:py-0">No reviews yet.</p>
-                        </>}
-                    </section>
-
-                    <section className="block sm:flex justify-center items-center">
-
-                      <form onSubmit={handleSubmitReview} className="flex flex-col gap-4">
-                        {hasReviewUser && <h3 className="font-bold">Edit your review</h3>}
+            >
+              <AnimationTab key={"review_tab_content"} id={"review_tab_content"}>
+                <div className="w-full grid grid-cols-1 sm:grid-cols-2 grid-flow-row gap-4">
+                  <section className={cn("flex justify-start items-start flex-col gap-6", false && "justify-center items-center")}>
+                    {hasReviews ?
+                      <>
                         <div>
-                          <label className="text-small font-medium pb-2">Rate</label>
-                          <div className="flex flex-row items-center space-x-1 " onMouseLeave={() => {
-                            if (starsSelected !== 0) {
-                              setHoverStarts(starsSelected)
-                            } else {
-                              setHoverStarts(0)
-                            }
-                          }}>
-                            {Array.from([1, 2, 3, 4, 5]).map(index => (
-                              <div onMouseEnter={() => setHoverStarts(index)} key={index} onClick={() => setStarsSelected(index)}>
-                                {index <= hoverStarts ? <AiTwotoneStar className="text-yellow-400" /> : <AiOutlineStar />}
-                              </div>
-                            ))}
+                          <User
+                            as="button"
+                            avatarProps={{
+                              isBordered: true,
+                              src: false || '/img/placeholder.jpg'
+                            }}
+                            name={"Christian Soledispa"}
+                            description={"chris@gmail.com"}
+                            className="transition-transform"
+                            classNames={{
+                              name: "max-w-full",
+                              description: "max-w-full ",
+                            }}
+                          />
+                          <div className="flex flex-row items-center space-x-1 ">
+                            <AiTwotoneStar className="text-yellow-400" />
+                            <AiTwotoneStar className="text-yellow-400" />
+                            <AiTwotoneStar className="text-yellow-400" />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                            <span className="text-small font-medium">recomended</span>
+                          </div>
+                          <div className="flex flex-col ">
+                            <p className="text-tiny">Reviewed in Japan on July 2, 2023</p>
+                            <p className="font-normal">Great quality and fast shipping.</p>
                           </div>
                         </div>
-                        <Textarea
-                          name="description"
-                          label="Description"
-                          labelPlacement="outside"
-                          placeholder="Enter a description"
-                          className="max-w-xs"
-                        />
-                        <div className="flex gap-2 justify-start">
-                          <Button color="primary" type="submit">
-                            Add
-                          </Button>
+                        <div>
+                          <User
+                            as="button"
+                            avatarProps={{
+                              isBordered: true,
+                              src: false || '/img/placeholder.jpg'
+                            }}
+                            name={"Christian Soledispa"}
+                            description={"chris@gmail.com"}
+                            className="transition-transform"
+                            classNames={{
+                              name: "max-w-full",
+                              description: "max-w-full ",
+                            }}
+                          />
+                          <div className="flex flex-row items-center space-x-1 ">
+                            <AiTwotoneStar className="text-yellow-400" />
+                            <AiTwotoneStar className="text-yellow-400" />
+                            <AiTwotoneStar className="text-yellow-400" />
+                            <AiOutlineStar />
+                            <AiOutlineStar />
+                            <span className="text-small font-medium">recomended</span>
+                          </div>
+                          <div className="flex flex-col ">
+                            <p className="text-tiny">Reviewed in Japan on July 2, 2023</p>
+                            <p className="font-normal">Great quality and fast shipping.</p>
+                          </div>
                         </div>
-                      </form>
+                      </> : <>
+                        <p className="font-bold py-4 sm:py-0">No reviews yet.</p>
+                      </>}
+                  </section>
 
-                    </section>
-                  </div>
-                </AnimationTab>} />
+                  <section className="block sm:flex justify-center items-center">
+
+                    <form onSubmit={handleSubmitReview} className="flex flex-col gap-4">
+                      {hasReviewUser && <h3 className="font-bold">Edit your review</h3>}
+                      <div>
+                        <label className="text-small font-medium pb-2">Rate</label>
+                        <div className="flex flex-row items-center space-x-1 " onMouseLeave={() => {
+                          if (starsSelected !== 0) {
+                            setHoverStarts(starsSelected)
+                          } else {
+                            setHoverStarts(0)
+                          }
+                        }}>
+                          {Array.from([1, 2, 3, 4, 5]).map(index => (
+                            <div onMouseEnter={() => setHoverStarts(index)} key={index} onClick={() => setStarsSelected(index)}>
+                              {index <= hoverStarts ? <AiTwotoneStar className="text-yellow-400" /> : <AiOutlineStar />}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                      <Textarea
+                        name="description"
+                        label="Description"
+                        labelPlacement="outside"
+                        placeholder="Enter a description"
+                        className="max-w-xs"
+                      />
+                      <div className="flex gap-2 justify-start">
+                        <Button color="primary" type="submit">
+                          Add
+                        </Button>
+                      </div>
+                    </form>
+
+                  </section>
+                </div>
+              </AnimationTab>
+            </Tab>
           </Tabs>
         </div>
       </div>

@@ -12,6 +12,7 @@ const page = async () => {
   // const listings = await getFavoriteListings();
   const favorites = await getFavorites();
   const currentUser = await getCurrentUser();
+  
   const formattedFavorites = formattedProducts(favorites || []);
   // if (favorites.length === 0) {
   //   return (

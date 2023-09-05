@@ -6,7 +6,7 @@ import Heading from '../components/Heading'
 import getCurrentUser from '../actions/getCurrentUser'
 import getCarts from '../actions/getCarts'
 import getItemsCarousel from '../actions/getItemsCarousel'
-import { formattedProducts } from '../hooks/useProducts'
+import { formattedCarts, formattedProducts } from '../hooks/useProducts'
 
 type Props = {}
 
@@ -22,7 +22,7 @@ async function page({ }: Props) {
   return (
     <Container>
       <ClientOnly>
-        <CartClient currentUser={currentUser} carts={carts} itemsCarousel={ formattedProducts(itemsCarousel)} />
+        <CartClient currentUser={currentUser} carts={formattedCarts(carts)} itemsCarousel={formattedProducts(itemsCarousel)} />
       </ClientOnly>
     </Container>
   )

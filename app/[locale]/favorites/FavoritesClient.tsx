@@ -3,7 +3,6 @@ import { SafeUser, safeFavoritesProducts } from "@/app/types";
 
 import Heading from "@/app/components/Heading";
 import Container from "@/app/components/Container";
-import ListingCard from "@/app/components/listings/ListingCard";
 import { useFavoriteStore } from "../hooks/useFavorite";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
@@ -43,7 +42,7 @@ const FavoritesClient: React.FC<FavoritesClientProps> = ({
 
   useEffect(() => {
     mergeLocalandDB(currentUser, favorites, locale)
-  }, [])
+  }, [currentUser, favorites, locale])
 
   useEffect(() => {
     setData(currentFavorites())

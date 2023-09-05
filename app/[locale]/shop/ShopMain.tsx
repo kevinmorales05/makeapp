@@ -1,7 +1,6 @@
 'use client'
 
 import React, { useEffect, useMemo, useState } from 'react'
-import { Products } from '../types/products';
 import { useProducts } from '../hooks/useProducts';
 import { Pagination } from '@nextui-org/react';
 import { useRouter } from 'next-intl/client';
@@ -11,9 +10,8 @@ import HeartButton from '../components/buttons/HeartButton';
 import { motion } from "framer-motion"
 import { PRODUCTS_PEER_PAGE } from '../constants/constants';
 import Image from 'next/image';
-import { useSession } from 'next-auth/react';
 import { SafeUser } from '../types';
-import useFavorite, { useFavoriteStore } from '../hooks/useFavorite';
+import  { useFavoriteStore } from '../hooks/useFavorite';
 import { useRef } from 'react';
 
 
@@ -47,7 +45,7 @@ export default function ShopMain({ data, currentUser }: { data: IShopProps[], cu
 
   useEffect(() => {
     if (refMerge?.current === 0 && currentUser) {
-      mergeLocalandDB(currentFavorites(), currentUser?.favoriteIds, locale)
+      mergeLocalandDB(currentUser, currentFavorites(), locale)
       refMerge.current++;
     }
   }, [currentUser])

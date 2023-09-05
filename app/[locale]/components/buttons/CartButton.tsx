@@ -2,7 +2,7 @@
 
 import { AiFillHeart, AiOutlineHeart, AiOutlineShoppingCart } from "react-icons/ai";
 
-import useCart from "@/app/hooks/useCart";
+import useCart, { ICartItemState } from "@/app/hooks/useCart";
 import { SafeUser } from "@/app/types";
 import { motion } from "framer-motion"
 import ClientOnly from "../ClientOnly";
@@ -12,7 +12,7 @@ import { MdShoppingCart } from "react-icons/md";
 import { useRouter } from "next/navigation";
 
 interface CartButtonProps {
-  listing: IProductFormatted,
+  listing: ICartItemState,
   currentUser?: SafeUser | null,
   locale: string
 }
@@ -31,8 +31,8 @@ const CartButton: React.FC<CartButtonProps> = ({
   return (
     <motion.div
       onClick={!hasCarted ? toggleCart : () => router.push(`/${locale}/carts`)}
-      // whileHover={{ scale: 1.1 }}
-      // whileTap={{ scale: 0.9 }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
       className="
         relative
         hover:opacity-80

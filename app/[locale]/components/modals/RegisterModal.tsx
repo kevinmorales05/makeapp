@@ -50,7 +50,6 @@ const RegisterModal = () => {
 
     apix(locale).post(`register`, data)
       .then((callback) => {
-        // console.log("tell me callback", callback);
         toast.success(t("toaster.success"));
         registerModal.onClose();
         loginModal.onOpen();

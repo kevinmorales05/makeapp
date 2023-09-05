@@ -2,6 +2,7 @@ import products from "@/public/data/productsKorean.json"
 import { create } from "zustand";
 import { Products } from "../types/products";
 import { useCallback, useMemo } from "react";
+import { ICartItemState } from "./useCart";
 
 
 interface formattedProductsProps {
@@ -69,6 +70,24 @@ export interface IProductFormatted {
     subCategory: string;
     color: string;
 }
+
+export const formattedCarts = (products: IProductProps[] | []) => products.map((p) => ({
+    id: p.id,
+    title: p.title,
+    description: p.description,
+    category: p.category,
+    subCategory: p.subCategory,
+    cost: p.cost,
+    promoCost: p.promoCost,
+    bestSeller: p.bestSeller,
+    kit: p.kit,
+    weight: p.weight,
+    farmacState: p.farmacState,
+    presentation: p.presentation,
+    color: p.color,
+    src: p.imageSrc,
+    quantity: 0
+})) as ICartItemState[];
 
 
 export const formattedProducts = (products: IProductProps[] | []) => products.map((p) => ({

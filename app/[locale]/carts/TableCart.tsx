@@ -4,7 +4,7 @@ import { AiOutlineMinus, AiOutlinePlus, AiOutlineRest, AiOutlineShopping } from 
 import { TbMoodEmpty, TbTruckDelivery } from 'react-icons/tb';
 import useCheckoutModal from '../hooks/useCheckoutModal';
 import { IProductFormatted } from '../hooks/useProducts';
-import { useCartStore } from '../hooks/useCart';
+import { ICartItemState, useCartStore } from '../hooks/useCart';
 import { SafeUser } from '../types';
 import { BsTrash3 } from 'react-icons/bs';
 
@@ -28,7 +28,7 @@ interface ICartProduct {
     quantity: number;
 }
 type Props = {
-    data: IProductFormatted[],
+    data: ICartItemState[],
     currentUser?: SafeUser | null;
     locale: string;
 }
@@ -59,7 +59,7 @@ const TableCart = (props: Props) => {
             count: it.quantity,
             total: it.cost * it.quantity,
         }
-    })
+    }) as any[]
 
     type Cart = typeof dataParse[0];
 

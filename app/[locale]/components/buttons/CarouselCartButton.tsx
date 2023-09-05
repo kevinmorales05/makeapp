@@ -1,7 +1,7 @@
 'use client';
 
 
-import { useCarouselCart } from "@/app/hooks/useCart";
+import { ICartItemState, useCarouselCart } from "@/app/hooks/useCart";
 import { SafeUser } from "@/app/types";
 import { motion } from "framer-motion"
 import { IProductFormatted } from "../../hooks/useProducts";

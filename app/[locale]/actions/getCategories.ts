@@ -6,8 +6,8 @@ export interface IGetCategoriesProps {
 }
 
 interface ICategory {
-  category: string;
-  subCategory: string;
+  category?: string;
+  subCategory?: string;
 }
 
 export const dynamic = 'force-dynamic'
@@ -44,9 +44,6 @@ export default async function getCategories(category: string, subCategory: strin
         category: true,
         subCategory: true
       }
-      // orderBy: {
-      //   createdAt: 'desc'
-      // }
     })
     else listings = await prisma.product.findMany({
       select: {
