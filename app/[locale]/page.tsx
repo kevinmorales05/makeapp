@@ -9,7 +9,7 @@ import ClientOnly from "./components/ClientOnly";
 import Carousel from "./components/carousel/Carousel";
 import { GiLips } from "react-icons/gi";
 import { AiOutlineHighlight } from "react-icons/ai";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React from "react";
 import Breadcrumbs from "./components/Breadcrumbs";
 import ProductCarousel from "./components/carousel/ProductCarousel";
@@ -30,6 +30,9 @@ const Home = async (
   const slides_count = 10;
   const itemsCarousel = await getItemsCarousel(slides_count);
 
+  // const locale1 = useLocale()
+
+  // console.log("locale 1", locale1)
 
   // if (listings.length === 0) {
   //   return (
@@ -44,12 +47,12 @@ const Home = async (
       <Container>
         <ClientOnly>
           <Carousel />
-          <ProductCarousel
+          {/* <ProductCarousel
             title="top products"
             autoPlayProp
             items={formattedProducts(itemsCarousel)}
             currentUser={currentUser}
-          />
+          /> */}
         </ClientOnly >
       </Container>
       <Container>

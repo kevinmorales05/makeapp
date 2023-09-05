@@ -1,69 +1,36 @@
 import prisma from "@/app/libs/prismadb";
 
-export interface IGetCategoriesProps {
-  category?: string;
-  subCategory?: string;
-}
-
 interface ICategory {
-  category?: string;
-  subCategory?: string;
+  id: number;
+  category: string;
+  subCategory: string;
+}
+type UniqueFields = {
+  [key: string]: Set<string>
+}
+type ReadableCategories = {
+  category: string,
+  values: string[]
 }
 
 export const dynamic = 'force-dynamic'
 
-export default async function getCategories(category: string, subCategory: string) {
+export default async function getCategories() {
   try {
-    // const {
-    //   userId,
-    //   roomCount,
-    //   guestCount,
-    //   bathroomCount,
-    //   locationValue,
-    //   startDate,
-    //   endDate,
-    //   category,
-    // } = params;
 
-
-    let query: any = {};
-
-    if (category) {
-      query.category = category;
-    }
-    if (subCategory) {
-      query.subCategory = subCategory;
-    }
-
-    let listings;
-
-    if (category) listings = await prisma.product.findMany({
-      where: query,
+    const categories = await prisma.product.findMany({
       select: {
         id: true,
         category: true,
         subCategory: true
       }
-    })
-    else listings = await prisma.product.findMany({
-      select: {
-        id: true,
-        category: true,
-        subCategory: true
-      }
-    });
+    }) as ICategory[];
 
-    // const safeListings = listings.map((listing) => ({
-    //   ...listing,
-    //   createdAt: listing.createdAt.toISOString(),
-    // }));
+    if (!categories) return []
 
-    // return safeListings;
-
-
-    const uniqueFileds = listings?.reduce((acc: any, listing: ICategory) => {
+    const uniqueFields = categories.reduce((acc: UniqueFields, listing) => {
       const CATEGORIES = "categories";
-      const UNIQUE_CATEGORY = listing.category
+      const UNIQUE_CATEGORY = listing.category;
       const EMPTY_SUBCATEGORY = ''
 
       if (listing.subCategory === EMPTY_SUBCATEGORY || listing.category.startsWith(listing.subCategory)) return acc;
@@ -71,7 +38,7 @@ export default async function getCategories(category: string, subCategory: strin
       if (UNIQUE_CATEGORY in acc) {
         acc[UNIQUE_CATEGORY].add(listing.subCategory);
       } else {
-        const cat = new Set();
+        const cat = new Set<string>();
         cat.add(listing.subCategory);
         acc[UNIQUE_CATEGORY] = cat;
       }
@@ -88,11 +55,10 @@ export default async function getCategories(category: string, subCategory: strin
       return acc;
     }, {});
 
-    const readableCategories = Array.from(uniqueFileds["categories"]).reduce((acc: any, category: any) => {
-      const values = Array.from(uniqueFileds[category])
+    const readableCategories = Array.from(uniqueFields["categories"]).reduce((acc: ReadableCategories[], category) => {
+      const values = Array.from(uniqueFields[category])
       acc.push({ category: category, values: values });
       return acc;
-
     }, [])
 
     return readableCategories;

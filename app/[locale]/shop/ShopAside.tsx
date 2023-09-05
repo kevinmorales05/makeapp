@@ -25,17 +25,16 @@ export default function ShopAside({ allCategories, categoryByName }: {
   const t = useTranslations("categories")
   const tshop = useTranslations("shoppage")
 
+  console.log("categories: ", allCategories)
+
   return (
 
-    <div className='
-    flex flex-col px-4 sm:px-0
-    '>
+    <div className='flex flex-col px-4 sm:px-0'>
 
       {/* {categories} */}
-      <ClientOnly>
-        <section className='py-1 mb-2'>
-          <HeadingAside title={tshop("aside.categories", { locale })} />
-          <Accordion selectionMode="multiple" defaultExpandedKeys={[categoryByName.category]} >
+      <section className='py-1 mb-2'>
+        <HeadingAside title={tshop("aside.categories", { locale })} />
+        {/* <Accordion selectionMode="multiple" defaultExpandedKeys={[categoryByName.category]} >
             {allCategories.map((i) => (
               <AccordionItem key={i.category} aria-label={i.category} title={t(`${i.category}.label`)}>
                 <ul>
@@ -49,9 +48,8 @@ export default function ShopAside({ allCategories, categoryByName }: {
                 </ul>
               </AccordionItem>
             ))}
-          </Accordion>
-        </section>
-      </ClientOnly>
+          </Accordion> */}
+      </section>
 
       {/* {slider} */}
       <section>
@@ -71,7 +69,6 @@ export default function ShopAside({ allCategories, categoryByName }: {
           ))}
         </div>
       </section>
-
     </div>
   )
 }

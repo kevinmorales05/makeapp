@@ -50,8 +50,6 @@ export interface IProductProps {
     category: string;
     subCategory: string;
     color: string;
-    createdAt: string;
-    updatedAt: string;
 }
 
 export interface IProductFormatted {
@@ -71,7 +69,7 @@ export interface IProductFormatted {
     color: string;
 }
 
-export const formattedCarts = (products: IProductProps[] | []) => products.map((p) => ({
+export const formattedCarts = (products: IProductProps[]) => products.map((p) => ({
     id: p.id,
     title: p.title,
     description: p.description,
@@ -108,7 +106,7 @@ export const formattedProducts = (products: IProductProps[] | []) => products.ma
 })) as IProductFormatted[];
 
 
-export const formattedProductById = (product: IProductProps | any): IProductFormatted | {} => {
+export const formattedProductById = (product: IProductProps): IProductFormatted | {} => {
     if (JSON.stringify(product) === '{}') {
         return {}
     }

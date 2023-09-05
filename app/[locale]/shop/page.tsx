@@ -7,11 +7,9 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import EmptyState from '../components/EmptyState'
 import getProducts from '../actions/getProducts'
 import { PRODUCTS_PEER_PAGE } from '../constants/constants'
-import { formattedProducts } from '../hooks/useProducts'
+import { IProductProps, formattedProducts } from '../hooks/useProducts'
 import getCategories from '../actions/getCategories'
-import Loading from '../loading'
 import { MoonLoader, PropagateLoader } from 'react-spinners'
-import { useLocale } from 'next-intl'
 import { categoriesFormattedShop } from '../hooks/useFormatters'
 import Breadcrumbs from '../components/Breadcrumbs'
 
@@ -27,34 +25,46 @@ interface ShopProps {
 
 export const dynamic = "force-dynamic";
 
+const PEER_PAGE = PRODUCTS_PEER_PAGE
 
-export default async function page(
-    params: any
-) {
-    const { searchParams} = params
+export default async function ShopPage({
+    searchParams
+}: {
+    searchParams: { [key: string]: string | string[] | undefined }
+}) {
+    const category =
+        typeof searchParams.category === 'string' ? searchParams.category : 'skin-care'
+    const subCategory =
+        typeof searchParams.subCategory === 'string' ? searchParams.subCategory : 'toner'
+
+    // const categoryWithoutDash = category.split('-').join(' ')
+    // console.log("this", category)
+
+    const productPagination: Omit<IProductProps, "createdAt" | "updatedAt">[] = await getProducts(PEER_PAGE, category, subCategory);
+    const currentPagination = formattedProducts(productPagination)
+
+    const sideCategories = await getCategories();
+
     const currentUser = await getCurrentUser();
 
-    const products = await getProducts(PRODUCTS_PEER_PAGE, searchParams?.category?.split('-').join(' ') || "skin-care", searchParams?.subCategory);
+    // const sideCategoriesWithDash = await getCategories();
+    // const allCategories = categoriesFormattedShop(categories)
 
-    const categories = await getCategories("", "");
-    const allCategories = categoriesFormattedShop(categories)
+    const categoryChocen = { category, subCategory }
 
-    const categoryByName = { category: searchParams.category, subCategory: searchParams?.subCategory || "" }
-
-    // console.log("what is the product category", products, products.length)
     return (
         <Container>
             <div className='flex flex-wrap md:flex-nowrap justify-start'>
-            <Breadcrumbs/>
+                {/* <Breadcrumbs/> */}
                 <div className='w-full md:w-[480px] xl:w-[232px]'>
-                    <ClientOnly>
-                        <ShopAside allCategories={allCategories} categoryByName={categoryByName} />
-                    </ClientOnly>
+                    <Suspense fallback={"Loading aside aside aside..."}>
+                        <ShopAside allCategories={sideCategories} categoryByName={categoryChocen} />
+                    </Suspense>
                 </div>
                 <div className='w-full md:w-auto xl:auto flex flex-col'>
-                    <ClientOnly>
-                        <ShopMain data={formattedProducts(products)} currentUser={currentUser} />
-                    </ClientOnly>
+                    <Suspense fallback={"Loading..."}>
+                        <ShopMain data={currentPagination} currentUser={currentUser} />
+                    </Suspense>
 
                 </div>
             </div>

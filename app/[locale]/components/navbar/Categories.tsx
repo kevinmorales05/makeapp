@@ -1,4 +1,4 @@
-
+'use client'
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import CategoryBox from "../CategoryBox";

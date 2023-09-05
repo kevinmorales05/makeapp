@@ -11,7 +11,7 @@ import { motion } from "framer-motion"
 import { PRODUCTS_PEER_PAGE } from '../constants/constants';
 import Image from 'next/image';
 import { SafeUser } from '../types';
-import  { useFavoriteStore } from '../hooks/useFavorite';
+import { useFavoriteStore } from '../hooks/useFavorite';
 import { useRef } from 'react';
 
 
@@ -31,9 +31,13 @@ interface IShopProps {
   color: string
   src: string
 }
+type ShopMainProps = {
+  data: IShopProps[],
+  currentUser?: SafeUser | null
+}
 
-export default function ShopMain({ data, currentUser }: { data: IShopProps[], currentUser: SafeUser }) {
-
+export default function ShopMain(props: ShopMainProps) {
+  const { data, currentUser } = props
   const { mergeLocalandDB, currentFavorites } = useFavoriteStore()
 
   const { getByPagination } = useProducts();
