@@ -42,17 +42,17 @@ const Breadcrumbs = () => {
         })
       }
     });
-
     return splitted.reverse()
   }
 
   return (
-    <div className="flex gap-2 items-start">
+    <div className="flex gap-2 items-start mb-1">
       {splitPathnames(pathname, locale).map((crumb: CrumbItem, i: number) => {
         const isLastItem = i === splitPathnames(pathname, locale).length - 1;
-        if (!isLastItem) {
-          return (
-            <>
+        console.log(crumb.label, splitPathnames(pathname, locale).length)
+        return (
+          <div key={i} className="flex gap-1">
+            {!isLastItem && <>
               <Link
                 href={crumb.path}
                 key={i}
@@ -63,10 +63,10 @@ const Breadcrumbs = () => {
               {/* separator */}
               <span> / </span>
             </>
-          );
-        } else {
-          return crumb.label;
-        }
+            }
+            {isLastItem && crumb.label}
+          </div>
+        );
       })}
     </div>
   );

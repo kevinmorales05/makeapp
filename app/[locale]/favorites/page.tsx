@@ -7,13 +7,17 @@ import getFavorites from "@/app/actions/getFavorites";
 
 import FavoritesClient from "./FavoritesClient";
 import { formattedProducts } from "../hooks/useProducts";
+import { SafeProducts, SafeUser } from "../types";
+
+export const dynamic = "force-dynamic";
 
 const page = async () => {
   // const listings = await getFavoriteListings();
-  const favorites = await getFavorites();
-  const currentUser = await getCurrentUser();
+  const favorites: SafeProducts[] = await getFavorites();
+  const currentUser: SafeUser | null = await getCurrentUser();
+
+  const formattedFavorites = formattedProducts(favorites);
   
-  const formattedFavorites = formattedProducts(favorites || []);
   // if (favorites.length === 0) {
   //   return (
   //     <ClientOnly>

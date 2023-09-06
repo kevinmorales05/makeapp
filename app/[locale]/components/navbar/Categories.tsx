@@ -29,7 +29,9 @@ const Categories = () => {
           flex-row 
           items-center 
           justify-start
-          2xl:justify-evenly
+          sm:justify-between
+          lg:justify-center
+          xl:justify-evenly
           overflow-x-auto
           lg:hover:overflow-x-auto
         "

@@ -23,8 +23,16 @@ export type SafeUser = Omit<
   emailVerified: string | null;
 };
 
-export type safeFavoritesProducts = Omit<Product, "createdAt" | "updatedAt"> & {
-  createdAt: string;
-  updatedAt: string;
+export type SafeProducts = Omit<Product, "createdAt" | "updatedAt"> & {
+  createdAt: Date;
+  updatedAt: Date;
 };
 
+export type ExtendedProductCart = Product & {
+  quantity: number
+}
+
+export type SafeCart = Omit<ExtendedProductCart, "createdAt" | "updatedAt"> & {
+  createdAt: Date;
+  updatedAt: Date;
+};

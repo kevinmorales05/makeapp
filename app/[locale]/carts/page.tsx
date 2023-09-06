@@ -7,16 +7,19 @@ import getCurrentUser from '../actions/getCurrentUser'
 import getCarts from '../actions/getCarts'
 import getItemsCarousel from '../actions/getItemsCarousel'
 import { formattedCarts, formattedProducts } from '../hooks/useProducts'
+import { SafeCart, SafeProducts, SafeUser } from '../types'
+
+export const dynamic = "force-dynamic";
 
 type Props = {}
 
 async function page({ }: Props) {
 
-  const currentUser = await getCurrentUser()
-  const carts = await getCarts()
+  const currentUser: SafeUser | null = await getCurrentUser()
+  const carts: SafeCart[] = await getCarts()
 
   const slides_count = 10;
-  const itemsCarousel = await getItemsCarousel(slides_count);
+  const itemsCarousel: SafeProducts[] = await getItemsCarousel(slides_count);
 
 
   return (

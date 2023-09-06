@@ -3,6 +3,7 @@ import { create } from "zustand";
 import { Products } from "../types/products";
 import { useCallback, useMemo } from "react";
 import { ICartItemState } from "./useCart";
+import { SafeCart, SafeProducts } from "../types";
 
 
 interface formattedProductsProps {
@@ -69,7 +70,7 @@ export interface IProductFormatted {
     color: string;
 }
 
-export const formattedCarts = (products: IProductProps[]) => products.map((p) => ({
+export const formattedCarts = (products: SafeCart[] | []) => products.map((p) => ({
     id: p.id,
     title: p.title,
     description: p.description,
@@ -84,11 +85,11 @@ export const formattedCarts = (products: IProductProps[]) => products.map((p) =>
     presentation: p.presentation,
     color: p.color,
     src: p.imageSrc,
-    quantity: 0
+    quantity: p.quantity
 })) as ICartItemState[];
 
 
-export const formattedProducts = (products: IProductProps[] | []) => products.map((p) => ({
+export const formattedProducts = (products: SafeProducts[] | []) => products.map((p) => ({
     id: p.id,
     title: p.title,
     description: p.description,
@@ -106,10 +107,8 @@ export const formattedProducts = (products: IProductProps[] | []) => products.ma
 })) as IProductFormatted[];
 
 
-export const formattedProductById = (product: IProductProps): IProductFormatted | {} => {
-    if (JSON.stringify(product) === '{}') {
-        return {}
-    }
+export const formattedProductById = (product: SafeProducts | null): IProductFormatted | null => {
+    if (!product) return null
     return {
         id: product.id,
         title: product.title,

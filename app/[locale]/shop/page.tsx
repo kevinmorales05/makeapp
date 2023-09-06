@@ -4,66 +4,62 @@ import ClientOnly from '../components/ClientOnly'
 import ShopAside from './ShopAside'
 import ShopMain from './ShopMain'
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import EmptyState from '../components/EmptyState'
 import getProducts from '../actions/getProducts'
 import { PRODUCTS_PEER_PAGE } from '../constants/constants'
-import { IProductProps, formattedProducts } from '../hooks/useProducts'
+import { formattedProducts } from '../hooks/useProducts'
 import getCategories from '../actions/getCategories'
-import { MoonLoader, PropagateLoader } from 'react-spinners'
-import { categoriesFormattedShop } from '../hooks/useFormatters'
 import Breadcrumbs from '../components/Breadcrumbs'
-
-interface ISearchParams {
-    category?: string;
-    subCategory?: string;
-}
-
-interface ShopProps {
-    searchParams: ISearchParams;
-    locale: string;
-};
+import { SafeProducts, SafeUser } from '../types'
 
 export const dynamic = "force-dynamic";
 
-const PEER_PAGE = PRODUCTS_PEER_PAGE
-
 export default async function ShopPage({
-    searchParams
+    searchParams,
+    // locale
 }: {
-    searchParams: { [key: string]: string | string[] | undefined }
-}) {
+    searchParams: {
+        // [key: string]: string |
+        // string[] |
+        // undefined
+        category: string,
+        subCategory: string,
+        limit: number
+    },
+    // locale: string
+}
+) {
+
     const category =
-        typeof searchParams.category === 'string' ? searchParams.category : 'skin-care'
+        typeof searchParams.category === 'string' ? searchParams.category : "skin care"
     const subCategory =
-        typeof searchParams.subCategory === 'string' ? searchParams.subCategory : 'toner'
+        typeof searchParams.subCategory === 'string' ? searchParams.subCategory : "lotion"
+    const limit =
+        typeof searchParams.limit === 'string' ? Number(searchParams.limit) : PRODUCTS_PEER_PAGE
 
-    // const categoryWithoutDash = category.split('-').join(' ')
-    // console.log("this", category)
 
-    const productPagination: Omit<IProductProps, "createdAt" | "updatedAt">[] = await getProducts(PEER_PAGE, category, subCategory);
-    const currentPagination = formattedProducts(productPagination)
+    const currentUser: SafeUser | null = await getCurrentUser();
+    const products: SafeProducts[] = await getProducts(limit, category, subCategory);
 
-    const sideCategories = await getCategories();
+    const categories = await getCategories();
+    const i18Categories = categories.map(c => ({
+        ...c,
+        i18Category: c.category.split(' ').join('-')
+    }))
 
-    const currentUser = await getCurrentUser();
-
-    // const sideCategoriesWithDash = await getCategories();
-    // const allCategories = categoriesFormattedShop(categories)
-
-    const categoryChocen = { category, subCategory }
+    const categoryByName = { category, subCategory }
 
     return (
         <Container>
+            <Breadcrumbs />
             <div className='flex flex-wrap md:flex-nowrap justify-start'>
-                {/* <Breadcrumbs/> */}
                 <div className='w-full md:w-[480px] xl:w-[232px]'>
-                    <Suspense fallback={"Loading aside aside aside..."}>
-                        <ShopAside allCategories={sideCategories} categoryByName={categoryChocen} />
-                    </Suspense>
+                    <ClientOnly>
+                        <ShopAside allCategories={i18Categories} categoryByName={categoryByName} />
+                    </ClientOnly>
                 </div>
                 <div className='w-full md:w-auto xl:auto flex flex-col'>
                     <Suspense fallback={"Loading..."}>
-                        <ShopMain data={currentPagination} currentUser={currentUser} />
+                        <ShopMain data={formattedProducts(products)} currentUser={currentUser} />
                     </Suspense>
 
                 </div>

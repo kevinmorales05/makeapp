@@ -10,7 +10,8 @@ import { useCategories } from '../hooks/useCategories'
 
 interface IShopAsideProps {
   category: string,
-  values: string[]
+  i18Category: string,
+  values: string[],
 }
 interface ICategoryByName {
   category: string,
@@ -29,26 +30,26 @@ export default function ShopAside({ allCategories, categoryByName }: {
 
   return (
 
-    <div className='flex flex-col px-4 sm:px-0'>
+    <div className='flex flex-col px-4 sm:px-0 whydevilmaycry'>
 
       {/* {categories} */}
       <section className='py-1 mb-2'>
         <HeadingAside title={tshop("aside.categories", { locale })} />
-        {/* <Accordion selectionMode="multiple" defaultExpandedKeys={[categoryByName.category]} >
-            {allCategories.map((i) => (
-              <AccordionItem key={i.category} aria-label={i.category} title={t(`${i.category}.label`)}>
-                <ul>
-                  {i.values.map((item: string, index: number) => (
-                    <li key={item} className='py-2 px-8'>
-                      <Link href={`${locale}/shop?category=${i.category}&subCategory=${item}`} color="foreground" className={cn(`hover:text-red-dark/50`,
-                        categoryByName.subCategory === item ? "text-red-dark/50" : ""
-                      )}>{item.charAt(0).toUpperCase() + item.slice(1)}</Link>
-                    </li>
-                  ))}
-                </ul>
-              </AccordionItem>
-            ))}
-          </Accordion> */}
+        <Accordion selectionMode="multiple" defaultExpandedKeys={[categoryByName.category]} >
+          {allCategories.map((c) => (
+            <AccordionItem key={c.category} aria-label={c.category} title={t(`${c.i18Category}.label`)}>
+              <ul>
+                {c.values.map((item: string, index: number) => (
+                  <li key={item} className='py-2 px-8'>
+                    <Link href={`${locale}/shop?category=${c.category}&subCategory=${item}`} color="foreground" className={cn(`hover:text-red-dark/50`,
+                      categoryByName.subCategory === item ? "text-red-dark/50" : ""
+                    )}>{item.charAt(0).toUpperCase() + item.slice(1)}</Link>
+                  </li>
+                ))}
+              </ul>
+            </AccordionItem>
+          ))}
+        </Accordion>
       </section>
 
       {/* {slider} */}

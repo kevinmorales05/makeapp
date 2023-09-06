@@ -1,7 +1,6 @@
 import createIntlMiddleware from 'next-intl/middleware';
 import { NextFetchEvent, NextMiddleware, NextRequest } from 'next/server';
 import { authMiddleware } from './authmiddleware';
-import middleware from '@ppmiddleware';
 
 const locales = ['es', 'en', 'ko'];
 const publicPages = ['/', '/shop', '/carts', "/shop/", "/favorites", "/listings"];
@@ -25,9 +24,9 @@ export default function i18AuthMiddleware(middleware: NextMiddleware) {
         const isPublicPage = publicPathnameRegex.test(request.nextUrl.pathname);
 
         if (isPublicPage) {
-            return intlMiddleware(request);
+            intlMiddleware(request);
         } else {
-            return (authMiddleware as any)(request);
+            (authMiddleware as any)(request);
         }
 
         return middleware(request, event)

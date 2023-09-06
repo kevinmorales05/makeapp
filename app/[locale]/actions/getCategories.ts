@@ -1,34 +1,25 @@
 import prisma from "@/app/libs/prismadb";
 
-interface ICategory {
-  id: number;
+export interface UniqueFields {
+  [key: string]: Set<string>;
+}
+export interface ReadableCategories {
   category: string;
-  subCategory: string;
-}
-type UniqueFields = {
-  [key: string]: Set<string>
-}
-type ReadableCategories = {
-  category: string,
-  values: string[]
+  values: string[];
 }
 
-export const dynamic = 'force-dynamic'
 
-export default async function getCategories() {
+export default async function getCategories(): Promise<ReadableCategories[]> {
   try {
-
-    const categories = await prisma.product.findMany({
+    const listings = await prisma.product.findMany({
       select: {
         id: true,
         category: true,
         subCategory: true
       }
-    }) as ICategory[];
+    })
 
-    if (!categories) return []
-
-    const uniqueFields = categories.reduce((acc: UniqueFields, listing) => {
+    const uniqueFileds = listings.reduce((acc: UniqueFields, listing) => {
       const CATEGORIES = "categories";
       const UNIQUE_CATEGORY = listing.category;
       const EMPTY_SUBCATEGORY = ''
@@ -55,8 +46,8 @@ export default async function getCategories() {
       return acc;
     }, {});
 
-    const readableCategories = Array.from(uniqueFields["categories"]).reduce((acc: ReadableCategories[], category) => {
-      const values = Array.from(uniqueFields[category])
+    const readableCategories = Array.from(uniqueFileds["categories"]).reduce((acc: ReadableCategories[], category) => {
+      const values = Array.from(uniqueFileds[category])
       acc.push({ category: category, values: values });
       return acc;
     }, [])

@@ -13,7 +13,6 @@ import Providers from './providers/Providers';
 
 import { notFound } from 'next/navigation'
 import { Suspense } from 'react';
-import Skeleton from './skeleton';
 import Await from './await';
 import Movies from './movies';
 import { NextUI } from './providers/NextUI';
@@ -71,7 +70,7 @@ const DynamicNavbar = dynamic(() => import('@/app/components/navbar/Navbar'), {
 
 export default async function RootLayout({
   children,
-  params: { locale }
+  params: { locale },
 }: RootProps) {
 
   const currentLocale = useLocale();
@@ -87,31 +86,16 @@ export default async function RootLayout({
     <html lang={locale} className={htmlClasses}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          {/* <Suspense fallback={<Skeleton />}>
-            <Providers />
-          </Suspense> */}
           <Navbar currentUser={currentUser} />
-          <Suspense>
-            <NextUI>
+          <ClientOnly>
+            <Providers>
               <div className="pb-20 pt-32">
                 {children}
               </div>
-            </NextUI>
-          </Suspense>
+            </Providers>
+          </ClientOnly>
         </NextIntlClientProvider>
-        <Footer />
-        {/* <Suspense fallback={<Skeleton />}>
-          <Await promise={new Promise(resolve => setTimeout(resolve, 2000))}>
-            <>
-              <Suspense fallback={<Skeleton />}>
-                <Await promise={new Promise(resolve => setTimeout(resolve, 2000))}>
-                  <>
-                  </>
-                </Await>
-              </Suspense>
-            </>
-          </Await>
-        </Suspense> */}
+        {/* <Footer /> */}
       </body>
     </html >
   )

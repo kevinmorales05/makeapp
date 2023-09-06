@@ -1,36 +1,25 @@
 'use client'
 
-import getProductById from "@/app/actions/getProductById";
 import ClientOnly from "@/app/components/ClientOnly";
 import Container from "@/app/components/Container";
 import EmptyState from "@/app/components/EmptyState";
-// import ListingHead from "@/app/components/listings/ListingHead";
-import ListingInfo from "@/app/components/listings/ListingInfo";
-import { useMemo, useState } from "react";
-import ListingProductHead from "./ListingProductImage";
 import ListingProductImage from "./ListingProductImage";
 import Heading from "@/app/components/Heading";
 import { ListingProductInfo } from "./ListingProductInfo";
 import ListingProductRequest from "./ListingProductRequest";
-import axios from "axios";
-import { toast } from "sonner";
-import { useLocale } from "next-intl";
-import { apix } from "@/app/constants/axios-instance";
 import { IProductFormatted, formattedProductById } from "@/app/hooks/useProducts";
 import { useCartStore } from "@/app/hooks/useCart";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
-// import { apix } from "@/app/constants/axios-instance";
 
 interface IShopClientProps {
   currentUser?: any;
-  product: IProductFormatted | any
+  product: IProductFormatted | null
   locale: string
 }
 
 const ShopClient: React.FC<IShopClientProps> = ({ product, locale, currentUser }) => {
   const listing = product
-  const [hasUser, setHasUser] = useState<boolean>(false)
-  const {  addCart } = useCartStore()
+  const { addCart } = useCartStore()
 
 
   const handlerAddCart = async (currentListing: IProductFormatted) => {
@@ -38,43 +27,39 @@ const ShopClient: React.FC<IShopClientProps> = ({ product, locale, currentUser }
   }
 
 
+  if (!listing) {
+    return (<ClientOnly>
+      <EmptyState title="Something went wrong with this product" subtitle="Try with another product" />
+    </ClientOnly>)
+  }
+
+
   return (
     <Container>
-      <div className="flex justify-center flex-col">
+      <div className="flex justify-center flex-col something">
         <Breadcrumbs />
-        <div>btn</div>
-        <div
-          className="
-          max-w-screen-lg 
-          mx-auto
-          flex
-        "
-        >
+        {/* <div>btn</div> */}
+        <div className="max-w-screen-lg mx-auto flex">
 
           <div className="flex flex-wrap flex-col">
-
-            <ListingProductImage
-              imageSrc={listing.src}
-              id={listing.id}
-              listing={listing}
-              currentUser={currentUser}
-            />
-
-            <Heading
-              title={listing.title}
-              subtitle={listing.description}
-            />
-
-            <ListingProductRequest price={listing.cost} handlerButton={handlerAddCart} listing={listing} />
-            <ListingProductInfo
-              description={listing.description}
-            />
-
+            <ClientOnly>
+              <ListingProductImage
+                imageSrc={listing.src}
+                id={listing.id}
+                listing={listing}
+                currentUser={currentUser}
+              />
+              <Heading
+                title={listing.title}
+                subtitle={listing.description}
+              />
+              <ListingProductRequest price={listing.cost} handlerButton={handlerAddCart} listing={listing} />
+              <ListingProductInfo
+                description={listing.description}
+              />
+            </ClientOnly>
           </div>
-
         </div>
-
-
       </div>
     </Container>
   )

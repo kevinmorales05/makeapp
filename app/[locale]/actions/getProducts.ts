@@ -11,28 +11,13 @@ export interface IListingsParams {
   category?: string;
 }
 
-export interface IListingsParamsShop {
-  category?: string;
-  nameProduct?: string;
-}
-
 export default async function getProducts(
   // params: IListingsParams
   page_peer_size: number,
-  category?: string,
-  subCategory?: string,
+  category: string,
+  subCategory: string,
 ) {
   try {
-    // const {
-    //   userId,
-    //   roomCount,
-    //   guestCount,
-    //   bathroomCount,
-    //   locationValue,
-    //   startDate,
-    //   endDate,
-    //   category,
-    // } = params;
 
     let query: any = {};
     let listings;

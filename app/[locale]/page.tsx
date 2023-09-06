@@ -15,6 +15,7 @@ import Breadcrumbs from "./components/Breadcrumbs";
 import ProductCarousel from "./components/carousel/ProductCarousel";
 import getItemsCarousel from "./actions/getItemsCarousel";
 import { formattedProducts } from "./hooks/useProducts";
+import { SafeProducts, SafeUser } from "./types";
 
 
 // interface HomeProps {
@@ -26,9 +27,9 @@ const Home = async (
   // { searchParams }: HomeProps
 ) => {
   // const listings = await getListings(searchParams);
-  const currentUser = await getCurrentUser();
+  const currentUser: SafeUser | null = await getCurrentUser();
   const slides_count = 10;
-  const itemsCarousel = await getItemsCarousel(slides_count);
+  const itemsCarousel: SafeProducts[] = await getItemsCarousel(slides_count);
 
   // const locale1 = useLocale()
 
@@ -47,12 +48,12 @@ const Home = async (
       <Container>
         <ClientOnly>
           <Carousel />
-          {/* <ProductCarousel
+          <ProductCarousel
             title="top products"
             autoPlayProp
             items={formattedProducts(itemsCarousel)}
             currentUser={currentUser}
-          /> */}
+          />
         </ClientOnly >
       </Container>
       <Container>
