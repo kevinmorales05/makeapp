@@ -26,6 +26,7 @@ import CarouselCartButton from '../buttons/CarouselCartButton'
 import { useLocale } from 'next-intl'
 import { useRouter } from 'next-intl/client'
 import { ICartItemState } from '@/app/hooks/useCart'
+import Image from 'next/image'
 
 
 interface ProductCarouselProps {
@@ -101,12 +102,13 @@ const ProductCarousel
                                         onMouseEnter={() => handleMouseEnter}
                                         onMouseLeave={() => handleMouseLeave}
                                         isPressable radius='none' shadow='none' className="sm:h-[435px] w-full relative group">
-                                        <img
+                                        <Image
                                             src={item.src}
                                             alt={item.title}
-                                            className="w-full h-auto transition-transform transform scale-100 group-hover:scale-102"
+                                            fill
+                                            className="w-full h-auto transition-transform transform scale-100 group-hover:scale-103"
                                         />
-                                        <div className="flex flex-col gap-8 lg:gap-14 opacity-0 absolute top-0 left-0 w-full h-full transition-opacity bg-[#222] bg-opacity-10 p-30 flex items-center justify-center opacity-0 transition-all duration-300 ease-linear group-hover:opacity-100 cursor-pointer">
+                                        <div className="flex flex-col gap-8 lg:gap-14 absolute top-0 left-0 w-full h-full transition-opacity bg-[#222] bg-opacity-10 p-30 items-center justify-center opacity-0  duration-300 ease-linear group-hover:opacity-100 cursor-pointer">
                                             <BsSearch className="text-white/90 h-[250px] w-full flex justify-center items-center opacity-100 z-400 p-20 md:py-10 xl:py-0" />
                                             <div className="flex gap-8">
                                                 <CarouselHeartButton

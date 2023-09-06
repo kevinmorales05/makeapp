@@ -9,6 +9,8 @@ import getItemsCarousel from '../actions/getItemsCarousel'
 import { formattedCarts, formattedProducts } from '../hooks/useProducts'
 import { SafeCart, SafeProducts, SafeUser } from '../types'
 
+export const dynamic = "force-dynamic";
+
 type Props = {}
 
 async function page({ }: Props) {

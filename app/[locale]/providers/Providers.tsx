@@ -1,7 +1,7 @@
 import ToasterProvider from './ToasterProvider'
 import ModalsProvider from './ModalsProvider'
-import { NextUIProvider } from '@nextui-org/react'
 import { NextUI } from './NextUI'
+import { SessionProvider } from "next-auth/react"
 
 type Props = { children: React.ReactNode }
 

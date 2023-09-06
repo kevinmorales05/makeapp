@@ -9,12 +9,13 @@ import ClientOnly from "./components/ClientOnly";
 import Carousel from "./components/carousel/Carousel";
 import { GiLips } from "react-icons/gi";
 import { AiOutlineHighlight } from "react-icons/ai";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import React from "react";
 import Breadcrumbs from "./components/Breadcrumbs";
 import ProductCarousel from "./components/carousel/ProductCarousel";
 import getItemsCarousel from "./actions/getItemsCarousel";
 import { formattedProducts } from "./hooks/useProducts";
+import { SafeProducts, SafeUser } from "./types";
 
 
 // interface HomeProps {
@@ -26,10 +27,13 @@ const Home = async (
   // { searchParams }: HomeProps
 ) => {
   // const listings = await getListings(searchParams);
-  const currentUser = await getCurrentUser();
+  const currentUser: SafeUser | null = await getCurrentUser();
   const slides_count = 10;
-  const itemsCarousel = await getItemsCarousel(slides_count);
+  const itemsCarousel: SafeProducts[] = await getItemsCarousel(slides_count);
 
+  // const locale1 = useLocale()
+
+  // console.log("locale 1", locale1)
 
   // if (listings.length === 0) {
   //   return (

@@ -4,18 +4,19 @@ import React, { useState, useEffect } from 'react';
 
 interface ClientOnlyProps {
   children: React.ReactNode;
+  exotic?: React.ReactNode;
 }
 
-const ClientOnly: React.FC<ClientOnlyProps> = ({ 
-  children
+const ClientOnly: React.FC<ClientOnlyProps> = ({
+  children, exotic
 }) => {
   const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-      setHasMounted(true);
+    setHasMounted(true);
   }, [])
 
-  if (!hasMounted) return null;
+  if (!hasMounted) return exotic;
 
   return (
     <>

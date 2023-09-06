@@ -4,25 +4,14 @@ import ClientOnly from '../components/ClientOnly'
 import ShopAside from './ShopAside'
 import ShopMain from './ShopMain'
 import getCurrentUser from "@/app/actions/getCurrentUser";
-import EmptyState from '../components/EmptyState'
 import getProducts from '../actions/getProducts'
 import { PRODUCTS_PEER_PAGE } from '../constants/constants'
-import { IProductFormatted, formattedProducts } from '../hooks/useProducts'
+import { formattedProducts } from '../hooks/useProducts'
 import getCategories from '../actions/getCategories'
-import Loading from '../loading'
-import { MoonLoader, PropagateLoader } from 'react-spinners'
-import { useLocale } from 'next-intl'
-import { categoriesFormattedShop } from '../hooks/useFormatters'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { SafeProducts, SafeUser } from '../types'
 
-interface ISearchParams {
-    category?: string;
-    subCategory?: string;
-}
-
 export const dynamic = "force-dynamic";
-
 
 export default async function ShopPage({
     searchParams,
@@ -52,22 +41,26 @@ export default async function ShopPage({
     const products: SafeProducts[] = await getProducts(limit, category, subCategory);
 
     const categories = await getCategories();
+    const i18Categories = categories.map(c => ({
+        ...c,
+        i18Category: c.category.split(' ').join('-')
+    }))
+
     const categoryByName = { category, subCategory }
 
-    // console.log("lcoale shop", locale)
     return (
         <Container>
+            <Breadcrumbs />
             <div className='flex flex-wrap md:flex-nowrap justify-start'>
-                <Breadcrumbs />
                 <div className='w-full md:w-[480px] xl:w-[232px]'>
                     <ClientOnly>
-                        <ShopAside allCategories={categories} categoryByName={categoryByName} />
+                        <ShopAside allCategories={i18Categories} categoryByName={categoryByName} />
                     </ClientOnly>
                 </div>
                 <div className='w-full md:w-auto xl:auto flex flex-col'>
-                    <ClientOnly>
+                    <Suspense fallback={"Loading..."}>
                         <ShopMain data={formattedProducts(products)} currentUser={currentUser} />
-                    </ClientOnly>
+                    </Suspense>
 
                 </div>
             </div>

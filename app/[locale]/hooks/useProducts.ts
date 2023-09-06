@@ -51,8 +51,6 @@ export interface IProductProps {
     category: string;
     subCategory: string;
     color: string;
-    createdAt: string;
-    updatedAt: string;
 }
 
 export interface IProductFormatted {
@@ -109,10 +107,8 @@ export const formattedProducts = (products: SafeProducts[] | []) => products.map
 })) as IProductFormatted[];
 
 
-export const formattedProductById = (product: IProductProps | any): IProductFormatted | {} => {
-    if (JSON.stringify(product) === '{}') {
-        return {}
-    }
+export const formattedProductById = (product: SafeProducts | null): IProductFormatted | null => {
+    if (!product) return null
     return {
         id: product.id,
         title: product.title,

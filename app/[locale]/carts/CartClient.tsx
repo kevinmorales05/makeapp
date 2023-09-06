@@ -31,7 +31,7 @@ const CartClient = (props: Props) => {
 
     useEffect(() => {
         setData(currentCarts())
-    }, [currentCarts()])
+    }, [currentCarts])
 
 
     if (!data) return (<>Loading...</>)

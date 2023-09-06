@@ -12,6 +12,11 @@ import { NextIntlClientProvider, useLocale } from 'next-intl';
 import Providers from './providers/Providers';
 
 import { notFound } from 'next/navigation'
+import { Suspense } from 'react';
+import Await from './await';
+import Movies from './movies';
+import { NextUI } from './providers/NextUI';
+import dynamic from 'next/dynamic';
 
 async function getMessages(locale: string) {
   try {
@@ -52,26 +57,26 @@ export const metadata = {
   description: 'Amazing Korean Cosmetics',
 }
 
-export const dynamic = 'force-dynamic'
+// export const dynamic = 'force-dynamic'
 
 type RootProps = {
   children: React.ReactNode
   params: { locale: string }
 }
+
+const DynamicNavbar = dynamic(() => import('@/app/components/navbar/Navbar'), {
+  ssr: true
+});
+
 export default async function RootLayout({
   children,
-  params: { locale }
+  params: { locale },
 }: RootProps) {
 
   const currentLocale = useLocale();
-
-
-  // if (locale !== currentLocale) {
-  //   console.log("current locale is not found in the config file")
-    
-  //   notFound();
-  // }
-
+  if (locale !== currentLocale) {
+    notFound();
+  }
 
   const currentUser = await getCurrentUser();
   const messages = await getMessages(locale)
@@ -81,17 +86,17 @@ export default async function RootLayout({
     <html lang={locale} className={htmlClasses}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
+          <Navbar currentUser={currentUser} />
           <ClientOnly>
-            <Navbar currentUser={currentUser} />
             <Providers>
               <div className="pb-20 pt-32">
                 {children}
               </div>
             </Providers>
           </ClientOnly>
-            {/* <Footer /> */}
         </NextIntlClientProvider>
+        {/* <Footer /> */}
       </body>
-    </html>
+    </html >
   )
 }

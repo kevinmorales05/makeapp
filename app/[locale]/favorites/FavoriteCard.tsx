@@ -35,11 +35,7 @@ const FavoriteCard = (props: Props) => {
                                 src={item.src}
                                 alt="Listing"
                             />
-                            <div className="
-          absolute
-          top-3
-          right-3
-          ">
+                            <div className="absolute top-3 right-3">
                                 <HeartButton
                                     listing={item}
                                     currentUser={currentUser}

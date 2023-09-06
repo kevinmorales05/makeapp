@@ -8,7 +8,7 @@ export default async function getProductById(
 
     const id = parseInt(productId) ? parseInt(productId) : -1;
     
-    if (id < 0) return {};
+    if (id < 0) return null;
 
     const listing = await prisma.product.findUnique({
       where: {
@@ -29,6 +29,8 @@ export default async function getProductById(
         category: true,
         subCategory: true,
         color: true,
+        createdAt: true,
+        updatedAt: true,
       }
       // include: {
       //   user: true
@@ -36,20 +38,9 @@ export default async function getProductById(
     });
 
     if (!listing) {
-      return {};
+      return null;
     }
     return listing;
-    return {
-      // ...listing,
-      // createdAt: listing.createdAt.toString(),
-      // user: {
-      //   ...listing.user,
-      //   createdAt: listing.user.createdAt.toString(),
-      //   updatedAt: listing.user.updatedAt.toString(),
-      //   emailVerified:
-      //     listing.user.emailVerified?.toString() || null,
-      // }
-    };
   } catch (error: any) {
     throw new Error(error);
   }

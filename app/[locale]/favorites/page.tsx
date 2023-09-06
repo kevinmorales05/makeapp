@@ -9,6 +9,8 @@ import FavoritesClient from "./FavoritesClient";
 import { formattedProducts } from "../hooks/useProducts";
 import { SafeProducts, SafeUser } from "../types";
 
+export const dynamic = "force-dynamic";
+
 const page = async () => {
   // const listings = await getFavoriteListings();
   const favorites: SafeProducts[] = await getFavorites();

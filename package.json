@@ -47,6 +47,7 @@
     "react-hot-toast": "^2.4.1",
     "react-icons": "^4.10.1",
     "react-leaflet": "^4.2.1",
+    "react-loading-skeleton": "^3.3.1",
     "react-select": "^5.7.4",
     "react-spinners": "^0.13.8",
     "sonner": "^0.6.2",

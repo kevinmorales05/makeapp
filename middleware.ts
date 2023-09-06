@@ -11,31 +11,14 @@
 //   ]
 // };
 
-import createMiddleware from 'next-intl/middleware';
-
-// export default createMiddleware({
-//   // A list of all locales that are supported
-//   locales: ['es', 'en', 'ko'],
-
-//   // If this locale is matched, pathnames work without a prefix (e.g. `/about`)
-//   defaultLocale: 'es'
-// });
-
-// export const config = {
-//   // Skip all paths that should not be internationalized. This example skips the
-//   // folders "api", "_next" and all files with an extension (e.g. favicon.ico)
-//   matcher: ['/((?!api|_next|.*\\..*).*)']
-// };
-
-
 import { withAuth } from 'next-auth/middleware';
 import createIntlMiddleware from 'next-intl/middleware';
 import { NextRequest } from 'next/server';
 
-const locales = ['es', 'ko', 'en' ];
+const locales = ['es', 'en', 'ko'];
 const publicPages = ['/', '/shop', '/carts', "/shop/", "/favorites", "/listings"];
 
-const intlMiddleware = createIntlMiddleware({
+export const intlMiddleware = createIntlMiddleware({
     locales,
     defaultLocale: 'es'
 });
@@ -80,12 +63,7 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: [
-        '/((?!api|_next|.*\\..*).*)'
-        // '/((?!api|_next/static|_next/img|img|favicon.ico).*)',
-    ]
-
+    // Skip all paths that should not be internationalized. This example skips the
+    // folders "api", "_next" and all files with an extension (e.g. favicon.ico)
+    matcher: ['/((?!api|_next|.*\\..*).*)']
 };
-// export const config = {
-//     matcher: ["/((?!api/auth|_next|favicon.ico).*)"],
-//   };

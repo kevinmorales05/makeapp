@@ -21,7 +21,7 @@ export default async function getCategories(): Promise<ReadableCategories[]> {
 
     const uniqueFileds = listings.reduce((acc: UniqueFields, listing) => {
       const CATEGORIES = "categories";
-      const UNIQUE_CATEGORY = listing.category
+      const UNIQUE_CATEGORY = listing.category;
       const EMPTY_SUBCATEGORY = ''
 
       if (listing.subCategory === EMPTY_SUBCATEGORY || listing.category.startsWith(listing.subCategory)) return acc;
@@ -50,7 +50,6 @@ export default async function getCategories(): Promise<ReadableCategories[]> {
       const values = Array.from(uniqueFileds[category])
       acc.push({ category: category, values: values });
       return acc;
-
     }, [])
 
     return readableCategories;
