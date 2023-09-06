@@ -1,5 +1,5 @@
 'use client'
-import { SafeUser, safeFavoritesProducts } from "@/app/types";
+import { SafeUser } from "@/app/types";
 
 import Heading from "@/app/components/Heading";
 import Container from "@/app/components/Container";
@@ -7,17 +7,8 @@ import { useFavoriteStore } from "../hooks/useFavorite";
 import { useLocale } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { apix } from "../constants/axios-instance";
-import { produce } from "immer";
-import HeartButton from "../components/buttons/HeartButton";
-import Image from "next/image";
-import Button from "../components/buttons/Button";
 import { IProductFormatted, formattedProducts } from "../hooks/useProducts";
-import { Card, CardBody, CardFooter, CardHeader, Image as ImageUI, Button as ButtonUI } from "@nextui-org/react";
-import image33 from '@/public/mocking/creams.jpg'
-import { GiLips } from "react-icons/gi";
 import { useCategories } from "../hooks/useCategories";
-import CartButton from "../components/buttons/CartButton";
 import { useCartStore } from "../hooks/useCart";
 import EmptyState from "../components/EmptyState";
 import FavoriteCard from "./FavoriteCard";

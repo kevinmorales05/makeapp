@@ -1,67 +1,25 @@
 import prisma from "@/app/libs/prismadb";
 
-export interface IGetCategoriesProps {
-  category?: string;
-  subCategory?: string;
+export interface UniqueFields {
+  [key: string]: Set<string>;
+}
+export interface ReadableCategories {
+  category: string;
+  values: string[];
 }
 
-interface ICategory {
-  category?: string;
-  subCategory?: string;
-}
 
-export const dynamic = 'force-dynamic'
-
-export default async function getCategories(category: string, subCategory: string) {
+export default async function getCategories(): Promise<ReadableCategories[]> {
   try {
-    // const {
-    //   userId,
-    //   roomCount,
-    //   guestCount,
-    //   bathroomCount,
-    //   locationValue,
-    //   startDate,
-    //   endDate,
-    //   category,
-    // } = params;
-
-
-    let query: any = {};
-
-    if (category) {
-      query.category = category;
-    }
-    if (subCategory) {
-      query.subCategory = subCategory;
-    }
-
-    let listings;
-
-    if (category) listings = await prisma.product.findMany({
-      where: query,
+    const listings = await prisma.product.findMany({
       select: {
         id: true,
         category: true,
         subCategory: true
       }
     })
-    else listings = await prisma.product.findMany({
-      select: {
-        id: true,
-        category: true,
-        subCategory: true
-      }
-    });
 
-    // const safeListings = listings.map((listing) => ({
-    //   ...listing,
-    //   createdAt: listing.createdAt.toISOString(),
-    // }));
-
-    // return safeListings;
-
-
-    const uniqueFileds = listings?.reduce((acc: any, listing: ICategory) => {
+    const uniqueFileds = listings.reduce((acc: UniqueFields, listing) => {
       const CATEGORIES = "categories";
       const UNIQUE_CATEGORY = listing.category
       const EMPTY_SUBCATEGORY = ''
@@ -71,7 +29,7 @@ export default async function getCategories(category: string, subCategory: strin
       if (UNIQUE_CATEGORY in acc) {
         acc[UNIQUE_CATEGORY].add(listing.subCategory);
       } else {
-        const cat = new Set();
+        const cat = new Set<string>();
         cat.add(listing.subCategory);
         acc[UNIQUE_CATEGORY] = cat;
       }
@@ -88,7 +46,7 @@ export default async function getCategories(category: string, subCategory: strin
       return acc;
     }, {});
 
-    const readableCategories = Array.from(uniqueFileds["categories"]).reduce((acc: any, category: any) => {
+    const readableCategories = Array.from(uniqueFileds["categories"]).reduce((acc: ReadableCategories[], category) => {
       const values = Array.from(uniqueFileds[category])
       acc.push({ category: category, values: values });
       return acc;

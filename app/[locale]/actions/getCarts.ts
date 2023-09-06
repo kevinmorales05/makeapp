@@ -1,6 +1,7 @@
 import prisma from "@/app/libs/prismadb";
 
 import getCurrentUser from "./getCurrentUser";
+import { SafeCart } from "../types";
 
 export default async function getCarts() {
     try {
@@ -19,10 +20,8 @@ export default async function getCarts() {
             }
         });
 
-        const safeCarts = carts.map((cart) => ({
+        const safeCarts: SafeCart[] = carts.map((cart) => ({
             ...cart.product,
-            createdAt: cart.product.createdAt.toString(),
-            updatedAt: cart.product.createdAt.toString(),
             quantity: cart.quantity
         }));
 

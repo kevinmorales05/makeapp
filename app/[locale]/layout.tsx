@@ -89,7 +89,7 @@ export default async function RootLayout({
               </div>
             </Providers>
           </ClientOnly>
-            <Footer />
+            {/* <Footer /> */}
         </NextIntlClientProvider>
       </body>
     </html>

@@ -1,5 +1,4 @@
 import prisma from "@/app/libs/prismadb";
-
 import getCurrentUser from "./getCurrentUser";
 
 export default async function getFavorites() {
@@ -19,12 +18,7 @@ export default async function getFavorites() {
     });
 
     if (favoriteProducts) {
-      const safeFavorites = favoriteProducts.map((favorite) => ({
-        ...favorite,
-        createdAt: favorite.createdAt.toString(),
-        updatedAt: favorite.createdAt.toString(),
-      }));
-      return safeFavorites;
+      return favoriteProducts;
     }
     else return [];
 

@@ -1,10 +1,8 @@
-import axios from "axios";
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
 
-import { SafeUser, safeFavoritesProducts } from "@/app/types";
+import { SafeUser } from "@/app/types";
 
-import useLoginModal from "./useLoginModal";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
 import { produce } from "immer";

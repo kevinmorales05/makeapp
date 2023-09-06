@@ -84,9 +84,9 @@ const Carousel: React.FC<PropType> = (props: ProductCarouselProps) => {
                     <p className="font-light font-gandhi text-4xl text-start">{t("title", { data: index + 1 })}</p>
                     <div className='mt-8'>
                       <p className="font-gandhi font-medium antialiased text-ellipsis py-6 text-start">{t("subtitle", { data: index + 1 })}</p>
-                      <div className="w-[8rem] items-start group">
+                      {/* <div className="w-[8rem] items-start group">
                         <Button label={t("button", { locale })} onClick={() => { }} className='group-hover:scale-105 transition' />
-                      </div>
+                      </div> */}
                     </div>
                   </div>
 

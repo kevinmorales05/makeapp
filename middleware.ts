@@ -32,7 +32,7 @@ import { withAuth } from 'next-auth/middleware';
 import createIntlMiddleware from 'next-intl/middleware';
 import { NextRequest } from 'next/server';
 
-const locales = ['es', 'en', 'ko'];
+const locales = ['es', 'ko', 'en' ];
 const publicPages = ['/', '/shop', '/carts', "/shop/", "/favorites", "/listings"];
 
 const intlMiddleware = createIntlMiddleware({
@@ -41,7 +41,7 @@ const intlMiddleware = createIntlMiddleware({
 });
 
 const authMiddleware = withAuth(
-    function onSuccess(req) {
+    function middleware(req: any) {
         return intlMiddleware(req);
     },
     // (req) => intlMiddleware(req),
