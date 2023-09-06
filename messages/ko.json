@@ -1,0 +1,139 @@
+{
+  "LocaleSwitcher": {
+    "titleModal": "언어 선택",
+    "title": "{locale, select, es {스페인어} en {영어} ko {한국어} other {알 수 없음}}",
+    "description": "{locale, select, es {생생하고 선율적인} en {글로벌하고 연결된} ko {매혹적이고 수수께끼 같은} other {알 수 없음}}"
+  },
+  "navbar": {
+    "title": "Hello world!",
+    "subtitle": "Hello world!",
+    "userMenu": {
+      "invoices": "My invoices",
+      "details": "My invoices",
+      "korean": "Korean Cosmetic your home",
+      "logout": "Logout"
+    }
+  },
+  "carousel": {
+    "title": "{data, select, 1 {K-뷰티 360: 한국 뷰티 루틴의 완벽한 진화} 2{테크스타일: 패션과 기술의 절정적 융합, 한국에서} 3{가스트로놈이 강남: 서울의 트렌드 세터 식품 문화} 4{할류 웨이브 2.0: 글로벌 한국 엔터테인먼트의 새로운 시대} 5{슬로 라이프 한옥: 전통적인 한국 생활을 통해 평온을 재발견} 6{지속 가능한 서울: 한국의 친환경적 미래 구상} other{lorem ipsum}}",
+    "subtitle": "{data, select, 1 {뷰티 산업을 혁신하는 최신 스킨케어 및 메이크업 트렌드를 발견해보세요} 2{혁신적인 패션과 첨단 기술이 만나는 곳, 한국 라이프스타일을 정의합니다} 3{강남의 절묘한 미식을 경험해보세요, 음식이 라이프스타일 경험으로 변모합니다} 4{중독성 있는 K-드라마부터 혁신적인 K-팝까지, 할류 웨이브가 새로운 차원을 만들며 전 세계적으로 사랑받고 있습니다} 5{한옥과 전통적인 생활 방식의 평온을 현대 세계에서 찾아보며 일상 생활에서 균형을 찾아보세요} 6{지속 가능한 혁신과 환경 인식이 한국 수도에서 비즈니스 실천과 라이프스타일을 형성하는 방향을 탐구해보세요} other{lorem ipsum}}",
+    "slide_count": "6",
+    "button": "{locale, select, es {Leer más} en {Read more} ko {더 읽기} other {Read more}}"
+  },
+  "footer": {
+    "title": "안전한 결제 보장",
+    "subtitle": "저희 온라인 스토어의 양식에 입력된 모든 데이터는 SSL 인증된 보안 프로토콜 하에 안전하게 암호화되어 저장됩니다. 마찬가지로 결제 시스템은 안전한 은행 게이트웨이를 통해 이루어집니다.",
+    "networks": "소셜 네트워크에서 저희를 팔로우하세요"
+  },
+  "categories": {
+    "derma-plan": {
+      "label": "더마 플랜",
+      "description": "이 크림은 피부를 햇볕으로부터 보호합니다!"
+    },
+    "skin-care": {
+      "label": "스킨 케어",
+      "description": "이 속성은 피부를 돕습니다!"
+    },
+    "sun-care": {
+      "label": "선 케어",
+      "description": "이 크림은 피부를 햇볕으로부터 보호합니다!"
+    },
+    "toner-skin": {
+      "label": "토너/피부",
+      "description": "이 제품은 당신을 보호하고 빛나는 얼굴을 제공합니다!"
+    },
+    "wrinkle-solution-toner": {
+      "label": "주름 해결 토너",
+      "description": "이 제품은 비타민과 항산화 물질을 제공합니다!"
+    },
+    "lotion": {
+      "label": "로션",
+      "description": "이 제품은 여러 가지 혜택을 제공합니다!"
+    },
+    "skin": {
+      "label": "피부",
+      "description": "이 제품은 고대의 비밀을 제공합니다!"
+    },
+    "body-care": {
+      "label": "바디 케어",
+      "description": "이 제품은 클렌징, 각질 제거, 털 제거, 네일 케어 및 바디 브러싱을 제공합니다!"
+    },
+    "mask-pack": {
+      "label": "마스크 팩",
+      "description": "이 마스크는 수분 공급, 화사함, 모공 개선, 진정 및 기타 다양한 피부 관리 요구에 맞는 다양한 성분으로 제조됩니다."
+    },
+    "make-up": {
+      "label": "메이크업",
+      "description": "이 제품은 자연스러운 특징을 강화하며 흠을 가려내고 창의성을 표현하며 이전에 본 적 없는 특정한 룩을 완성하는 데 사용됩니다!"
+    },
+    "all-in-one": {
+      "label": "올인원",
+      "description": "이 제품은 편리성과 시간 절약성으로 특히 인기 있으며 노력을 최소한으로 하거나 바쁜 사람들에게 완벽한 피부조합을 단 한 단계로 얻을 수 있도록 이상적입니다."
+    },
+    "perfume": {
+      "label": "향수",
+      "description": "이것들은 다양한 향료 성분을 세심하게 혼합하여 독특하고 독보적인 향기를 만들어 내어 감정, 기억, 스타일, 개인 연관 및 개인성을 불러일으킬 수 있습니다."
+    },
+    "nail-care": {
+      "label": "네일 케어",
+      "description": "이 제품은 손톱의 건강, 강도 및 모양을 유지하기 위한 다양한 관행과 제품을 포괄합니다."
+    }
+  },
+  "homepage": {
+    "title": "Hello world!",
+    "subtitle": "Hello world!"
+  },
+  "shoppage": {
+    "aside": {
+      "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",
+      "tops3": "{locale, select, es {Top 3 Para Hoy} en {Top 3 For Today} ko {오늘의 상위 3개} other {Top 3 For Today}}"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "content": {
+      "title": "Welcome back",
+      "subtitle": "Login to your account!",
+      "inputs": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "footer": {
+        "button": "Continue",
+        "button-google": "Continue with Google",
+        "label": "First time using Korean Cosmetic?",
+        "span-label": "Create an account"
+      }
+    },
+    "toaster": {
+      "success": "Logged in",
+      "error": "{error_msg}"
+    }
+  },
+  "register": {
+    "title": "Register",
+    "content": {
+      "title": "Welcome to Korean Cosmetic",
+      "subtitle": "Create an account!",
+      "inputs": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password"
+      },
+      "footer": {
+        "button": "Continue",
+        "button-google": "Continue with Google",
+        "label": "Already have an account?",
+        "span-label": "Log in"
+      }
+    },
+    "toaster": {
+      "success": "Registered!",
+      "error": "{error_msg}"
+    }
+  },
+  "signup": {
+    "title": "Welcome to Corean Cosmetic",
+    "subtitle": "Create an account!"
+  }
+}

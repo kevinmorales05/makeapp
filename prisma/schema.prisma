@@ -1,0 +1,117 @@
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "debian-openssl-1.1.x", "debian-openssl-3.0.x", "linux-musl", "linux-musl-openssl-3.0.x"]
+  // output        = "./generated/client" // to use a custom output path
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  // shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+}
+
+model User {
+  id             String     @id @default(cuid())
+  name           String?
+  bio            String?
+  email          String?    @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime   @default(now())
+  updatedAt      DateTime   @default(now()) @updatedAt
+  favoriteIds    Int[]
+  accounts       Account[]
+  carts          Cart[]
+  reviews        Review[]
+  sessions       Session[]
+  checkkouts     Checkout[]
+}
+
+model Account {
+  id                Int     @id @default(autoincrement())
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  userId            String
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Product {
+  id           Int      @id @default(autoincrement())
+  title        String   @db.VarChar(200)
+  description  String
+  imageSrc     String
+  cost         Float
+  promoCost    Float
+  bestSeller   Boolean  @default(false)
+  kit          Boolean  @default(false)
+  weight       String
+  farmacState  String
+  presentation String
+  category     String
+  subCategory  String
+  color        String   @default("default")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  carts        Cart[]
+  Review       Review?
+}
+
+model Cart {
+  id        Int     @id @default(autoincrement())
+  productId Int     @unique
+  quantity  Int
+  userId    String
+  product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Review {
+  id          Int     @id @default(autoincrement())
+  rating      Int     @default(0)
+  title       String  @db.VarChar(100)
+  description String  @db.VarChar(150)
+  userId      String
+  productId   Int     @unique
+  product     Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Checkout {
+  id              Int    @id @default(autoincrement())
+  contact         Json?
+  deliveryMethods String
+  deliveryShip    Json?
+  deliveryPickup  Json?
+  items           Json
+  methodPayment   Json?
+
+  User   User   @relation(fields: [userId], references: [id])
+  userId String
+}

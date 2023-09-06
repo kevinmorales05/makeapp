@@ -1,0 +1,137 @@
+{
+  "LocaleSwitcher": {
+    "titleModal": "Selecciona un idioma",
+    "title": "{locale, select, es {Español} en {Ingles} ko {Coreano} other {Desconocido}}",
+    "description": "{locale, select, es {Vibrante y melódico} en {Global y conectado} ko {Fascinante y enigmático} other {Desconocido}}"
+  },
+  "navbar": {
+    "userMenu": {
+      "invoices": "My invoices",
+      "details": "My invoices",
+      "korean": "Korean Cosmetic your home",
+      "logout": "Logout"
+    }
+  },
+  "carousel": {
+    "title": "{data, select, 1 {K-Beauty 360: La Evolución Total de la Rutina de Belleza Coreana} 2 {TechStyle: La Fusión Vanguardista entre Moda y Tecnología en Corea} 3 {Gastronomía Gangnam: La Escena Culinaria de Lujo que Marca Tendencia en Seúl} 4 {Hallyu Wave 2.0: La Nueva Era del Entretenimiento Coreano Global} 5 {Slow Life Hanok: Redescubriendo la Tranquilidad a Través de la Vida Tradicional Coreana} 6 {Sustainable Seoul: El Impulso de Corea hacia un Futuro Eco-Consciente} other {lorem ipsum}}",
+    "subtitle": "{data, select, 1 {Descubre las Últimas Tendencias en Cuidado de la Piel y Maquillaje que Están Revolucionando la Industria de la Belleza} 2 {Explora la Intersección de la Moda Innovadora y la Tecnología de Vanguardia que Define el Estilo de Vida en Corea del Sur} 3 {Sumérgete en la Exquisita Gastronomía de Gangnam, Donde la Comida se Convierte en una Experiencia de Estilo de Vida} 4 {Desde K-Dramas Adictivos hasta K-Pop Rompedor, Explora cómo la Ola Hallyu Está Tomando Nuevas Dimensiones y Conquistando Corazones en Todo el Mundo} 5 {Abraza la Serenidad de los Hanoks y las Prácticas Tradicionales en un Mundo Moderno, Encontrando Equilibrio en la Vida Cotidiana} 6 {Explora cómo la Innovación Sostenible y la Conciencia Ambiental están Definiendo las Prácticas Empresariales y el Estilo de Vida en la Capital Coreana} other {lorem ipsum}}",
+    "slide_count": "6",
+    "button": "{locale, select, es {Leer más} en {Read more} ko {더 읽기} other {Read more}}"
+  },
+  "footer": {
+    "title": "Garantía de pago seguro",
+    "subtitle": "Todos los datos ingresados en los formularios de nuestra tienda en línea se almacenan de manera segura y encriptada bajo el protocolo de seguridad certificado SSL. De igual manera, el sistema de pago se realiza a través de una pasarela bancaria segura.",
+    "networks": "Síguenos en redes sociales"
+  },
+  "categories": {
+    "derma-plan": {
+      "label": "Plan Derma",
+      "description": "¡Esta crema protege la piel contra el sol!"
+    },
+    "skin-care": {
+      "label": "Cuidado de la Piel",
+      "description": "¡Esta propiedad ayuda a tu piel!"
+    },
+    "sun-care": {
+      "label": "Cuidado Solar",
+      "description": "¡Esta crema protege la piel contra el sol!"
+    },
+    "toner-skin": {
+      "label": "Tónico/Piel",
+      "description": "¡Estos productos te protegen y brindan un rostro radiante!"
+    },
+    "wrinkle-solution-toner": {
+      "label": "Tónico Solución de Arrugas",
+      "description": "¡Estos productos te proporcionan vitaminas y antioxidantes!"
+    },
+    "lotion": {
+      "label": "Loción",
+      "description": "¡Estos productos te proporcionan algunos beneficios!"
+    },
+    "skin": {
+      "label": "Piel",
+      "description": "¡Estos productos brindan secretos ancestrales!"
+    },
+    "body-care": {
+      "label": "Cuidado Corporal",
+      "description": "¡Estos productos ofrecen limpieza, exfoliación, eliminación de vello, cuidado de uñas y cepillado corporal!"
+    },
+    "mask-pack": {
+      "label": "Mascarillas",
+      "description": "Estas mascarillas están formuladas con diversos ingredientes que satisfacen diferentes necesidades de cuidado de la piel, como hidratación, luminosidad, refinamiento de poros, calmante y más."
+    },
+    "make-up": {
+      "label": "Maquillaje",
+      "description": "¡Estos productos realzan rasgos naturales, ocultan imperfecciones, expresan la creatividad y logran looks específicos nunca antes vistos!"
+    },
+    "all-in-one": {
+      "label": "Todo en uno",
+      "description": "Estos productos son especialmente populares por su conveniencia y propiedades que ahorran tiempo, lo que los hace ideales para personas que buscan lograr un aspecto completo con un esfuerzo mínimo o para aquellos que están en movimiento, y lograr una tez impecable en un solo paso."
+    },
+    "perfume": {
+      "label": "Perfume",
+      "description": "Estos se crean mediante una cuidadosa mezcla de varios ingredientes aromáticos, dando como resultado una fragancia única y distintiva que puede evocar emociones, recuerdos, estilo, asociaciones personales y la personalidad de cada individuo."
+    },
+    "nail-care": {
+      "label": "Cuidado de Uñas",
+      "description": "Estos productos abarcan una variedad de prácticas y productos destinados a mantener la salud, fuerza y apariencia de las uñas."
+    }
+  },
+  "homepage": {
+    "title": "Hello world!",
+    "subtitle": "Hello world!"
+  },
+  "shoppage": {
+    "aside": {
+      "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",
+      "tops3": "{locale, select, es {Top 3 Para Hoy} en {Top 3 For Today} ko {오늘의 상위 3개} other {Top 3 For Today}}"
+    }
+  },
+  "login": {
+    "title": "Ingresar",
+    "content": {
+      "title": "Bienvenido de vuelta",
+      "subtitle": "Ingresa en tu cuenta!",
+      "inputs": {
+        "email": "Correo electrónico",
+        "password": "Contraseña"
+      },
+      "footer": {
+        "button": "Continuar",
+        "button-google": "Continuar con Google",
+        "label": "Primera vez usando Korean Cosmetic?",
+        "span-label": "Crear una cuenta"
+      }
+    },
+    "toaster": {
+      "success": "Ingreso exitoso!",
+      "error": "{error_msg}"
+    }
+  },
+  "register": {
+    "title": "Registrar",
+    "content": {
+      "title": "Bienvenido a Corean Cosmetic",
+      "subtitle": "Crear una cuenta!",
+      "inputs": {
+        "name": "Nombre",
+        "email": "Correo electrónico",
+        "password": "Contraseña"
+      },
+      "footer": {
+        "button": "Continuar",
+        "button-google": "Continuar con Google",
+        "label": "¿Ya tienes una cuenta?",
+        "span-label": "Ingresar"
+      }
+    },
+    "toaster": {
+      "success": "Registro exitoso!",
+      "error": "{error_msg}"
+    }
+  },
+  "signup": {
+    "title": "Welcome to Corean Cosmetic",
+    "subtitle": "Create an account!"
+  }
+}

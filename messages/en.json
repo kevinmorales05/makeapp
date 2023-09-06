@@ -1,0 +1,139 @@
+{
+  "LocaleSwitcher": {
+    "titleModal": "Select a language",
+    "title": "{locale, select, es {Spanish} en {English} ko {Korean} other {Unknown}}",
+    "description": "{locale, select, es {Vibrant and melodic} en {Global and connected} ko {Fascinating and enigmatic} other {Unknown}}"
+  },
+  "navbar": {
+    "title": "Hello world!",
+    "subtitle": "Hello world!",
+    "userMenu": {
+      "invoices": "My invoices",
+      "details": "My invoices",
+      "korean": "Make App your home",
+      "logout": "Logout"
+    }
+  },
+  "carousel": {
+    "title": "{data, select, 1 {K-Beauty 360: The Complete Evolution of the Korean Beauty Routine} 2{TechStyle: The Cutting-Edge Fusion of Fashion and Technology in Korea} 3{Gastronomy Gangnam: The Trendsetting Culinary Scene in Seoul} 4{Hallyu Wave 2.0: The New Era of Global Korean Entertainment} 5{Slow Life Hanok: Rediscovering Tranquility Through Traditional Korean Living} 6{Sustainable Seoul: Korea's Drive Towards an Eco-Conscious Future} other{lorem ipsum}}",
+    "subtitle": "{data, select, 1 {Discover the Latest Trends in Skincare and Makeup that are Revolutionizing the Beauty Industry} 2{Explore the Intersection of Innovative Fashion and Cutting-Edge Technology that Defines the Lifestyle in South Korea} 3{Immerse Yourself in Gangnam's Exquisite Gastronomy, Where Food Turns into a Lifestyle Experience} 4{From Addictive K-Dramas to Groundbreaking K-Pop, Explore How the Hallyu Wave is Taking New Dimensions and Winning Hearts Worldwide} 5{Embrace the Serenity of Hanoks and Traditional Practices in a Modern World, Finding Balance in Everyday Life} 6{Explore How Sustainable Innovation and Environmental Awareness are Shaping Business Practices and Lifestyle in the Korean Capital} other{lorem ipsum}}",
+    "slide_count": "6",
+    "button": "{locale, select, es {Leer más} en {Read more} ko {더 읽기} other {Read more}}"
+  },
+  "footer": {
+    "title": "Secure payment guarantee",
+    "subtitle": "All the data entered in the forms of our online store are stored securely encrypted under the SSL certified security protocol. In the same way, the payment system is carried out through a secure bank gateway.",
+    "networks": "Follow us on social networks"
+  },
+  "categories": {
+    "derma-plan": {
+      "label": "Derma Plan",
+      "description": "This cream protects the skin against the sun!"
+    },
+    "skin-care": {
+      "label": "Skin Care",
+      "description": "This property heps your skin!"
+    },
+    "sun-care": {
+      "label": "Sun Care",
+      "description": "This cream protects the skin against the sun!"
+    },
+    "toner-skin": {
+      "label": "Toner/Skin",
+      "description": "These products protect to you and provides a shining face!"
+    },
+    "wrinkle-solution-toner": {
+      "label": "Wrinkle Solution Toner",
+      "description": "These products provides to you so vitamins and antioxidants!"
+    },
+    "lotion": {
+      "label": "Lotion",
+      "description": "These products provides to you so some benefits!"
+    },
+    "skin": {
+      "label": "Skin",
+      "description": "These products provides ancient secrets!"
+    },
+    "body-care": {
+      "label": "Body Care",
+      "description": "These products provides cleansing, exfoliating, and hair removal to nail care and body brushing!"
+    },
+    "mask-pack": {
+      "label": "Mask Pack",
+      "description": "These masks are formulated with various ingredients that cater to different skincare needs, such as hydration, brightening, pore refinement, soothing, and more.!"
+    },
+    "make-up": {
+      "label": "Make Up",
+      "description": "These products have enhancing natural features, concealing imperfections, expressing creativity, and achieving specific looks never seen before !"
+    },
+    "all-in-one": {
+      "label": "All in one",
+      "description": "These products are especially popular for their convenience and time-saving properties, making them ideal for individuals looking to achieve a complete look with minimal effort or for those on the go, and achieve a flawless complexion in a single step."
+    },
+    "perfume": {
+      "label": "Perfume",
+      "description": "These are created through a careful blending of various aromatic ingredients, resulting in a unique and distinctive fragrance that can evoke emotions, memories, style, personal associations, and an individual's personality."
+    },
+    "nail-care": {
+      "label": "Nail Care",
+      "description": "These products encompasses a range of practices and products aimed at maintaining the health, strength, and appearance of the nails."
+    }
+  },
+  "homepage": {
+    "title": "Hello world!",
+    "subtitle": "Hello world!"
+  },
+  "shoppage": {
+    "aside": {
+      "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",
+      "tops3": "{locale, select, es {Top 3 Para Hoy} en {Top 3 For Today} ko {오늘의 상위 3개} other {Top 3 For Today}}"
+    }
+  },
+  "login": {
+    "title": "Login",
+    "content": {
+      "title": "Welcome back",
+      "subtitle": "Login to your account!",
+      "inputs": {
+        "email": "Email",
+        "password": "Password"
+      },
+      "footer": {
+        "button": "Continue",
+        "button-google": "Continue with Google",
+        "label": "First time using Korean Cosmetic?",
+        "span-label": "Create an account"
+      }
+    },
+    "toaster": {
+      "success": "Logged in",
+      "error": "{error_msg}"
+    }
+  },
+  "register": {
+    "title": "Register",
+    "content": {
+      "title": "Welcome to Korean Cosmetic",
+      "subtitle": "Create an account!",
+      "inputs": {
+        "name": "Name",
+        "email": "Email",
+        "password": "Password"
+      },
+      "footer": {
+        "button": "Continue",
+        "button-google": "Continue with Google",
+        "label": "Already have an account?",
+        "span-label": "Log in"
+      }
+    },
+    "toaster": {
+      "success": "Registered!",
+      "error": "{error_msg}"
+    }
+  },
+  "signup": {
+    "title": "Welcome to Corean Cosmetic",
+    "subtitle": "Create an account!"
+  }
+}

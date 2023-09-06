@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    // "baseUrl": "app/[locale]/",
+    "baseUrl": ".",
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/pages/*": ["pages/*"],
+      "@/app/*": ["app/[locale]/*"],
+      "@/components/*": ["app/[locale]/components/*"],
+      "@/public/*": ["public/*"],
+      "@*": ["*"],
+      "@/*": ["./*"]
+
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "app/[locale]/listings/[listingId]/t.page.tsx"],
+  "exclude": ["node_modules"]
+}
