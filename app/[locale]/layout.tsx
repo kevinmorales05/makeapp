@@ -1,22 +1,39 @@
-import { Merienda, Roboto_Serif } from 'next/font/google'
+import { Merienda } from 'next/font/google'
 import localFont from 'next/font/local'
+import './globals.css'
+
+
+import ClientOnly from './components/ClientOnly';
+import dynamic from 'next/dynamic';
 
 import Navbar from '@/app/components/navbar/Navbar';
-
-import './globals.css'
-import ClientOnly from './components/ClientOnly';
-import getCurrentUser from './actions/getCurrentUser';
-import Footer from './components/footer/Footer';
-
-import { NextIntlClientProvider, useLocale } from 'next-intl';
 import Providers from './providers/Providers';
-
 import { notFound } from 'next/navigation'
-import { Suspense } from 'react';
-import Await from './await';
-import Movies from './movies';
-import { NextUI } from './providers/NextUI';
-import dynamic from 'next/dynamic';
+
+import { NextIntlClientProvider, createTranslator, useLocale } from 'next-intl';
+import getCurrentUser from './actions/getCurrentUser';
+
+const merienda = Merienda({
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-merienda',
+  // fallback: [ "Times New Roman" ],
+  adjustFontFallback: true
+})
+// const roboto = Roboto_Serif({
+//   subsets: ['latin'],
+//   display: 'swap',
+//   variable: '--font-roboto-serif',
+// })
+
+const gandhi = localFont({
+  src: "./fonts/GandhiSerif-Regular.otf",
+  weight: '400',
+  display: 'swap',
+  style: 'normal',
+  variable: '--font-gandhi-serif',
+}
+)
 
 async function getMessages(locale: string) {
   try {
@@ -30,33 +47,6 @@ async function getMessages(locale: string) {
 //   return ['es', 'en', 'ko'].map((locale) => ({ locale }))
 // }
 
-const merienda = Merienda({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-merienda',
-  // fallback: [ "Times New Roman" ],
-  adjustFontFallback: true
-})
-const roboto = Roboto_Serif({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-roboto-serif',
-})
-
-const gandhi = localFont({
-  src: "./fonts/GandhiSerif-Regular.otf",
-  weight: '400',
-  display: 'swap',
-  style: 'normal',
-  variable: '--font-gandhi-serif',
-}
-)
-
-export const metadata = {
-  title: 'Makeapp',
-  description: 'Amazing Korean Cosmetics',
-}
-
 // export const dynamic = 'force-dynamic'
 
 type RootProps = {
@@ -64,9 +54,14 @@ type RootProps = {
   params: { locale: string }
 }
 
-const DynamicNavbar = dynamic(() => import('@/app/components/navbar/Navbar'), {
-  ssr: true
-});
+export async function generateMetadata({ params: { locale } }: RootProps) {
+  const messages = await getMessages(locale);
+  const t = createTranslator({ locale, messages });
+  return {
+    title: t("Metadata.title"),
+    description: t("Metadata.description"),
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -79,7 +74,7 @@ export default async function RootLayout({
   }
 
   const currentUser = await getCurrentUser();
-  const messages = await getMessages(locale)
+  const messages: IntlMessages = await getMessages(locale)
   const htmlClasses = `${merienda.variable} ${gandhi.variable}`
 
   return (

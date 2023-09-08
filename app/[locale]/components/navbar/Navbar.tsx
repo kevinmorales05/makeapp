@@ -10,6 +10,7 @@ import dynamic from "next/dynamic";
 import ClientOnly from "../ClientOnly";
 import i18AuthMiddleware from "@middlewares/i18middleware";
 import UserMenuSke from "../skeletons/navbar/UserMenuSke";
+import { useCategories } from "@/app/hooks/useCategories";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
@@ -24,14 +25,16 @@ const Navbar: React.FC<NavbarProps> = ({
   currentUser,
 }) => {
 
+  const { allCategories } = useCategories()
+
   return (
     <div className="fixed w-full bg-white z-10 shadow-sm">
       <div className="py-4 border-b-[1px]">
         <Container>
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0 mt-2">
-            
             <Logo />
-            <ClientOnly exotic={<UserMenuSke/>}>
+
+            <ClientOnly exotic={<UserMenuSke />}>
               <I18nDropdown />
               {/* <Search /> */}
               <UserMenu currentUser={currentUser} />
@@ -40,7 +43,7 @@ const Navbar: React.FC<NavbarProps> = ({
         </Container>
       </div>
       <ClientOnly>
-        <DynamicCategories />
+        <DynamicCategories categories={allCategories} />
       </ClientOnly>
       {/* <MegaMenu /> */}
     </div>

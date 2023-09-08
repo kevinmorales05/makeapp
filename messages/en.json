@@ -4,6 +4,10 @@
     "title": "{locale, select, es {Spanish} en {English} ko {Korean} other {Unknown}}",
     "description": "{locale, select, es {Vibrant and melodic} en {Global and connected} ko {Fascinating and enigmatic} other {Unknown}}"
   },
+  "Metadata": {
+    "title": "Make App",
+    "description": "Amazing Korean Cosmetics"
+  },
   "navbar": {
     "title": "Hello world!",
     "subtitle": "Hello world!",
@@ -136,4 +140,5 @@
     "title": "Welcome to Corean Cosmetic",
     "subtitle": "Create an account!"
   }
+
 }

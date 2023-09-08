@@ -4,6 +4,10 @@
     "title": "{locale, select, es {Español} en {Ingles} ko {Coreano} other {Desconocido}}",
     "description": "{locale, select, es {Vibrante y melódico} en {Global y conectado} ko {Fascinante y enigmático} other {Desconocido}}"
   },
+  "Metadata": {
+    "title": "Make App",
+    "description": "Increíbles Cosméticos Coreanos"
+  },
   "navbar": {
     "userMenu": {
       "invoices": "My invoices",

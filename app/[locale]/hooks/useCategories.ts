@@ -14,11 +14,32 @@ import { useTranslations } from 'next-intl';
 
 import { AiOutlineHighlight } from "react-icons/ai";
 import { TbHandThreeFingers } from "react-icons/tb";
+import { IconType } from 'react-icons';
 
+
+export type CategoryKey =
+    | "derma-plan"
+    | "skin-care"
+    | "sun-care"
+    | "toner-skin"
+    | "wrinkle-solution-toner"
+    | "lotion"
+    | "skin"
+    | "body-care"
+    | "mask-pack"
+    | "make-up"
+    | "all-in-one"
+    | "perfume"
+    | "nail-care";
+
+export type CategoryItem = {
+    label: CategoryKey;
+    icon: IconType;
+};
 
 export const useCategories = () => {
 
-    const allCategories = [
+    const allCategories: CategoryItem[] = [
         {
             label: "derma-plan",
             icon: GiLips,

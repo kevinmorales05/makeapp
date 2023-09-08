@@ -5,19 +5,22 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { IconType } from "react-icons";
 import { useTranslations } from 'next-intl';
+import { Button } from '@nextui-org/react';
+import { CategoryKey } from '../hooks/useCategories';
 
 interface CategoryBoxProps {
   icon: IconType,
-  label: string;
+  label: CategoryKey,
   selected?: boolean;
 }
 
 const CategoryBox: React.FC<CategoryBoxProps> = ({
   icon: Icon,
-  label,
+  label: i18Label,
   selected,
 }) => {
-  const t = useTranslations("categories")
+  const t = useTranslations(`categories.${i18Label}`)
+  const label = t('label')
   const router = useRouter();
   const params = useSearchParams();
 
@@ -30,10 +33,10 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
 
     const updatedQuery: any = {
       ...currentQuery,
-      category: label
+      category: i18Label
     }
 
-    if (params?.get('category') === label) {
+    if (params?.get('category') === i18Label) {
       delete updatedQuery.category;
     }
 
@@ -43,16 +46,18 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
     }, { skipNull: true });
 
     router.push(url);
-  }, [label, router, params]);
+  }, [i18Label, router, params]);
 
   return (
-    <div
-      onClick={handleClick}
+    <Button
+      onPress={handleClick}
       className={`
         flex 
+        bg-white
         flex-col 
         items-center 
         justify-center 
+        h-16
         gap-2
         p-2
         md:p-2
@@ -67,9 +72,9 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
     >
       <Icon size={26} />
       <div className="font-medium text-sm whitespace-nowrap">
-        {t(`${label}.label`)}
+        {label}
       </div>
-    </div>
+    </Button>
   );
 }
 

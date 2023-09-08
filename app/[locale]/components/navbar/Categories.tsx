@@ -4,9 +4,15 @@ import { usePathname, useSearchParams } from 'next/navigation';
 import CategoryBox from "../CategoryBox";
 import Container from '../Container';
 import { useLocale, useTranslations } from 'next-intl';
-import { useCategories } from '@/app/hooks/useCategories';
+import { CategoryItem, useCategories } from '@/app/hooks/useCategories';
+import { IconType } from 'react-icons';
+import { ButtonGroup } from '@nextui-org/react';
 
-const Categories = () => {
+type CategoriesProps = {
+  categories: CategoryItem[]
+}
+
+const Categories = ({ categories }: CategoriesProps) => {
   const params = useSearchParams();
   const locale = useLocale();
   const category = params?.get('category');
@@ -14,7 +20,6 @@ const Categories = () => {
   // console.log("pathnames", pathname); //  /en/favorites
   // console.log("params: ", params); // readonlySearchparams
   const isMainPage = pathname === '/' || pathname === `/${locale}`;
-  const { allCategories } = useCategories()
 
   if (!isMainPage) {
     return null;
@@ -24,26 +29,25 @@ const Categories = () => {
     <Container>
       <div
         className="
-          pt-1
           flex 
           flex-row 
           items-center 
           justify-start
-          sm:justify-between
-          lg:justify-center
-          xl:justify-evenly
+          2xl:justify-evenly
           overflow-x-auto
           lg:hover:overflow-x-auto
         "
       >
-        {allCategories.map((item) => (
-          <CategoryBox
-            key={item.label}
-            label={item.label}
-            icon={item.icon}
-            selected={category === item.label}
-          />
-        ))}
+        <ButtonGroup>
+          {categories.map((item) => (
+            <CategoryBox
+              key={item.label}
+              label={item.label}
+              icon={item.icon}
+              selected={category === item.label}
+            />
+          ))}
+        </ButtonGroup>
       </div>
     </Container>
   );

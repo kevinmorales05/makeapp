@@ -4,6 +4,10 @@
     "title": "{locale, select, es {스페인어} en {영어} ko {한국어} other {알 수 없음}}",
     "description": "{locale, select, es {생생하고 선율적인} en {글로벌하고 연결된} ko {매혹적이고 수수께끼 같은} other {알 수 없음}}"
   },
+  "Metadata": {
+    "title": "Make App",
+    "description": "놀라운 한국 화장품"
+  },
   "navbar": {
     "title": "Hello world!",
     "subtitle": "Hello world!",
