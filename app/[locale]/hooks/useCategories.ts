@@ -7,10 +7,7 @@ import {
 } from 'react-icons/gi';
 import { BsEmojiSunglasses, BsEyedropper, BsFillBagHeartFill, BsSnow } from 'react-icons/bs';
 import { IoBodySharp } from 'react-icons/io5';
-import { MdCleanHands, MdFace2, MdFace3, MdOutlineVilla } from 'react-icons/md';
-
-import { useTranslations } from 'next-intl';
-
+import { MdCleanHands, MdFace2 } from 'react-icons/md';
 
 import { AiOutlineHighlight } from "react-icons/ai";
 import { TbHandThreeFingers } from "react-icons/tb";
