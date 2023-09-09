@@ -1,51 +1,39 @@
 import prisma from "@/app/libs/prismadb";
 
-export interface IListingsParams {
-  userId?: string;
-  guestCount?: number;
-  roomCount?: number;
-  bathroomCount?: number;
-  startDate?: string;
-  endDate?: string;
-  locationValue?: string;
-  category?: string;
-}
-
 export default async function getProducts(
-  // params: IListingsParams
   page_peer_size: number,
-  category: string,
-  subCategory: string,
+  skip_page: number,
+  i18category: string,
+  i18subCategory: string,
 ) {
   try {
 
     let query: any = {};
-    let listings;
-    if (category) {
-      query.category = category;
+    let products;
+
+    if (i18category) {
+      query.category = i18category.split('-').join(' ');
     }
 
-    if (subCategory) {
-      query.subCategory = subCategory;
+    if (i18subCategory) {
+      query.subCategory = i18subCategory.split('-').join(' ');
     }
 
-    if (category) {
-      listings = await prisma.product.findMany({
-        where: query
+    if (i18category !== "all") {
+      products = await prisma.product.findMany({
+        where: query,
+        take: page_peer_size,
+        skip: skip_page
+      })
+    } else {
+      products = await prisma.product.findMany({
+        take: page_peer_size,
+        skip: skip_page
       })
     }
-    else {
-      listings = await prisma.product.findMany()
-    }
 
+    return products;
 
-    return listings;
-
-    // const safeListings = listings.map((listing) => ({
-    //   ...listing,
-    //   createdAt: listing.createdAt.toISOString(),
-    // }));
-    // return safeListings;
   } catch (error: any) {
     throw new Error(error);
   }

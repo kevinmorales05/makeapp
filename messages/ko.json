@@ -31,56 +31,92 @@
   },
   "categories": {
     "derma-plan": {
-      "label": "더마 플랜",
-      "description": "이 크림은 피부를 햇볕으로부터 보호합니다!"
+      "label": "데르마 플랜",
+      "description": "이 크림은 피부를 햇빛으로부터 보호합니다!",
+      "subs": {
+        "helper": "{sub, select, other {}}",
+        "mapper": "<i></i>"
+      }
     },
     "skin-care": {
-      "label": "스킨 케어",
-      "description": "이 속성은 피부를 돕습니다!"
+      "label": "피부 관리",
+      "description": "이 속성은 피부에 도움을 줍니다!",
+      "subs": {
+        "helper": "{sub, select, toner {토너} emulsion {에멀젼} cream {크림} cleansing-bar {클렌징 바} foam-cleanser {폼 클렌저} ampoule {앰플} essence {에센스} kit {키트} balm {밤} 1+1 {1+1} sun-cream {선크림} serum {세럼} mask {마스크} cosmetics/kit {화장품/키트} lotion {로션} cream/oil {크림/오일} skin/lotion {피부 로션} }",
+        "mapper": "<i>toner</i><i>emulsion</i><i>cream</i><i>cleansing-bar</i><i>foam-cleanser</i><i>ampoule</i><i>essence</i><i>kit</i><i>balm</i><i>1+1</i><i>sun-cream</i><i>serum</i><i>mask</i><i>cosmetics/kit</i><i>lotion</i><i>cream/oil</i><i>skin/lotion</i>"
+      }
     },
     "sun-care": {
-      "label": "선 케어",
-      "description": "이 크림은 피부를 햇볕으로부터 보호합니다!"
-    },
-    "toner-skin": {
-      "label": "토너/피부",
-      "description": "이 제품은 당신을 보호하고 빛나는 얼굴을 제공합니다!"
+      "label": "선케어",
+      "description": "이 크림은 피부를 햇빛으로부터 보호합니다!",
+      "subs": {
+        "helper": "{sub, select, kit {키트} foam-cleanser {폼 클렌저} sun-cream {선크림} sun-stick {선 스틱} other {}}",
+        "mapper": "<i>kit</i><i>foam-cleanser</i><i>sun-cream</i><i>sun-stick</i>"
+      }
     },
     "wrinkle-solution-toner": {
       "label": "주름 해결 토너",
-      "description": "이 제품은 비타민과 항산화 물질을 제공합니다!"
-    },
-    "lotion": {
-      "label": "로션",
-      "description": "이 제품은 여러 가지 혜택을 제공합니다!"
-    },
-    "skin": {
-      "label": "피부",
-      "description": "이 제품은 고대의 비밀을 제공합니다!"
-    },
-    "body-care": {
-      "label": "바디 케어",
-      "description": "이 제품은 클렌징, 각질 제거, 털 제거, 네일 케어 및 바디 브러싱을 제공합니다!"
-    },
-    "mask-pack": {
-      "label": "마스크 팩",
-      "description": "이 마스크는 수분 공급, 화사함, 모공 개선, 진정 및 기타 다양한 피부 관리 요구에 맞는 다양한 성분으로 제조됩니다."
+      "description": "이 제품들은 비타민과 항산화제를 제공합니다!",
+      "subs": {
+        "helper": "{sub, select, kit {키트} other {}}",
+        "mapper": "<i>kit</i>"
+      }
     },
     "make-up": {
       "label": "메이크업",
-      "description": "이 제품은 자연스러운 특징을 강화하며 흠을 가려내고 창의성을 표현하며 이전에 본 적 없는 특정한 룩을 완성하는 데 사용됩니다!"
+      "description": "이 제품들은 자연스러운 특징을 강화하며 흠을 가려 창의성을 표현하고 이전에 본 적 없는 특정한 모습을 만듭니다!",
+      "subs": {
+        "helper": "{sub, select, eyes {눈} primer/make/base {프라이머/메이크/베이스} fixer {고정제} lipstick {립스틱} other {}}",
+        "mapper": "<i>eyes</i><i>primer/make/base</i><i>fixer</i><i>lipstick</i>"
+      }
     },
-    "all-in-one": {
-      "label": "올인원",
-      "description": "이 제품은 편리성과 시간 절약성으로 특히 인기 있으며 노력을 최소한으로 하거나 바쁜 사람들에게 완벽한 피부조합을 단 한 단계로 얻을 수 있도록 이상적입니다."
+    "skin": {
+      "label": "피부",
+      "description": "이 제품들은 고대의 비밀을 제공합니다!",
+      "subs": {
+        "helper": "{sub, select, lotion {로션} other {}}",
+        "mapper": "<i>lotion</i>"
+      }
+    },
+    "body-care": {
+      "label": "바디 케어",
+      "description": "이 제품들은 클렌징, 각질 제거 및 모발 제거부터 손톱 관리 및 몸을 브러싱하는 다양한 실천과 제품을 제공합니다!",
+      "subs": {
+        "helper": "{sub, select, cleanser {클렌저} body-lotion/-cream {바디로션/크림} other {}}",
+        "mapper": "<i>cleanser</i><i>body-lotion/-cream</i>"
+      }
+    },
+    "mask-pack": {
+      "label": "마스크 팩",
+      "description": "이 마스크들은 수분 공급, 화사함, 모공 개선, 진정 및 기타 피부 관리 필요에 맞는 다양한 성분으로 제조되었습니다!",
+      "subs": {
+        "helper": "{sub, select, mask-sheet {마스크 시트} other {}}",
+        "mapper": "<i>mask-sheet</i>"
+      }
     },
     "perfume": {
       "label": "향수",
-      "description": "이것들은 다양한 향료 성분을 세심하게 혼합하여 독특하고 독보적인 향기를 만들어 내어 감정, 기억, 스타일, 개인 연관 및 개인성을 불러일으킬 수 있습니다."
+      "description": "이것들은 다양한 향료 성분을 조심스럽게 혼합하여 감정, 기억, 스타일, 개인 연관 및 개인의 개성을 자아낼 수 있는 독특하고 독특한 향기를 만듭니다!",
+      "subs": {
+        "helper": "{sub, select, perfume/diffuser {향수/디퓨저} other {}}",
+        "mapper": "<i>perfume/diffuser</i>"
+      }
     },
     "nail-care": {
       "label": "네일 케어",
-      "description": "이 제품은 손톱의 건강, 강도 및 모양을 유지하기 위한 다양한 관행과 제품을 포괄합니다."
+      "description": "이 제품들은 손톱의 건강, 강도 및 외관을 유지하는 데 목적을 두고 다양한 실천과 제품을 포함하고 있습니다!",
+      "subs": {
+        "helper": "{sub, select, other {}}",
+        "mapper": "<i></i>"
+      }
+    },
+    "all": {
+      "label": "모두",
+      "description": "다양한 제품과 실천을 제공하여 다양한 요구를 충족시키는 포괄적인 선택을 제공합니다. 감정을 자아내는 향수, 건강하고 세련된 손톱을 유지하기 위한 손톱 관리 또는 다른 미용 필수품을 찾고 있다면 모두 여기에서 찾을 수 있습니다. 다양한 제품을 살펴보고 개인 스타일과 웰빙을 높이는 완벽한 제품을 찾아보세요!",
+      "subs": {
+        "helper": "{sub, select, other {}}",
+        "mapper": "<i></i>"
+      }
     }
   },
   "homepage": {

@@ -10,6 +10,7 @@ import { formattedProducts } from '../hooks/useProducts'
 import getCategories from '../actions/getCategories'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { SafeProducts, SafeUser } from '../types'
+import { useCategories } from '../hooks/useCategories'
 
 export const dynamic = "force-dynamic";
 
@@ -23,30 +24,39 @@ export default async function ShopPage({
         // undefined
         category: string,
         subCategory: string,
-        limit: number
+        limit: number,
+        skip: number
     },
     // locale: string
 }
 ) {
 
-    const category =
-        typeof searchParams.category === 'string' ? searchParams.category : "skin care"
-    const subCategory =
-        typeof searchParams.subCategory === 'string' ? searchParams.subCategory : "lotion"
+    const i18category =
+        typeof searchParams.category === 'string' ? searchParams.category : "all"
+    const i18subCategory =
+        typeof searchParams.subCategory === 'string' ? searchParams.subCategory : ""
     const limit =
         typeof searchParams.limit === 'string' ? Number(searchParams.limit) : PRODUCTS_PEER_PAGE
+    const skip_page =
+        typeof searchParams.skip === 'string' ? Number(searchParams.skip) : 0
 
 
     const currentUser: SafeUser | null = await getCurrentUser();
-    const products: SafeProducts[] = await getProducts(limit, category, subCategory);
+    const products: SafeProducts[] = await getProducts(limit, skip_page, i18category, i18subCategory);
 
-    const categories = await getCategories();
-    const i18Categories = categories.map(c => ({
-        ...c,
-        i18Category: c.category.split(' ').join('-')
-    }))
+    // const categories = await getCategories();
 
-    const categoryByName = { category, subCategory }
+    const { keysCategories } = useCategories()
+    // console.log("all categories: ", categories)
+
+
+
+    // const i18Categories = categories.map(c => ({
+    //     ...c,
+    //     i18Category: c.category.split(' ').join('-')
+    // }))
+
+    const categoryByName = { category: i18category, subCategory: i18subCategory }
 
     return (
         <Container>
@@ -54,14 +64,13 @@ export default async function ShopPage({
             <div className='flex flex-wrap md:flex-nowrap justify-start'>
                 <div className='w-full md:w-[480px] xl:w-[232px]'>
                     <ClientOnly>
-                        <ShopAside allCategories={i18Categories} categoryByName={categoryByName} />
+                        <ShopAside keysCategories={keysCategories} categoryByName={categoryByName} />
                     </ClientOnly>
                 </div>
                 <div className='w-full md:w-auto xl:auto flex flex-col'>
-                    <Suspense fallback={"Loading..."}>
+                    <ClientOnly>
                         <ShopMain data={formattedProducts(products)} currentUser={currentUser} />
-                    </Suspense>
-
+                    </ClientOnly>
                 </div>
             </div>
         </Container>

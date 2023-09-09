@@ -2,11 +2,11 @@
 import React, { Fragment } from 'react'
 import HeadingAside from './HeadingAside'
 import Image from 'next/image'
-import { useLocale, useTranslations } from 'next-intl'
+import { useLocale, useMessages, useTranslations } from 'next-intl'
 import ClientOnly from '../components/ClientOnly'
 import { Accordion, AccordionItem, cn } from '@nextui-org/react'
 import Link from 'next/link'
-import { useCategories } from '../hooks/useCategories'
+import { CategoryKey, useCategories } from '../hooks/useCategories'
 
 interface IShopAsideProps {
   category: string,
@@ -17,16 +17,43 @@ interface ICategoryByName {
   category: string,
   subCategory: string
 }
-
-export default function ShopAside({ allCategories, categoryByName }: {
-  allCategories: IShopAsideProps[],
+type ShopAsideProps = {
+  // allCategories: IShopAsideProps[],
+  keysCategories: CategoryKey[],
   categoryByName: ICategoryByName,
-}) {
+}
+
+export default function ShopAside({
+  // allCategories,
+  keysCategories,
+  categoryByName }: ShopAsideProps) {
   const locale = useLocale()
   const t = useTranslations("categories")
   const tshop = useTranslations("shoppage")
 
-  console.log("categories: ", allCategories)
+
+  // const mappedSubcategories = t("skin-care.subs.mapped")
+  // t.rich('skin-care.subs.mapped', {
+  //   i: (chunks) => <>{console.log(chunks?.toLocaleString().split(' ').join('&'))}</>,
+  // });
+
+
+  const { keysCategories: someCategories } = useCategories()
+
+  console.log("it workds", t("body-care.subs.helper", { sub: "" }))
+  const ts = useTranslations("LocaleSwitcher")
+  console.log("title", ts("title", { locale: "es" }))
+  const tss = useTranslations("categories.body-care.subs")
+  console.log("helper", tss("helper",  { locale: "cleanser" }))
+  console.log("testing where is title", t("body-care.subs.title",  { locale: "es" }))
+
+
+  const messages = useMessages();
+  console.log("please tell me", messages)
+
+
+
+
 
   return (
 
@@ -34,9 +61,51 @@ export default function ShopAside({ allCategories, categoryByName }: {
 
       {/* {categories} */}
       <section className='py-1 mb-2'>
+
+        <ClientOnly>
+
+          <HeadingAside title={tshop("aside.categories", { locale })} />
+          <Accordion selectionMode="multiple" defaultExpandedKeys={[categoryByName.category]} >
+            {someCategories.map((category) => (
+              <AccordionItem key={category} aria-label={category} title={t(`${category}.label`)}>
+                <ul>
+                  {/* {category !== "all" && <div>tell me{t(`${category}.subs.mapper`)}</div>} */}
+                  {
+                    // t(`${category}.subs.mapper`)
+                    true
+                    &&
+                    t.rich(`${category}.subs.mapper`, {
+                      i: (chunks) => {
+                        const subCategory = chunks?.toLocaleString().split('-').join(' ');
+                        const format = t(`${category}.subs.helper`, { sub: chunks?.toLocaleString() })
+                        console.log("format: ", format)
+                        return (
+                          <li key={chunks?.toLocaleString()} className='py-2 px-8'>
+                            <Link href={`${locale}/shop?category=${category}&subCategory=${subCategory}`} color="foreground"
+                              className={cn(`hover:text-red-dark/50`,
+                                categoryByName.subCategory === subCategory ? "text-red-dark/50" : ""
+                              )}>
+                              {chunks?.toString()}--
+                              {format}
+                            </Link>
+                          </li>)
+                      }
+                    })
+                  }
+                </ul>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </ClientOnly>
+
+      </section>
+
+
+      {/* <section className='py-1 mb-2'>
+
         <HeadingAside title={tshop("aside.categories", { locale })} />
         <Accordion selectionMode="multiple" defaultExpandedKeys={[categoryByName.category]} >
-          {allCategories.map((c) => (
+          {allCategories.reverse().map((c) => (
             <AccordionItem key={c.category} aria-label={c.category} title={t(`${c.i18Category}.label`)}>
               <ul>
                 {c.values.map((item: string, index: number) => (
@@ -50,7 +119,10 @@ export default function ShopAside({ allCategories, categoryByName }: {
             </AccordionItem>
           ))}
         </Accordion>
-      </section>
+      </section> */}
+
+
+
 
       {/* {slider} */}
       <section>

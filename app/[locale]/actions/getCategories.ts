@@ -8,6 +8,15 @@ export interface ReadableCategories {
   values: string[];
 }
 
+/**
+ * Function that I used to get all categories and subcategories from db but it's not really used anymore due to the
+ * i18n integration is neccessary to have born data to allow translation
+ * @param {number} radio - El radio del círculo.
+ * @returns {Promise<ReadableCategories[]>} "An array of readable categories with their respective subcategories."
+ * @throws {Error} error during the db
+ * @example
+ * const categoriasLegibles = await getCategories();
+ */
 
 export default async function getCategories(): Promise<ReadableCategories[]> {
   try {
@@ -19,37 +28,55 @@ export default async function getCategories(): Promise<ReadableCategories[]> {
       }
     })
 
-    const uniqueFileds = listings.reduce((acc: UniqueFields, listing) => {
-      const CATEGORIES = "categories";
-      const UNIQUE_CATEGORY = listing.category;
+    const CATEGORIES_PATH = "categories";
+
+    const uniqueFields = listings.reduce((acc: UniqueFields, listing) => {
+      const CATEGORY = listing.category;
+      const SUBCATEGORY = listing.subCategory;
       const EMPTY_SUBCATEGORY = ''
 
-      if (listing.subCategory === EMPTY_SUBCATEGORY || listing.category.startsWith(listing.subCategory)) return acc;
-
-      if (UNIQUE_CATEGORY in acc) {
-        acc[UNIQUE_CATEGORY].add(listing.subCategory);
+      // Set "categories" to store unique categories
+      if (CATEGORIES_PATH in acc) {
+        const allCategories = acc.categories
+        allCategories.add(CATEGORY);
+        acc.categories = allCategories;
       } else {
-        const cat = new Set<string>();
-        cat.add(listing.subCategory);
-        acc[UNIQUE_CATEGORY] = cat;
+        const cats = new Set<string>([CATEGORY]);
+        acc[CATEGORIES_PATH] = cats;
       }
 
-      if (CATEGORIES in acc) {
-        let allCat = acc.categories
-        allCat.add(listing.category);
-        acc.categories = allCat;
+      // Set subcategories 
+      if (SUBCATEGORY === EMPTY_SUBCATEGORY || CATEGORY.startsWith(SUBCATEGORY)) return acc;
+
+      if (CATEGORY in acc) {
+        acc[CATEGORY].add(SUBCATEGORY);
       } else {
-        let cats = new Set([listing.category]);
-        acc[CATEGORIES] = cats;
+        const category = new Set<string>();
+        category.add(SUBCATEGORY);
+        acc[CATEGORY] = category;
       }
 
       return acc;
     }, {});
 
-    const readableCategories = Array.from(uniqueFileds["categories"]).reduce((acc: ReadableCategories[], category) => {
-      const values = Array.from(uniqueFileds[category])
-      acc.push({ category: category, values: values });
-      return acc;
+    const readableCategories: ReadableCategories[] = Array.from(uniqueFields[CATEGORIES_PATH]).reduce((acc: ReadableCategories[], category) => {
+      const CATEGORY = category
+
+      if (!(CATEGORY in uniqueFields)) {
+        const values: string[] = ['']
+        acc.push({
+          category: CATEGORY,
+          values: values
+        })
+      }
+      if (CATEGORY in uniqueFields) {
+        const values = Array.from(uniqueFields[CATEGORY])
+        acc.push({
+          category: CATEGORY,
+          values: values
+        });
+      }
+      return acc
     }, [])
 
     return readableCategories;

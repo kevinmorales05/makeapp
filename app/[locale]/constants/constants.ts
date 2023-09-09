@@ -1,6 +1,5 @@
 import { EmblaOptionsType } from "embla-carousel-react";
-import { fakeUser } from "@/public/data/fakeUser";
-export const PRODUCTS_PEER_PAGE = 6;
+export const PRODUCTS_PEER_PAGE = 15;
 
 export const LOCALE_ES = 'es'
 export const LOCALE_EN = 'en'
@@ -10,5 +9,3 @@ export const ICON_CLASES_DROPDOWN: string = "text-xl text-default-500 pointer-ev
 
 
 export const OPTIONS_CAROUSEL: EmblaOptionsType = {}
-
-export const FAKE_USER = fakeUser

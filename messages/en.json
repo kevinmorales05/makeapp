@@ -32,55 +32,93 @@
   "categories": {
     "derma-plan": {
       "label": "Derma Plan",
-      "description": "This cream protects the skin against the sun!"
+      "description": "This cream protects the skin against the sun!",
+      "subs": {
+        "helper": "{sub, select, other {}}",
+        "mapper": "<i></i>"
+      }
     },
     "skin-care": {
       "label": "Skin Care",
-      "description": "This property heps your skin!"
+      "description": "This property helps your skin!",
+      "subs": {
+        "helper": "{sub, select, toner {Toner} emulsion {Emulsion} cream {Cream} cleansing-bar {Cleansing Bar} foam-cleanser {Foam Cleanser} ampoule {Ampoule} essence {Essence} kit {Kit} balm {Balm} 1+1 {1+1} sun-cream {Sun Cream} serum {Serum} mask {Mask} cosmetics/kit {Cosmetics/Kit} lotion {Lotion} cream/oil {Cream/Oil} skin/lotion {Skin/Lotion} other {''}}",
+        "mapper": "<i>toner</i><i>emulsion</i><i>cream</i><i>cleansing-bar</i><i>foam-cleanser</i><i>ampoule</i><i>essence</i><i>kit</i><i>balm</i><i>1+1</i><i>sun-cream</i><i>serum</i><i>mask</i><i>cosmetics/kit</i><i>lotion</i><i>cream/oil</i><i>skin/lotion</i>"
+      }
     },
     "sun-care": {
       "label": "Sun Care",
-      "description": "This cream protects the skin against the sun!"
-    },
-    "toner-skin": {
-      "label": "Toner/Skin",
-      "description": "These products protect to you and provides a shining face!"
+      "description": "This cream protects the skin against the sun!",
+      "subs": {
+        "helper": "{sub, select, kit {Kit} foam-cleanser {Foam Cleanser} sun-cream {Sun Cream} sun-stick {Sun Stick} other {}}",
+        "mapper": "<i>kit</i><i>foam-cleanser</i><i>sun-cream</i><i>sun-stick</i>"
+      }
     },
     "wrinkle-solution-toner": {
       "label": "Wrinkle Solution Toner",
-      "description": "These products provides to you so vitamins and antioxidants!"
-    },
-    "lotion": {
-      "label": "Lotion",
-      "description": "These products provides to you so some benefits!"
-    },
-    "skin": {
-      "label": "Skin",
-      "description": "These products provides ancient secrets!"
-    },
-    "body-care": {
-      "label": "Body Care",
-      "description": "These products provides cleansing, exfoliating, and hair removal to nail care and body brushing!"
-    },
-    "mask-pack": {
-      "label": "Mask Pack",
-      "description": "These masks are formulated with various ingredients that cater to different skincare needs, such as hydration, brightening, pore refinement, soothing, and more.!"
+      "description": "These products provide you with vitamins and antioxidants!",
+      "subs": {
+        "helper": "{sub, select, kit {Kit} other {}}",
+        "mapper": "<i>kit</i>"
+      }
     },
     "make-up": {
       "label": "Make Up",
-      "description": "These products have enhancing natural features, concealing imperfections, expressing creativity, and achieving specific looks never seen before !"
+      "description": "These products have enhancing natural features, concealing imperfections, expressing creativity, and achieving specific looks never seen before!",
+      "subs": {
+        "helper": "{sub, select, eyes {Eyes} primer/make/base {Primer/Make/Base} fixer {Fixer} lipstick {Lipstick} other {}}",
+        "mapper": "<i>eyes</i><i>primer/make/base</i><i>fixer</i><i>lipstick</i>"
+      }
     },
-    "all-in-one": {
-      "label": "All in one",
-      "description": "These products are especially popular for their convenience and time-saving properties, making them ideal for individuals looking to achieve a complete look with minimal effort or for those on the go, and achieve a flawless complexion in a single step."
+    "skin": {
+      "label": "Skin",
+      "description": "These products provide ancient secrets!",
+      "subs": {
+        "helper": "{sub, select, lotion {Lotion} other {}}",
+        "mapper": "<i>lotion</i>"
+      }
+    },
+    "body-care": {
+      "label": "Body Care",
+      "description": "These products provide cleansing, exfoliating, and hair removal to nail care and body brushing!",
+      "subs": {
+        "helper": "{locale, select, cleanser {Cleanser} body-lotion/-cream {Body-Lotion/Cream} other  {estoy}}",
+        "title": "{locale, select, es {Body-Lotion/Cream} en {English} ko {Korean} other {Unknown}}",
+
+        "mapper": "<i>cleanser</i><i>body-lotion/-cream</i>"
+      }
+    },
+    "mask-pack": {
+      "label": "Mask Pack",
+      "description": "These masks are formulated with various ingredients that cater to different skincare needs, such as hydration, brightening, pore refinement, soothing, and more!",
+      "subs": {
+        "helper": "{sub, select, mask-sheet {Mask Sheet} other {}}",
+        "mapper": "<i>mask-sheet</i>"
+      }
     },
     "perfume": {
       "label": "Perfume",
-      "description": "These are created through a careful blending of various aromatic ingredients, resulting in a unique and distinctive fragrance that can evoke emotions, memories, style, personal associations, and an individual's personality."
+      "description": "These are created through a careful blending of various aromatic ingredients, resulting in a unique and distinctive fragrance that can evoke emotions, memories, style, personal associations, and an individual's personality!",
+      "subs": {
+        "helper": "{sub, select, perfume/diffuser {Perfume/Diffuser} other {}}",
+        "mapper": "<i>perfume/diffuser</i>"
+      }
     },
     "nail-care": {
       "label": "Nail Care",
-      "description": "These products encompasses a range of practices and products aimed at maintaining the health, strength, and appearance of the nails."
+      "description": "These products encompass a range of practices and products aimed at maintaining the health, strength, and appearance of the nails!",
+      "subs": {
+        "helper": "{sub, select, other {''}}",
+        "mapper": "<i></i>"
+      }
+    },
+    "all": {
+      "label": "All",
+      "description": "A wide range of products and practices, offering a comprehensive selection to meet diverse needs. Whether you're looking for fragrances that evoke emotions, nail care for maintaining healthy and stylish nails, or any other beauty essentials, you'll find them all here. Explore our extensive collection and discover the perfect products to enhance your personal style and well-being!",
+      "subs": {
+        "helper": "{sub, select, other {}}",
+        "mapper": "<i></i>"
+      }
     }
   },
   "homepage": {

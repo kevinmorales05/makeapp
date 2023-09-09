@@ -4,6 +4,7 @@ import {
     GiHealthPotion,
     GiLips,
     GiPerfumeBottle,
+    GiStarFormation,
 } from 'react-icons/gi';
 import { BsEmojiSunglasses, BsEyedropper, BsFillBagHeartFill, BsSnow } from 'react-icons/bs';
 import { IoBodySharp } from 'react-icons/io5';
@@ -14,20 +15,20 @@ import { TbHandThreeFingers } from "react-icons/tb";
 import { IconType } from 'react-icons';
 
 
+
+
 export type CategoryKey =
+    | "all"
     | "derma-plan"
-    | "skin-care"
-    | "sun-care"
-    | "toner-skin"
-    | "wrinkle-solution-toner"
-    | "lotion"
-    | "skin"
-    | "body-care"
+    | "nail-care"
     | "mask-pack"
-    | "make-up"
-    | "all-in-one"
+    | "body-care"
+    | "skin"
     | "perfume"
-    | "nail-care";
+    | "make-up"
+    | "wrinkle-solution-toner"
+    | "sun-care"
+    | "skin-care";
 
 export type CategoryItem = {
     label: CategoryKey;
@@ -36,34 +37,46 @@ export type CategoryItem = {
 
 export const useCategories = () => {
 
+    const keysCategories: CategoryKey[] = [
+        "all",
+        "derma-plan",
+        "nail-care",
+        "mask-pack",
+        "body-care",
+        "skin",
+        "perfume",
+        "make-up",
+        "wrinkle-solution-toner",
+        "sun-care",
+        "skin-care",
+
+    ] as const;
+
     const allCategories: CategoryItem[] = [
+        {
+            label: "all",
+            icon: GiStarFormation,
+        },
         {
             label: "derma-plan",
             icon: GiLips,
         },
         {
             label: "skin-care",
-            icon: AiOutlineHighlight,
+            icon: GiPerfumeBottle,
         },
         {
             label: "sun-care",
             icon: BsEmojiSunglasses,
         },
         {
-            label: "toner-skin",
-            icon: MdCleanHands,
-        },
-        {
             label: "wrinkle-solution-toner",
             icon: GiHealthPotion,
         },
-        {
-            label: "lotion",
-            icon: GiPerfumeBottle,
-        },
+
         {
             label: "skin",
-            icon: MdFace2,
+            icon: MdCleanHands,
         },
         {
             label: "body-care",
@@ -78,10 +91,6 @@ export const useCategories = () => {
             icon: BsEyedropper,
         },
         {
-            label: "all-in-one",
-            icon: BsFillBagHeartFill,
-        },
-        {
             label: "perfume",
             icon: GiDelicatePerfume,
         },
@@ -90,6 +99,5 @@ export const useCategories = () => {
             icon: TbHandThreeFingers,
         },
     ]
-
-    return { allCategories }
+    return { allCategories, keysCategories }
 }

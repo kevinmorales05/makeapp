@@ -29,58 +29,95 @@
   },
   "categories": {
     "derma-plan": {
-      "label": "Plan Derma",
-      "description": "¡Esta crema protege la piel contra el sol!"
+      "label": "Derma Plan",
+      "description": "Esta crema protege la piel contra el sol!",
+      "subs": {
+        "helper": "{sub, select, other {}}",
+        "mapper": "<i></i>"
+      }
     },
     "skin-care": {
       "label": "Cuidado de la Piel",
-      "description": "¡Esta propiedad ayuda a tu piel!"
+      "description": "Esta propiedad ayuda a tu piel!",
+      "subs": {
+        "helper": "{sub, select, toner {Toner} emulsion {Emulsión} cream {Crema} cleansing-bar {Barra Limpiadora} foam-cleanser {Limpiador en Espuma} ampoule {Ampolla} essence {Esencia} kit {Kit} balm {Bálsamo} 1+1 {1+1} sun-cream {Protector Solar} serum {Suero} mask {Mascarilla} cosmetics/kit {Cosméticos/Kit} lotion {Loción} cream/oil {Crema/Aceite} skin/lotion {Loción para la Piel} }",
+        "mapper": "<i>toner</i><i>emulsion</i><i>cream</i><i>cleansing-bar</i><i>foam-cleanser</i><i>ampoule</i><i>essence</i><i>kit</i><i>balm</i><i>1+1</i><i>sun-cream</i><i>serum</i><i>mask</i><i>cosmetics/kit</i><i>lotion</i><i>cream/oil</i><i>skin/lotion</i>"
+      }
     },
     "sun-care": {
       "label": "Cuidado Solar",
-      "description": "¡Esta crema protege la piel contra el sol!"
-    },
-    "toner-skin": {
-      "label": "Tónico/Piel",
-      "description": "¡Estos productos te protegen y brindan un rostro radiante!"
+      "description": "Esta crema protege la piel contra el sol!",
+      "subs": {
+        "helper": "{sub, select, kit {Kit} foam-cleanser {Limpiador en Espuma} sun-cream {Protector Solar} sun-stick {Barra Solar} other {}}",
+        "mapper": "<i>kit</i><i>foam-cleanser</i><i>sun-cream</i><i>sun-stick</i>"
+      }
     },
     "wrinkle-solution-toner": {
-      "label": "Tónico Solución de Arrugas",
-      "description": "¡Estos productos te proporcionan vitaminas y antioxidantes!"
-    },
-    "lotion": {
-      "label": "Loción",
-      "description": "¡Estos productos te proporcionan algunos beneficios!"
-    },
-    "skin": {
-      "label": "Piel",
-      "description": "¡Estos productos brindan secretos ancestrales!"
-    },
-    "body-care": {
-      "label": "Cuidado Corporal",
-      "description": "¡Estos productos ofrecen limpieza, exfoliación, eliminación de vello, cuidado de uñas y cepillado corporal!"
-    },
-    "mask-pack": {
-      "label": "Mascarillas",
-      "description": "Estas mascarillas están formuladas con diversos ingredientes que satisfacen diferentes necesidades de cuidado de la piel, como hidratación, luminosidad, refinamiento de poros, calmante y más."
+      "label": "Tónico Solución Antiarrugas",
+      "description": "Estos productos te proporcionan vitaminas y antioxidantes!",
+      "subs": {
+        "helper": "{sub, select, kit {Kit} other {}}",
+        "mapper": "<i>kit</i>"
+      }
     },
     "make-up": {
       "label": "Maquillaje",
-      "description": "¡Estos productos realzan rasgos naturales, ocultan imperfecciones, expresan la creatividad y logran looks específicos nunca antes vistos!"
+      "description": "Estos productos tienen características naturales que realzan, ocultan imperfecciones, expresan la creatividad y logran looks nunca antes vistos!",
+      "subs": {
+        "helper": "{sub, select, eyes {Ojos} primer/make/base {Prebase/Maquillaje/Base} fixer {Fijador} lipstick {Lápiz Labial} other {}}",
+        "mapper": "<i>eyes</i><i>primer/make/base</i><i>fixer</i><i>lipstick</i>"
+      }
     },
-    "all-in-one": {
-      "label": "Todo en uno",
-      "description": "Estos productos son especialmente populares por su conveniencia y propiedades que ahorran tiempo, lo que los hace ideales para personas que buscan lograr un aspecto completo con un esfuerzo mínimo o para aquellos que están en movimiento, y lograr una tez impecable en un solo paso."
+    "skin": {
+      "label": "Piel",
+      "description": "Estos productos revelan antiguos secretos!",
+      "subs": {
+        "helper": "{sub, select, lotion {Loción} other {}}",
+        "mapper": "<i>lotion</i>"
+      }
+    },
+    "body-care": {
+      "label": "Cuidado Corporal",
+      "description": "Estos productos ofrecen limpieza, exfoliación, eliminación del vello y cepillado corporal, además de cuidado de las uñas!",
+      "subs": {
+        "helper": "{sub, select, cleanser {Limpiador} body-lotion/-cream {Loción/Crème Corporal} other {}}",
+        "mapper": "<i>cleanser</i><i>body-lotion/-cream</i>"
+      }
+    },
+    "mask-pack": {
+      "label": "Mascarilla",
+      "description": "Estas mascarillas están formuladas con diversos ingredientes que satisfacen diferentes necesidades de cuidado de la piel, como hidratación, iluminación, refinamiento de los poros, alivio y mucho más!",
+      "subs": {
+        "helper": "{sub, select, mask-sheet {Mascarilla en Hoja} other {}}",
+        "mapper": "<i>mask-sheet</i>"
+      }
     },
     "perfume": {
       "label": "Perfume",
-      "description": "Estos se crean mediante una cuidadosa mezcla de varios ingredientes aromáticos, dando como resultado una fragancia única y distintiva que puede evocar emociones, recuerdos, estilo, asociaciones personales y la personalidad de cada individuo."
+      "description": "Estos se crean mediante una cuidadosa mezcla de diversos ingredientes aromáticos, lo que resulta en una fragancia única y distintiva que puede evocar emociones, recuerdos, estilo, asociaciones personales y la personalidad de un individuo!",
+      "subs": {
+        "helper": "{sub, select, perfume/diffuser {Perfume/Difusor} other {}}",
+        "mapper": "<i>perfume/difusor</i>"
+      }
     },
     "nail-care": {
-      "label": "Cuidado de Uñas",
-      "description": "Estos productos abarcan una variedad de prácticas y productos destinados a mantener la salud, fuerza y apariencia de las uñas."
+      "label": "Cuidado de las Uñas",
+      "description": "Estos productos abarcan una variedad de prácticas y productos destinados a mantener la salud, fuerza y apariencia de las uñas!",
+      "subs": {
+        "helper": "{sub, select, other {}}",
+        "mapper": "<i></i>"
+      }
+    },
+    "all": {
+      "label": "Todo",
+      "description": "Una amplia gama de productos y prácticas que ofrecen una selección completa para satisfacer diversas necesidades. Ya sea que estés buscando fragancias que evocan emociones, cuidado de las uñas para mantener uñas saludables y elegantes, o cualquier otro producto esencial de belleza, ¡los encontrarás todos aquí! ¡Explora nuestra amplia colección y descubre los productos perfectos para realzar tu estilo personal y bienestar!",
+      "subs": {
+        "helper": "{sub, select, other {}}",
+        "mapper": "<i></i>"
+      }
     }
   },
+
   "homepage": {
     "title": "Hello world!",
     "subtitle": "Hello world!"
