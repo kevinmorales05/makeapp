@@ -174,7 +174,7 @@ export default function ShopAside({
       <section>
       </section>
       {/* tops */}
-      <section>
+      {/* <section>
         <HeadingAside title={tshop("aside.tops3", { locale })} />
         <div className="flex justify-center items-start flex-col px-1">
           {Array.from([1, 2, 3]).map(item => (
@@ -187,7 +187,7 @@ export default function ShopAside({
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
     </div >
   )
 }
