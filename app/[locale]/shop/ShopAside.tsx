@@ -53,34 +53,6 @@ export default function ShopAside({
 
       {/* {categories} */}
       <section className='py-1 mb-2'>
-        <Accordion defaultExpandedKeys={["theme"]}>
-          <AccordionItem
-            key="theme"
-            aria-label="Theme"
-            indicator={({ isOpen }) => (isOpen ? <SunIcon /> : <MoonIcon />)}
-            title="Theme"
-          >
-            {defaultContent}
-          </AccordionItem>
-          <AccordionItem
-            key="anchor"
-            aria-label="Anchor"
-            indicator={<AnchorIcon />}
-            title="Anchor"
-          >
-            {defaultContent}
-          </AccordionItem>
-          <AccordionItem
-            key="sun"
-            aria-label="Sun"
-            indicator={<SunIcon />}
-            title="Sun"
-          >
-            {defaultContent}
-          </AccordionItem>
-        </Accordion>
-
-
         <Accordion selectionMode="multiple">
           <AccordionItem
             key="1"
@@ -149,19 +121,19 @@ export default function ShopAside({
                 {
                   t.rich(`${label}.subs.mapper`, {
                     i: (chunks) => {
-                      const subCategory: SubcategoryRouteKey = validateSubcategory(chunks);
                       const routecategory: string = label.split("_").join(" ");
-                      const translationKey = `${label}.subs.i18subs.${subCategory}`;
+
+                      const subCategoryKey: SubcategoryRouteKey = validateSubcategory(chunks);
+                      const translationKey = `${label}.subs.route.${subCategoryKey}`;
                       // @ts-ignore
                       const routesubCategory = t(translationKey);
-                      const routesubCategorys = t(`${"all"}.subs.validateSubcategory.${"toner"}`);
+                      const i18subCategory = t(`${label}.subs.i18subs`, { sub: subCategoryKey })
 
-                      const i18subCategory = t(`${label}.subs.i18subs`, { sub: subCategory })
                       return (
                         <li key={chunks?.toLocaleString()} className="group py-2 px-8 transition-colors duration-300 ease-in-out">
                           <Link href={`${locale}/shop?category=${routecategory}&subCategory=${routesubCategory}`} color="foreground"
                             className={cn(`group-hover:text-red-dark/50`,
-                              currentParams.subCategory === subCategory ? "text-red-dark/50" : ""
+                              currentParams.subCategory === routesubCategory && currentParams.category === routecategory ? "text-red-dark/50" : ""
                             )}>
                             {i18subCategory}
                           </Link>

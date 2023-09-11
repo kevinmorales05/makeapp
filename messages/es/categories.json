@@ -171,8 +171,7 @@
         "mapper": "<i>all_catalog</i>",
         "route": {
           "all_catalog": "ALL CATALOG"
-        },
-        "validSubcategories": ["toner", "emulsion"]
+        }
       }
     }
   }

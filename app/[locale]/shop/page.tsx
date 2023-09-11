@@ -38,18 +38,21 @@ export default async function ShopPage({
         typeof searchParams.category === 'string' ? searchParams.category : "all"
     const i18subCategory =
         typeof searchParams.subCategory === 'string' ? searchParams.subCategory : ""
-    const limit =
-        typeof searchParams.limit === 'string' ? Number(searchParams.limit) : PRODUCTS_PEER_PAGE
+
+    // typeof searchParams.limit === 'string' ? Number(searchParams.limit) :
+    const limit = PRODUCTS_PEER_PAGE
+
     const skip_page =
         typeof searchParams.skip === 'string' ? Number(searchParams.skip) : 0
 
 
     const currentUser: SafeUser | null = await getCurrentUser();
-    const products: SafeProducts[] = await getProducts(limit, skip_page, i18category, i18subCategory);
+    const { products, pagination: { total } } = await getProducts(limit, skip_page, i18category, i18subCategory);
     const _formattedProducts = formattedProducts(products)
-    
-    console.log("currentFormattedProducts", products.length, _formattedProducts.length);
-    const currentParams = { category: i18category, subCategory: i18subCategory }
+
+    console.log("currentFormattedProducts", _formattedProducts.length, "total", total);
+
+    const currentParams = { category: i18category, subCategory: i18subCategory, limit: limit, totalCount: total }
 
     return (
         <Container>
@@ -62,7 +65,7 @@ export default async function ShopPage({
                 </div>
                 <div className='w-full md:w-auto xl:auto flex flex-col'>
                     <ClientOnly>
-                        <ShopMain data={_formattedProducts} currentUser={currentUser} />
+                        <ShopMain data={_formattedProducts} currentUser={currentUser} params={currentParams} />
                     </ClientOnly>
                 </div>
             </div>

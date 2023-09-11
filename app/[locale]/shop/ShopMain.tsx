@@ -13,6 +13,8 @@ import Image from 'next/image';
 import { SafeProducts, SafeUser } from '../types';
 import { useFavoriteStore } from '../hooks/useFavorite';
 import { useRef } from 'react';
+import qs from 'query-string';
+import { useSearchParams } from 'next/navigation';
 
 
 interface IShopProps {
@@ -33,10 +35,16 @@ interface IShopProps {
 }
 type ShopMainProps = {
   data: IProductFormatted[],
-  currentUser?: SafeUser | null
+  currentUser?: SafeUser | null,
+  params: {
+    category: string,
+    subCategory: string,
+    limit: number,
+    totalCount: number
+  }
 }
 
-export default function ShopMain({ data, currentUser }: ShopMainProps) {
+export default function ShopMain({ data, currentUser, params }: ShopMainProps) {
 
   const { mergeLocalandDB, currentFavorites } = useFavoriteStore()
 
@@ -62,10 +70,25 @@ export default function ShopMain({ data, currentUser }: ShopMainProps) {
   }, [data])
 
   const handlePagination = (page: number) => {
-    const from = (page - 1) * PRODUCTS_PEER_PAGE;
-    const to = (page - 1) * PRODUCTS_PEER_PAGE + PRODUCTS_PEER_PAGE;
-    const filteredProducts = getByPagination(from, to, data)
-    setProducts(filteredProducts)
+    console.log("page", page)
+    const from = (page - 1) * params.limit;
+    const to = (page - 1) * params.limit + params.limit;
+
+    // const filteredProducts = getByPagination(from, to, data)
+    // setProducts(filteredProducts)
+
+    let currentQuery = {
+      category: params.category,
+      subCategory: params.subCategory,
+      skip: from,
+    }
+
+    const url = qs.stringifyUrl({
+      url: '/shop/',
+      query: currentQuery
+    }, { skipNull: true });
+
+    router.push(url);
   }
 
 
@@ -123,7 +146,7 @@ export default function ShopMain({ data, currentUser }: ShopMainProps) {
 
         <Pagination key={"lg"}
           initialPage={1} size='lg'
-          total={Math.ceil(data.length / PRODUCTS_PEER_PAGE)}
+          total={Math.ceil(params.totalCount / PRODUCTS_PEER_PAGE)}
           onChange={(number) => handlePagination(number)}
         />
       </div>
