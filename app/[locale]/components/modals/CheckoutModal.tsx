@@ -20,7 +20,6 @@ import CountrySelect from "../inputs/CountrySelect";
 import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Heading from '../Heading';
-import { useCategories } from '@/app/hooks/useCategories';
 import { useLocale, useTranslations } from 'next-intl';
 import useCheckoutModal from '@/app/hooks/useCheckoutModal';
 import HasAccount from '@/app/carts/HasAccount';

@@ -16,6 +16,7 @@ import ProductCarousel from "./components/carousel/ProductCarousel";
 import getItemsCarousel from "./actions/getItemsCarousel";
 import { formattedProducts } from "./hooks/useProducts";
 import { SafeProducts, SafeUser } from "./types";
+import { getTranslator } from "next-intl/server";
 
 
 // interface HomeProps {
@@ -31,10 +32,6 @@ const Home = async (
   const slides_count = 10;
   const itemsCarousel: SafeProducts[] = await getItemsCarousel(slides_count);
 
-  // const locale1 = useLocale()
-
-  // console.log("locale 1", locale1)
-
   // if (listings.length === 0) {
   //   return (
   //     <ClientOnly>
@@ -42,7 +39,6 @@ const Home = async (
   //     </ClientOnly>
   //   );
   // }
-
   return (
     <>
       <Container>
@@ -69,6 +65,8 @@ const Home = async (
             gap-8
           "
         >
+
+
 
           {/* {listings.map((listing: any) => (
             <ListingCard

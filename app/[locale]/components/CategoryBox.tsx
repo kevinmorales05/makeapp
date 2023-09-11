@@ -19,8 +19,15 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
   label: i18Label,
   selected,
 }) => {
+
+  console.log("curerntCategory", i18Label)
   const t = useTranslations(`categories.${i18Label}`)
+
+
+
   const label = t('label')
+
+
   const router = useRouter();
   const params = useSearchParams();
 
@@ -33,10 +40,10 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
 
     const updatedQuery: any = {
       ...currentQuery,
-      category: i18Label
+      category: i18Label.split('_').join(' ')
     }
 
-    if (params?.get('category') === i18Label) {
+    if (params?.get('category') === i18Label.split('_').join(' ')) {
       delete updatedQuery.category;
     }
 
@@ -46,7 +53,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
     }, { skipNull: true });
 
     router.push(url);
-  }, [i18Label, router, params]);
+  }, [i18Label.split('_').join(' '), router, params]);
 
   return (
     <Button

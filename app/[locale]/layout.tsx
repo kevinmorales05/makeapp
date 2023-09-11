@@ -37,7 +37,11 @@ const gandhi = localFont({
 
 async function getMessages(locale: string) {
   try {
-    return (await import(`../../messages/${locale}.json`)).default
+    const msgs = {
+      ...(await import(`@/messages/${locale}/${locale}.json`)).default,
+      ...(await import(`@/messages/${locale}/categories.json`)).default
+    }
+    return msgs
   } catch (error) {
     notFound()
   }
@@ -59,7 +63,7 @@ export async function generateMetadata({ params: { locale } }: RootProps) {
   const t = createTranslator({ locale, messages });
   return {
     title: t("Metadata.title"),
-    description: t("Metadata.description"),
+    description: t("Metadata.description") || "Amazing Korean Cosmetics",
   };
 }
 
@@ -74,7 +78,7 @@ export default async function RootLayout({
   }
 
   const currentUser = await getCurrentUser();
-  const messages: IntlMessages = await getMessages(locale)
+  const messages = await getMessages(locale)
   const htmlClasses = `${merienda.variable} ${gandhi.variable}`
 
   return (

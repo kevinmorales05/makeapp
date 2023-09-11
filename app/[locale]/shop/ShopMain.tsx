@@ -69,7 +69,7 @@ export default function ShopMain({ data, currentUser }: ShopMainProps) {
   }
 
 
-
+  console.log("data: ", data)
   return (
     <>
       <div className='inline-grid grid-cols-3 gap-6 py-2 max-[480px]:grid-cols-1'>

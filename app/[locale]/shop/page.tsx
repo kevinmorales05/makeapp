@@ -1,4 +1,6 @@
-import React, { Suspense } from 'react'
+'use server'
+
+import React from 'react'
 import Container from '../components/Container'
 import ClientOnly from '../components/ClientOnly'
 import ShopAside from './ShopAside'
@@ -7,17 +9,12 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import getProducts from '../actions/getProducts'
 import { PRODUCTS_PEER_PAGE } from '../constants/constants'
 import { formattedProducts } from '../hooks/useProducts'
-import getCategories from '../actions/getCategories'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { SafeProducts, SafeUser } from '../types'
-import { useCategories } from '../hooks/useCategories'
 
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
 
-export default async function ShopPage({
-    searchParams,
-    // locale
-}: {
+type ShopPageProps = {
     searchParams: {
         // [key: string]: string |
         // string[] |
@@ -27,8 +24,14 @@ export default async function ShopPage({
         limit: number,
         skip: number
     },
-    // locale: string
+    params: { locale: string }
 }
+
+export default async function ShopPage({
+    searchParams,
+    params: { locale }
+}: ShopPageProps
+
 ) {
 
     const i18category =
@@ -43,20 +46,10 @@ export default async function ShopPage({
 
     const currentUser: SafeUser | null = await getCurrentUser();
     const products: SafeProducts[] = await getProducts(limit, skip_page, i18category, i18subCategory);
-
-    // const categories = await getCategories();
-
-    const { keysCategories } = useCategories()
-    // console.log("all categories: ", categories)
-
-
-
-    // const i18Categories = categories.map(c => ({
-    //     ...c,
-    //     i18Category: c.category.split(' ').join('-')
-    // }))
-
-    const categoryByName = { category: i18category, subCategory: i18subCategory }
+    const _formattedProducts = formattedProducts(products)
+    
+    console.log("currentFormattedProducts", products.length, _formattedProducts.length);
+    const currentParams = { category: i18category, subCategory: i18subCategory }
 
     return (
         <Container>
@@ -64,12 +57,12 @@ export default async function ShopPage({
             <div className='flex flex-wrap md:flex-nowrap justify-start'>
                 <div className='w-full md:w-[480px] xl:w-[232px]'>
                     <ClientOnly>
-                        <ShopAside keysCategories={keysCategories} categoryByName={categoryByName} />
+                        <ShopAside currentParams={currentParams} />
                     </ClientOnly>
                 </div>
                 <div className='w-full md:w-auto xl:auto flex flex-col'>
                     <ClientOnly>
-                        <ShopMain data={formattedProducts(products)} currentUser={currentUser} />
+                        <ShopMain data={_formattedProducts} currentUser={currentUser} />
                     </ClientOnly>
                 </div>
             </div>

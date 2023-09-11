@@ -3,7 +3,6 @@
 import CheckoutModal from "../components/modals/CheckoutModal";
 import LoginModal from "../components/modals/LoginModal";
 import RegisterModal from "../components/modals/RegisterModal";
-import RentModal from "../components/modals/RentModal";
 import SearchModal from "../components/modals/SearchModal";
 
 const ModalsProvider = () => {
@@ -12,7 +11,6 @@ const ModalsProvider = () => {
       <LoginModal />
       <RegisterModal />
       <SearchModal />
-      <RentModal />
       <CheckoutModal />
     </>
   );

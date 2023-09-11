@@ -8,7 +8,6 @@ import UserMenu from "./UserMenu";
 import I18nDropdown from "../dropdowns/I18nDropdown";
 import dynamic from "next/dynamic";
 import ClientOnly from "../ClientOnly";
-import i18AuthMiddleware from "@middlewares/i18middleware";
 import UserMenuSke from "../skeletons/navbar/UserMenuSke";
 import { useCategories } from "@/app/hooks/useCategories";
 

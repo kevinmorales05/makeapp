@@ -1,0 +1,179 @@
+{
+  "categories": {
+    "derma_plan": {
+      "label": "Derma Plan",
+      "description": "Esta crema protege la piel contra el sol!",
+      "short": "Renueva tu piel, día tras día",
+      "subs": {
+        "has": "false",
+        "i18subs": "{sub, select, all_catalog {Todo el catálogo} other {Sin subcategoría}}",
+        "mapper": "<i>all_catalog</i>",
+        "route": {
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "skin_care": {
+      "label": "Cuidado de la Piel",
+      "description": "Esta propiedad ayuda a tu piel!",
+      "short": "Piel radiante, cuidado esencial",
+      "subs": {
+        "has": "true",
+        "i18subs": "{sub, select, toner {Tónico} emulsion {Emulsión} cream {Crema} cleansing_bar {Barra de Limpieza} foam_cleanser {Limpiador en Espuma} ampoule {Ampolla} essence {Esencia} kit {Kit} balm {Bálsamo} 1_1 {1+1} sun_cream {Crema Solar} serum {Suero} mask {Mascarilla} cosmetics_kit {Kit de Cosméticos} lotion {Loción} cream_oil {Crema/Aceite} skin_lotion {Loción para la Piel} all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>toner</i><i>emulsion</i><i>cream</i><i>cleansing_bar</i><i>foam_cleanser</i><i>ampoule</i><i>essence</i><i>kit</i><i>balm</i><i>1_1</i><i>sun_cream</i><i>serum</i><i>mask</i><i>cosmetics_kit</i><i>lotion</i><i>cream_oil</i><i>skin_lotion</i><i>all_catalog</i>",
+        "route": {
+          "toner": "toner",
+          "emulsion": "emulsion",
+          "cream": "cream",
+          "cleansing_bar": "cleansing_bar",
+          "foam_cleanser": "foam_cleanser",
+          "ampoule": "ampoule",
+          "essence": "essence",
+          "kit": "kit",
+          "balm": "balm",
+          "1_1": "1+1",
+          "sun_cream": "sun_cream",
+          "serum": "serum",
+          "mask": "mask",
+          "cosmetics_kit": "cosmetics/kit",
+          "lotion": "lotion",
+          "cream_oil": "cream/oil",
+          "skin_lotion": "skin/lotion",
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "sun_care": {
+      "label": "Cuidado Solar",
+      "description": "Esta crema protege la piel contra el sol!",
+      "short": "Protección bajo el sol",
+      "subs": {
+        "has": "true",
+        "i18subs": "{sub, select, kit {Kit} foam_cleanser {Limpiador en Espuma} sun_cream {Crema Solar} sun_stick {Protector Solar en Barra} all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>kit</i><i>foam_cleanser</i><i>sun_cream</i><i>sun_stick</i><i>all_catalog</i>",
+        "route": {
+          "kit": "kit",
+          "foam_cleanser": "foam cleanser",
+          "sun_cream": "sun cream",
+          "sun_stick": "sun stick",
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "wrinkle_solution_toner": {
+      "label": "Tónico Solución Antiarrugas",
+      "description": "Estos productos te proporcionan vitaminas y antioxidantes!",
+      "short": "Juventud en cada gota",
+      "subs": {
+        "has": "true",
+        "i18subs": "{sub, select, kit {Kit} all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>kit</i><i>all_catalog</i>",
+        "route": {
+          "kit": "kit",
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "make_up": {
+      "label": "Maquillaje",
+      "description": "Estos productos tienen características naturales que realzan, ocultan imperfecciones, expresan la creatividad y logran looks nunca antes vistos!",
+      "short": "Expresa tu belleza única",
+      "subs": {
+        "has": "true",
+        "i18subs": "{sub, select, eyes {Ojos} primer_make_base {Primer/Maquillaje/Base} fixer {Fijador} lipstick {Labial} all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>eyes</i><i>primer_make_base</i><i>fixer</i><i>lipstick</i><i>all_catalog</i>",
+        "route": {
+          "eyes": "eyes",
+          "primer_make_base": "primer/make/base",
+          "fixer": "fixer",
+          "lipstick": "lipstick",
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "skin": {
+      "label": "Piel",
+      "description": "Estos productos revelan antiguos secretos!",
+      "short": "El secreto de la belleza natural",
+      "subs": {
+        "has": "true",
+        "i18subs": "{sub, select, lotion {Loción} all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>lotion</i><i>all_catalog</i>",
+        "route": {
+          "lotion": "lotion",
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "body_care": {
+      "label": "Cuidado Corporal",
+      "description": "Estos productos ofrecen limpieza, exfoliación, eliminación del vello y cepillado corporal, además de cuidado de las uñas!",
+      "short": "Cuida tu cuerpo con amor",
+      "subs": {
+        "has": "true",
+        "i18subs": "{sub, select, cleanser {Limpiador} body_lotion_cream {Loción Corporal/Crema}  all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>cleanser</i><i>body_lotion_cream</i><i>all_catalog</i>",
+        "route": {
+          "cleanser": "cleanser",
+          "body_lotion_cream": "body lotion/ cream",
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "mask_pack": {
+      "label": "Mascarilla",
+      "description": "Estas mascarillas están formuladas con diversos ingredientes que satisfacen diferentes necesidades de cuidado de la piel, como hidratación, iluminación, refinamiento de los poros, alivio y mucho más!",
+      "short": "Mimos para tu piel",
+      "subs": {
+        "has": "true",
+        "i18subs": "{sub, select, mask_sheet {Mascarilla en Hoja} all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>mask_sheet</i><i>all_catalog</i>",
+        "route": {
+          "mask_sheet": "mask sheet",
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "perfume": {
+      "label": "Perfume",
+      "description": "Estos se crean mediante una cuidadosa mezcla de diversos ingredientes aromáticos, lo que resulta en una fragancia única y distintiva que puede evocar emociones, recuerdos, estilo, asociaciones personales y la personalidad de un individuo!",
+      "short": "Aromas que te definen",
+      "subs": {
+        "has": "true",
+        "i18subs": "{sub, select, perfume_diffuser {Perfume/Difusor} all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>perfume_diffuser</i><i>all_catalog</i>",
+        "route": {
+          "perfume_diffuser": "perfume/diffuser",
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "nail_care": {
+      "label": "Cuidado de las Uñas",
+      "description": "Estos productos abarcan una variedad de prácticas y productos destinados a mantener la salud, fuerza y apariencia de las uñas!",
+      "short": "Elegancia en cada uña",
+      "subs": {
+        "has": "false",
+        "i18subs": "{sub, select, all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>all_catalog</i>",
+        "route": {
+          "all_catalog": "ALL CATALOG"
+        }
+      }
+    },
+    "all": {
+      "label": "Todo",
+      "description": "Una amplia gama de productos y prácticas que ofrecen una selección completa para satisfacer diversas necesidades. Ya sea que estés buscando fragancias que evocan emociones, cuidado de las uñas para mantener uñas saludables y elegantes, o cualquier otro producto esencial de belleza, ¡los encontrarás todos aquí! ¡Explora nuestra amplia colección y descubre los productos perfectos para realzar tu estilo personal y bienestar!",
+      "short": "Todo en uno, para tu belleza",
+      "subs": {
+        "has": "false",
+        "i18subs": "{sub, select, all_catalog {Todo el catálogo} other {Sin Subcategoría}}",
+        "mapper": "<i>all_catalog</i>",
+        "route": {
+          "all_catalog": "ALL CATALOG"
+        },
+        "validSubcategories": ["toner", "emulsion"]
+      }
+    }
+  }
+}

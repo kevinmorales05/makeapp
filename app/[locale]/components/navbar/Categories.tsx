@@ -3,9 +3,8 @@ import { usePathname, useSearchParams } from 'next/navigation';
 
 import CategoryBox from "../CategoryBox";
 import Container from '../Container';
-import { useLocale, useTranslations } from 'next-intl';
-import { CategoryItem, useCategories } from '@/app/hooks/useCategories';
-import { IconType } from 'react-icons';
+import { useLocale } from 'next-intl';
+import { CategoryItem } from '@/app/hooks/useCategories';
 import { ButtonGroup } from '@nextui-org/react';
 
 type CategoriesProps = {
