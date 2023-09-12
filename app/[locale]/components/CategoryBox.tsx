@@ -53,7 +53,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
     }, { skipNull: true });
 
     router.push(url);
-  }, [i18Label.split('_').join(' '), router, params]);
+  }, [i18Label, router, params]);
 
   return (
     <Button

@@ -56,14 +56,14 @@ export default async function ShopPage({
 
     return (
         <Container>
-            <Breadcrumbs />
+            {/* <Breadcrumbs /> */}
             <div className='flex flex-wrap md:flex-nowrap justify-start'>
-                <div className='w-full md:w-[480px] xl:w-[232px]'>
+                <div className='w-full md:w-[480px] xl:w-[600px] gap-4'>
                     <ClientOnly>
                         <ShopAside currentParams={currentParams} />
                     </ClientOnly>
                 </div>
-                <div className='w-full md:w-auto xl:auto flex flex-col'>
+                <div className='w-full flex flex-col'>
                     <ClientOnly>
                         <ShopMain data={_formattedProducts} currentUser={currentUser} params={currentParams} />
                     </ClientOnly>

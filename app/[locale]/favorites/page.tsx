@@ -12,23 +12,11 @@ import { SafeProducts, SafeUser } from "../types";
 export const dynamic = "force-dynamic";
 
 const page = async () => {
-  // const listings = await getFavoriteListings();
   const favorites: SafeProducts[] = await getFavorites();
   const currentUser: SafeUser | null = await getCurrentUser();
 
   const formattedFavorites = formattedProducts(favorites);
   
-  // if (favorites.length === 0) {
-  //   return (
-  //     <ClientOnly>
-  //       <EmptyState
-  //         title="No favorites found"
-  //         subtitle="Looks like you have no favorite listings."
-  //       />
-  //     </ClientOnly>
-  //   );
-  // }
-
   return (
     <ClientOnly>
       <FavoritesClient
