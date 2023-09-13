@@ -1,29 +1,11 @@
 'use client'
 
-import {
-  GiCeremonialMask,
-  GiDelicatePerfume,
-  GiHealthPotion,
-  GiLips,
-  GiPerfumeBottle,
-  GiStarFormation,
-} from 'react-icons/gi';
-import { BsEmojiSunglasses, BsEyedropper, BsFillArrowDownRightCircleFill } from 'react-icons/bs';
-import { IoBodySharp } from 'react-icons/io5';
-import { MdCleanHands, MdFace2 } from 'react-icons/md';
-
-import { TbHandThreeFingers } from "react-icons/tb";
-
 import React from 'react'
 import HeadingAside from './HeadingAside'
-import Image from 'next/image'
 import { useLocale, useMessages, useTranslations } from 'next-intl'
-import ClientOnly from '../components/ClientOnly'
 import { Accordion, AccordionItem, Avatar, cn } from '@nextui-org/react'
 import Link from 'next/link'
-import { CategoryKey, SubcategoryRouteKey, useCategories } from '../hooks/useCategories'
-import { IconType } from 'react-icons'
-import { BiLeftArrowAlt } from 'react-icons/bi';
+import {  SubcategoryRouteKey, useCategories } from '../hooks/useCategories'
 
 interface CurrentParams {
   category: string,

@@ -75,8 +75,6 @@ export default function ShopMain({ data, currentUser, params }: ShopMainProps) {
     if (params.skip !== 0) {
       const _currentPage = Math.ceil((params.skip + 1) / params.limit)
       setCurrentPage(_currentPage)
-      console.log("params.skip: ", params.skip, params)
-      console.log("real current page: ", _currentPage)
     }
   }, [])
 

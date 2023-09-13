@@ -37,7 +37,6 @@ function I18nDropdown(
       requery += `&${SHOP_PARAMS.LIMIT}=${params?.get(SHOP_PARAMS.LIMIT)}`
     };
     const rePathname = pathname + requery
-    console.log("full pathname ", rePathname);
     router.replace(rePathname, { locale: newLocale });
   }
 
