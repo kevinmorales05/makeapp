@@ -3,9 +3,9 @@
 import React from 'react'
 import HeadingAside from './HeadingAside'
 import { useLocale, useMessages, useTranslations } from 'next-intl'
+import Link from 'next-intl/link'
 import { Accordion, AccordionItem, Avatar, cn } from '@nextui-org/react'
-import Link from 'next/link'
-import {  SubcategoryRouteKey, useCategories } from '../hooks/useCategories'
+import { SubcategoryRouteKey, useCategories } from '../hooks/useCategories'
 
 interface CurrentParams {
   category: string,
@@ -61,7 +61,7 @@ export default function ShopAside({
 
                       return (
                         <li key={chunks?.toLocaleString()} className="group py-2 px-8 transition-colors duration-300 ease-in-out">
-                          <Link href={`${locale}/shop?category=${routecategory}&subCategory=${routesubCategory}`} color="foreground"
+                          <Link locale={locale} href={`/shop?category=${routecategory}&subCategory=${routesubCategory}`} color="foreground"
                             className={cn(`group-hover:text-primary-red/50`,
                               currentParams.subCategory === routesubCategory && currentParams.category === routecategory ? "text-primary-red/50" : ""
                             )}>
