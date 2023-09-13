@@ -1,0 +1,8 @@
+{
+  "products": {
+    "colors": "{spec, select, null {Predeterminado} green {Verde} pink {Rosa} gold {Oro} white {Blanco} brown {Marrón} red {Rojo} white__brown {Blanco/Marrón} blue {Azul} white__blue {Blanco/Azul} sky_blue {Azul Cielo} grey {Gris} yellow {Amarillo} orange {Naranja} transparent {Transparente} cherry {Cereza} white__green {Blanco/Verde} olive {Oliva} fuchsia {Fucsia} purple {Morado} silver {Plateado} white__pink {Blanco/Rosa} white__violet {Blanco/Morado} white__gold {Blanco/Oro} black {Negro} black__white {Negro/Blanco} white__black {Blanco/Negro} violet {Violeta} cream {Crema} pumpkin {Calabaza} indigo_blue {Azul Índigo} maple_red {Rojo Arce} dusk_purple {Púrpura Atardecer} glint_pink {Rosa Destellante} other {Predeterminado}}",
+    "kit": "Kit",
+    "bestSeller": "Mejor Vendido",
+    "promo": "Promoción"
+  }
+}

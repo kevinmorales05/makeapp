@@ -61,11 +61,11 @@ export const authOptions: AuthOptions = {
   pages: {
     signIn: '/',
   },
-  debug: process.env.NODE_ENV === 'development',
+  debug: process.env.NODE_ENV as string === 'development',
   session: {
     strategy: "jwt",
   },
-  secret: process.env.NEXTAUTH_SECRET,
+  secret: process.env.NEXTAUTH_SECRET as string,
 }
 
 export default NextAuth(authOptions);

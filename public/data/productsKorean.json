@@ -807,7 +807,7 @@
     "cost": "10000",
     "promoCost": "10000",
     "bestSeller": "0",
-    "kit": "0",
+    "kit": "1",
     "weight": "35",
     "farmacState": "ml",
     "presentation": "liquid",
@@ -1131,7 +1131,7 @@
     "weight": "381",
     "farmacState": "ml",
     "presentation": "liquid",
-    "color": "white/nlue",
+    "color": "white/blue",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/derma%20plan%2Fderma%20plan%2FCellRenewBioSkinCareSpecialSetOf3.png?alt=media&token=bacf93cd-78e8-45b8-8451-cce7bc6fe1e1",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=3849&cate_no=54&display_group=1"
   },
@@ -1292,7 +1292,7 @@
     "weight": "25",
     "farmacState": "gr",
     "presentation": "solid",
-    "color": "gray",
+    "color": "grey",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/derma%20plan%2Fderma%20plan%2Fsun%20care%2FEcoEarthCicaMildSunCushion.png?alt=media&token=fe7959a0-cc7f-43e8-a129-5099ab040971",
     "urlProduct": "https://healivemall.com/product/%EC%97%90%EC%BD%94-%EC%96%B4%EC%8A%A4-%EC%8B%9C%EC%B9%B4-%EB%A7%88%EC%9D%BC%EB%93%9C-%EC%84%A0-%EC%BF%A0%EC%85%98/5069/category/85/display/1/"
   },
@@ -1440,7 +1440,6 @@
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/derma%20plan%2Fderma%20plan%2Fsun%20care%2FEcoEarthWaterproofSunCream.png?alt=media&token=0303c98b-ab59-472e-b3d6-8aab4c7bcefa",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=3710&cate_no=65&display_group=1"
   },
-
   {
     "title": "Touch On Body Cotton Body Wash + Lotion",
     "description": "A body wash/lotion that contains cotton seed extract and provides comfortable and moist care for body skin with soft and rich bubbles",
@@ -1693,11 +1692,10 @@
     "weight": "300",
     "farmacState": "ml",
     "presentation": "liquid",
-    "color": "white and green",
+    "color": "white/green",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/derma%20plan%2Fderma%20plan%2Fsun%20care%2Fbody%20care%2FNaturalDailyAvocadoBodyCream.png?alt=media&token=1678a1f4-3079-4294-a133-85b08da3688f",
     "urlProduct": "https://healivemall.com/product/%EB%82%B4%EC%B6%94%EB%9F%B4-%EB%8D%B0%EC%9D%BC%EB%A6%AC-%EC%95%84%EB%B3%B4%EC%B9%B4%EB%8F%84-%EB%B0%94%EB%94%94-%ED%81%AC%EB%A6%BC/2368/category/69/display/1/"
   },
-
   {
     "title": "Natural Green Grape Mask Sheet 1+1",
     "description": "A mask sheet containing fresh green grapes that turns tired skin into clear, fresh, and energetic skin as if it has been hydrated",
@@ -2098,7 +2096,6 @@
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2FNaturalAloeMaskSheet1%2B1.png?alt=media&token=563236f5-1289-4dd1-90ce-82ceae3f4add",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=4634&cate_no=77&display_group=1"
   },
-
   {
     "title": "Eco Soul Vegan Bright Up Makeup Base 02 Lavender",
     "description": "A vegan makeup base that makes your skin look bright and shiny as if you had applied a radiance tone-up cream",
@@ -2147,7 +2144,6 @@
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FEcoSoulPerfectMakeupFixer.png?alt=media&token=5cc9baab-68bb-4e62-85a7-b41d673c17c6",
     "urlProduct": "https://healivemall.com/product/%EC%97%90%EC%BD%94-%EC%86%8C%EC%9A%B8-%ED%8D%BC%ED%8E%99%ED%8A%B8-%EB%A9%94%EC%9D%B4%ED%81%AC%EC%97%85-%ED%94%BD%EC%84%9C/1969/category/91/display/1/"
   },
-
   {
     "title": "Eco Soul Sparkling Eye CR02 Coralliday",
     "description": "Liquid glitter that shines brilliantly from any angle",
@@ -2272,7 +2268,7 @@
     "weight": "1.1",
     "farmacState": "g",
     "presentation": "solid",
-    "color": "white and pink",
+    "color": "white/pink",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FGlowStayStickShadowPk01RoseSeduction.png?alt=media&token=8b40a628-8192-4bc5-ad01-12d531021b63",
     "urlProduct": "https://healivemall.com/product/%EA%B8%80%EB%A1%9C%EC%9A%B0-%EC%8A%A4%ED%85%8C%EC%9D%B4-%EC%8A%A4%ED%8B%B1-%EC%84%80%EB%8F%84%EC%9A%B0-pk01-%EB%A1%9C%EC%A6%88-%EC%8B%9C%EB%8D%95%EC%85%98/2199/category/1/display/564/"
   },
@@ -2288,7 +2284,7 @@
     "weight": "11",
     "farmacState": "g",
     "presentation": "solid",
-    "color": "white and pink",
+    "color": "white/pink",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FGlowStayStickShadowBe01SleepBeige.png?alt=media&token=3bcf09a4-c24d-4e4a-a8e5-54db86b71aeb",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=2197&cate_no=1&display_group=564"
   },
@@ -2304,7 +2300,7 @@
     "weight": "1.1",
     "farmacState": "g",
     "presentation": "solid",
-    "color": "white and pink",
+    "color": "white/pink",
     "imgUrl": "https://healivemall.com/product/detail.html?product_no=2198&cate_no=1&display_group=564",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=2198&cate_no=1&display_group=564"
   },
@@ -2320,7 +2316,7 @@
     "weight": "1.1",
     "farmacState": "g",
     "presentation": "solid",
-    "color": "white and violet",
+    "color": "white/violet",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FGlowStayStickShadowPp01VioletCharm.png?alt=media&token=c60ed2c6-f9a0-448c-b941-ced34d77a52b",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=2200&cate_no=1&display_group=564"
   },
@@ -2336,7 +2332,7 @@
     "weight": "1.1",
     "farmacState": "g",
     "presentation": "solid",
-    "color": "white and gold",
+    "color": "white/gold",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FGlowStayStickShadowYe01GoldMare.png?alt=media&token=4918bcea-597f-42ea-bc30-bddf131652b6",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=2201&cate_no=1&display_group=564"
   },
@@ -2352,7 +2348,7 @@
     "weight": "1.1",
     "farmacState": "g",
     "presentation": "solid",
-    "color": "white and pink",
+    "color": "white/pink",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FGlowStayStickShadowPk02BloomPink.png?alt=media&token=f81cca52-acd7-465f-a183-edf55a7038ff",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=4260&cate_no=1&display_group=564"
   },
@@ -2368,7 +2364,7 @@
     "weight": "1.1",
     "farmacState": "g",
     "presentation": "solid",
-    "color": "white and blue",
+    "color": "white/blue",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FGlowStayStickShadowBl02FrostNavy.png?alt=media&token=731f4899-9e84-4ab8-9f7b-da5f6b91f2f0",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=4261&cate_no=1&display_group=564"
   },
@@ -2384,7 +2380,7 @@
     "weight": "1.1",
     "farmacState": "g",
     "presentation": "solid",
-    "color": "white and pink",
+    "color": "white/pink",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FGlowStayStickShadowWh01BridalWhite.png?alt=media&token=4c65dba8-4bc0-4c25-850d-315096848592",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=4263&cate_no=1&display_group=564"
   },
@@ -2400,7 +2396,7 @@
     "weight": "1.1",
     "farmacState": "g",
     "presentation": "solid",
-    "color": "white and pink",
+    "color": "white/pink",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FGlowStayStickShadowBe02HazyRose.png?alt=media&token=01a1b7a3-db2d-4ae2-b01d-8cf4f1dccce4",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=4264&cate_no=1&display_group=564"
   },
@@ -2624,7 +2620,7 @@
     "weight": "8",
     "farmacState": "ml",
     "presentation": "liquid",
-    "color": "black and white",
+    "color": "black/white",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FSaemmulJjangjjangCurlingMascara.png?alt=media&token=a0733514-9fbf-494d-96ac-b3413691fb78",
     "urlProduct": "https://healivemall.com/product/%EC%83%98%EB%AC%BC-%EC%A7%B1%EC%A7%B1-%EC%BB%AC%EB%A7%81-%EB%A7%88%EC%8A%A4%EC%B9%B4%EB%9D%BC/2291/category/94/display/1/"
   },
@@ -2640,7 +2636,7 @@
     "weight": "8",
     "farmacState": "ml",
     "presentation": "liquid",
-    "color": "black and white",
+    "color": "black/white",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FSaemmulPompangVolumeMascara.png?alt=media&token=5e671088-fef7-4bdf-8d1f-120a43092214",
     "urlProduct": "https://healivemall.com/product/%EC%83%98%EB%AC%BC-%EB%B9%B5%EB%B9%B5-%EB%B3%BC%EB%A5%A8-%EB%A7%88%EC%8A%A4%EC%B9%B4%EB%9D%BC/2213/category/94/display/1/"
   },
@@ -2656,7 +2652,7 @@
     "weight": "4",
     "farmacState": "g",
     "presentation": "liquid",
-    "color": "white and brown",
+    "color": "white/brown",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FSaemmul3DSlimMascara-Brown.png?alt=media&token=c396c761-f797-40ae-bcab-388d662f0adb",
     "urlProduct": "https://healivemall.com/product/%EC%83%98%EB%AC%BC-3d-%EC%8A%AC%EB%A6%BC-%EB%A7%88%EC%8A%A4%EC%B9%B4%EB%9D%BC-%EB%B8%8C%EB%9D%BC%EC%9A%B4/2203/category/94/display/1/"
   },
@@ -2672,11 +2668,10 @@
     "weight": "4",
     "farmacState": "g",
     "presentation": "liquid",
-    "color": "white and black",
+    "color": "white/black",
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FSaemmul3DSlimMascara-Black.png?alt=media&token=cc340daa-6f4b-40a7-aa0c-611f458cf76f",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=2202&cate_no=94&display_group=1"
   },
-
   {
     "title": "M Touch Shine Lipstick RD02 Red Show",
     "description": "Shine lipstick with bright glitter that provides a moist and colorful gloss",
@@ -2981,7 +2976,6 @@
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/mask%20pack%2Fmake%20up%2FKissholicLipstickMattePk07SpeciallyPink.png?alt=media&token=c7ac50f4-cb9c-49bd-97c9-e38570dccc72",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=2150&cate_no=196&display_group=1"
   },
-
   {
     "title": "Eco Energy Skin Care Set of 2",
     "description": "A mild skin care set containing French herbal tea water and herbal extracts that replenishes moisture and energy to the skin and cares for comfortable skin",
@@ -3190,7 +3184,6 @@
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/Men's%20cosmetics%2FMineralHommeBlackExSetOf2.png?alt=media&token=0a85089d-115e-4dff-8cdc-fcd8447d9055",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=3871&cate_no=111&display_group=1"
   },
-
   {
     "title": "City Ardo Secret in Prague Czech Eau de Parfum",
     "description": "A scent that expresses the hidden charms encountered on an unfamiliar trip to Prague, the city of freedom and romance, with the harmony of fresh juice of red apple and soft suede notes added to the coveted peony",
@@ -3271,6 +3264,7 @@
     "imgUrl": "https://firebasestorage.googleapis.com/v0/b/makeapp-80c29.appspot.com/o/perfume-diffuser%2FUrbanBreezeEauDeParfum-BerryYard.png?alt=media&token=4bb02a7f-92e7-47e1-9a5f-7e96096ad40f",
     "urlProduct": "https://healivemall.com/product/detail.html?product_no=3792&cate_no=214&display_group=1"
   },
+
   {
     "title": "(Like a Dream Collection)Nail Wear 112. Forest Mint",
     "description": "Syrup nail with glass luster & matte nail with mood New nail wear in 5 pastel colors",

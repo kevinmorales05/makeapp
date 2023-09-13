@@ -1,4 +1,5 @@
 import prisma from "@/app/libs/prismadb";
+import { getPriceApp } from "../constants/server_constants";
 
 export default async function getProducts(
   page_peer_size: number,
@@ -48,8 +49,14 @@ export default async function getProducts(
 
     const [categories, count] = data
 
+    const categoriesMapped = categories.map(c => ({
+      ...c,
+      promoCost: getPriceApp(c.promoCost),
+      cost: getPriceApp(c.cost),
+    }))
+
     return {
-      products: categories,
+      products: categoriesMapped,
       pagination: {
         total: count
       },

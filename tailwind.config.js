@@ -2,12 +2,73 @@
 const { nextui } = require("@nextui-org/react");
 
 const colors = {
-  blue: "#2882ef",
-  lightblue: "#2882ef",
-  violet: "#8524c3",
+  primary: {
+    red: "#c1272d",
+    indigo: "#333d8d",
+    black: "#000000",
+    white: "#ffffff",
+    DEFAULT: "#c1272d",
+  },
+  secondary: {
+    teal: "#3e858c",
+    azure: "#8fc5d6",
+    crimson: "#da5054",
+    DEFAULT: "#da5054",
+  },
+  // to color products
+  brown: {
+    500: "#bfa094",
+  },
+  cherry: {
+    500: "#500",
+  },
+  cream: {
+    500: "#dac0a7",
+  },
+  dusk: {
+    purple: {
+      500: "#bfa094",
+    },
+  },
+  fuchsia: {
+    500: "#E500FF",
+  },
+  glint: {
+    pink: {
+      500: "#E5679B",
+    },
+  },
+  gold: {
+    500: "#FFD500",
+  },
+  maple: {
+    red: {
+      500: "#bf514e",
+    },
+  },
+  dusk: {
+    purple: {
+      500: "#C73D3D",
+    },
+  },
+  olive: {
+    500: "#75773C",
+  },
+  pumpkin: {
+    500: "#FF7518",
+  },
+  silver: {
+    500: "#c0c0c0",
+  },
+  
+
+  red: {
+    dark: "#c1272d",
+    light: "#fcebe8",
+    letter: "#d2567b",
+    DEFAULT: "#c1272d",
+  },
   rosa: "#f02888",
-  yellow: "#f9c32a",
-  orange: "#f97449",
   accents: {
     0: "#fff",
     1: "#fafafa",
@@ -20,6 +81,7 @@ const colors = {
     8: "#111",
     9: "#000",
   },
+
   success: {
     DEFAULT: "#0070f3",
     dark: "#0761d1",
@@ -74,24 +136,7 @@ module.exports = {
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
-      colors: {
-        red: {
-          dark: "#c1272d",
-          light: "#fcebe8",
-          letter: "#d2567b",
-          DEFAULT: "#c1272d",
-        },
-        // secondary: {
-        //   dark: "#3e858c",
-        //   DEFAULT: "#3e858c",
-        // },
-        secondary: {
-          DEFAULT: colors.accents[5],
-          dark: colors.accents[7],
-          light: colors.accents[3],
-          lighter: colors.accents[2],
-        },
-      },
+      colors: { ...colors },
       fontFamily: {
         merienda: ["var(--font-merienda)", "cursive"],
         gandhi: ["var(--font-gandhi-serif)", "var(--font-roboto-serif)"],

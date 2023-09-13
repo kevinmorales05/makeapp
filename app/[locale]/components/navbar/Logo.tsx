@@ -5,7 +5,7 @@ const Logo = () => {
       href={'/'}
       // onClick={() => router.push('/', { locale })}
       aria-label="Korean-Cosmetic"
-      className="block cursor-pointer font-merienda !text-red-dark text-4xl"
+      className="block cursor-pointer font-merienda !text-primary-red text-4xl"
       // size="md"
       color="primary"
     // src="/img/logo.png" 

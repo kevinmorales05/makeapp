@@ -19,8 +19,8 @@
 //           <ul>
 //             {i.values.map((item: string, index: number) => (
 //               <li key={item} className='py-2 px-8'>
-//                 <Link href={`${locale}/shop?category=${i.category}&subCategory=${item}`} color="foreground" className={cn(`hover:text-red-dark/50`,
-//                   categoryByName.subCategory === item ? "text-red-dark/50" : ""
+//                 <Link href={`${locale}/shop?category=${i.category}&subCategory=${item}`} color="foreground" className={cn(`hover:text-primary-red/50`,
+//                   categoryByName.subCategory === item ? "text-primary-red/50" : ""
 //                 )}>{item.charAt(0).toUpperCase() + item.slice(1)}</Link>
 //               </li>
 //             ))}

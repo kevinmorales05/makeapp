@@ -1,0 +1,8 @@
+{
+  "products": {
+    "colors": "{spec, select, null {기본} green {녹색} pink {분홍} gold {금색} white {흰색} brown {갈색} red {빨강} white__brown {흰색/갈색} blue {파랑} white__blue {흰색/파랑} sky_blue {하늘색} grey {회색} yellow {노랑} orange {주황} transparent {투명} cherry {체리} white__green {흰색/녹색} olive {올리브} fuchsia {자홍} purple {보라} silver {은색} white__pink {흰색/분홍} white__violet {흰색/보라} white__gold {흰색/금색} black {검정} black__white {검정/흰색} white__black {흰색/검정} violet {바이올렛} cream {크림} pumpkin {호박} indigo_blue {남색} maple_red {단풍} dusk_purple {황혼 보라} glint_pink {빛나는 핑크} other {기본}}",
+    "kit": "키트",
+    "bestSeller": "베스트셀러",
+    "promo": "프로모션"
+  }
+}

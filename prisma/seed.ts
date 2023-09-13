@@ -7,15 +7,14 @@ import { FormattedProduct, Product } from './helpers/productTypes';
 const prisma = new PrismaClient()
 
 
-
 const formattedProductsToDB: FormattedProduct[] = products.map((p) => ({
     title: p.title,
     description: p.description,
     imageSrc: p.imgUrl,
     cost: parseFloat(p.cost),
     promoCost: "promoCost" in p ? parseFloat(p.promoCost) : 12344321,
-    bestSeller: p.bestSeller || p.bestSeller === "0" ? false : true,
-    kit: p.kit || p.kit === "0" ? false : true,
+    bestSeller: p.bestSeller === "1" ? true : false,
+    kit: p.kit === "1" ? true : false,
     weight: p.weight,
     farmacState: p.farmacState,
     presentation: p.presentation,
@@ -31,7 +30,6 @@ const load = async () => {
         await prisma.product.createMany({
             data: formattedProductsToDB
         })
-        // await prisma.$queryRaw`ALTER TABLE Product AUTO_INCREMENT = 1`
         console.log('🌱  Added category data')
     } catch (e) {
         console.error(e)
@@ -41,3 +39,4 @@ const load = async () => {
     }
 }
 load()
+// await prisma.$queryRaw`ALTER TABLE Product AUTO_INCREMENT = 1`

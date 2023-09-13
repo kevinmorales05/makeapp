@@ -5,7 +5,7 @@ import { Dropdown as DropdownUI, DropdownTrigger, DropdownMenu, DropdownItem, Dr
 
 import { usePathname, useRouter } from 'next-intl/client';
 import { useLocale, useTranslations } from "next-intl"
-import { ICON_CLASES_DROPDOWN, LOCALE_EN, LOCALE_ES, LOCALE_KO } from "@/app/constants/constants";
+import { ICON_CLASES_DROPDOWN, LOCALE_EN, LOCALE_ES, LOCALE_KO } from "@/app/constants/client_constants";
 import { EC, KR, US } from "country-flag-icons/react/3x2";
 import useCountries from "@/app/hooks/useCountries";
 

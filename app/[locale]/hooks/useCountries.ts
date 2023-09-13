@@ -2,7 +2,7 @@ import countries from 'world-countries';
 import { US } from 'country-flag-icons/react/3x2'
 import { EC } from 'country-flag-icons/react/3x2'
 import { KR } from 'country-flag-icons/react/3x2'
-import { LOCALE_EN, LOCALE_ES, LOCALE_KO } from '../constants/constants';
+import { LOCALE_EN, LOCALE_ES, LOCALE_KO } from '../constants/client_constants';
 
 
 const formattedCountries = countries.map((country) => ({

@@ -7,7 +7,7 @@ import ShopAside from './ShopAside'
 import ShopMain from './ShopMain'
 import getCurrentUser from "@/app/actions/getCurrentUser";
 import getProducts from '../actions/getProducts'
-import { PRODUCTS_PEER_PAGE } from '../constants/constants'
+import { PRODUCTS_PEER_PAGE } from '../constants/client_constants'
 import { formattedProducts } from '../hooks/useProducts'
 import Breadcrumbs from '../components/Breadcrumbs'
 import { SafeProducts, SafeUser } from '../types'
@@ -58,16 +58,16 @@ export default async function ShopPage({
         <Container>
             {/* <Breadcrumbs /> */}
             <div className='flex flex-wrap md:flex-nowrap justify-start'>
-                <div className='w-full md:w-[480px] xl:w-[600px] gap-4'>
+                <div className='w-full block md:flex mr-0 md:mr-[16px] md:w-[440px] xl:w-[500px] gap-6'>
                     <ClientOnly>
                         <ShopAside currentParams={currentParams} />
                     </ClientOnly>
                 </div>
-                <div className='w-full flex flex-col'>
-                    <ClientOnly>
-                        <ShopMain data={_formattedProducts} currentUser={currentUser} params={currentParams} />
-                    </ClientOnly>
-                </div>
+
+                <ClientOnly>
+                    <ShopMain data={_formattedProducts} currentUser={currentUser} params={currentParams} />
+                </ClientOnly>
+
             </div>
         </Container>
     )

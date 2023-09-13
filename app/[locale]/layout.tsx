@@ -39,7 +39,8 @@ async function getMessages(locale: string) {
   try {
     const msgs = {
       ...(await import(`@/messages/${locale}/${locale}.json`)).default,
-      ...(await import(`@/messages/${locale}/categories.json`)).default
+      ...(await import(`@/messages/${locale}/categories.json`)).default,
+      ...(await import(`@/messages/${locale}/products.json`)).default,
     }
     return msgs
   } catch (error) {
@@ -50,7 +51,6 @@ async function getMessages(locale: string) {
 // export function generateStaticParams() {
 //   return ['es', 'en', 'ko'].map((locale) => ({ locale }))
 // }
-
 // export const dynamic = 'force-dynamic'
 
 type RootProps = {

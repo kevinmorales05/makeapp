@@ -35,6 +35,9 @@
     "aside": {
       "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",
       "tops3": "{locale, select, es {Top 3 Para Hoy} en {Top 3 For Today} ko {오늘의 상위 3개} other {Top 3 For Today}}"
+    },
+    "main": {
+      "actionButton": "Mostrar"
     }
   },
   "login": {

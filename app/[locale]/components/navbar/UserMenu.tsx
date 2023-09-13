@@ -25,7 +25,7 @@ import Dropdown, { IDropdownProps } from "../dropdowns/Dropdown";
 import { Button, User, cn } from "@nextui-org/react";
 import { useLocale } from "next-intl";
 import { FaHandsHelping } from "react-icons/fa";
-import { ICON_CLASES_DROPDOWN } from "@/app/constants/constants";
+import { ICON_CLASES_DROPDOWN } from "@/app/constants/client_constants";
 import { useCartStore } from "@/app/hooks/useCart";
 import { useFavoriteStore } from "@/app/hooks/useFavorite";
 
@@ -201,8 +201,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             py-3 
             sm:px-4 
             rounded-full 
-          hover:text-red-dark
-          hover:bg-red-dark/10
+          hover:text-primary-red
+          hover:bg-primary-red/10
             transition 
             cursor-pointer
           "
@@ -212,8 +212,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             <span
               className="
           absolute
-        bg-red-dark
-        text-white
+        bg-primary-red
+        text-primary-white
           bottom-0
           ml-4
           inline-block whitespace-nowrap rounded-full 
@@ -240,8 +240,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           font-bold 
           py-3 
           px-4 
-        hover:text-red-dark
-        hover:bg-red-dark/10
+        hover:text-primary-red
+        hover:bg-primary-red/10
           rounded-full 
           transition 
           cursor-pointer
@@ -253,8 +253,8 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
               className="
                   absolute
                   bottom-0
-                  bg-red-dark
-                   text-white
+                  bg-primary-red
+                   text-primary-white
                     ml-4
                     inline-block whitespace-nowrap rounded-full 
                     px-[0.60em] 

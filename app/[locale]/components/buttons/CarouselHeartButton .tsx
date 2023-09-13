@@ -24,20 +24,20 @@ const CarouselHeartButton: React.FC<CarouselHeartButtonProps> = ({
   });
 
   return (
-      <motion.div
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        className="
+    <motion.div
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      className="
         relative
         hover:opacity-80
         transition
         cursor-pointer
       "
-      >
-        <Button onPress={toggleFavorite} isIconOnly radius="full" className="w-16 h-16 md:w-14 md:h-14 shadow-md text-white cursor-pointer transition-all duration-300 ease-linear group-hover:text-white bg-red-dark hover:opacity-80 transition-opacity">
-          {hasFavorited ? <AiFillHeart className="w-8 h-8 md:w-6 md:h-6 text-white" /> : <AiOutlineHeart className="w-8 h-8 md:w-6 md:h-6 text-white" />}
-        </Button>
-      </motion.div >
+    >
+      <Button onPress={toggleFavorite} isIconOnly radius="full" className="w-16 h-16 md:w-14 md:h-14 shadow-md text-white cursor-pointer transition-all duration-300 ease-linear group-hover:text-white bg-primary-red hover:opacity-80 ">
+        {hasFavorited ? <AiFillHeart className="w-8 h-8 md:w-6 md:h-6 text-white" /> : <AiOutlineHeart className="w-8 h-8 md:w-6 md:h-6 text-white" />}
+      </Button>
+    </motion.div >
   );
 }
 

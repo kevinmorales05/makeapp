@@ -80,8 +80,8 @@ export default function ShopAside({
                       return (
                         <li key={chunks?.toLocaleString()} className="group py-2 px-8 transition-colors duration-300 ease-in-out">
                           <Link href={`${locale}/shop?category=${routecategory}&subCategory=${routesubCategory}`} color="foreground"
-                            className={cn(`group-hover:text-red-dark/50`,
-                              currentParams.subCategory === routesubCategory && currentParams.category === routecategory ? "text-red-dark/50" : ""
+                            className={cn(`group-hover:text-primary-red/50`,
+                              currentParams.subCategory === routesubCategory && currentParams.category === routecategory ? "text-primary-red/50" : ""
                             )}>
                             {i18subCategory}
                           </Link>
@@ -96,23 +96,6 @@ export default function ShopAside({
           )}
         </Accordion>
       </section>
-
-      {/* {slider} */}
-      {/* tops */}
-      {/* <section>
-        <HeadingAside title={tshop("aside.tops3", { locale })} />
-        <div className="flex justify-center items-start flex-col px-1">
-          {Array.from([1, 2, 3]).map(item => (
-            <div key={item} className="flex justify-center align-center">
-              <Image src="/img/product1.jpg" alt="image" width={60} height={100} className='cursor-pointer' />
-              <div className="flex flex-col justify-center align-center">
-                <span className="hover:text-red-dark/50 cursor-pointer">Spray Balm With Oat Extract</span>
-                <span className="text-sm text-[#5e5c5c]">$30.99</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section> */}
     </div >
   )
 }
