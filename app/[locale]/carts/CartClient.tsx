@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from 'react'
 import Breadcrumbs from '../components/Breadcrumbs'
-import Link from 'next-intl/dist/link'
 import useLoginModal from '../hooks/useLoginModal'
 import { IProductFormatted, formattedProducts } from '../hooks/useProducts'
 import { SafeUser } from '../types'

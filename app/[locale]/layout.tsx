@@ -72,10 +72,10 @@ export default async function RootLayout({
   params: { locale },
 }: RootProps) {
 
-  const currentLocale = useLocale();
-  if (locale !== currentLocale) {
-    notFound();
-  }
+  // const currentLocale = useLocale();
+  // if (locale !== currentLocale) {
+  //   notFound();
+  // }
 
   const currentUser = await getCurrentUser();
   const messages = await getMessages(locale)

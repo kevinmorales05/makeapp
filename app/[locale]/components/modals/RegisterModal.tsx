@@ -5,7 +5,6 @@ import { AiFillGithub } from "react-icons/ai";
 import { signIn } from "next-auth/react";
 import { FcGoogle } from "react-icons/fc";
 import { useCallback, useState } from "react";
-import { toast } from "react-hot-toast";
 import {
   FieldValues,
   SubmitHandler,
@@ -21,6 +20,7 @@ import Heading from "../Heading";
 import Button from "../buttons/Button";
 import { useLocale, useTranslations } from "next-intl";
 import { apix } from "@/app/constants/axios-instance";
+import { toast } from "sonner";
 
 const RegisterModal = () => {
   const locale = useLocale()

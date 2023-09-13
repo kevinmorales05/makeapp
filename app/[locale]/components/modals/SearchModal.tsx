@@ -12,9 +12,9 @@ import useSearchModal from "@/app/hooks/useSearchModal";
 import Modal from "./Modal";
 import Calendar from "../inputs/Calendar";
 import Counter from "../inputs/Counter";
-import CountrySelect, { 
-  CountrySelectValue
-} from "../inputs/CountrySelect";
+// import CountrySelect, { 
+//   CountrySelectValue
+// } from "../inputs/CountrySelect";
 import Heading from '../Heading';
 
 enum STEPS {
@@ -30,7 +30,7 @@ const SearchModal = () => {
 
   const [step, setStep] = useState(STEPS.LOCATION);
 
-  const [location, setLocation] = useState<CountrySelectValue>();
+  // const [location, setLocation] = useState<CountrySelectValue>();
   const [guestCount, setGuestCount] = useState(1);
   const [roomCount, setRoomCount] = useState(1);
   const [bathroomCount, setBathroomCount] = useState(1);
@@ -40,9 +40,9 @@ const SearchModal = () => {
     key: 'selection'
   });
 
-  const Map = useMemo(() => dynamic(() => import('../Map'), { 
-    ssr: false 
-  }), [location]);
+  // const Map = useMemo(() => dynamic(() => import('../Map'), { 
+  //   ssr: false 
+  // }), [location]);
 
   const onBack = useCallback(() => {
     setStep((value) => value - 1);
@@ -65,7 +65,7 @@ const SearchModal = () => {
 
     const updatedQuery: any = {
       ...currentQuery,
-      locationValue: location?.value,
+      // locationValue: location?.value,
       guestCount,
       roomCount,
       bathroomCount
@@ -123,13 +123,13 @@ const SearchModal = () => {
         title="Search you're cosmetic product"
         subtitle="Find the perfect location!"
       />
-      <CountrySelect 
+      {/* <CountrySelect 
         value={location} 
         onChange={(value) => 
           setLocation(value as CountrySelectValue)} 
-      />
+      /> */}
       <hr />
-      <Map center={location?.latlng} />
+      {/* <Map center={location?.latlng} /> */}
     </div>
   )
 

@@ -1,7 +1,6 @@
 'use client';
 
 import axios from 'axios';
-import { toast } from 'react-hot-toast';
 import {
   FieldValues,
   SubmitHandler,
@@ -15,9 +14,9 @@ import React, { useMemo, useState } from "react";
 import Modal from "./Modal";
 import Counter from "../inputs/Counter";
 import CategoryInput from '../inputs/CategoryInput';
-import CountrySelect from "../inputs/CountrySelect";
+// import CountrySelect from "../inputs/CountrySelect";
 // import { categories } from '../navbar/Categories';
-import ImageUpload from '../inputs/ImageUpload';
+// import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Heading from '../Heading';
 import { useLocale, useTranslations } from 'next-intl';
@@ -40,6 +39,7 @@ import image33 from '@/public/mocking/creams.jpg'
 import image44 from '@/public/mocking/mizon.jpg'
 import useCart, { useCartStore } from '@/app/hooks/useCart';
 import { apix } from '@/app/constants/axios-instance';
+import { toast } from 'sonner';
 
 enum STEPS {
   DELIVERY = 0,
@@ -126,11 +126,9 @@ const CheckoutModal = () => {
   // console.log('everything', watch())
 
 
-
-
-  const Map = useMemo(() => dynamic(() => import('../Map'), {
-    ssr: false
-  }), [location]);
+  // const Map = useMemo(() => dynamic(() => import('../Map'), {
+  //   ssr: false
+  // }), [location]);
 
 
   const setCustomValue = (id: string, value: any) => {
@@ -566,10 +564,10 @@ const CheckoutModal = () => {
           title="Add a photo of your place"
           subtitle="Show guests what your place looks like!"
         />
-        <ImageUpload
+        {/* <ImageUpload
           onChange={(value) => setCustomValue('imageSrc', value)}
           value={imageSrc}
-        />
+        /> */}
       </div>
     )
   }
