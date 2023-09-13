@@ -1,9 +1,17 @@
 import { EmblaOptionsType } from "embla-carousel-react";
 export const PRODUCTS_PEER_PAGE = 15;
 
-export const LOCALE_ES = 'es'
-export const LOCALE_EN = 'en'
-export const LOCALE_KO = 'ko'
+export enum LOCALES {
+    ES = "es",
+    EN = "en",
+    KO = "ko",
+}
+export enum SHOP_PARAMS {
+    CATEGORY = "category",
+    SUBCATEGORY = "subCategory",
+    LIMIT = "limit",
+    SKIP = "skip"
+}
 
 export const ICON_CLASES_DROPDOWN: string = "text-xl text-default-500 pointer-events-none flex-shrink-0";
 

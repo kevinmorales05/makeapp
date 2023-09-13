@@ -1,8 +1,7 @@
 import { US } from 'country-flag-icons/react/3x2'
 import { EC } from 'country-flag-icons/react/3x2'
 import { KR } from 'country-flag-icons/react/3x2'
-import { LOCALE_EN, LOCALE_ES, LOCALE_KO } from '../constants/client_constants';
-
+import { LOCALES} from '../constants/client_constants';
 
 // const formattedCountries = countries.map((country) => ({
 //   value: country.cca2,
@@ -11,8 +10,6 @@ import { LOCALE_EN, LOCALE_ES, LOCALE_KO } from '../constants/client_constants';
 //   latlng: country.latlng,
 //   region: country.region,
 // }));
-
-
 const useCountries = () => {
   // const getAll = () => formattedCountries;
   // const getByValue = (value: string) => {
@@ -21,9 +18,9 @@ const useCountries = () => {
 
   const getByFlag = (locale: string) => {
     let flag = EC
-    if (locale === LOCALE_ES) flag = EC
-    if (locale === LOCALE_EN) flag = US
-    if (locale === LOCALE_KO) flag = KR
+    if (locale === LOCALES.ES) flag = EC
+    if (locale === LOCALES.EN) flag = US
+    if (locale === LOCALES.KO) flag = KR
     return flag
   }
 

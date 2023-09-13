@@ -1,5 +1,4 @@
 'use server'
-
 import React from 'react'
 import Container from '../components/Container'
 import ClientOnly from '../components/ClientOnly'
@@ -9,10 +8,14 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import getProducts from '../actions/getProducts'
 import { PRODUCTS_PEER_PAGE } from '../constants/client_constants'
 import { formattedProducts } from '../hooks/useProducts'
-import Breadcrumbs from '../components/Breadcrumbs'
-import { SafeProducts, SafeUser } from '../types'
+import { SafeUser } from '../types'
 
-// export const dynamic = "force-dynamic";
+enum SHOP_PARAMS {
+    CATEGORY = "category",
+    SUBCATEGORY = "subCategory",
+    LIMIT = "limit",
+    SKIP = "skip"
+}
 
 type ShopPageProps = {
     searchParams: {
@@ -35,15 +38,15 @@ export default async function ShopPage({
 ) {
 
     const i18category =
-        typeof searchParams.category === 'string' ? searchParams.category : "all"
+        typeof searchParams[SHOP_PARAMS.CATEGORY] === 'string' ? searchParams[SHOP_PARAMS.CATEGORY] : "all"
     const i18subCategory =
-        typeof searchParams.subCategory === 'string' ? searchParams.subCategory : ""
+        typeof searchParams[SHOP_PARAMS.SUBCATEGORY] === 'string' ? searchParams[SHOP_PARAMS.SUBCATEGORY] : ""
 
     // typeof searchParams.limit === 'string' ? Number(searchParams.limit) :
     const limit = PRODUCTS_PEER_PAGE
 
     const skip_page =
-        typeof searchParams.skip === 'string' ? Number(searchParams.skip) : 0
+        typeof searchParams[SHOP_PARAMS.SKIP] === 'string' ? Number(searchParams[SHOP_PARAMS.SKIP]) : 0
 
 
     const currentUser: SafeUser | null = await getCurrentUser();
@@ -52,7 +55,7 @@ export default async function ShopPage({
 
     console.log("currentFormattedProducts", _formattedProducts.length, "total", total);
 
-    const currentParams = { category: i18category, subCategory: i18subCategory, limit: limit, totalCount: total }
+    const currentParams = { category: i18category, subCategory: i18subCategory, skip: skip_page, limit: limit, totalCount: total }
 
     return (
         <Container>

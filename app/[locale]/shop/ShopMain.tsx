@@ -43,6 +43,7 @@ type ShopMainProps = {
   params: {
     category: string,
     subCategory: string,
+    skip: number,
     limit: number,
     totalCount: number
   }
@@ -57,9 +58,8 @@ export default function ShopMain({ data, currentUser, params }: ShopMainProps) {
   const locale = useLocale()
   const router = useRouter()
   const format = useFormatter();
-
   const t = useTranslations()
-
+  const [currentPage, setCurrentPage] = useState(1);
 
   const refMerge = React.useRef<number>(0);
 
@@ -71,6 +71,14 @@ export default function ShopMain({ data, currentUser, params }: ShopMainProps) {
   }, [currentUser])
 
 
+  useEffect(() => {
+    if (params.skip !== 0) {
+      const _currentPage = Math.ceil((params.skip + 1) / params.limit)
+      setCurrentPage(_currentPage)
+      console.log("params.skip: ", params.skip, params)
+      console.log("real current page: ", _currentPage)
+    }
+  }, [])
 
 
   useEffect(() => {
@@ -78,6 +86,8 @@ export default function ShopMain({ data, currentUser, params }: ShopMainProps) {
   }, [data])
 
   const handlePagination = (page: number) => {
+    setCurrentPage(page);
+
     const from = (page - 1) * params.limit;
     const to = (page - 1) * params.limit + params.limit;
     // const filteredProducts = getByPagination(from, to, data)
@@ -141,9 +151,10 @@ export default function ShopMain({ data, currentUser, params }: ShopMainProps) {
                     className="flex flex-col gap-2 w-full">
                     <Card onPress={() => {
                       router.push(`/shop/${item.id}`, { locale })
-                    }} isPressable shadow="none" radius="none" className="aspect-square w-full relative overflow-hidden rounded-xl group">
+                    }} isPressable shadow="none" radius="none" className="aspect-square w-full relative overflow-hidden rounded-xl group ">
                       <Image
                         fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                         className="object-cover h-full w-full group-hover:scale-108 transition px-1"
                         src={item.src}
                         alt="Listing"
@@ -231,9 +242,12 @@ export default function ShopMain({ data, currentUser, params }: ShopMainProps) {
       </div >
       <div className='flex justify-center items-center -2' >
         <Pagination key={"lg"}
-          initialPage={1} size='lg'
+          page={currentPage}
+          size='lg'
           total={Math.ceil(params.totalCount / PRODUCTS_PEER_PAGE)}
           onChange={(number) => handlePagination(number)}
+          showControls
+          color='primary'
         />
       </div>
     </div>

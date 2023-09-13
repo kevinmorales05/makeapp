@@ -19,7 +19,7 @@ const formattedProductsToDB: FormattedProduct[] = products.map((p) => ({
     farmacState: p.farmacState,
     presentation: p.presentation,
     category: p.category.toLowerCase(),
-    subCategory: p.subcategory.toLowerCase(),
+    subCategory: p.subCategory.toLowerCase(),
     color: p.color,
     createdAt: new Date(),
     updatedAt: new Date(),

@@ -2,7 +2,7 @@ export interface Product {
     title: string;
     description: string;
     category: Category;
-    subcategory: string;
+    subCategory?: string;
     cost: string;
     promoCost: string;
     bestSeller: string;
@@ -12,7 +12,7 @@ export interface Product {
     presentation: Presentation;
     color: string;
     imgUrl: string;
-    urlProduct: string;
+    urlProduct?: string;
 }
 
 export enum Category {

@@ -5,7 +5,6 @@ const nextConfig = {
   experimental: {
     appDir: true,
     serverActions: true,
-
     //   turbo: {
     //     loaders: {
     //       // Option format
@@ -34,34 +33,9 @@ const nextConfig = {
       "console.firebase.google.com",
       "healivemall.com",
       "healivemall-com.translate.goog",
+      "i.ibb.co",
     ],
   },
-  // i18n: {
-  //   locales: ['en', 'ru', 'tm'],
-  //   defaultLocale: 'en',
-  //   localeDetection: false,
-  //   // localePath: path.resolve('./public/locales'),
-  //   // This is a list of locale domains and the default locale they
-  //   // should handle (these are only required when setting up domain routing)
-  //   // Note: subdomains must be included in the domain value to be matched e.g. "fr.example.com".
-  //   domains: [
-  //     {
-  //       domain: "example.com",
-  //       defaultLocale: "en-US",
-  //     },
-  //     {
-  //       domain: "example.nl",
-  //       defaultLocale: "nl-NL",
-  //     },
-  //     {
-  //       domain: "example.fr",
-  //       defaultLocale: "fr",
-  //       // an optional http field can also be used to test
-  //       // locale domains locally with http instead of https
-  //       http: true,
-  //     },
-  //   ],
-  // },
 };
 
 module.exports = withNextIntl(nextConfig);

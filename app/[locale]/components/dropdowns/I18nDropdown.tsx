@@ -5,20 +5,40 @@ import { Dropdown as DropdownUI, DropdownTrigger, DropdownMenu, DropdownItem, Dr
 
 import { usePathname, useRouter } from 'next-intl/client';
 import { useLocale, useTranslations } from "next-intl"
-import { ICON_CLASES_DROPDOWN, LOCALE_EN, LOCALE_ES, LOCALE_KO } from "@/app/constants/client_constants";
 import { EC, KR, US } from "country-flag-icons/react/3x2";
 import useCountries from "@/app/hooks/useCountries";
+import { useSearchParams } from "next/navigation";
+import { ICON_CLASES_DROPDOWN, LOCALES, SHOP_PARAMS } from "@/app/constants/client_constants";
+
 
 function I18nDropdown(
   // { trigger, items }: { trigger: React.ReactNode, items: IDropdownProps }
 ) {
   const t = useTranslations('LocaleSwitcher')
   const router = useRouter();
+  const params = useSearchParams();
   const pathname = usePathname();
+
 
   const onLocaleChange = (e: React.ChangeEvent<HTMLSelectElement> | { currentKey: string } | any) => {
     const newLocale: string = e["currentKey"];
-    router.replace(pathname, { locale: newLocale });
+
+    let requery: string = `?`
+    if (params?.get(SHOP_PARAMS.CATEGORY)) {
+      requery += `&${SHOP_PARAMS.CATEGORY}=${params?.get(SHOP_PARAMS.CATEGORY)}`
+    };
+    if (params?.get(SHOP_PARAMS.SUBCATEGORY)) {
+      requery += `&${SHOP_PARAMS.SUBCATEGORY}=${params?.get(SHOP_PARAMS.SUBCATEGORY)}`
+    };
+    if (params?.get(SHOP_PARAMS.SKIP)) {
+      requery += `&${SHOP_PARAMS.SKIP}=${params?.get(SHOP_PARAMS.SKIP)}`
+    };
+    if (params?.get(SHOP_PARAMS.LIMIT)) {
+      requery += `&${SHOP_PARAMS.LIMIT}=${params?.get(SHOP_PARAMS.LIMIT)}`
+    };
+    const rePathname = pathname + requery
+    console.log("full pathname ", rePathname);
+    router.replace(rePathname, { locale: newLocale });
   }
 
 
@@ -39,25 +59,25 @@ function I18nDropdown(
         xkey: "Languages",
         content: [
           {
-            title: LOCALE_ES,
-            description: LOCALE_ES,
-            xkey: LOCALE_ES,
+            title: LOCALES.ES,
+            description: LOCALES.ES,
+            xkey: LOCALES.ES,
             color: "danger",
             onClick: () => { },
             startContent: <Button size="sm" variant="light" startContent={<EC className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
           },
           {
-            title: LOCALE_EN,
-            description: LOCALE_EN,
-            xkey: LOCALE_EN,
+            title: LOCALES.EN,
+            description: LOCALES.EN,
+            xkey: LOCALES.EN,
             color: "danger",
             onClick: () => { },
             startContent: <Button size="sm" variant="light" startContent={<US className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
           },
           {
-            title: LOCALE_KO,
-            description: LOCALE_KO,
-            xkey: LOCALE_KO,
+            title: LOCALES.KO,
+            description: LOCALES.KO,
+            xkey: LOCALES.KO,
             color: "danger",
             onClick: () => { },
             startContent: <Button size="sm" variant="light" startContent={<KR className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
