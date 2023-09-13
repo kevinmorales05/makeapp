@@ -58,7 +58,7 @@ export default async function ShopPage({
         <Container>
             {/* <Breadcrumbs /> */}
             <div className='flex flex-wrap md:flex-nowrap justify-start'>
-                <div className='w-full block md:flex mr-0 md:mr-[16px] md:w-[440px] xl:w-[500px] gap-6'>
+                <div className='w-full block md:flex mr-0 md:mr-[8px] lg:mr-0 md:w-[440px] xl:w-[500px] gap-6'>
                     <ClientOnly>
                         <ShopAside currentParams={currentParams} />
                     </ClientOnly>
