@@ -37,7 +37,7 @@ import image11 from '@/public/mocking/banila.jpg'
 import image22 from '@/public/mocking/chamos.jpg'
 import image33 from '@/public/mocking/creams.jpg'
 import image44 from '@/public/mocking/mizon.jpg'
-import useCart, { useCartStore } from '@/app/hooks/useCart';
+import useCart, { ICartItemState, useCartStore } from '@/app/hooks/useCart';
 import { apix } from '@/app/constants/axios-instance';
 import { toast } from 'sonner';
 
@@ -45,7 +45,7 @@ enum STEPS {
   DELIVERY = 0,
   CONTACT = 1,
   SUMMARY = 2,
-  PAYMENT = 3// actually don' implemented
+  // PAYMENT = 3// actually don' implemented
 }
 
 enum DELIVERY_MODE {
@@ -69,6 +69,8 @@ const CheckoutModal = () => {
 
   const { currentCarts } = useCartStore()
   const [deliveryMethod, setDeliveryMethod] = React.useState<string[]>([""]);
+
+  const { incrementCart, decrementCart, removeCart } = useCartStore()
 
   const {
     register,
@@ -111,7 +113,7 @@ const CheckoutModal = () => {
       //   price: 5,
       //   count: 1,
       // }],
-      items: currentCarts
+      items: currentCarts(),
     }
   });
 
@@ -131,7 +133,18 @@ const CheckoutModal = () => {
   // }), [location]);
 
 
-  const setCustomValue = (id: string, value: any) => {
+  const setCustomValue = (id: string, value: any, indexItem: number) => {
+    const currentItem = items[indexItem]
+
+    // console.log("value", value, currentItem)
+
+    if (currentItem.quantity < value) {
+      incrementCart(null, currentItem.id, locale)
+    }
+    if (currentItem.quantity > value) {
+      decrementCart(null, currentItem.id, locale)
+    }
+
     setValue(id, value, {
       shouldDirty: true,
       shouldTouch: true,
@@ -139,22 +152,29 @@ const CheckoutModal = () => {
     })
   }
 
+  // steps handler 
   const onBack = () => {
     setStep((value) => value - 1);
   }
-
   const onNext = () => {
     setStep((value) => value + 1);
   }
+  const onStepContact = () => {
+    setStep((value) => STEPS.CONTACT);
+  }
+  const onStepDelivery = () => {
+    setStep((value) => STEPS.DELIVERY);
+  }
+
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
-    if (step !== STEPS.PAYMENT) {
+    if (step !== STEPS.SUMMARY) {
       return onNext();
     }
 
     setIsLoading(true);
 
-    console.log("all data to checkout", data)
+    // console.log("all data to checkout", data)
 
     apix(locale).post('checkouts', data)
       .then(() => {
@@ -174,7 +194,7 @@ const CheckoutModal = () => {
   }
 
   const actionLabel = useMemo(() => {
-    if (step === STEPS.PAYMENT) {
+    if (step === STEPS.SUMMARY) {
       return 'Create'
     }
 
@@ -498,35 +518,20 @@ const CheckoutModal = () => {
               transition={{ duration: .15 }}
               className='flex flex-col gap-4'
             >
-              <SummaryCounter
-                src={image11.src}
-                onChange={(value) => setCustomValue('items.0.count', value)}
-                value={items[0].count}
-                title="TOUCH ON BODY COTTON BODY WASH + LOTION"
-                total={items[0].count * items[0].price}
-              />
-              <SummaryCounter
-                src={image22.src}
-                onChange={(value) => setCustomValue('items.0.count', value)}
-                value={items[0].count}
-                title="URBAN DELIGHT BODY SHOWER GEL"
-                total={items[0].count * items[0].price}
-              />
-              <SummaryCounter
-                src={image33.src}
-                onChange={(value) => setCustomValue('items.0.count', value)}
-                value={items[0].count}
-                title="URBAN ECO HARAKEKE TONER"
-                total={items[0].count * items[0].price}
-              />
-              <SummaryCounter
-                src={image44.src}
-                onChange={(value) => setCustomValue('items.0.count', value)}
-                value={items[0].count}
-                title="TOUCH ON BODY  WASH + LOTION"
-                total={items[0].count * items[0].price}
-              />
+              {items.length > 0 && <>
+                {items.map((item: ICartItemState, indexItem: number) => (
+                  <SummaryCounter
+                    key={item.title}
+                    src={item.src}
+                    onChange={(value) => setCustomValue(`items.${indexItem}.quantity`, value, indexItem)}
+                    value={item.quantity}
+                    title={item.title}
+                    total={item.quantity * item.promoCost}
+                  />
+                ))}
+              </>
 
+              }
             </motion.div>
           </AccordionItem>
         </Accordion>
@@ -534,7 +539,7 @@ const CheckoutModal = () => {
           <CardBody>
             <div className='flex justify-between'>
               <p className='font-bold'>Contact</p>
-              <span className='underline cursor-pointer'>Change</span>
+              <span onClick={() => onStepContact()} className='underline cursor-pointer'>Change</span>
             </div>
             <p>{Object.values(watch('contact')).join(', ')}</p>
           </CardBody>
@@ -543,7 +548,7 @@ const CheckoutModal = () => {
           <CardBody>
             <div className='flex justify-between'>
               <p className='font-bold'>Shipping method</p>
-              <span className='underline cursor-pointer'>Change</span>
+              <span onClick={() => onStepDelivery()} className='underline cursor-pointer'>Change</span>
             </div>
             <div>
               {currentDeliveryMethod}
@@ -553,21 +558,6 @@ const CheckoutModal = () => {
             </div>
           </CardBody>
         </Card>
-      </div>
-    )
-  }
-
-  if (step === STEPS.PAYMENT) {
-    bodyContent = (
-      <div className="flex flex-col gap-8">
-        <Heading
-          title="Add a photo of your place"
-          subtitle="Show guests what your place looks like!"
-        />
-        {/* <ImageUpload
-          onChange={(value) => setCustomValue('imageSrc', value)}
-          value={imageSrc}
-        /> */}
       </div>
     )
   }

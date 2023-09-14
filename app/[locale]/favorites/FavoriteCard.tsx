@@ -17,13 +17,12 @@ type Props = {
         icon: IconType;
     }[],
     actionCard: () => void;
-
 }
 
 const FavoriteCard = (props: Props) => {
     const { item, currentUser, locale, allCategories, actionCard } = props
     return (
-        <div className="flex flex-col col-span-1 gap-2 cursor-pointer group">
+        <div className="flex flex-col justify-between col-span-1 gap-2 cursor-pointer group">
             <Card onPress={actionCard} isPressable shadow="none" radius="none" className="flex flex-col gap-2 w-full bg-transparent">
                 <CardBody className="overflow-visible p-0">
 

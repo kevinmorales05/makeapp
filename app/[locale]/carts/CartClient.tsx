@@ -24,13 +24,14 @@ const CartClient = (props: Props) => {
     const locale = useLocale()
     const { currentCarts, mergeLocalandDB } = useCartStore()
     const [data, setData] = useState<ICartItemState[]>([])
+
     useEffect(() => {
         mergeLocalandDB(currentUser, carts, locale)
     }, [currentUser, carts, locale])
 
     useEffect(() => {
         setData(currentCarts())
-    }, [currentCarts])
+    }, [currentCarts()])
 
 
     if (!data) return (<>Loading...</>)

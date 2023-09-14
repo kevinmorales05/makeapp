@@ -277,7 +277,7 @@ const useCart = ({ listing, currentUser, locale }: IUseCart) => {
     }, [currentCarts()]);
 
     const toggleCart = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
-        e.stopPropagation();
+        // e.stopPropagation();
 
         try {
             if (hasCarted) {

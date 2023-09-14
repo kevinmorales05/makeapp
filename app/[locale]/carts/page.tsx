@@ -11,10 +11,7 @@ import { SafeCart, SafeProducts, SafeUser } from '../types'
 
 export const dynamic = "force-dynamic";
 
-type Props = {}
-
-async function page({ }: Props) {
-
+async function ShopCart() {
   const currentUser: SafeUser | null = await getCurrentUser()
   const carts: SafeCart[] = await getCarts()
 
@@ -31,4 +28,4 @@ async function page({ }: Props) {
   )
 }
 
-export default page
+export default ShopCart

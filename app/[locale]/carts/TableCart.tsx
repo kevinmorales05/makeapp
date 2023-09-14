@@ -45,11 +45,11 @@ const columns = [
 
 const TableCart = (props: Props) => {
 
-    const checkoutModal = useCheckoutModal();
+    const { data, currentUser, locale } = props;
 
     const { incrementCart, decrementCart, removeCart } = useCartStore()
+    const checkoutModal = useCheckoutModal();
 
-    const { data, currentUser, locale } = props;
     const dataParse = data.map(it => {
         return {
             id: it.id,
@@ -130,14 +130,11 @@ const TableCart = (props: Props) => {
         decrementCart(currentUser, keyId, locale)
 
     }
-
     const handlerPlus = (keyId: number) => {
         incrementCart(currentUser, keyId, locale)
     }
-
     const handlerRemove = (keyId: number) => {
         removeCart(currentUser, keyId, locale)
-
     }
 
     const total = dataParse.reduce((acc, curr) => acc + curr.total, 0)
