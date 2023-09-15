@@ -13,9 +13,9 @@ export const dynamic = "force-dynamic";
 
 const page = async () => {
   const favorites: SafeProducts[] = await getFavorites();
-  const currentUser: SafeUser | null = await getCurrentUser();
-
   const formattedFavorites = formattedProducts(favorites);
+  
+  const currentUser: SafeUser | null = await getCurrentUser();
   
   return (
     <ClientOnly>

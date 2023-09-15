@@ -1,4 +1,5 @@
 import prisma from "@/app/libs/prismadb";
+import { getPriceApp } from "../constants/server_constants";
 
 export default async function getItemsCarousel(slides_count: number) {
   try {
@@ -13,7 +14,12 @@ export default async function getItemsCarousel(slides_count: number) {
         id: 'asc',
       },
     });
-    return carouselItems
+    const mappedCarouselItems = carouselItems.map((p) => ({
+      ...p,
+      promoCost: getPriceApp(p.promoCost),
+      cost: getPriceApp(p.cost),
+    }));
+    return mappedCarouselItems
   } catch (error: any) {
     throw new Error(error);
   }

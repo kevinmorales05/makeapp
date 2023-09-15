@@ -185,7 +185,7 @@ const CheckoutModal = () => {
     apix(locale).post('email', sendEmail)
       .then((res) => {
 
-        console.log("ok", res.status, "or", res)
+        // console.log("ok", res.status, "or", res)
         if (res.status === 201) {
           toast.success('Email sended!');
           //reseting
@@ -202,7 +202,7 @@ const CheckoutModal = () => {
         setIsLoading(false);
       })
 
-    console.log("all data to checkout", data)
+    // console.log("all data to checkout", data)
     return
 
     apix(locale).post('checkouts', data)

@@ -1,4 +1,5 @@
 import prisma from "@/app/libs/prismadb";
+import { getPriceApp } from "../constants/server_constants";
 
 
 export default async function getProductById(
@@ -7,7 +8,7 @@ export default async function getProductById(
   try {
 
     const id = parseInt(productId) ? parseInt(productId) : -1;
-    
+
     if (id < 0) return null;
 
     const listing = await prisma.product.findUnique({
@@ -40,7 +41,14 @@ export default async function getProductById(
     if (!listing) {
       return null;
     }
-    return listing;
+
+    const mappedListing = {
+      ...listing,
+      promoCost: getPriceApp(listing.promoCost),
+      cost: getPriceApp(listing.cost),
+    }
+
+    return mappedListing;
   } catch (error: any) {
     throw new Error(error);
   }

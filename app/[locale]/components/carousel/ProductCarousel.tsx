@@ -129,11 +129,9 @@ const ProductCarousel
                                         <div className="flex-grow border-t border-neutral-500"></div>
                                         <div className="flex justify-between gap-6 items-end">
 
-                                            {/* this is only for see a discount */}
-                                            {item.promoCost === item.cost && <p className="line-through text-base">$ {item.promoCost - 10}</p>}
-                                            {item.promoCost !== item.cost && <p className="line-through text-base">$ {item.cost}</p>}
-
                                             <p className="text-lg font-semibold border-neutral-500">$ {item.promoCost}</p>
+                                            {item.promoCost < item.cost && <p className="line-through text-base">$ {item.cost}</p>}
+
                                         </div>
                                     </div>
                                 </div>

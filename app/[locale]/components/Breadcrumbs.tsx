@@ -49,7 +49,7 @@ const Breadcrumbs = () => {
     <div className="flex gap-2 items-start mb-1">
       {splitPathnames(pathname, locale).map((crumb: CrumbItem, i: number) => {
         const isLastItem = i === splitPathnames(pathname, locale).length - 1;
-        console.log(crumb.label, splitPathnames(pathname, locale).length)
+        // console.log(crumb.label, splitPathnames(pathname, locale).length)  
         return (
           <div key={i} className="flex gap-1">
             {!isLastItem && <>

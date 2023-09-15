@@ -119,93 +119,78 @@ export const html = `
                                                                         <tr>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                Suyeran Cheongcho Essence</td>
+                                                                                Repair RX Intense Cream (Gift) Toner or
+                                                                                Emulsion</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                5</td>
+                                                                                1</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                32000</td>
+                                                                                48.5</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                160000</td>
+                                                                                48.5</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                Suyeran Cheongcho Emulsion</td>
+                                                                                Iceland Aqua Gel Cream</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                5</td>
+                                                                                1</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                28000</td>
+                                                                                21.42</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                140000</td>
+                                                                                21.42</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                (City Breeze Collection) Nail Wear 117.
-                                                                                Indigo Blue</td>
+                                                                                Iceland Aqua Moist Cream</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                8</td>
+                                                                                1</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                4000</td>
+                                                                                21.42</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                32000</td>
+                                                                                21.42</td>
                                                                         </tr>
                                                                         <tr>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                [For Overseas Only] Jeju Fresh Aloe
-                                                                                Essence</td>
+                                                                                iceland moisture popsicle</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                10</td>
+                                                                                1</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                13.83</td>
+                                                                                11.67</td>
                                                                             <td
                                                                                 style="border: 1px solid #ddd; padding: 8px; text-align: left; font-size: 9px;">
-                                                                                138.3</td>
+                                                                                11.67</td>
                                                                         </tr>
                                                                     </tbody>
                                                                 </table>
 
-                                                                <table
-                                                                    style="margin-top: 20px; width: auto; display: flex; justify-content: flex-end;">
+                                                                <table style="margin-top: 20px; width: auto; float: right;">
                                                                     <tbody>
-                                                                      
                                                                         <tr style="border-bottom: 1px solid #ddd;">
-                                                                            <td style="text-align: right; padding: 8px;  font-size: 9px;"
-                                                                                colspan="3">Subtotal:</td>
-                                                                            <td
-                                                                                style="text-align: left; padding: 8px;  font-size: 9px;">
-                                                                                342030</td>
+                                                                            <td style="text-align: right; padding: 8px; font-size: 9px;" colspan="3">Subtotal:</td>
+                                                                            <td style="text-align: left; padding: 8px; font-size: 9px;">102.59</td>
                                                                         </tr>
                                                                         <tr>
-                                                                            <td colspan="4"
-                                                                                style="border-bottom: 1px solid #ddd;">
-                                                                            </td>
+                                                                            <td colspan="4" style="border-bottom: 1px solid #ddd;"></td>
                                                                         </tr>
-
                                                                         <tr style="border-bottom: 1px solid #ddd;">
-                                                                            <td style="text-align: right; padding: 8px;  font-size: 9px;"
-                                                                                colspan="3">Total:</td>
-                                                                            <td
-                                                                                style="text-align: left; padding: 8px; font-size: 9px;">
-                                                                                342030</td>
+                                                                            <td style="text-align: right; padding: 8px; font-size: 9px;" colspan="3">Total:</td>
+                                                                            <td style="text-align: left; padding: 8px; font-size: 9px;">102.59</td>
                                                                         </tr>
-                                                                      
                                                                     </tbody>
                                                                 </table>
-
-
                                                             </td>
                                                         </tr>
                                                         <tr>
