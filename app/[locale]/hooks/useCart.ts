@@ -99,7 +99,7 @@ export const useCartStore = create<CartStore>()(
                             toast.promise(apix(locale).delete(`carts/reducers/${itemId}`,), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
-                                    console.log("date decrement", data)
+                                    // console.log("date decrement", data)
                                     // set(produce((draft) => ({
                                     //     ...draft, cartItems: data.data
                                     // })))
