@@ -40,7 +40,8 @@ import image44 from '@/public/mocking/mizon.jpg'
 import useCart, { ICartItemState, useCartStore } from '@/app/hooks/useCart';
 import { apix } from '@/app/constants/axios-instance';
 import { toast } from 'sonner';
-import { html } from './html';
+import { html } from '../../emails/html';
+import { NAME_APP } from '@/app/constants/client_constants';
 
 enum STEPS {
   DELIVERY = 0,
@@ -175,24 +176,22 @@ const CheckoutModal = () => {
 
     setIsLoading(true);
     const sendEmail = {
-      // toEmail: "aguilabestial@gmail.com",
-      toEmail: "aguilakrakatoa@gmail.com",
-      subject: "New buying in Make App",
-      // html: "<p>Alrigh baby fucking crazy</p>",
-      html: html,
+      toEmail: "aguilabestial@gmail.com",
+      subject: `"Confirmación de compra de producto coreano en ${NAME_APP} - ¡Prepárate para experimentar la excelencia coreana 🌺 en ${NAME_APP}!"`,
     }
+
 
     apix(locale).post('email', sendEmail)
       .then((res) => {
 
-        // console.log("ok", res.status, "or", res)
-        if (res.status === 201) {
+        if (res.status === 200) {
           toast.success('Email sended!');
-          //reseting
-          router.refresh();
-          reset();
+
           setStep(STEPS.DELIVERY)
+          //reseting
+          reset();
           checkoutModal.onClose();
+          router.refresh();
         }
       })
       .catch(() => {

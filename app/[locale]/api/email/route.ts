@@ -1,44 +1,66 @@
-import { sendMail } from "@/app/actions/emailService";
-import { NextRequest, NextResponse } from "next/server";
+import { html } from "@/app/emails/html";
+import { NextResponse } from "next/server";
+import nodemailer from "nodemailer";
+import Mail from "nodemailer/lib/mailer";
 
-type Props = {}
-
-export async function POST(req: Request, props: Props) {
+export async function POST(req: Request) {
     try {
-        const { method } = req;
         const body = await req.json()
-        const { toEmail, subject, html } = body
+        const { toEmail, subject } = body
 
-        console.log("gimme body", body)
-        await sendMail(
-            toEmail,
+        const fromAddress = process.env.NODEMAILER_ACCOUNT as string;
+        const fromName = process.env.NEXT_PUBLIC_NAME_APP as string;
+
+        const hostname = process.env.NODE_ENV !== 'development' ? process.env.HOST as string : 'localhost';
+
+        const pw = process.env.NODEMAILER_PW as string;
+
+        const transporter = nodemailer.createTransport({
+            host: hostname,
+            port: 587,
+            service: "gmail",
+            secure: false,
+            requireTLS: true,
+            auth: {
+                user: fromAddress,
+                pass: pw,
+            },
+            logger: process.env.NODE_ENV === 'development',
+        });
+
+        const mailData: Mail.Options = {
+            from: {
+                name: fromName,
+                address: fromAddress,
+            },
+            to: toEmail,
             subject,
-            html,
-        );
-        return NextResponse.json("sucess", { status: 201 })
+            html: html
+        };
 
-        // switch (method) {
-        //     case "POST": {
-        //         //Do some thing
-        //         await sendMail(
-        //             "dontkillme@bunnyfiedlabs.com",
-        //             "TEST",
-        //             "THI IS A TEST FOR MY MEDIUM USERS"
-        //         );
-        //         return NextResponse.json("sucess", { status: 201 })
-        //         break;
-        //     }
-        //     case "GET": {
-        //         //Do some thing
-        //         return NextResponse.json("get function not implemented", { status: 201 })
-        //         break;
-        //     }
-        //     default:
-        //         return NextResponse.json(`Method ${method} Not Allowed`, { status: 405 })
-        //         // .setHeader("Allow", ["POST", "GET", "PUT", "DELETE"]);
-        //         // res.status(405).end(`Method ${method} Not Allowed`);
-        //         break;
-        // }
+        await new Promise((resolve, reject) => {
+            // verify connection configuration
+            transporter.verify(function (error, success) {
+                if (error) {
+                    reject(error);
+                } else {
+                    resolve(success);
+                }
+            });
+        });
+
+        await new Promise((resolve, reject) => {
+            // send mail
+            transporter.sendMail(mailData, (err, info) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve(info);
+                }
+            });
+        });
+
+        return NextResponse.json("sucess", { status: 200 })
     } catch (err) {
         NextResponse.error();
     }
