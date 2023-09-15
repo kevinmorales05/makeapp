@@ -25,7 +25,8 @@ model User {
   carts          Cart[]
   reviews        Review[]
   sessions       Session[]
-  checkkouts     Checkout[]
+
+  // checkkouts     Checkout[]
 }
 
 model Account {
@@ -104,14 +105,15 @@ model Review {
 }
 
 model Checkout {
-  id              Int    @id @default(autoincrement())
-  contact         Json?
+  id              Int     @id @default(autoincrement())
+  hasUser         Boolean
+  userId          String?
+  contact         Json
   deliveryMethods String
   deliveryShip    Json?
-  deliveryPickup  Json?
+  deliveryPickup  String?
   items           Json
-  methodPayment   Json?
 
-  User   User   @relation(fields: [userId], references: [id])
-  userId String
+  // User   User   @relation(fields: [userId], references: [id])
+  // userId String
 }

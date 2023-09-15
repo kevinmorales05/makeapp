@@ -40,7 +40,6 @@ import image44 from '@/public/mocking/mizon.jpg'
 import useCart, { ICartItemState, useCartStore } from '@/app/hooks/useCart';
 import { apix } from '@/app/constants/axios-instance';
 import { toast } from 'sonner';
-import { html } from '../../emails/html';
 import { NAME_APP } from '@/app/constants/client_constants';
 
 enum STEPS {
@@ -86,12 +85,6 @@ const CheckoutModal = () => {
     reset,
   } = useForm<FieldValues>({
     defaultValues: {
-      category: '',
-      guestCount: 1,
-      roomCount: 1,
-      bathroomCount: 1,
-      price: 1,
-      title: '',
       deliveryMethods: '',
       deliveryPickup: 'Quito, Ecuador',
       deliveryShip: {
@@ -108,37 +101,19 @@ const CheckoutModal = () => {
         first_name: '',
         last_name: '',
       },
-      description: '',
-      somethingforlife: 1,
-      // items: [{
-      //   title: 'TOUCH ON BODY COTTON BODY WASH + LOTION',
-      //   price: 5,
-      //   count: 1,
-      // }],
       items: currentCarts(),
     }
   });
 
-  const location = watch('location');
-  const category = watch('category');
-  const guestCount = watch('guestCount');
-  const roomCount = watch('roomCount');
-  const bathroomCount = watch('bathroomCount');
   const items = watch('items');
-  const imageSrc = watch('imageSrc');
   const currentDeliveryMethod = watch().deliveryMethods;
   // console.log('everything', watch())
-
 
   // const Map = useMemo(() => dynamic(() => import('../Map'), {
   //   ssr: false
   // }), [location]);
-
-
   const setCustomValue = (id: string, value: any, indexItem: number) => {
     const currentItem = items[indexItem]
-
-    // console.log("value", value, currentItem)
 
     if (currentItem.quantity < value) {
       incrementCart(null, currentItem.id, locale)
@@ -174,51 +149,49 @@ const CheckoutModal = () => {
       return onNext();
     }
 
-    setIsLoading(true);
-    const sendEmail = {
-      toEmail: "aguilabestial@gmail.com",
-      subject: `"Confirmación de compra de producto coreano en ${NAME_APP} - ¡Prepárate para experimentar la excelencia coreana 🌺 en ${NAME_APP}!"`,
+
+    const emailData = {
+      ...data,
+      toEmail: data.contact.email,
+      subject: `Confirmación de compra de producto coreano en ${NAME_APP} - ¡Prepárate para experimentar la excelencia coreana 🌺 en ${NAME_APP}!`,
+      locale,
     }
+    setIsLoading(true);
 
-
-    apix(locale).post('email', sendEmail)
-      .then((res) => {
-
+    toast.promise(apix(locale).post('email', emailData), {
+      loading: 'Loading...',
+      success: (res) => {
         if (res.status === 200) {
-          toast.success('Email sended!');
 
           setStep(STEPS.DELIVERY)
           //reseting
           reset();
           checkoutModal.onClose();
           router.refresh();
+          return `Please checkout your spam to your email ${data.contact.email}`;
+        } else {
+          toast.error('Error sending to your email address')
+          return
         }
-      })
-      .catch(() => {
-        toast.error('Something went wrong.');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
+      },
+      error: 'Something went wrong.',
+    });
 
-    // console.log("all data to checkout", data)
-    return
+    toast.promise(apix(locale).post('checkouts', emailData), {
+      loading: 'Sync your shipping...',
+      success: (res) => {
+        console.log("res", res)
+        if (res?.status === 200) {
+          return `Syncronization successfully`;
+        } else {
+          toast.error('Syncronization failed.')
+          return ''
+        }
+      },
+      error: 'Something went wrong.',
+    });
 
-    apix(locale).post('checkouts', data)
-      .then(() => {
-        toast.success('checkout created!');
-        //reseting
-        router.refresh();
-        reset();
-        setStep(STEPS.DELIVERY)
-        checkoutModal.onClose();
-      })
-      .catch(() => {
-        toast.error('Something went wrong.');
-      })
-      .finally(() => {
-        setIsLoading(false);
-      })
+    setIsLoading(false);
   }
 
   const actionLabel = useMemo(() => {

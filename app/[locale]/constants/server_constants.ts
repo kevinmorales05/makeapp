@@ -9,3 +9,10 @@ export const getPriceApp = (price: number): number => {
 
     return roundedFinalPrice;
 }
+
+
+export enum SERVER_LOCALES {
+    ES = "es",
+    EN = "en",
+    KO = "ko",
+}

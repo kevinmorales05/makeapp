@@ -102,7 +102,7 @@ const TableCart = (props: Props) => {
                             </Tooltip>
                         </ButtonGroup>
                         <ButtonGroup>
-                            <Button startContent={<BsTrash3/>} aria-label="delete" className='bg-white underline decoration-1' disableAnimation onPress={() => handlerRemove(idValue)}>
+                            <Button startContent={<BsTrash3 />} aria-label="delete" className='bg-white underline decoration-1' disableAnimation onPress={() => handlerRemove(idValue)}>
                                 Delete
                             </Button>
                         </ButtonGroup>
@@ -163,7 +163,7 @@ const TableCart = (props: Props) => {
                 <div className='max-w-full w-full sm:max-w-lg md:max-w-md  flex justify-end flex-col items-end py-4 gap-1'>
                     <div className='flex justify-between w-full'>
                         <span>Subtotal: </span>
-                        <span>$ {total}</span>
+                        <span>$ {total.toFixed(2)}</span>
                     </div>
                     <div className='flex justify-between w-full'>
                         <span>{`Shipping :(default)`}</span>
@@ -171,7 +171,7 @@ const TableCart = (props: Props) => {
                     </div>
                     <div className='flex justify-between w-full'>
                         <span className='font-bold'>Total</span>
-                        <span>$ {total}</span>
+                        <span>$ {total.toFixed(2)}</span>
                     </div>
                     <div className='flex flex-col w-full gap-2 py-4 '>
                         <Button onPress={checkoutModal.onOpen} fullWidth color="primary" radius="none" startContent={<TbTruckDelivery />}>PROCEED TO CHECKOUT</Button>
