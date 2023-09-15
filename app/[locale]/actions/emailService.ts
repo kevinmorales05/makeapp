@@ -39,6 +39,7 @@ export async function sendMail(toEmail: string, subject: string, html: string) {
 
     var transporter = nodemailer.createTransport({
         host: hostname,
+        port: 587,
         service: "gmail",
         secure: false,
         requireTLS: true,
@@ -46,7 +47,7 @@ export async function sendMail(toEmail: string, subject: string, html: string) {
             user: from,
             pass: pw,
         },
-        logger: process.env.NODE_ENV !== 'production',
+        logger: process.env.NODE_ENV === 'development',
     });
 
     var mailOptions: Mail.Options = {
@@ -60,7 +61,6 @@ export async function sendMail(toEmail: string, subject: string, html: string) {
         //         filename: 'README.md',
         //         // path: '@/README.md', // stream this file
         //         path: '/home/zukyo/Desktop/jobs/makeapp/README.md', // stream this file
-
         //     },
         // ]
     };
