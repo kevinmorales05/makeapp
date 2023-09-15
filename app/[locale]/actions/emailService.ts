@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 import SMTPTransport from "nodemailer/lib/smtp-transport";
+
 // const nodemailer = require("nodemailer");
 
 // async function main() {
@@ -33,9 +34,11 @@ import SMTPTransport from "nodemailer/lib/smtp-transport";
 //-----------------------------------------------------------------------------
 export async function sendMail(toEmail: string, subject: string, html: string) {
     const from = process.env.NODEMAILER_ACCOUNT as string;
+    const hostname = process.env.NODE_ENV !== 'development' ? process.env.HOST as string : 'localhost';
     const pw = process.env.NODEMAILER_PW as string;
 
     var transporter = nodemailer.createTransport({
+        host: hostname,
         service: "gmail",
         secure: false,
         requireTLS: true,

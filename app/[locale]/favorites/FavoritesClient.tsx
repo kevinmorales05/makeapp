@@ -44,7 +44,6 @@ const FavoritesClient: React.FC<FavoritesClientProps> = ({
   if (!data) return <>Loading...</>
 
 
-  console.log("gimmer data ", data)
   return (
     <Container>
       {data.length === 0 &&
