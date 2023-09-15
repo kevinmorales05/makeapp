@@ -40,6 +40,7 @@ import image44 from '@/public/mocking/mizon.jpg'
 import useCart, { ICartItemState, useCartStore } from '@/app/hooks/useCart';
 import { apix } from '@/app/constants/axios-instance';
 import { toast } from 'sonner';
+import { html } from './html';
 
 enum STEPS {
   DELIVERY = 0,
@@ -173,8 +174,36 @@ const CheckoutModal = () => {
     }
 
     setIsLoading(true);
+    const sendEmail = {
+      // toEmail: "aguilabestial@gmail.com",
+      toEmail: "aguilakrakatoa@gmail.com",
+      subject: "New buying in Make App",
+      // html: "<p>Alrigh baby fucking crazy</p>",
+      html: html,
+    }
 
-    // console.log("all data to checkout", data)
+    apix(locale).post('email', sendEmail)
+      .then((res) => {
+
+        console.log("ok", res.status, "or", res)
+        if (res.status === 201) {
+          toast.success('Email sended!');
+          //reseting
+          router.refresh();
+          reset();
+          setStep(STEPS.DELIVERY)
+          checkoutModal.onClose();
+        }
+      })
+      .catch(() => {
+        toast.error('Something went wrong.');
+      })
+      .finally(() => {
+        setIsLoading(false);
+      })
+
+    console.log("all data to checkout", data)
+    return
 
     apix(locale).post('checkouts', data)
       .then(() => {
