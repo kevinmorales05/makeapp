@@ -157,7 +157,7 @@ const CheckoutModal = () => {
       locale,
     }
     setIsLoading(true);
-
+    // SEND EMAIL
     toast.promise(apix(locale).post('email', emailData), {
       loading: 'Loading...',
       success: (res) => {
@@ -176,7 +176,7 @@ const CheckoutModal = () => {
       },
       error: 'Something went wrong.',
     });
-
+    // SAVE CHECKOUT MODEL
     toast.promise(apix(locale).post('checkouts', emailData), {
       loading: 'Sync your shipping...',
       success: (res) => {
