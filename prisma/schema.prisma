@@ -11,15 +11,15 @@ datasource db {
 }
 
 model User {
-  id             String     @id @default(cuid())
+  id             String    @id @default(cuid())
   name           String?
   bio            String?
-  email          String?    @unique
+  email          String?   @unique
   emailVerified  DateTime?
   image          String?
   hashedPassword String?
-  createdAt      DateTime   @default(now())
-  updatedAt      DateTime   @default(now()) @updatedAt
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now()) @updatedAt
   favoriteIds    Int[]
   accounts       Account[]
   carts          Cart[]
@@ -114,6 +114,22 @@ model Checkout {
   deliveryPickup  String?
   items           Json
 
+  orderNumber   String
+  orderStatus   OrderStatus @default(PENDING)
+  orderTotal    Float
+  changeHistory Json?
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @default(now()) @updatedAt
   // User   User   @relation(fields: [userId], references: [id])
   // userId String
+}
+
+enum OrderStatus {
+  PENDING // Pedido pendiente de procesamiento
+  PROCESSING // Pedido en proceso de preparación/envío
+  SHIPPED // Pedido enviado
+  DELIVERED // Pedido entregado
+  CANCELED // Pedido cancelado por el usuario o administrador
+  REFUNDED // Pedido reembolsado
+  COMPLETED // Pedido completado exitosamente
 }

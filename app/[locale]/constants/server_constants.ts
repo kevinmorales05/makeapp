@@ -16,3 +16,14 @@ export enum SERVER_LOCALES {
     EN = "en",
     KO = "ko",
 }
+
+export enum ORDER_STATUS {
+    PENDING = 'PENDING', // Pedido pendiente de procesamiento
+    PROCESSING = 'PROCESSING', // Pedido en proceso de preparación/envío
+    SHIPPED = 'SHIPPED', // Pedido enviado
+    DELIVERED = 'DELIVERED', // Pedido entregado
+    CANCELED = 'CANCELED', // Pedido cancelado por el usuario o administrador
+    REFUNDED = 'REFUNDED', // Pedido reembolsado
+    COMPLETED = 'COMPLETED' // Pedido completado exitosamente
+  }
+  

@@ -35,7 +35,6 @@ export async function POST(req: Request) {
         const userWithRest: PropsUserHtml = { ...defaultProps, ...rest };
 
         //   ABOVE TO SEND EMAIL
-
         const fromAddress = process.env.NODEMAILER_ACCOUNT as string;
         const fromName = process.env.NEXT_PUBLIC_NAME_APP as string;
 
