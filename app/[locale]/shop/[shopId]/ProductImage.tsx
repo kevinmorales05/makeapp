@@ -9,17 +9,15 @@ import HeartButton from "@/app/components/buttons/HeartButton";
 import { IProductFormatted } from "@/app/hooks/useProducts";
 
 
-interface ListingHeadProps {
+interface ProductImageProps {
   imageSrc: string;
-  id: number;
-  listing: IProductFormatted;
+  product: IProductFormatted;
   currentUser?: SafeUser | null
 }
 
-const ListingProductImage: React.FC<ListingHeadProps> = ({
+const ProductImage: React.FC<ProductImageProps> = ({
   imageSrc,
-  id,
-  listing,
+  product,
   currentUser
 }) => {
 
@@ -49,7 +47,7 @@ const ListingProductImage: React.FC<ListingHeadProps> = ({
           "
         >
           <HeartButton
-            listing={listing}
+            listing={product}
             currentUser={currentUser}
           />
         </div>
@@ -58,4 +56,4 @@ const ListingProductImage: React.FC<ListingHeadProps> = ({
   );
 }
 
-export default ListingProductImage;
+export default ProductImage;

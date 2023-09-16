@@ -3,22 +3,22 @@
 import ClientOnly from "@/app/components/ClientOnly";
 import Container from "@/app/components/Container";
 import EmptyState from "@/app/components/EmptyState";
-import ListingProductImage from "./ListingProductImage";
-import Heading from "@/app/components/Heading";
-import { ListingProductInfo } from "./ListingProductInfo";
-import ListingProductRequest from "./ListingProductRequest";
-import { IProductFormatted, formattedProductById } from "@/app/hooks/useProducts";
+import ListingProductImage from "./ProductImage";
+import { DescriptionProduct } from "./ProductInfo";
+import { IProductFormatted } from "@/app/hooks/useProducts";
 import { useCartStore } from "@/app/hooks/useCart";
 import Breadcrumbs from "@/app/components/Breadcrumbs";
+import { SafeUser } from "@/app/types";
+import DetailProduct from "./DetailProduct";
+import ProductImage from "./ProductImage";
 
 interface IShopClientProps {
-  currentUser?: any;
   product: IProductFormatted | null
   locale: string
+  currentUser?: SafeUser | null
 }
 
 const ShopClient: React.FC<IShopClientProps> = ({ product, locale, currentUser }) => {
-  const listing = product
   const { addCart } = useCartStore()
 
 
@@ -26,8 +26,7 @@ const ShopClient: React.FC<IShopClientProps> = ({ product, locale, currentUser }
     addCart(currentUser, currentListing, locale)
   }
 
-
-  if (!listing) {
+  if (!product) {
     return (<ClientOnly>
       <EmptyState title="Something went wrong with this product" subtitle="Try with another product" />
     </ClientOnly>)
@@ -36,29 +35,26 @@ const ShopClient: React.FC<IShopClientProps> = ({ product, locale, currentUser }
 
   return (
     <Container>
-      <div className="flex justify-center flex-col something">
+      <div className="flex justify-center flex-col">
         <Breadcrumbs />
-        {/* <div>btn</div> */}
-        <div className="max-w-screen-lg mx-auto flex">
-
-          <div className="flex flex-wrap flex-col">
-            <ClientOnly>
-              <ListingProductImage
-                imageSrc={listing.src}
-                id={listing.id}
-                listing={listing}
+        <div className="max-w-screen-lg mx-auto flex flex-col gap-4 sm:gap-0">
+          <ClientOnly>
+            <div className="
+          flex flex-col px-4 
+          sm:grid sm:grid-flow-row sm:grid-cols-2
+          gap-0 sm:gap-8 w-full
+           ">
+              <ProductImage
+                imageSrc={product.src}
+                product={product}
                 currentUser={currentUser}
               />
-              <Heading
-                title={listing.title}
-                subtitle={listing.description}
-              />
-              <ListingProductRequest price={listing.cost} handlerButton={handlerAddCart} listing={listing} />
-              <ListingProductInfo
-                description={listing.description}
-              />
-            </ClientOnly>
-          </div>
+              <DetailProduct handlerButton={handlerAddCart} product={product} currentUser={currentUser} locale={locale} />
+            </div>
+            <DescriptionProduct
+              description={product.description}
+            />
+          </ClientOnly>
         </div>
       </div>
     </Container>

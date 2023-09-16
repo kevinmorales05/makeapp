@@ -14,16 +14,16 @@ interface RequestData {
 }
 
 
-export interface IListingInfoProps {
+export interface DescriptionProductProps {
   description: string;
 }
 
-export const ListingProductInfo: React.FC<IListingInfoProps> = ({
+export const DescriptionProduct: React.FC<DescriptionProductProps> = ({
   description,
 }) => {
   const [selected, setSelected] = useState("login");
-  const [hasReviews, setHasReviews] = useState(true);
-  const [hasReviewUser, setHasReviewUser] = useState(true);
+  const [hasReviews, setHasReviews] = useState(false);
+  const [hasReviewUser, setHasReviewUser] = useState(false);
   const [hoverStarts, setHoverStarts] = useState(0);
   const [starsSelected, setStarsSelected] = useState(0);
 
@@ -49,37 +49,6 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
 
   return (
     <div className="col-span-4 flex flex-col gap-8">
-      <div className="flex flex-col gap-2">
-        <div
-          className="
-            text-xl 
-            font-semibold 
-            flex 
-            flex-row 
-            items-center
-            gap-2
-          "
-        >
-          <div>Category</div>
-          {/* <Avatar src={user?.image} /> */}
-        </div>
-        <hr />
-        <div className="
-            flex 
-            flex-row 
-            items-center 
-            gap-4 
-            font-light
-            text-neutral-500
-          "
-        >
-          <div>
-            category description
-          </div>
-        </div>
-      </div>
-      <hr />
-
       <div className="flex justify-center">
         <div className="flex w-full flex-col">
           {/* TABS */}
@@ -112,7 +81,7 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
               title={<div className={class_tab_btn}>
                 <TbListDetails style={{ width: 24, height: 24 }} />
                 <span>Ingredients</span>
-                <Chip size="sm" variant="faded">1</Chip>
+                <Chip size="sm" variant="faded">0</Chip>
               </div>}
             >
               <AnimationTab key={"ingredients_tab_content"} id={"ingredients_tab_content"} className="py-4 !justify-start"><>No ingredients</></AnimationTab>
@@ -193,38 +162,39 @@ export const ListingProductInfo: React.FC<IListingInfoProps> = ({
                   </section>
 
                   <section className="block sm:flex justify-center items-center">
-
-                    <form onSubmit={handleSubmitReview} className="flex flex-col gap-4">
-                      {hasReviewUser && <h3 className="font-bold">Edit your review</h3>}
-                      <div>
-                        <label className="text-small font-medium pb-2">Rate</label>
-                        <div className="flex flex-row items-center space-x-1 " onMouseLeave={() => {
-                          if (starsSelected !== 0) {
-                            setHoverStarts(starsSelected)
-                          } else {
-                            setHoverStarts(0)
-                          }
-                        }}>
-                          {Array.from([1, 2, 3, 4, 5]).map(index => (
-                            <div onMouseEnter={() => setHoverStarts(index)} key={index} onClick={() => setStarsSelected(index)}>
-                              {index <= hoverStarts ? <AiTwotoneStar className="text-yellow-400" /> : <AiOutlineStar />}
-                            </div>
-                          ))}
+                    {hasReviewUser &&
+                      <form onSubmit={handleSubmitReview} className="flex flex-col gap-4">
+                        {hasReviewUser && <h3 className="font-bold">Edit your review</h3>}
+                        <div>
+                          <label className="text-small font-medium pb-2">Rate</label>
+                          <div className="flex flex-row items-center space-x-1 " onMouseLeave={() => {
+                            if (starsSelected !== 0) {
+                              setHoverStarts(starsSelected)
+                            } else {
+                              setHoverStarts(0)
+                            }
+                          }}>
+                            {Array.from([1, 2, 3, 4, 5]).map(index => (
+                              <div onMouseEnter={() => setHoverStarts(index)} key={index} onClick={() => setStarsSelected(index)}>
+                                {index <= hoverStarts ? <AiTwotoneStar className="text-yellow-400" /> : <AiOutlineStar />}
+                              </div>
+                            ))}
+                          </div>
                         </div>
-                      </div>
-                      <Textarea
-                        name="description"
-                        label="Description"
-                        labelPlacement="outside"
-                        placeholder="Enter a description"
-                        className="max-w-xs"
-                      />
-                      <div className="flex gap-2 justify-start">
-                        <Button color="primary" type="submit">
-                          Add
-                        </Button>
-                      </div>
-                    </form>
+                        <Textarea
+                          name="description"
+                          label="Description"
+                          labelPlacement="outside"
+                          placeholder="Enter a description"
+                          className="max-w-xs"
+                        />
+                        <div className="flex gap-2 justify-start">
+                          <Button color="primary" type="submit">
+                            Add
+                          </Button>
+                        </div>
+                      </form>
+                    }
 
                   </section>
                 </div>

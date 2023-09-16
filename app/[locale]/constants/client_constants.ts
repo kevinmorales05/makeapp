@@ -2,7 +2,7 @@ import { EmblaOptionsType } from "embla-carousel-react";
 
 export const PRODUCTS_PEER_PAGE = 15;
 
-export const NAME_APP = process.env.NEXT_PUBLIC_NAME_APP
+export const NAME_APP = process.env.NEXT_PUBLIC_NAME_APP as string
 
 export enum LOCALES {
     ES = "es",
