@@ -127,7 +127,7 @@ const LoginModal = () => {
         icon={FcGoogle}
         onClick={() => {
           signIn('google')
-          console.log("Process google I can ")
+          // console.log("Process google I can ")
         }}
       />
       {/* <Button

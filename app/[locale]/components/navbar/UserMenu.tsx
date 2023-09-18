@@ -23,11 +23,12 @@ import { BsHousesFill } from "react-icons/bs";
 import Dropdown, { IDropdownProps } from "../dropdowns/Dropdown";
 
 import { Button, User, cn } from "@nextui-org/react";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { FaHandsHelping } from "react-icons/fa";
 import { ICON_CLASES_DROPDOWN } from "@/app/constants/client_constants";
 import { useCartStore } from "@/app/hooks/useCart";
 import { useFavoriteStore } from "@/app/hooks/useFavorite";
+import { TbFileInvoice } from "react-icons/tb";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -38,6 +39,7 @@ const iconClasses = "text-xl text-default-500 pointer-events-none flex-shrink-0"
 const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
   const router = useRouter()
   const locale = useLocale();
+  const t = useTranslations("navbar")
   const { totalCart } = useCartStore()
   const { totalFavorite } = useFavoriteStore()
 
@@ -87,13 +89,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     disabledKeys: ["signed_in_as"],
     sections: [
       {
-        title: "My profile",
+        title: t("user_menu.section_profile.title"),
         xkey: "my_profile",
         showDivider: true,
         content: [
           {
             xkey: "signed_in_as",
-            title: "Signed in as",
+            title: t("user_menu.section_profile.btns.signed.title"),
             description: currentUser?.email || "",
             color: "primary",
             onClick: () => { alert("development") },
@@ -109,47 +111,48 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           //   startContent: <Button size="sm" variant="light" startContent={<RiUserReceivedFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
           // },
           {
-            xkey: "my_curiosities",
-            title: "My favorites",
-            description: "Place of your amazing and beauty products",
+            xkey: "my_invoices",
+            title: t("user_menu.section_profile.btns.invoices.title"),
+            description: t("user_menu.section_profile.btns.invoices.subtitle"),
             color: "primary",
             onClick: () => router.push("/favorites", { locale }),
-            startContent: <Button size="sm" variant="light" startContent={<BsHousesFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+            startContent: <Button size="sm" variant="light" startContent={<TbFileInvoice className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
           },
           {
-            xkey: "my_shopping_cart",
-            title: "My shoppping cart",
-            description: "See some my beauty choices",
-            color: "primary",
-            onClick: () => router.push("/cart", { locale }),
-            startContent: <Button size="sm" variant="light" startContent={<LuIceCream className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
-          }
-        ]
-      },
-      {
-        title: "Discover more",
-        xkey: "disvover_more",
-        content: [
-          {
             xkey: "log_out",
-            title: "Log Out",
-            description: "Goint out of my account",
+            title: t("user_menu.section_profile.btns.log_out.title"),
+            description: t("user_menu.section_profile.btns.log_out.subtitle"),
             color: "danger",
             onClick: () => signOutAndClear(),
             startContent: <Button size="sm" variant="light" startContent={<LuLogOut className={cn(ICON_CLASES_DROPDOWN, "rotate-180")} />} isIconOnly />,
           },
+          // {
+          //   xkey: "my_shopping_cart",
+          //   title: "My shoppping cart",
+          //   description: "See some my beauty choices",
+          //   color: "primary",
+          //   onClick: () => router.push("/cart", { locale }),
+          //   startContent: <Button size="sm" variant="light" startContent={<LuIceCream className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+          // }
+        ]
+      },
+      {
+        xkey: "disvover_more",
+        title: t("user_menu.section_feedback.title"),
+        content: [
+
+          // {
+          //   xkey: "configurations",
+          //   title: "Configurations",
+          //   description: "Manage my account",
+          //   color: "danger",
+          //   onClick: () => alert("configurations"),
+          //   startContent: <Button size="sm" variant="light" startContent={<RiFileSettingsFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+          // },
           {
-            xkey: "configurations",
-            title: "Configurations",
-            description: "Manage my account",
-            color: "danger",
-            onClick: () => alert("configurations"),
-            startContent: <Button size="sm" variant="light" startContent={<RiFileSettingsFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
-          },
-          {
-            xkey: "help_and_feedback",
-            title: "Help & Feedback",
-            description: "Help to improve this application",
+            xkey: "feedback",
+            title: t("user_menu.section_feedback.btns.feedback.title"),
+            description: t("user_menu.section_feedback.btns.feedback.subtitle"),
             color: "danger",
             onClick: () => alert("help_and_feedback"),
             startContent: <Button size="sm" variant="light" startContent={<FaHandsHelping className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
@@ -166,21 +169,21 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     sections: [
       {
         xkey: "my_profile",
-        title: "Welcome",
+        title: t("guest_menu.section_title"),
         showDivider: false,
         content: [
           {
             xkey: "login",
-            title: "Login",
-            description: "Enter to your account",
+            title: t("guest_menu.btns.login.title"),
+            description: t("guest_menu.btns.login.subtitle"),
             color: "primary",
             onClick: () => loginModal.onOpen(),
             startContent: <Button size="sm" variant="light" startContent={<LuLogIn className={iconClasses} />} isIconOnly />,
           },
           {
             xkey: "sign_up",
-            title: "Sign Up",
-            description: "Register to my new account",
+            title: t("guest_menu.btns.sign_up.title"),
+            description: t("guest_menu.btns.sign_up.subtitle"),
             color: "primary",
             onClick: () => registerModal.onOpen(),
             startContent: <Button size="sm" variant="light" startContent={<LuUserPlus className={iconClasses} />} isIconOnly />,

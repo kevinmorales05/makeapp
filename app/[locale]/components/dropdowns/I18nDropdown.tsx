@@ -14,7 +14,7 @@ import { ICON_CLASES_DROPDOWN, LOCALES, SHOP_PARAMS } from "@/app/constants/clie
 function I18nDropdown(
   // { trigger, items }: { trigger: React.ReactNode, items: IDropdownProps }
 ) {
-  const t = useTranslations('LocaleSwitcher')
+  const t = useTranslations()
   const router = useRouter();
   const params = useSearchParams();
   const pathname = usePathname();
@@ -98,18 +98,18 @@ function I18nDropdown(
           defaultSelectedKeys={[locale]}
         >
           {items.sections.map(({ title, showDivider, content, xkey }) => (
-            <DropdownSection key={xkey} title={t('titleModal')}
+            <DropdownSection key={xkey} title={t('LocaleSwitcher.titleModal')}
               showDivider={showDivider}>
               {content.map(({ startContent, ...item }) => (
                 <DropdownItem
                   key={item.xkey}
                   shortcut={item.shortcut}
-                  description={t('description', { locale: item.xkey })}
+                  description={t('LocaleSwitcher.description', { locale: item.xkey })}
                   startContent={startContent}
                   color={item.color}
                   className={item.className}
                 >
-                  {t('title', { locale: item.xkey })}
+                  {t('LocaleSwitcher.title', { locale: item.xkey })}
                 </DropdownItem>
               ))}
             </DropdownSection>))}

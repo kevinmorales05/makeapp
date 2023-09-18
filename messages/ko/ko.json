@@ -9,11 +9,45 @@
     "description": "놀라운 한국 화장품"
   },
   "navbar": {
-    "userMenu": {
-      "invoices": "My invoices",
-      "details": "My invoices",
-      "korean": "Korean Cosmetic your home",
-      "logout": "Logout"
+    "user_menu": {
+      "section_profile": {
+        "title": "내 프로필",
+        "btns": {
+          "signed": {
+            "title": "다음으로 로그인됨"
+          },
+          "invoices": {
+            "title": "내 송장",
+            "subtitle": "송장을 확인하세요"
+          },
+          "log_out": {
+            "title": "로그아웃",
+            "subtitle": "내 계정에서 로그아웃"
+          }
+        }
+      },
+      "section_feedback": {
+        "title": "더 알아보기",
+        "btns": {
+          "feedback": {
+            "title": "피드백",
+            "subtitle": "최고의 서비스를 제공하기 위해 도와주세요"
+          }
+        }
+      }
+    },
+    "guest_menu": {
+      "section_title": "환영합니다",
+      "btns": {
+        "login": {
+          "title": "로그인",
+          "subtitle": "계정에 로그인하세요"
+        },
+        "sign_up": {
+          "title": "가입하기",
+          "subtitle": "계정을 등록하세요"
+        }
+      }
     }
   },
   "carousel": {

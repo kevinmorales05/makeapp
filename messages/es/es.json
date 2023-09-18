@@ -9,11 +9,45 @@
     "description": "Increíbles cosméticos coreanos"
   },
   "navbar": {
-    "userMenu": {
-      "invoices": "My invoices",
-      "details": "My invoices",
-      "korean": "Korean Cosmetic your home",
-      "logout": "Logout"
+    "user_menu": {
+      "section_profile": {
+        "title": "Mi perfil",
+        "btns": {
+          "signed": {
+            "title": "Conectado como"
+          },
+          "invoices": {
+            "title": "Mis facturas",
+            "subtitle": "Ver tus facturas"
+          },
+          "log_out": {
+            "title": "Cerrar sesión",
+            "subtitle": "Salir de mi cuenta"
+          }
+        }
+      },
+      "section_feedback": {
+        "title": "Descubrir más",
+        "btns": {
+          "feedback": {
+            "title": "Comentarios",
+            "subtitle": "Ayúdanos a mejorar para ofrecerte lo mejor"
+          }
+        }
+      }
+    },
+    "guest_menu": {
+      "section_title": "Bienvenido",
+      "btns": {
+        "login": {
+          "title": "Iniciar sesión",
+          "subtitle": "Acceder a tu cuenta"
+        },
+        "sign_up": {
+          "title": "Registrarse",
+          "subtitle": "Registrar una cuenta"
+        }
+      }
     }
   },
   "carousel": {

@@ -14,11 +14,45 @@
     "description": "Amazing Korean Cosmetics"
   },
   "navbar": {
-    "userMenu": {
-      "invoices": "My invoices",
-      "details": "My invoices",
-      "korean": "Make App your home",
-      "logout": "Logout"
+    "user_menu": {
+      "section_profile": {
+        "title": "My profile",
+        "btns": {
+          "signed": {
+            "title": "Signed in as"
+          },
+          "invoices": {
+            "title": "My invoices",
+            "subtitle": "See to your invoices"
+          },
+          "log_out": {
+            "title": "Sign Out",
+            "subtitle": "Log out of my account"
+          }
+        }
+      },
+      "section_feedback": {
+        "title": "Discover more",
+        "btns": {
+          "feedback": {
+            "title": "Feedback",
+            "subtitle": "Help us improve to bring you the best"
+          }
+        }
+      }
+    },
+    "guest_menu": {
+      "section_title": "Welcome",
+      "btns": {
+        "login": {
+          "title": "Login",
+          "subtitle": "Enter to your account"
+        },
+        "sign_up": {
+          "title": "Sign Up",
+          "subtitle": "Register an account"
+        }
+      }
     }
   },
   "carousel": {
