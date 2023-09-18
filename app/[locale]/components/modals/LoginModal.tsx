@@ -29,7 +29,7 @@ const LoginModal = () => {
   const registerModal = useRegisterModal();
   const [isLoading, setIsLoading] = useState(false);
 
-  const t = useTranslations('login')
+  const t = useTranslations('login_modal')
 
   const {
     register,

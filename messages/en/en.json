@@ -101,7 +101,7 @@
       }
     }
   },
-  "login": {
+  "login_modal": {
     "title": "Login",
     "content": {
       "title": "Welcome back",
@@ -122,7 +122,7 @@
       "error": "{error_msg}"
     }
   },
-  "register": {
+  "register_modal": {
     "title": "Register",
     "content": {
       "title": "Welcome to Korean Cosmetic",
@@ -138,6 +138,105 @@
         "label": "Already have an account?",
         "span-label": "Log in"
       }
+    },
+    "toaster": {
+      "success": "Registered!",
+      "error": "{error_msg}"
+    }
+  },
+  "cart_modal": {
+    "title": "Checkout",
+    "content_delivery": {
+      "title": "Describe your shipping",
+      "subtitle": "Delivery method",
+      "delivery_mode": "{mode, select, ship {Ship} pick_up {Pick Up} other {No methods}}",
+      "inputs_ship": {
+        "title": "Shipping  Address",
+        "country": {
+          "label": "Country/Region",
+          "description": "Enter your country or region",
+          "error": "Please enter a valid country"
+        },
+        "city": {
+          "label": "City",
+          "description": "Enter your city ",
+          "error": "Please enter a valid city"
+        },
+        "neighborhood": {
+          "label": "Neighborhood",
+          "description": "Enter your neighborhood",
+          "error": "Please enter a valid neighborhood"
+        },
+        "address": {
+          "label": "Address",
+          "description": "Enter your address",
+          "error": "Please enter a valid address"
+        },
+        "apartment": {
+          "label": "Apartment/suite/#home",
+          "description": "Enter your specific location (optional)"
+        },
+        "postal_code": {
+          "label": "Postal Code",
+          "description": "Enter your postal code (optional)"
+        }
+      },
+      "inputs_pick_up": {
+        "title": "Pick Up Location",
+        "default": {
+          "label": "N954 Av. Padre Luis Vaccari y Galo Plaza Lasso",
+          "description": "Quito, Ecuador"
+        }
+      }
+    },
+    "content_contact": {
+      "title": "Where are you located?",
+      "subtitle": "Help delivers find you!",
+      "inputs": {
+        "title": "Contact",
+        "email": {
+          "label": "Email",
+          "description": "Enter your email address",
+          "error": "Please enter a valid email"
+        },
+        "phone": {
+          "label": "Phone Number",
+          "description": "Enter your phone number ",
+          "error": "Please enter a valid phone number"
+        },
+        "first_name": {
+          "label": "First Name",
+          "description": "Enter your first name",
+          "error": "Please enter a valid first name"
+        },
+        "last_name": {
+          "label": "Last Name",
+          "description": "Enter your last name",
+          "error": "Please enter a valid last name"
+        }
+      }
+    },
+    "content_summary": {
+      "title": "Resume your shipping process",
+      "subtitle": "Your skin always looks radiant and well-cared-for",
+      "subcontent": {
+        "orders": {
+          "label": "Show order summary"
+        },
+        "contact": {
+          "label": "Contact",
+          "action": "Change"
+        },
+        "shipping": {
+          "label": "Shipping method",
+          "action": "Change"
+        }
+      }
+    },
+    "steps": {
+      "next": "Next",
+      "back": "Back",
+      "create": "Create"
     },
     "toaster": {
       "success": "Registered!",

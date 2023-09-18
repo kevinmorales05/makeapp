@@ -96,11 +96,11 @@
       }
     }
   },
-  "login": {
-    "title": "Ingresar",
+  "login_modal": {
+    "title": "Iniciar sesión",
     "content": {
-      "title": "Bienvenido de vuelta",
-      "subtitle": "Ingresa en tu cuenta!",
+      "title": "¡Bienvenido de nuevo!",
+      "subtitle": "¡Inicia sesión en tu cuenta!",
       "inputs": {
         "email": "Correo electrónico",
         "password": "Contraseña"
@@ -108,20 +108,20 @@
       "footer": {
         "button": "Continuar",
         "button-google": "Continuar con Google",
-        "label": "Primera vez usando Korean Cosmetic?",
+        "label": "¿Es la primera vez usando Korean Cosmetic?",
         "span-label": "Crear una cuenta"
       }
     },
     "toaster": {
-      "success": "Ingreso exitoso!",
+      "success": "Sesión iniciada",
       "error": "{error_msg}"
     }
   },
-  "register": {
-    "title": "Registrar",
+  "register_modal": {
+    "title": "Registrarse",
     "content": {
-      "title": "Bienvenido a Corean Cosmetic",
-      "subtitle": "Crear una cuenta!",
+      "title": "¡Bienvenido a Korean Cosmetic!",
+      "subtitle": "¡Crea una cuenta!",
       "inputs": {
         "name": "Nombre",
         "email": "Correo electrónico",
@@ -131,14 +131,114 @@
         "button": "Continuar",
         "button-google": "Continuar con Google",
         "label": "¿Ya tienes una cuenta?",
-        "span-label": "Ingresar"
+        "span-label": "Iniciar sesión"
       }
     },
     "toaster": {
-      "success": "Registro exitoso!",
+      "success": "Registrado!",
       "error": "{error_msg}"
     }
   },
+  "cart_modal": {
+    "title": "Confirmación de compra",
+    "content_delivery": {
+      "title": "Describe tu envío",
+      "subtitle": "Método de entrega",
+      "delivery_mode": "{mode, select, ship {Envío} pick_up {Recoger} other {Sin métodos}}",
+      "inputs_ship": {
+        "title": "Dirección de envío",
+        "country": {
+          "label": "País/Región",
+          "description": "Ingresa tu país o región",
+          "error": "Por favor, ingresa un país válido"
+        },
+        "city": {
+          "label": "Ciudad",
+          "description": "Ingresa tu ciudad ",
+          "error": "Por favor, ingresa una ciudad válida"
+        },
+        "neighborhood": {
+          "label": "Barrio",
+          "description": "Ingresa tu barrio",
+          "error": "Por favor, ingresa un barrio válido"
+        },
+        "address": {
+          "label": "Dirección",
+          "description": "Ingresa tu dirección",
+          "error": "Por favor, ingresa una dirección válida"
+        },
+        "apartment": {
+          "label": "Apartamento/suite/#hogar",
+          "description": "Ingresa tu ubicación específica (opcional)"
+        },
+        "postal_code": {
+          "label": "Código postal",
+          "description": "Ingresa tu código postal (opcional)"
+        }
+      },
+      "inputs_pick_up": {
+        "title": "Lugar de recogida",
+        "default": {
+          "label": "N954 Av. Padre Luis Vaccari y Galo Plaza Lasso",
+          "description": "Quito, Ecuador"
+        }
+      }
+    },
+    "content_contact": {
+      "title": "¿Dónde te encuentras?",
+      "subtitle": "¡Ayuda a los repartidores a encontrarte!",
+      "inputs": {
+        "title": "Información de contacto",
+        "email": {
+          "label": "Correo electrónico",
+          "description": "Ingresa tu dirección de correo electrónico",
+          "error": "Por favor, ingresa un correo electrónico válido"
+        },
+        "phone": {
+          "label": "Número de teléfono",
+          "description": "Ingresa tu número de teléfono ",
+          "error": "Por favor, ingresa un número de teléfono válido"
+        },
+        "first_name": {
+          "label": "Nombre",
+          "description": "Ingresa tu nombre",
+          "error": "Por favor, ingresa un nombre válido"
+        },
+        "last_name": {
+          "label": "Apellido",
+          "description": "Ingresa tu apellido",
+          "error": "Por favor, ingresa un apellido válido"
+        }
+      }
+    },
+    "content_summary": {
+      "title": "Resumen de tu proceso de envío",
+      "subtitle": "Tu piel siempre luce radiante y bien cuidada",
+      "subcontent": {
+        "orders": {
+          "label": "Mostrar resumen del pedido"
+        },
+        "contact": {
+          "label": "Contacto",
+          "action": "Cambiar"
+        },
+        "shipping": {
+          "label": "Método de envío",
+          "action": "Cambiar"
+        }
+      }
+    },
+    "steps": {
+      "next": "Siguiente",
+      "back": "Atrás",
+      "create": "Crear"
+    },
+    "toaster": {
+      "success": "¡Registrado!",
+      "error": "{error_msg}"
+    }
+  }
+,  
   "signup": {
     "title": "Welcome to Corean Cosmetic",
     "subtitle": "Create an account!"
