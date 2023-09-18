@@ -1,8 +1,11 @@
 import Link from "next/link";
-const Logo = () => {
+type LogoProps = {
+  locale: string;
+}
+const Logo = ({ locale }: LogoProps) => {
   return (
     <Link
-      href={'/'}
+      href={`/${locale}`}
       // onClick={() => router.push('/', { locale })}
       aria-label="Korean-Cosmetic"
       className="block cursor-pointer font-merienda !text-primary-red text-4xl"

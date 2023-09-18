@@ -127,7 +127,7 @@ export const useCartStore = create<CartStore>()(
                         }
                     },
                     addCart: async (currentUser, item, locale) => {
-                        console.log("you call me", item)
+                        // console.log("you call me", item)
                         if (currentUser) {
                             toast.promise(apix(locale).put(`carts/${item.id}`), {
                                 loading: 'Loading...',
@@ -157,7 +157,7 @@ export const useCartStore = create<CartStore>()(
                             toast.promise(apix(locale).delete(`carts/${itemId}`), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
-                                    console.log("removed item", data)
+                                    // console.log("removed item", data)
                                     set(produce((draft) => ({
                                         ...draft, cartItems: data
                                     })))
@@ -196,7 +196,7 @@ export const useCartStore = create<CartStore>()(
                                         loading: 'Loading...',
                                         success: ({ data }) => {
 
-                                            console.log("sync data", data)
+                                            // console.log("sync data", data)
                                             set(produce((draft) => ({
                                                 ...draft, favoriteItems: data
                                             })))

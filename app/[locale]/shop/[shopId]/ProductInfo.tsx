@@ -7,6 +7,7 @@ import { useState } from "react";
 import { AnimationTab } from "./AnimationTab";
 import { AiOutlineStar, AiTwotoneStar } from "react-icons/ai";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 
 interface RequestData {
@@ -26,6 +27,7 @@ export const DescriptionProduct: React.FC<DescriptionProductProps> = ({
   const [hasReviewUser, setHasReviewUser] = useState(false);
   const [hoverStarts, setHoverStarts] = useState(0);
   const [starsSelected, setStarsSelected] = useState(0);
+  const t = useTranslations()
 
   const class_tab_btn = "flex items-center space-x-2"
 
@@ -67,12 +69,14 @@ export const DescriptionProduct: React.FC<DescriptionProductProps> = ({
               key="description_tab"
               title={<div className={class_tab_btn}>
                 <TbFileDescription style={{ width: 24, height: 24 }} />
-                <span>Description</span>
+                <span>{t("shoppage_product.descriptions.tabs.description.title")}</span>
                 <Chip size="sm" variant="faded">1</Chip>
               </div>}
 
             >
-              <AnimationTab key={"description_tab_content"} id={"description_tab_content"} ><>{description}</></AnimationTab>
+              <AnimationTab key={"description_tab_content"} id={"description_tab_content"}
+                className="!justify-start"
+              ><>{description}</></AnimationTab>
             </Tab>
 
             <Tab
@@ -80,18 +84,19 @@ export const DescriptionProduct: React.FC<DescriptionProductProps> = ({
               key="ingredients_tab"
               title={<div className={class_tab_btn}>
                 <TbListDetails style={{ width: 24, height: 24 }} />
-                <span>Ingredients</span>
+                <span>{t("shoppage_product.descriptions.tabs.ingredients.title")}</span>
                 <Chip size="sm" variant="faded">0</Chip>
               </div>}
             >
-              <AnimationTab key={"ingredients_tab_content"} id={"ingredients_tab_content"} className="py-4 !justify-start"><>No ingredients</></AnimationTab>
+              <AnimationTab key={"ingredients_tab_content"} id={"ingredients_tab_content"} className="!justify-start"><>{t("shoppage_product.descriptions.tabs.description.empty")}</></AnimationTab>
             </Tab>
 
             <Tab
               key="review_tab"
-              title={<div className={class_tab_btn}>
+              title={<div className={class_tab_btn}
+              >
                 <MdOutlineReviews style={{ width: 24, height: 24 }} />
-                <span>Reviews</span>
+                <span>{t("shoppage_product.descriptions.tabs.reviews.title")}</span>
                 <Chip size="sm" variant="faded">0</Chip>
               </div>}
             >
@@ -157,7 +162,7 @@ export const DescriptionProduct: React.FC<DescriptionProductProps> = ({
                           </div>
                         </div>
                       </> : <>
-                        <p className="font-bold py-4 sm:py-0">No reviews yet.</p>
+                        <p className="font-bold py-4 sm:py-0">{t("shoppage_product.descriptions.tabs.reviews.empty")}</p>
                       </>}
                   </section>
 

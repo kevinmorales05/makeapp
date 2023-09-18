@@ -43,7 +43,7 @@ const FavoriteCard = (props: Props) => {
                         </div>
                         <div className="flex justify-start gap-1 items-center font-light text-neutral-500">
                             {allCategories.map(c => {
-                                const cat_slash = item.category.split(' ').join('-');
+                                const cat_slash = item.category.split(' ').join('_');
                                 if (cat_slash === c.label) {
                                     return <div key={c.label}>{<c.icon />}</div>
                                 }

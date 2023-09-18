@@ -14,8 +14,6 @@
     "description": "Amazing Korean Cosmetics"
   },
   "navbar": {
-    "title": "Hello world!",
-    "subtitle": "Hello world!",
     "userMenu": {
       "invoices": "My invoices",
       "details": "My invoices",
@@ -29,22 +27,44 @@
     "slide_count": "6",
     "button": "{locale, select, es {Leer más} en {Read more} ko {더 읽기} other {Read more}}"
   },
+  "carousel_items": {
+    "title": "Top Products"
+  },
   "footer": {
     "title": "Secure payment guarantee",
     "subtitle": "All the data entered in the forms of our online store are stored securely encrypted under the SSL certified security protocol. In the same way, the payment system is carried out through a secure bank gateway.",
     "networks": "Follow us on social networks"
-  },
-  "homepage": {
-    "title": "Hello world!",
-    "subtitle": "Hello world!"
   },
   "shoppage": {
     "aside": {
       "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",
       "tops3": "{locale, select, es {Top 3 Para Hoy} en {Top 3 For Today} ko {오늘의 상위 3개} other {Top 3 For Today}}"
     },
-    "main":{
+    "main": {
       "actionButton": "Show"
+    }
+  },
+  "shoppage_product": {
+    "details": {
+      "color": "Color",
+      "category": "Category",
+      "sell_button": "{state, select, buy {Buy} added {Added} other {No available}}"
+    },
+    "descriptions": {
+      "tabs": {
+        "description": {
+          "title": "Description",
+          "empty": "No description"
+        },
+        "ingredients": {
+          "title": "Ingredients",
+          "empty": "No ingredients"
+        },
+        "reviews": {
+          "title": "Reviews",
+          "empty": "No reviews yet"
+        }
+      }
     }
   },
   "login": {

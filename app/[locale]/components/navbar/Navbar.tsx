@@ -13,6 +13,7 @@ import { useCategories } from "@/app/hooks/useCategories";
 
 interface NavbarProps {
   currentUser?: SafeUser | null;
+  locale: string;
 }
 
 const DynamicCategories = dynamic(() => import('./Categories'), {
@@ -22,6 +23,7 @@ const DynamicCategories = dynamic(() => import('./Categories'), {
 
 const Navbar: React.FC<NavbarProps> = ({
   currentUser,
+  locale
 }) => {
 
   const { allCategories } = useCategories()
@@ -31,7 +33,7 @@ const Navbar: React.FC<NavbarProps> = ({
       <div className="py-4 border-b-[1px]">
         <Container>
           <div className="flex flex-row items-center justify-between gap-3 md:gap-0 mt-2">
-            <Logo />
+            <Logo locale={locale} />
 
             <ClientOnly exotic={<UserMenuSke />}>
               <I18nDropdown />

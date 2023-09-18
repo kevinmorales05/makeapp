@@ -9,6 +9,8 @@ import CounterButton from './CounterButton'
 import { LOCALES, getColorProduct } from '@/app/constants/client_constants'
 import useCart from '@/app/hooks/useCart'
 import { SafeUser } from '@/app/types'
+import { useTranslations } from 'next-intl'
+import { useCategories } from '@/app/hooks/useCategories'
 
 type DetailProductProps = {
   handlerButton: (listing: IProductFormatted) => void,
@@ -19,6 +21,12 @@ type DetailProductProps = {
 
 const DetailProduct = ({ handlerButton, product, currentUser, locale }: DetailProductProps) => {
   const { hasCarted } = useCart({ listing: product, currentUser, locale })
+  const t = useTranslations()
+  const { currentCategory } = useCategories()
+  const category = product.category.split(' ').join('_')
+  const _currentCategory = currentCategory(category)
+  const IconCategory = _currentCategory[0].icon
+
   return (
     <div className='flex flex-col gap-8'>
       <Heading
@@ -31,18 +39,22 @@ const DetailProduct = ({ handlerButton, product, currentUser, locale }: DetailPr
       <Heading title={""} subtitle={product.description} />
       <div className='flex justify-between'>
         <div className="flex flex-col  justify-center items-start gap-4 font-semibold">
-          <p className='flex gap-2'>Color: <span className="font-normal">{product.color}</span></p>
+          <p className='flex gap-2'>{t("shoppage_product.details.color")}:<span className="font-normal">{product.color !== 'null' && `${product.color}`}
+          </span></p>
           <BsFillSquareFill className={getColorProduct(product.color)} />
         </div>
         <div className="flex flex-col  justify-center items-start gap-4 font-semibold">
-          <p className='flex gap-2'>Category: <span className="font-normal">{product.category}</span></p>
-          {/* <BsFillSquareFill className={getColorProduct(product.color)} /> */}
+          <p className='flex gap-2'>{t("shoppage_product.details.category")}:<span className="font-normal">{t(`categories.${_currentCategory[0].label}.label`)}</span></p>
+          <IconCategory />
         </div>
       </div>
       <div className="flex flex-col gap-4 font-semibold">
         {/* <p>Quantity:</p>
         <CounterButton /> */}
-        <Button label={hasCarted ? 'Added' : "Buy"} onClick={() => handlerButton(product)} />
+        <Button label={hasCarted ?
+          t("shoppage_product.details.sell_button", { state: "added" }) :
+          t("shoppage_product.details.sell_button", { state: "buy" })
+        } onClick={() => handlerButton(product)} />
       </div>
     </div>
   )

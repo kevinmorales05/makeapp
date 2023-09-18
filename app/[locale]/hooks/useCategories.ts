@@ -122,6 +122,9 @@ export const useCategories = () => {
             icon: TbHandThreeFingers,
         },
     ]
+    const currentCategory = (category: string) => {
+        return allCategories.filter(c => c.label === category)
+    }
 
     function validateSubcategory(subcategory: React.ReactNode): SubcategoryRouteKey {
         const subcategoryStr = subcategory?.toString()
@@ -159,5 +162,5 @@ export const useCategories = () => {
         }
     }
 
-    return { allCategories, keysCategories, validateSubcategory }
+    return { allCategories, currentCategory, keysCategories, validateSubcategory }
 }

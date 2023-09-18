@@ -4,7 +4,7 @@ import qs from 'query-string';
 import { useRouter, useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import { IconType } from "react-icons";
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Button } from '@nextui-org/react';
 import { CategoryKey } from '../hooks/useCategories';
 
@@ -20,13 +20,11 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
   selected,
 }) => {
 
-  console.log("curerntCategory", i18Label)
+  // console.log("curerntCategory", i18Label)
   const t = useTranslations(`categories.${i18Label}`)
 
-
-
   const label = t('label')
-
+  const locale = useLocale()
 
   const router = useRouter();
   const params = useSearchParams();
@@ -48,7 +46,7 @@ const CategoryBox: React.FC<CategoryBoxProps> = ({
     }
 
     const url = qs.stringifyUrl({
-      url: '/shop/',
+      url: `/${locale}/shop/`,
       query: updatedQuery
     }, { skipNull: true });
 

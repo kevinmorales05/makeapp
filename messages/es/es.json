@@ -22,14 +22,13 @@
     "slide_count": "6",
     "button": "{locale, select, es {Leer más} en {Read more} ko {더 읽기} other {Read more}}"
   },
+  "carousel_items": {
+    "title": "Productos Destacados"
+  },
   "footer": {
     "title": "Garantía de pago seguro",
     "subtitle": "Todos los datos ingresados en los formularios de nuestra tienda en línea se almacenan de manera segura y encriptada bajo el protocolo de seguridad certificado SSL. De igual manera, el sistema de pago se realiza a través de una pasarela bancaria segura.",
     "networks": "Síguenos en redes sociales"
-  },
-  "homepage": {
-    "title": "Hello world!",
-    "subtitle": "Hello world!"
   },
   "shoppage": {
     "aside": {
@@ -38,6 +37,29 @@
     },
     "main": {
       "actionButton": "Mostrar"
+    }
+  },
+  "shoppage_product": {
+    "details": {
+      "color": "Color",
+      "category": "Categoría",
+      "sell_button": "{state, select, buy {Comprar} added {Añadido} other {No disponible}}"
+    },
+    "descriptions": {
+      "tabs": {
+        "description": {
+          "title": "Descripción",
+          "empty": "Sin descripción"
+        },
+        "ingredients": {
+          "title": "Ingredientes",
+          "empty": "Sin ingredientes"
+        },
+        "reviews": {
+          "title": "Reseñas",
+          "empty": "Aún no hay reseñas"
+        }
+      }
     }
   },
   "login": {

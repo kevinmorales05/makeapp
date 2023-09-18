@@ -8,7 +8,7 @@ export const AnimationTab = ({ children, id, className }: { children: React.Reac
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: .2 }}
-            className={cn("flex justify-center", className)}
+            className={cn("flex justify-center py-4", className)}
         >
             {children}
         </motion.div></AnimatePresence>)

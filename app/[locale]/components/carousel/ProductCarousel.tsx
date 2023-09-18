@@ -23,10 +23,11 @@ import { IProductFormatted } from '@/app/hooks/useProducts'
 import CarouselHeartButton from '../buttons/CarouselHeartButton '
 import { SafeUser } from '@/app/types'
 import CarouselCartButton from '../buttons/CarouselCartButton'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import { useRouter } from 'next-intl/client'
 import { ICartItemState } from '@/app/hooks/useCart'
 import Image from 'next/image'
+import { useCategories } from '@/app/hooks/useCategories'
 
 
 interface ProductCarouselProps {
@@ -43,9 +44,11 @@ const SLIDES = Array.from(Array(SLIDE_COUNT).keys())
 const ProductCarousel
     // : React.FC<PropType>
     = (props: ProductCarouselProps) => {
-        const { title, dots, autoPlayProp, items, currentUser } = props
+        const { dots, autoPlayProp, items, currentUser } = props
         const route = useRouter()
         const locale = useLocale()
+        const t = useTranslations()
+        const { allCategories } = useCategories()
 
         const slides = SLIDES
         const options = OPTIONS
@@ -92,7 +95,7 @@ const ProductCarousel
 
         return (
             <div className="embla theme-mix mt-8 lg:mt-10">
-                <DividerCarousel title={title ? title.toLocaleUpperCase() : ""} />
+                <DividerCarousel title={t("carousel_items.title").toLocaleUpperCase()} />
                 <div className="relative">
                     <div className="embla__viewport" ref={emblaRef}>
                         <div className="embla__container">
@@ -124,8 +127,26 @@ const ProductCarousel
                                         </div>
                                     </Card>
                                     <div className="flex flex-col items-center justify-center text-center">
-                                        <p onClick={() => alert("send this category")} className="cursor-pointer hover:text-black/80">{item.category.charAt(0).toLocaleUpperCase() + item.category.slice(1)}</p>
-                                        <p onClick={() => alert("send this product")} className="font-bold cursor-pointer hover:text-black/80">{item.title.toLocaleUpperCase()} {"(1 UNIDAD)"}</p>
+
+                                        <div className="flex justify-start gap-1 items-center font-light text-neutral-500">
+                                            {allCategories.map(c => {
+                                                const cat_slash = item.category.split(' ').join('_');
+                                                if (cat_slash === c.label) {
+                                                    return <div key={c.label}>{<c.icon />}</div>
+                                                }
+
+                                            })}
+
+                                            <span>
+                                                {
+                                                    // @ts-ignore
+                                                    t(`categories.${item.category.split(' ').join('_')}.label`).charAt(0).toUpperCase() + t(`categories.${item.category.split(' ').join('_')}.label`).slice(1)
+
+                                                }
+                                            </span>
+                                        </div>
+                                        <p onClick={() => alert("send this product")} className="font-bold cursor-pointer hover:text-black/80">{
+                                            item.title.toLocaleUpperCase()}</p>
                                         <div className="flex-grow border-t border-neutral-500"></div>
                                         <div className="flex justify-between gap-6 items-end">
 

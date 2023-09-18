@@ -9,8 +9,6 @@
     "description": "놀라운 한국 화장품"
   },
   "navbar": {
-    "title": "Hello world!",
-    "subtitle": "Hello world!",
     "userMenu": {
       "invoices": "My invoices",
       "details": "My invoices",
@@ -24,14 +22,13 @@
     "slide_count": "6",
     "button": "{locale, select, es {Leer más} en {Read more} ko {더 읽기} other {Read more}}"
   },
+  "carousel_items": {
+    "title": "최고 제품"
+  },
   "footer": {
     "title": "안전한 결제 보장",
     "subtitle": "저희 온라인 스토어의 양식에 입력된 모든 데이터는 SSL 인증된 보안 프로토콜 하에 안전하게 암호화되어 저장됩니다. 마찬가지로 결제 시스템은 안전한 은행 게이트웨이를 통해 이루어집니다.",
     "networks": "소셜 네트워크에서 저희를 팔로우하세요"
-  },
-  "homepage": {
-    "title": "Hello world!",
-    "subtitle": "Hello world!"
   },
   "shoppage": {
     "aside": {
@@ -41,6 +38,30 @@
       "actionButton": "표시"
     }
   },
+  "shoppage_product": {
+    "details": {
+      "color": "색상",
+      "category": "카테고리",
+      "sell_button": "{state, select, buy {구매} added {추가} other {사용 불가}}"
+    },
+    "descriptions": {
+      "tabs": {
+        "description": {
+          "title": "설명",
+          "empty": "설명 없음"
+        },
+        "ingredients": {
+          "title": "성분",
+          "empty": "성분 없음"
+        },
+        "reviews": {
+          "title": "리뷰",
+          "empty": "아직 리뷰 없음"
+        }
+      }
+    }
+  },
+
   "login": {
     "title": "Login",
     "content": {

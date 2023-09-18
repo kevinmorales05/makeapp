@@ -32,6 +32,8 @@ const Home = async (
   const slides_count = 10;
   const itemsCarousel: SafeProducts[] = await getItemsCarousel(slides_count);
 
+  // const t = await getTranslator(locale, 'Index');
+
   // if (listings.length === 0) {
   //   return (
   //     <ClientOnly>
@@ -45,7 +47,7 @@ const Home = async (
         <ClientOnly>
           <Carousel />
           <ProductCarousel
-            title="top products"
+            // title="top products"
             autoPlayProp
             items={formattedProducts(itemsCarousel)}
             currentUser={currentUser}

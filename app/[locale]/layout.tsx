@@ -85,7 +85,7 @@ export default async function RootLayout({
     <html lang={locale} className={htmlClasses}>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <Navbar currentUser={currentUser} />
+          <Navbar currentUser={currentUser} locale={locale} />
           <ClientOnly>
             <Providers>
               <div className="pb-20 pt-32">
