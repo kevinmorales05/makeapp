@@ -120,7 +120,7 @@
   "register_modal": {
     "title": "회원 가입",
     "content": {
-      "title": "Korean Cosmetic에 오신 것을 환영합니다",
+      "title": "Make App에 오신 것을 환영합니다!",
       "subtitle": "계정을 만드세요!",
       "inputs": {
         "name": "이름",
@@ -212,7 +212,7 @@
     },
     "content_summary": {
       "title": "배송 과정 요약",
-      "subtitle": "당신의 피부는 항상 화사하고 잘 돌봐집니다",
+      "subtitle": "당신의 피부는 항상 빛나고 잘 돌봐질 것입니다.",
       "subcontent": {
         "orders": {
           "label": "주문 요약 표시"
@@ -236,9 +236,5 @@
       "success": "등록 완료!",
       "error": "{error_msg}"
     }
-  },
-  "signup": {
-    "title": "Welcome to Corean Cosmetic",
-    "subtitle": "Create an account!"
   }
 }

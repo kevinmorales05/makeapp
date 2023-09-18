@@ -10,9 +10,11 @@ export async function POST(request: Request) {
         const currentUser = await getCurrentUser();
         const body = await request.json();
 
+        console.dir(body)
         const { contact, deliveryMethods, deliveryShip, deliveryPickup, items } = body
         const orderNumber = uuidv4()
         const orderTotal = items.reduce((acc: number, item: ICartItemState) => acc + (item.promoCost * item.quantity), 0)
+
 
         const checkout = await prisma.checkout.create({
             data: {

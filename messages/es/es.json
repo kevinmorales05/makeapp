@@ -120,7 +120,7 @@
   "register_modal": {
     "title": "Registrarse",
     "content": {
-      "title": "¡Bienvenido a Korean Cosmetic!",
+      "title": "¡Bienvenido a Make App!",
       "subtitle": "¡Crea una cuenta!",
       "inputs": {
         "name": "Nombre",
@@ -213,7 +213,7 @@
     },
     "content_summary": {
       "title": "Resumen de tu proceso de envío",
-      "subtitle": "Tu piel siempre luce radiante y bien cuidada",
+      "subtitle": "Tu piel siempre lucirá radiante y bien cuidada",
       "subcontent": {
         "orders": {
           "label": "Mostrar resumen del pedido"
@@ -237,10 +237,5 @@
       "success": "¡Registrado!",
       "error": "{error_msg}"
     }
-  }
-,  
-  "signup": {
-    "title": "Welcome to Corean Cosmetic",
-    "subtitle": "Create an account!"
   }
 }

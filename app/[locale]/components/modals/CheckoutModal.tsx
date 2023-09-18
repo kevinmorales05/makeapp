@@ -146,6 +146,7 @@ const CheckoutModal = () => {
       locale,
     }
     setIsLoading(true);
+    console.log("email data", emailData);
     // SEND EMAIL
     toast.promise(apix(locale).post('email', emailData), {
       loading: 'Loading...',
@@ -166,6 +167,7 @@ const CheckoutModal = () => {
       error: 'Something went wrong.',
     });
     // SAVE CHECKOUT MODEL
+
     toast.promise(apix(locale).post('checkouts', emailData), {
       loading: 'Sync your shipping...',
       success: (res) => {
@@ -236,8 +238,8 @@ const CheckoutModal = () => {
 
 
         >
-          <CustomCheckbox register={register} value={DELIVERY_MODE.SHIP} text="Ship" icon={<FaMotorcycle />} />
-          <CustomCheckbox register={register} value={DELIVERY_MODE.PICKUP} text="Pick Up" icon={<MdOutlineLocalShipping />}
+          <CustomCheckbox register={register} value={DELIVERY_MODE.SHIP} text={t("content_delivery.delivery_mode", { mode: "ship" })} icon={<FaMotorcycle />} />
+          <CustomCheckbox register={register} value={DELIVERY_MODE.PICKUP} text={t("content_delivery.delivery_mode", { mode: "pick_up" })} icon={<MdOutlineLocalShipping />}
           />
         </CheckboxGroup>
       </div>
@@ -402,7 +404,7 @@ const CheckoutModal = () => {
             transition={{ duration: .2 }}
             className='flex flex-col gap-4'
           >
-            <span className='text-[#71717a] font-base'>Contact</span>
+            <span className='text-[#71717a] font-base'>{t("content_contact.inputs.title")}</span>
             <InputUI
               id='email'
               classNames={{ base: cn("hover:bg-content2") }}
