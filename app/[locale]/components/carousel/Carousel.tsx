@@ -24,7 +24,6 @@ import Autoplay from 'embla-carousel-autoplay'
 import { useLocale, useTranslations } from 'next-intl'
 import Image from 'next/image'
 
-
 interface ProductCarouselProps {
   title?: string
 }
@@ -38,7 +37,6 @@ const Carousel: React.FC<PropType> = (props: ProductCarouselProps) => {
 
   const t = useTranslations("carousel")
   const locale = useLocale();
-
 
   const slides = SLIDES
   const options = OPTIONS

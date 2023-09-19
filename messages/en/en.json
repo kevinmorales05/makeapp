@@ -69,6 +69,14 @@
     "subtitle": "All the data entered in the forms of our online store are stored securely encrypted under the SSL certified security protocol. In the same way, the payment system is carried out through a secure bank gateway.",
     "networks": "Follow us on social networks"
   },
+  "favoritepage": {
+    "title": "Favorites",
+    "subtitle": "List of cosmetics you favorited!"
+  },
+  "cartpage": {
+    "title": "Cart",
+    "subtitle": "List of products you shopping!"
+  },
   "shoppage": {
     "aside": {
       "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",

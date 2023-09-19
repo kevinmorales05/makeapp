@@ -54,9 +54,9 @@ const LoginModal = () => {
       }), {
         loading: 'Loading...',
         success: (callback) => {
-          console.log("when callback is ok", callback);
+          // console.log("when callback is ok", callback);
           setIsLoading(false);
-          
+
           router.refresh();
           loginModal.onClose();
           return `${t("toaster.success")}`;
@@ -126,7 +126,15 @@ const LoginModal = () => {
         label={t("content.footer.button-google")}
         icon={FcGoogle}
         onClick={() => {
-          signIn('google')
+          signIn('google').then((result) => {
+            if (result?.error) {
+
+              console.log("ERRORES", result.error);
+            } else {
+              alert("working")
+              router.push('/' + 'es');
+            }
+          });
           // console.log("Process google I can ")
         }}
       />

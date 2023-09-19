@@ -47,7 +47,7 @@
 //   useEffect(() => {
 //     if (currentFavorites().length) {
 //       (async () => {
-//         const favorites = await apix(locale).post(`favorites`, currentFavorites());
+//         const favorites = await apix().post(`favorites`, currentFavorites());
 //       })();
 //     }
 //   }, [currentFavorites()])

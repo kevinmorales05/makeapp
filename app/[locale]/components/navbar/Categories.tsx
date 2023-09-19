@@ -7,6 +7,7 @@ import { useLocale } from 'next-intl';
 import { CategoryItem } from '@/app/hooks/useCategories';
 import { ButtonGroup } from '@nextui-org/react';
 
+
 type CategoriesProps = {
   categories: CategoryItem[]
 }
@@ -18,7 +19,9 @@ const Categories = ({ categories }: CategoriesProps) => {
   const pathname = usePathname();
   // console.log("pathnames", pathname); //  /en/favorites
   // console.log("params: ", params); // readonlySearchparams
-  const isMainPage = pathname === '/' || pathname === `/${locale}`;
+  const isMainPage = pathname === '/' || pathname === `/${locale}`
+    // || pathname === '/carts' || pathname === `/${locale}/carts` || pathname === '/favorites' || pathname === `/${locale}/favorites`;
+
 
   if (!isMainPage) {
     return null;

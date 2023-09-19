@@ -96,7 +96,6 @@ const CheckoutModal = () => {
 
   const items = watch('items');
   const currentDeliveryMethod = watch().deliveryMethods;
-  // console.log('everything', watch())
 
   // const Map = useMemo(() => dynamic(() => import('../Map'), {
   //   ssr: false
@@ -146,9 +145,8 @@ const CheckoutModal = () => {
       locale,
     }
     setIsLoading(true);
-    console.log("email data", emailData);
     // SEND EMAIL
-    toast.promise(apix(locale).post('email', emailData), {
+    toast.promise(apix().post('email', emailData), {
       loading: 'Loading...',
       success: (res) => {
         if (res.status === 200) {
@@ -168,10 +166,9 @@ const CheckoutModal = () => {
     });
     // SAVE CHECKOUT MODEL
 
-    toast.promise(apix(locale).post('checkouts', emailData), {
+    toast.promise(apix().post('checkouts', emailData), {
       loading: 'Sync your shipping...',
       success: (res) => {
-        console.log("res", res)
         if (res?.status === 200) {
           return `Syncronization successfully`;
         } else {

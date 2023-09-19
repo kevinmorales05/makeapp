@@ -4,7 +4,7 @@ import { SafeUser } from "@/app/types";
 import Heading from "@/app/components/Heading";
 import Container from "@/app/components/Container";
 import { useFavoriteStore } from "../hooks/useFavorite";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IProductFormatted, formattedProducts } from "../hooks/useProducts";
@@ -27,6 +27,7 @@ const FavoritesClient: React.FC<FavoritesClientProps> = ({
 
   const router = useRouter();
   const locale = useLocale()
+  const t = useTranslations("favoritepage")
   const { mergeLocalandDB, currentFavorites } = useFavoriteStore()
   const { currentCarts } = useCartStore()
   const [data, setData] = useState<IProductFormatted[]>([])
@@ -54,8 +55,8 @@ const FavoritesClient: React.FC<FavoritesClientProps> = ({
       }
       {data.length !== 0 &&
         <Heading
-          title="Favorites"
-          subtitle="List of cosmetics you favorited!"
+          title={t("title")}
+          subtitle={t("subtitle")}
         />
       }
       <div

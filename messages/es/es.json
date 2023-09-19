@@ -64,6 +64,14 @@
     "subtitle": "Todos los datos ingresados en los formularios de nuestra tienda en línea se almacenan de manera segura y encriptada bajo el protocolo de seguridad certificado SSL. De igual manera, el sistema de pago se realiza a través de una pasarela bancaria segura.",
     "networks": "Síguenos en redes sociales"
   },
+  "favoritepage": {
+    "title": "Favoritos",
+    "subtitle": "¡Lista de cosméticos que has marcado como favoritos!"
+  },
+  "cartpage": {
+    "title": "Carrito",
+    "subtitle": "¡Lista de productos que has comprado!"
+  },
   "shoppage": {
     "aside": {
       "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}",

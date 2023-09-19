@@ -5,7 +5,7 @@ import Breadcrumbs from '../components/Breadcrumbs'
 import useLoginModal from '../hooks/useLoginModal'
 import { IProductFormatted, formattedProducts } from '../hooks/useProducts'
 import { SafeUser } from '../types'
-import { useLocale } from 'next-intl'
+import { useLocale, useTranslations } from 'next-intl'
 import TableCart from './TableCart'
 import Heading from '../components/Heading'
 import ProductCarousel from '../components/carousel/ProductCarousel'
@@ -22,6 +22,7 @@ const CartClient = (props: Props) => {
     const { carts, currentUser, itemsCarousel } = props
     const loginModal = useLoginModal()
     const locale = useLocale()
+    const t = useTranslations("cartpage")
     const { currentCarts, mergeLocalandDB } = useCartStore()
     const [data, setData] = useState<ICartItemState[]>([])
 
@@ -43,8 +44,8 @@ const CartClient = (props: Props) => {
                 {currentUser && <HasAccount onOpenModal={loginModal.onOpen} />}
             </div>
             <Heading
-                title="Cart"
-                subtitle="List of products you shopping!"
+                title={t("title")}
+                subtitle={t("subtitle")}
                 center
             />
             <TableCart data={data} currentUser={currentUser} locale={locale} />

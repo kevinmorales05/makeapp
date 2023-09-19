@@ -7,6 +7,7 @@ import { IProductFormatted } from '../hooks/useProducts';
 import { SafeUser } from '../types';
 import { IconType } from 'react-icons';
 import { ICartItemState } from '../hooks/useCart';
+import { useTranslations } from 'next-intl';
 
 type Props = {
     item: ICartItemState;
@@ -21,6 +22,7 @@ type Props = {
 
 const FavoriteCard = (props: Props) => {
     const { item, currentUser, locale, allCategories, actionCard } = props
+    const t = useTranslations("categories")
     return (
         <div className="flex flex-col justify-between col-span-1 gap-2 cursor-pointer group">
             <Card onPress={actionCard} isPressable shadow="none" radius="none" className="flex flex-col gap-2 w-full bg-transparent">
@@ -45,14 +47,13 @@ const FavoriteCard = (props: Props) => {
                             {allCategories.map(c => {
                                 const cat_slash = item.category.split(' ').join('_');
                                 if (cat_slash === c.label) {
-                                    return <div key={c.label}>{<c.icon />}</div>
+                                    return <div key={c.label} className='flex gap-2 items-center'>{<c.icon />}{
+                                        // @ts-ignore
+                                        t(`${cat_slash}.label`)
+                                    }</div>
                                 }
 
                             })}
-
-                            <span>
-                                {item.category.charAt(0).toUpperCase() + item.category.slice(1)}
-                            </span>
                         </div>
                         <p className="font-bold">{item.title}</p>
                         <div className="flex flex-row items-center gap-1">

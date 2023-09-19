@@ -64,6 +64,14 @@
     "subtitle": "저희 온라인 스토어의 양식에 입력된 모든 데이터는 SSL 인증된 보안 프로토콜 하에 안전하게 암호화되어 저장됩니다. 마찬가지로 결제 시스템은 안전한 은행 게이트웨이를 통해 이루어집니다.",
     "networks": "소셜 네트워크에서 저희를 팔로우하세요"
   },
+  "favoritepage": {
+    "title": "즐겨찾기",
+    "subtitle": "즐겨찾기한 화장품 목록입니다!"
+  },
+  "cartpage": {
+    "title": "장바구니",
+    "subtitle": "쇼핑한 제품 목록입니다!"
+  },
   "shoppage": {
     "aside": {
       "categories": "{locale, select, es {Categorías} en {Categories} ko {카테고리} other {something}}"
@@ -179,7 +187,8 @@
       "inputs_pick_up": {
         "title": "수령 위치",
         "default": {
-          "label": "에콰도르 키토, N954번지, Av. Padre Luis Vaccari 및 Galo Plaza Lasso"
+          "label": "N954 Av. Padre Luis Vaccari y Galo Plaza Lasso",
+          "description": "Quito, Ecuador"
         }
       }
     },

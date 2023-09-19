@@ -37,7 +37,7 @@ export const useFavoriteStore = create<FavoriteStore>()(
           favoriteItems: [],
           addFavorite: async (item, currentUser, locale) => {
             if (currentUser) {
-              toast.promise(apix(locale).put("favorites", item), {
+              toast.promise(apix().put("favorites", item), {
                 loading: 'Loading...',
                 success: (data) => {
                   // console.log("data", data)
@@ -58,7 +58,7 @@ export const useFavoriteStore = create<FavoriteStore>()(
           },
           removeFavorite: async (item, currentUser, locale) => {
             if (currentUser) {
-              toast.promise(apix(locale).delete(`favorites/${item.id}`,), {
+              toast.promise(apix().delete(`favorites/${item.id}`,), {
                 loading: 'Loading...',
                 success: (data) => {
                   // console.log("data", data)
@@ -101,7 +101,7 @@ export const useFavoriteStore = create<FavoriteStore>()(
 
                 // if existe ids to update then update them
                 if (uniqueIds.length > 0) {
-                  toast.promise(apix(locale).put("favorites/merging", uniqueIds), {
+                  toast.promise(apix().put("favorites/merging", uniqueIds), {
                     loading: 'Loading...',
                     success: ({ data }) => {
                       set(produce((draft) => ({

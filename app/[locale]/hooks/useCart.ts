@@ -64,7 +64,7 @@ export const useCartStore = create<CartStore>()(
                     cartItems: [],
                     incrementCart: async (currentUser, itemId, locale) => {
                         if (currentUser) {
-                            toast.promise(apix(locale).put("carts/reducers/", itemId), {
+                            toast.promise(apix().put("carts/reducers/", itemId), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
                                     // console.log("data increment", data)
@@ -96,7 +96,7 @@ export const useCartStore = create<CartStore>()(
                     },
                     decrementCart: async (currentUser, itemId, locale) => {
                         if (currentUser) {
-                            toast.promise(apix(locale).delete(`carts/reducers/${itemId}`,), {
+                            toast.promise(apix().delete(`carts/reducers/${itemId}`,), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
                                     // console.log("date decrement", data)
@@ -129,7 +129,7 @@ export const useCartStore = create<CartStore>()(
                     addCart: async (currentUser, item, locale) => {
                         // console.log("you call me", item)
                         if (currentUser) {
-                            toast.promise(apix(locale).put(`carts/${item.id}`), {
+                            toast.promise(apix().put(`carts/${item.id}`), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
                                     set(produce((draft) => ({
@@ -154,7 +154,7 @@ export const useCartStore = create<CartStore>()(
                     },
                     removeCart: async (currentUser, itemId, locale) => {
                         if (currentUser) {
-                            toast.promise(apix(locale).delete(`carts/${itemId}`), {
+                            toast.promise(apix().delete(`carts/${itemId}`), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
                                     // console.log("removed item", data)
@@ -192,7 +192,7 @@ export const useCartStore = create<CartStore>()(
 
                                 // if existe ids to update then update them
                                 if (uniqueIds.length > 0) {
-                                    toast.promise(apix(locale).put("carts/merging", mergeToServer), {
+                                    toast.promise(apix().put("carts/merging", mergeToServer), {
                                         loading: 'Loading...',
                                         success: ({ data }) => {
 

@@ -48,7 +48,7 @@ const RegisterModal = () => {
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     setIsLoading(true);
 
-    apix(locale).post(`register`, data)
+    apix().post(`register`, data)
       .then((callback) => {
         toast.success(t("toaster.success"));
         registerModal.onClose();
