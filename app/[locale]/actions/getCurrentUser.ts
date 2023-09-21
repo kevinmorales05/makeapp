@@ -28,6 +28,10 @@ export default async function getCurrentUser() {
       return null;
     }
 
+    // const mappedUser = {
+    //   ...currentUser,
+    // }
+
     return {
       ...currentUser,
       createdAt: currentUser.createdAt.toISOString(),

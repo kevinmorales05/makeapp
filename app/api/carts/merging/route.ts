@@ -32,6 +32,8 @@ export async function PUT(request: Request) {
             data: toMerge
         })
 
+        console.log("tell me ", userUpdated)
+
         
 
         const user = prisma.user.findUnique({

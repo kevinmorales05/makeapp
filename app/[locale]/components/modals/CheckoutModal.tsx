@@ -131,12 +131,22 @@ const CheckoutModal = () => {
     setStep((value) => STEPS.DELIVERY);
   }
 
+  const clearData = () => {
+    useCartStore.persist.clearStorage();
+    setStep(STEPS.DELIVERY)
+    //reseting
+    reset();
+
+    checkoutModal.onClose();
+    router.refresh();
+  }
 
   const onSubmit: SubmitHandler<FieldValues> = (data) => {
     if (step !== STEPS.SUMMARY) {
       return onNext();
     }
 
+    let everythingOk: boolean = false;
 
     const emailData = {
       ...data,
@@ -145,39 +155,25 @@ const CheckoutModal = () => {
       locale,
     }
     setIsLoading(true);
-    // SEND EMAIL
-    toast.promise(apix().post('email', emailData), {
-      loading: 'Loading...',
-      success: (res) => {
-        if (res.status === 200) {
-
-          setStep(STEPS.DELIVERY)
-          //reseting
-          reset();
-          checkoutModal.onClose();
-          router.refresh();
-          return `Please checkout your spam to your email ${data.contact.email}`;
-        } else {
-          toast.error('Error sending to your email address')
-          return
-        }
-      },
-      error: 'Something went wrong.',
-    });
-    // SAVE CHECKOUT MODEL
-
-    toast.promise(apix().post('checkouts', emailData), {
-      loading: 'Sync your shipping...',
-      success: (res) => {
-        if (res?.status === 200) {
-          return `Syncronization successfully`;
-        } else {
-          toast.error('Syncronization failed.')
-          return ''
-        }
-      },
-      error: 'Something went wrong.',
-    });
+    toast.promise(Promise.all([
+      // SEND EMAIL
+      apix().post('email', emailData),
+      // SAVE CHECKOUT MODEL
+      apix().post('checkouts', emailData)]),
+      {
+        loading: 'Loading...',
+        success: ([res1, res2]) => {
+          if (res1.status === 200 && res2.status === 200) {
+            clearData();
+            return `Please checkout your spam to your email ${data.contact.email}`;
+          } else {
+            toast.error('Something went wrong please try again')
+            return
+          }
+        },
+        error: 'Something went wrong.',
+      });
+    clearData()
 
     setIsLoading(false);
   }

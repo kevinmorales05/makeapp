@@ -1,20 +1,7 @@
 import { create } from "zustand";
 import { ICartItemState } from "./useCart";
 import { SafeCart, SafeProducts } from "../types";
-
-
-interface formattedProductsProps {
-    id?: Number;
-    price?: String;
-    title?: String;
-    category?: String;
-    src?: String;
-}
-interface currentProductsStore {
-    products?: formattedProductsProps | any;
-    setProducts: () => void;
-
-}
+import { getPriceApp } from "../constants/server_constants";
 
 export interface IProductProps {
     id: number;
@@ -56,8 +43,8 @@ export const formattedCarts = (products: SafeCart[] | []) => products.map((p) =>
     description: p.description,
     category: p.category,
     subCategory: p.subCategory,
-    cost: p.cost,
-    promoCost: p.promoCost,
+    cost: getPriceApp(p.cost),
+    promoCost: getPriceApp(p.promoCost),
     bestSeller: p.bestSeller,
     kit: p.kit,
     weight: p.weight,
@@ -75,8 +62,8 @@ export const formattedProducts = (products: SafeProducts[] | []) => products.map
     description: p.description,
     category: p.category,
     subCategory: p.subCategory,
-    cost: p.cost,
-    promoCost: p.promoCost,
+    cost: getPriceApp(p.cost),
+    promoCost: getPriceApp(p.promoCost),
     bestSeller: p.bestSeller,
     kit: p.kit,
     weight: p.weight,
@@ -95,8 +82,8 @@ export const formattedProductById = (product: SafeProducts | null): IProductForm
         description: product.description,
         category: product.category,
         subCategory: product.subCategory,
-        cost: product.cost,
-        promoCost: product.promoCost,
+        cost: getPriceApp(product.cost),
+        promoCost: getPriceApp(product.promoCost),
         bestSeller: product.bestSeller,
         kit: product.kit,
         weight: product.weight,

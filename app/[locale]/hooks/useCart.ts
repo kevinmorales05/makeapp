@@ -1,4 +1,4 @@
-    import { SafeUser } from "@/app/types";
+import { SafeUser } from "@/app/types";
 
 import { useRouter } from "next/navigation";
 import { useCallback, useMemo } from "react";
@@ -64,12 +64,12 @@ export const useCartStore = create<CartStore>()(
                     cartItems: [],
                     incrementCart: async (currentUser, itemId, locale) => {
                         if (currentUser) {
-                            toast.promise(apix().put("carts/reducers/", itemId), {
+                            toast.promise(apix().put(`carts/reducers/${itemId}`, { atomic_action: "plus" }), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
-                                    // console.log("data increment", data)
+                                    console.log("data increment", data)
                                     set(produce((draft) => ({
-                                        ...draft, cartItems: data.data
+                                        ...draft, cartItems: data
                                     })))
                                     return `Item added`;
                                 },
@@ -96,13 +96,13 @@ export const useCartStore = create<CartStore>()(
                     },
                     decrementCart: async (currentUser, itemId, locale) => {
                         if (currentUser) {
-                            toast.promise(apix().delete(`carts/reducers/${itemId}`,), {
+                            toast.promise(apix().put(`carts/reducers/${itemId}`, { atomic_action: "substract" }), {
                                 loading: 'Loading...',
                                 success: ({ data }) => {
-                                    // console.log("date decrement", data)
-                                    // set(produce((draft) => ({
-                                    //     ...draft, cartItems: data.data
-                                    // })))
+                                    console.log("date decrement", data)
+                                    set(produce((draft) => ({
+                                        ...draft, cartItems: data
+                                    })))
                                     return `Item deleted`;
                                 },
                                 error: (error: any) => {
@@ -196,17 +196,26 @@ export const useCartStore = create<CartStore>()(
                                         loading: 'Loading...',
                                         success: ({ data }) => {
 
-                                            // console.log("sync data", data)
+                                            console.log("sync data cartItems", data)
                                             set(produce((draft) => ({
-                                                ...draft, favoriteItems: data
+                                                ...draft, cartItems: data
                                             })))
-                                            return `favorites sync has been added`;
+                                            return `carts has been syncronized`;
                                         },
                                         error: (error: any) => {
                                             return `Failed to sync: ${error.message}`;
                                         }
                                     })
+                                } else {
+                                    set(produce((draft) => ({
+                                        ...draft, cartItems: [...cartsServer]
+                                    })))
                                 }
+
+                            } else {
+                                set(produce((draft) => ({
+                                    ...draft, cartItems: [...cartsServer]
+                                })))
                             }
                         }
                     },

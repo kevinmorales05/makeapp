@@ -144,17 +144,22 @@ const TableCart = (props: Props) => {
             <Table aria-label="Cart Make App" className='py-2'>
                 <TableHeader columns={columns} className=''>
                     {(column) => (
-                        <TableColumn key={column.uid} className={cn(`${column.uid === 'product' ? 'text-start' : 'text-start lg:text-center'}`,
+                        <TableColumn key={column.uid}
+                            className={cn(`${column.uid === 'product' ? 'text-start' : 'text-start lg:text-center'}`,
                             column.uid === 'count' && 'text-center', 'bg-transparent text-base font-bold text-black '
                         )} >
                             {column.name}
                         </TableColumn>
                     )}
                 </TableHeader>
-                <TableBody items={dataParse} emptyContent={<div className='flex justify-center items-center'>No products to display. <TbMoodEmpty /> </div>}>
+                <TableBody items={dataParse}
+                    emptyContent={<div className='flex justify-center items-center'>No products to display. <TbMoodEmpty /> </div>}>
                     {(item) => (
                         <TableRow key={item.id} >
-                            {(columnKey) => <TableCell>{renderCell(item, columnKey)}</TableCell>}
+                            {(columnKey) =>
+                                <TableCell>
+                                    {renderCell(item, columnKey)}
+                                </TableCell>}
                         </TableRow>
                     )}
                 </TableBody>
@@ -175,7 +180,7 @@ const TableCart = (props: Props) => {
                     </div>
                     <div className='flex flex-col w-full gap-2 py-4 '>
                         <Button onPress={checkoutModal.onOpen} fullWidth color="primary" radius="none" startContent={<TbTruckDelivery />}>PROCEED TO CHECKOUT</Button>
-                        <Button onPress={() => { }} fullWidth color="danger" radius="none" startContent={<AiOutlineShopping />}>CONTINUE TO SHOPPING</Button>
+                        {/* <Button onPress={() => { }} fullWidth color="danger" radius="none" startContent={<AiOutlineShopping />}>CONTINUE TO SHOPPING</Button> */}
                     </div>
                 </div>
             }

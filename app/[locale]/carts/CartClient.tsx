@@ -11,6 +11,7 @@ import Heading from '../components/Heading'
 import ProductCarousel from '../components/carousel/ProductCarousel'
 import HasAccount from './HasAccount'
 import { ICartItemState, useCartStore } from '../hooks/useCart'
+import EmptyState from '../components/EmptyState'
 
 type Props = {
     carts: ICartItemState[],
@@ -34,8 +35,10 @@ const CartClient = (props: Props) => {
         setData(currentCarts())
     }, [currentCarts()])
 
+    console.log("data", data)
+    console.log("but carts", carts)
 
-    if (!data) return (<>Loading...</>)
+    // if (!data) return (<>Loading...</>)
 
     return (
         <div>
@@ -43,12 +46,20 @@ const CartClient = (props: Props) => {
                 <Breadcrumbs />
                 {currentUser && <HasAccount onOpenModal={loginModal.onOpen} />}
             </div>
-            <Heading
-                title={t("title")}
-                subtitle={t("subtitle")}
-                center
-            />
-            <TableCart data={data} currentUser={currentUser} locale={locale} />
+            {data.length === 0 ?
+                <EmptyState
+                    title="No carts found"
+                    subtitle="Looks like you have no carts here."
+                /> :
+                <>
+                    <Heading
+                        title={t("title")}
+                        subtitle={t("subtitle")}
+                        center
+                    />
+                    <TableCart data={data} currentUser={currentUser} locale={locale} />
+                </>
+            }
             <div className='relative w-full '>
                 <ProductCarousel
                     title='recommended'
