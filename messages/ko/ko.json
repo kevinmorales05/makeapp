@@ -70,7 +70,20 @@
   },
   "cartpage": {
     "title": "장바구니",
-    "subtitle": "쇼핑한 제품 목록입니다!"
+    "subtitle": "쇼핑 중인 제품 목록입니다!",
+    "empty": {
+      "title": "장바구니가 없어요 😐",
+      "subtitle": "여기에 장바구니가 없는 것 같습니다."
+    },
+    "empty_table": "표시할 상품이 없습니다.",
+    "detail_table": {
+      "columns": "{col, select, product{제품} count{수량} unit_price{단가} total{총액} other{NO COL}}",
+      "btn_delete": "삭제"
+    },
+    "summary_table": {
+      "columns": "{col, select, subtotal{소계:} shipping{배송: (기본)} free{무료} total{총액} other{NO COL}}",
+      "btn_checkout": "결제로 이동"
+    }
   },
   "shoppage": {
     "aside": {

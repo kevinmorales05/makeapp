@@ -6,7 +6,7 @@ export const getPriceApp = (price: number): number => {
 
     const finalPrice = ((price / p_wones) * p_mult_const) + p_sum_const;
     const roundedFinalPrice = Number(finalPrice.toFixed(2));
-
+    console.log("in", price, "out", roundedFinalPrice)
     return roundedFinalPrice;
 }
 
@@ -25,5 +25,4 @@ export enum ORDER_STATUS {
     CANCELED = 'CANCELED', // Pedido cancelado por el usuario o administrador
     REFUNDED = 'REFUNDED', // Pedido reembolsado
     COMPLETED = 'COMPLETED' // Pedido completado exitosamente
-  }
-  
+}

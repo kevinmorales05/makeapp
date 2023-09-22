@@ -7,7 +7,7 @@ import {
   useForm
 } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import Modal from "./Modal";
 // import CountrySelect from "../inputs/CountrySelect";
@@ -43,9 +43,6 @@ enum DELIVERY_MODE {
   SHIP = "ship",
 }
 
-enum CONTACTS_MODE {
-  contact = "contact",
-}
 
 const CheckoutModal = () => {
   const router = useRouter();
@@ -57,10 +54,9 @@ const CheckoutModal = () => {
   const locale = useLocale();
   const t = useTranslations("cart_modal")
 
-  const { currentCarts } = useCartStore()
   const [deliveryMethod, setDeliveryMethod] = React.useState<string[]>([""]);
 
-  const { incrementCart, decrementCart, removeCart } = useCartStore()
+  const { incrementCart, decrementCart, currentCarts } = useCartStore()
 
   const {
     register,
@@ -90,12 +86,20 @@ const CheckoutModal = () => {
         first_name: '',
         last_name: '',
       },
-      items: currentCarts(),
+      items: currentCarts()
     }
   });
 
+  useEffect(() => {
+    reset({
+      ...watch(), // keep same values
+      items: currentCarts(), // update item values
+    });
+  }, [currentCarts()]);
+
   const items = watch('items');
   const currentDeliveryMethod = watch().deliveryMethods;
+  console.log("items: ", items)
 
   // const Map = useMemo(() => dynamic(() => import('../Map'), {
   //   ssr: false
@@ -236,7 +240,7 @@ const CheckoutModal = () => {
           />
         </CheckboxGroup>
       </div>
-      {deliveryMethod.length !== 0 && deliveryMethod[0] === DELIVERY_MODE.SHIP &&
+      {deliveryMethod[0] === DELIVERY_MODE.SHIP &&
         <ScrollShadow className="w-full h-[400px]" size={20}>
           <motion.div
             key="ship_container"
@@ -339,7 +343,7 @@ const CheckoutModal = () => {
           </motion.div>
         </ScrollShadow>
       }
-      {deliveryMethod.length !== 0 && deliveryMethod[0] === DELIVERY_MODE.PICKUP &&
+      {deliveryMethod[0] === DELIVERY_MODE.PICKUP &&
         <ScrollShadow className="w-full h-[300px]" size={20}>
           <motion.div
             key="pick_up_container"
@@ -635,58 +639,4 @@ export const CustomCheckbox = ({ value, icon, text, register }: { value: string,
   );
 };
 
-export const MonitorMobileIcon = (props: any) => (
-  <svg
-    aria-hidden="true"
-    fill="none"
-    focusable="false"
-    height="24"
-    role="presentation"
-    viewBox="0 0 24 24"
-    width="24"
-    {...props}
-  >
-    <path
-      d="M10 16.95H6.21C2.84 16.95 2 16.11 2 12.74V6.74003C2 3.37003 2.84 2.53003 6.21 2.53003H16.74C20.11 2.53003 20.95 3.37003 20.95 6.74003"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M10 21.4699V16.95"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M2 12.95H10"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M6.73999 21.47H9.99999"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M22 12.8V18.51C22 20.88 21.41 21.47 19.04 21.47H15.49C13.12 21.47 12.53 20.88 12.53 18.51V12.8C12.53 10.43 13.12 9.83997 15.49 9.83997H19.04C21.41 9.83997 22 10.43 22 12.8Z"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="1.5"
-    />
-    <path
-      d="M17.2445 18.25H17.2535"
-      stroke="currentColor"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth="2"
-    />
-  </svg>
-);
+

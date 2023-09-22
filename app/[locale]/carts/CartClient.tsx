@@ -6,18 +6,28 @@ import useLoginModal from '../hooks/useLoginModal'
 import { IProductFormatted, formattedProducts } from '../hooks/useProducts'
 import { SafeUser } from '../types'
 import { useLocale, useTranslations } from 'next-intl'
-import TableCart from './TableCart'
-import Heading from '../components/Heading'
 import ProductCarousel from '../components/carousel/ProductCarousel'
 import HasAccount from './HasAccount'
 import { ICartItemState, useCartStore } from '../hooks/useCart'
 import EmptyState from '../components/EmptyState'
+import dynamic from 'next/dynamic'
 
 type Props = {
     carts: ICartItemState[],
     currentUser: SafeUser | null,
     itemsCarousel: IProductFormatted[],
 }
+
+const DynamicHeading = dynamic(() =>
+    import('@/components/Heading'), {
+    ssr: false,
+}
+)
+const DynamicTableCart = dynamic(() =>
+    import('./TableCart'), {
+    ssr: false,
+}
+)
 
 const CartClient = (props: Props) => {
     const { carts, currentUser, itemsCarousel } = props
@@ -35,29 +45,25 @@ const CartClient = (props: Props) => {
         setData(currentCarts())
     }, [currentCarts()])
 
-    console.log("data", data)
-    console.log("but carts", carts)
-
-    // if (!data) return (<>Loading...</>)
 
     return (
         <div>
             <div className='flex justify-between items-center'>
                 <Breadcrumbs />
-                {currentUser && <HasAccount onOpenModal={loginModal.onOpen} />}
+                {!currentUser && <HasAccount onOpenModal={loginModal.onOpen} />}
             </div>
             {data.length === 0 ?
                 <EmptyState
-                    title="No carts found"
-                    subtitle="Looks like you have no carts here."
+                    title={t("empty.title")}
+                    subtitle={t("empty.subtitle")}
                 /> :
                 <>
-                    <Heading
+                    <DynamicHeading
                         title={t("title")}
                         subtitle={t("subtitle")}
                         center
                     />
-                    <TableCart data={data} currentUser={currentUser} locale={locale} />
+                    <DynamicTableCart data={data} currentUser={currentUser} locale={locale} />
                 </>
             }
             <div className='relative w-full '>

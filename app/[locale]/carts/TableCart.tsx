@@ -7,65 +7,45 @@ import { IProductFormatted } from '../hooks/useProducts';
 import { ICartItemState, useCartStore } from '../hooks/useCart';
 import { SafeUser } from '../types';
 import { BsTrash3 } from 'react-icons/bs';
+import { useTranslations } from 'next-intl';
 
-interface ICartProduct {
-    id: number;
-    title: string;
-    description: string;
-    imageSrc: string;
-    cost: number;
-    promoCost: number;
-    bestSeller: boolean;
-    kit: boolean;
-    weight: string;
-    farmacState: string;
-    presentation: string;
-    category: string;
-    subCategory: string;
-    color: string;
-    createdAt: Date;
-    updatedAt: Date;
-    quantity: number;
-}
-type Props = {
+
+type TableProps = {
     data: ICartItemState[],
     currentUser?: SafeUser | null;
     locale: string;
 }
 
 const columns = [
-    { name: "PRODUCT", uid: "product" },
-    { name: "COUNT", uid: "count" },
-    { name: "UNIT PRICE", uid: "unit_price" },
-    { name: "TOTAL", uid: "total" },
+    { name: "product", uid: "product" },
+    { name: "count", uid: "count" },
+    { name: "unit_price", uid: "unit_price" },
+    { name: "total", uid: "total" },
 ];
 
-// type Cart = typeof data[0];
-
-
-const TableCart = (props: Props) => {
-
-    const { data, currentUser, locale } = props;
-
+const TableCart = ({ data, currentUser, locale }: TableProps) => {
     const { incrementCart, decrementCart, removeCart } = useCartStore()
     const checkoutModal = useCheckoutModal();
+    const t = useTranslations("cartpage")
 
     const dataParse = data.map(it => {
         return {
             id: it.id,
             src: it.src,
             product: it.title,
+            unit_price_promo: it.promoCost,
             unit_price: it.cost,
+
             count: it.quantity,
-            total: it.cost * it.quantity,
+            total: Number((it.cost * it.quantity).toFixed(2)),
         }
-    }) as any[]
+    })
 
     type Cart = typeof dataParse[0];
 
     const renderCell = React.useCallback((cart: Cart, columnKey: React.Key) => {
         const cellValue = cart["product" as keyof Cart];
-        const idValue = cart["id" as keyof Cart];
+        const idValue = cart["id" as keyof Cart] as number;
 
         switch (columnKey) {
             case "product":
@@ -111,13 +91,16 @@ const TableCart = (props: Props) => {
                 );
             case "unit_price":
                 return (
-                    <p className='text-start lg:text-center'>
-                        $ {cart.unit_price}
-                    </p>
+                    <div className="flex flex-col justify-center gap-2 items-center">
+                        {cart.unit_price_promo < cart.unit_price && <p className="line-through text-sm">$ {cart.unit_price}</p>}
+                        <p className='text-start text-base lg:text-center'>
+                            $ {cart.unit_price_promo}
+                        </p>
+                    </div>
                 );
             case "total":
                 return (
-                    <p className="text-start lg:text-center break-keep">
+                    <p className="text-start text-base lg:text-center break-keep">
                         $ {cart.total}
                     </p>
                 );
@@ -146,14 +129,14 @@ const TableCart = (props: Props) => {
                     {(column) => (
                         <TableColumn key={column.uid}
                             className={cn(`${column.uid === 'product' ? 'text-start' : 'text-start lg:text-center'}`,
-                            column.uid === 'count' && 'text-center', 'bg-transparent text-base font-bold text-black '
-                        )} >
-                            {column.name}
+                                column.uid === 'count' && 'text-center', 'bg-transparent text-base font-bold text-black '
+                            )} >
+                            {t("detail_table.columns", { col: column.name })}
                         </TableColumn>
                     )}
                 </TableHeader>
                 <TableBody items={dataParse}
-                    emptyContent={<div className='flex justify-center items-center'>No products to display. <TbMoodEmpty /> </div>}>
+                    emptyContent={<div className='flex justify-center items-center'>{t("empty_table")} <TbMoodEmpty /> </div>}>
                     {(item) => (
                         <TableRow key={item.id} >
                             {(columnKey) =>
@@ -167,19 +150,19 @@ const TableCart = (props: Props) => {
             {dataParse.length !== 0 &&
                 <div className='max-w-full w-full sm:max-w-lg md:max-w-md  flex justify-end flex-col items-end py-4 gap-1'>
                     <div className='flex justify-between w-full'>
-                        <span>Subtotal: </span>
+                        <span>{t("summary_table.columns", { col: "subtotal" })} </span>
                         <span>$ {total.toFixed(2)}</span>
                     </div>
                     <div className='flex justify-between w-full'>
-                        <span>{`Shipping :(default)`}</span>
-                        <span>Free</span>
+                        <span>{t("summary_table.columns", { col: "shipping" })}</span>
+                        <span>{t("summary_table.columns", { col: "free" })} </span>
                     </div>
                     <div className='flex justify-between w-full'>
-                        <span className='font-bold'>Total</span>
+                        <span className='font-bold'>{t("summary_table.columns", { col: "total" })} </span>
                         <span>$ {total.toFixed(2)}</span>
                     </div>
                     <div className='flex flex-col w-full gap-2 py-4 '>
-                        <Button onPress={checkoutModal.onOpen} fullWidth color="primary" radius="none" startContent={<TbTruckDelivery />}>PROCEED TO CHECKOUT</Button>
+                        <Button onPress={checkoutModal.onOpen} fullWidth color="primary" radius="none" startContent={<TbTruckDelivery />}>{t("summary_table.btn_checkout")}</Button>
                         {/* <Button onPress={() => { }} fullWidth color="danger" radius="none" startContent={<AiOutlineShopping />}>CONTINUE TO SHOPPING</Button> */}
                     </div>
                 </div>

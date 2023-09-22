@@ -73,12 +73,16 @@ export async function PUT(
             where: { userId: currentUser.id },
             include: {
                 product: true
+            },
+            orderBy: {
+                id: "asc"
             }
         })
 
         const safeCarts: SafeCart[] = allCarts.map((cart) => ({
             ...cart.product,
             quantity: cart.quantity,
+            src: cart.product.imageSrc,
             promoCost: getPriceApp(cart.product.promoCost),
             cost: getPriceApp(cart.product.cost),
         }));

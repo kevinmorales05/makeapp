@@ -70,7 +70,20 @@
   },
   "cartpage": {
     "title": "Carrito",
-    "subtitle": "¡Lista de productos que has comprado!"
+    "subtitle": "¡Lista de productos que estás comprando!",
+    "empty": {
+      "title": "No hay carritos 😐",
+      "subtitle": "Parece que no tienes ningún carrito aquí."
+    },
+    "empty_table": "No hay productos para mostrar.",
+    "detail_table": {
+      "columns": "{col, select, product{PRODUCTO} count{CANTIDAD} unit_price{PRECIO UNITARIO} total{TOTAL} other{NO COL}}",
+      "btn_delete": "Eliminar"
+    },
+    "summary_table": {
+      "columns": "{col, select, subtotal{Subtotal:} shipping{Envío: (por defecto)} free{Gratis} total{TOTAL} other{NO COL}}",
+      "btn_checkout": "PROCEDE AL PAGO"
+    }
   },
   "shoppage": {
     "aside": {

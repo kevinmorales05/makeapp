@@ -75,7 +75,20 @@
   },
   "cartpage": {
     "title": "Cart",
-    "subtitle": "List of products you shopping!"
+    "subtitle": "List of products you shopping!",
+    "empty": {
+      "title": "No carts 😐",
+      "subtitle": "It appears that you have no carts here."
+    },
+    "empty_table": "No products to display.",
+    "detail_table": {
+      "columns": "{col, select, product{PRODUCT} count{COUNT} unit_price{UNIT PRICE} total{TOTAL} other{NO COL}}",
+      "btn_delete": "Delete"
+    },
+    "summary_table": {
+      "columns": "{col, select, subtotal{Subtotal:} shipping{Shipping: (default)} free {Free} total{TOTAL} other{NO COL}}",
+      "btn_checkout": "PROCEED TO CHECKOUT"
+    }
   },
   "shoppage": {
     "aside": {
