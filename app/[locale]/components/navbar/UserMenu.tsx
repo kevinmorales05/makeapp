@@ -102,21 +102,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             startContent: <></>,
             className: "h-14 gap-2 font-bold opacity-90",
           },
-          // {
-          //   xkey: "my_orders",
-          //   title: "Profile",
-          //   description: "See my personal profile",
-          //   color: "primary",
-          //   onClick: () => router.push("/profile", { locale }),
-          //   startContent: <Button size="sm" variant="light" startContent={<RiUserReceivedFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
-          // },
           {
             xkey: "my_orders",
             title: t("user_menu.section_profile.btns.orders.title"),
             description: t("user_menu.section_profile.btns.orders.subtitle"),
             color: "primary",
             onClick: () => router.push("/orders", { locale }),
-            startContent: <Button size="sm" variant="light" startContent={<RiUserReceivedFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+            startContent: <Button size="sm" variant="light" startContent={<TbFileInvoice className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
           },
           {
             xkey: "log_out",
