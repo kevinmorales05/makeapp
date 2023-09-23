@@ -1,4 +1,3 @@
-import { create } from "zustand";
 import { ICartItemState } from "./useCart";
 import { SafeCart, SafeProducts } from "../types";
 import { getPriceApp } from "../constants/server_constants";
@@ -56,7 +55,7 @@ export const formattedCarts = (products: SafeCart[] | []) => products.map((p) =>
 })) as ICartItemState[];
 
 
-export const formattedProducts = (products: SafeProducts[] | []) => products.map((p) => ({
+export const formattedProducts = (products: SafeProducts[] | [] ) => products.map((p) => ({
     id: p.id,
     title: p.title,
     description: p.description,

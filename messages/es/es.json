@@ -16,9 +16,9 @@
           "signed": {
             "title": "Conectado como"
           },
-          "invoices": {
-            "title": "Mis facturas",
-            "subtitle": "Ver tus facturas"
+          "orders": {
+            "title": "Mis órdenes",
+            "subtitle": "Ver tus órdenes"
           },
           "log_out": {
             "title": "Cerrar sesión",
@@ -117,6 +117,44 @@
       }
     }
   },
+  "orderpage": {
+    "heading": {
+      "title": "Gestión de Órdenes",
+      "subtitle": "Accede a información detallada sobre tus órdenes y lleva un registro de tus transacciones.",
+      "empty": {
+        "subtitle": "Actualmente, no hay órdenes disponibles."
+      }
+    },
+    "tabs": "{tab, select, PENDING{Pendientes} PROCESSING{Procesando} DELIVERED{Entregadas} CANCELED{Canceladas} other {Sin Col}}",
+    "empty_tab": {
+      "title": "Sin órdenes 😐",
+      "subtitle": "Actualmente no hay órdenes."
+    },
+    "delivery_method": "{method, select, PICKUP{Recoger} SHIP{Envío} other{Sin Método}}",
+    "total": "Total: ",
+    "details": {
+      "btn_close": "Cerrar",
+      "detail_order": {
+        "title": "Detalles de la Orden",
+        "code": "Código:",
+        "date": "Fecha de Emisión:"
+      },
+      "description": {
+        "title": "Descripción",
+        "total": "Total"
+      },
+      "contact": {
+        "title": "Contacto",
+        "email": "Correo Electrónico: ",
+        "phone": "Teléfono:",
+        "full_name": "Nombre Completo:"
+      },
+      "items": {
+        "title": "Productos",
+        "total": "Total:"
+      }
+    }
+  },
   "login_modal": {
     "title": "Iniciar sesión",
     "content": {
@@ -165,7 +203,7 @@
     "content_delivery": {
       "title": "Describe tu envío",
       "subtitle": "Método de entrega",
-      "delivery_mode": "{mode, select, ship {Envío} pick_up {Recoger} other {Sin métodos}}",
+      "delivery_mode": "{mode, select, SHIP {Envío} PICKUP {Recoger} other {Sin métodos}}",
       "inputs_ship": {
         "title": "Dirección de envío",
         "country": {

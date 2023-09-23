@@ -16,9 +16,9 @@
           "signed": {
             "title": "다음으로 로그인됨"
           },
-          "invoices": {
-            "title": "내 송장",
-            "subtitle": "송장을 확인하세요"
+          "orders": {
+            "title": "내 주문",
+            "subtitle": "주문 내역 보기"
           },
           "log_out": {
             "title": "로그아웃",
@@ -116,7 +116,44 @@
       }
     }
   },
-
+  "orderpage": {
+    "heading": {
+      "title": "주문 관리",
+      "subtitle": "주문에 대한 상세 정보에 액세스하고 거래 내역을 추적하세요.",
+      "empty": {
+        "subtitle": "현재 주문이 없습니다."
+      }
+    },
+    "tabs": "{tab, select, PENDING{대기 중} PROCESSING{처리 중} DELIVERED{배송 완료} CANCELED{취소됨} other {없음}}",
+    "empty_tab": {
+      "title": "주문 없음 😐",
+      "subtitle": "현재 주문이 없습니다."
+    },
+    "delivery_method": "{method, select, PICKUP{픽업} SHIP{배송} other{배송 방법 없음}}",
+    "total": "합계: ",
+    "details": {
+      "btn_close": "닫기",
+      "detail_order": {
+        "title": "주문 세부 정보",
+        "code": "코드:",
+        "date": "발행 날짜:"
+      },
+      "description": {
+        "title": "설명",
+        "total": "합계"
+      },
+      "contact": {
+        "title": "연락처",
+        "email": "이메일: ",
+        "phone": "전화번호:",
+        "full_name": "전체 이름:"
+      },
+      "items": {
+        "title": "품목",
+        "total": "합계:"
+      }
+    }
+  },
   "login_modal": {
     "title": "로그인",
     "content": {
@@ -165,7 +202,7 @@
     "content_delivery": {
       "title": "배송 정보 입력",
       "subtitle": "배송 방법",
-      "delivery_mode": "{mode, select, ship {배송} pick_up {픽업} other {사용 가능한 방법 없음}}",
+      "delivery_method": "{method, select, PICKUP{픽업} SHIP{배송} other{배송 방법 없음}}",
       "inputs_ship": {
         "title": "배송 주소",
         "country": {

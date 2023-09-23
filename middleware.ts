@@ -10,6 +10,7 @@ const publicPages = [
     '/carts',
     '/shop',
     '/shop/shopId',
+    '/orders',
     // (/invoices requires auth)
 ];
 const handleI18nRouting = createIntlMiddleware({

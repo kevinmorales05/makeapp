@@ -21,9 +21,9 @@
           "signed": {
             "title": "Signed in as"
           },
-          "invoices": {
-            "title": "My invoices",
-            "subtitle": "See to your invoices"
+          "orders": {
+            "title": "My orders",
+            "subtitle": "See to your orders"
           },
           "log_out": {
             "title": "Sign Out",
@@ -122,6 +122,44 @@
       }
     }
   },
+  "orderpage": {
+    "heading": {
+      "title": "Order Management",
+      "subtitle": "Access detailed information about your orders and keep track of your transactions.",
+      "empty": {
+        "subtitle": "Currently, there are no orders available."
+      }
+    },
+    "tabs": "{tab, select, PENDING{Pending} PROCESSING{Processing} DELIVERED{Delivered} CANCELED{Canceled} other {No Col}}",
+    "empty_tab": {
+      "title": "No orders 😐",
+      "subtitle": "There are currently no orders."
+    },
+    "delivery_method": "{method, select, PICKUP{Pick Up} SHIP{Ship} other{No Method}}",
+    "total": "Total: ",
+    "details": {
+      "btn_close": "Close",
+      "detail_order": {
+        "title": "Detail Order",
+        "code": "Code:",
+        "date": "Issued date:"
+      },
+      "description": {
+        "title": "Description",
+        "total": "Total"
+      },
+      "contact": {
+        "title": "Contact",
+        "email": "Email: ",
+        "phone": "Phone:",
+        "full_name": "Full Name:"
+      },
+      "items": {
+        "title": "Items",
+        "total": "Total:"
+      }
+    }
+  },
   "login_modal": {
     "title": "Login",
     "content": {
@@ -170,7 +208,7 @@
     "content_delivery": {
       "title": "Describe your shipping",
       "subtitle": "Delivery method",
-      "delivery_mode": "{mode, select, ship {Ship} pick_up {Pick Up} other {No methods}}",
+      "delivery_mode": "{mode, select, SHIP {Ship} PICKUP {Pick Up} other {No methods}}",
       "inputs_ship": {
         "title": "Shipping  Address",
         "country": {

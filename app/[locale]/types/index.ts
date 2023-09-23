@@ -1,4 +1,4 @@
-import { User, Product } from "@prisma/client";
+import { User, Product, Checkout } from "@prisma/client";
 
 // export type SafeListing = Omit<Listing, "createdAt"> & {
 //   createdAt: string;
@@ -36,3 +36,8 @@ export type SafeCart = Omit<ExtendedProductCart, "createdAt" | "updatedAt"> & {
   createdAt: Date;
   updatedAt: Date;
 };
+
+
+export type Order = Omit<Checkout, "updatedAt"> & {
+  updatedAt: Date;
+}

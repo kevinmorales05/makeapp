@@ -30,6 +30,7 @@ import { ICartItemState, useCartStore } from '@/app/hooks/useCart';
 import { apix } from '@/app/constants/axios-instance';
 import { toast } from 'sonner';
 import { NAME_APP } from '@/app/constants/client_constants';
+import { DELIVERY_MODE } from '@/app/constants/server_constants';
 
 enum STEPS {
   DELIVERY = 0,
@@ -38,10 +39,7 @@ enum STEPS {
   // PAYMENT = 3// actually don' implemented
 }
 
-enum DELIVERY_MODE {
-  PICKUP = "pick_up",
-  SHIP = "ship",
-}
+
 
 
 const CheckoutModal = () => {
@@ -205,13 +203,13 @@ const CheckoutModal = () => {
 
       // put value to react-hook-form
       if (DELIVERY_MODE.PICKUP === getLastCheckBox) {
-        setValue(`deliveryMethods`, "PICKUP");
+        setValue(`deliveryMethods`, DELIVERY_MODE.PICKUP);
         // clear supposed errors
         clearErrors('deliveryShip');
 
       }
       if (DELIVERY_MODE.SHIP === getLastCheckBox) {
-        setValue(`deliveryMethods`, 'SHIP')
+        setValue(`deliveryMethods`, DELIVERY_MODE.SHIP)
       }
     }
   }
@@ -232,11 +230,9 @@ const CheckoutModal = () => {
           classNames={{
             base: "w-full"
           }}
-
-
         >
-          <CustomCheckbox register={register} value={DELIVERY_MODE.SHIP} text={t("content_delivery.delivery_mode", { mode: "ship" })} icon={<FaMotorcycle />} />
-          <CustomCheckbox register={register} value={DELIVERY_MODE.PICKUP} text={t("content_delivery.delivery_mode", { mode: "pick_up" })} icon={<MdOutlineLocalShipping />}
+          <CustomCheckbox register={register} value={DELIVERY_MODE.SHIP} text={t("content_delivery.delivery_mode", { mode: DELIVERY_MODE.SHIP })} icon={<FaMotorcycle />} />
+          <CustomCheckbox register={register} value={DELIVERY_MODE.PICKUP} text={t("content_delivery.delivery_mode", { mode: DELIVERY_MODE.PICKUP })} icon={<MdOutlineLocalShipping />}
           />
         </CheckboxGroup>
       </div>

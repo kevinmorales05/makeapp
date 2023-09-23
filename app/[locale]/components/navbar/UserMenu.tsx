@@ -103,7 +103,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             className: "h-14 gap-2 font-bold opacity-90",
           },
           // {
-          //   xkey: "my_invoices",
+          //   xkey: "my_orders",
           //   title: "Profile",
           //   description: "See my personal profile",
           //   color: "primary",
@@ -111,12 +111,12 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
           //   startContent: <Button size="sm" variant="light" startContent={<RiUserReceivedFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
           // },
           {
-            xkey: "my_invoices",
-            title: t("user_menu.section_profile.btns.invoices.title"),
-            description: t("user_menu.section_profile.btns.invoices.subtitle"),
+            xkey: "my_orders",
+            title: t("user_menu.section_profile.btns.orders.title"),
+            description: t("user_menu.section_profile.btns.orders.subtitle"),
             color: "primary",
-            onClick: () => router.push("/favorites", { locale }),
-            startContent: <Button size="sm" variant="light" startContent={<TbFileInvoice className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
+            onClick: () => router.push("/orders", { locale }),
+            startContent: <Button size="sm" variant="light" startContent={<RiUserReceivedFill className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
           },
           {
             xkey: "log_out",
