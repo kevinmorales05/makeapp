@@ -1,8 +1,6 @@
 import React, { Suspense } from 'react'
 import Container from '../components/Container'
 import CartClient from './CartClient'
-import ClientOnly from '../components/ClientOnly'
-import Heading from '../components/Heading'
 import getCurrentUser from '../actions/getCurrentUser'
 import getCarts from '../actions/getCarts'
 import getItemsCarousel from '../actions/getItemsCarousel'

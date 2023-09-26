@@ -17,7 +17,6 @@ import { MdSell } from 'react-icons/md';
 import { IoColorPalette } from 'react-icons/io5';
 import { AiFillDropboxCircle } from 'react-icons/ai';
 import { TbPigMoney } from 'react-icons/tb';
-import CartButton from '../components/buttons/CartButton';
 import Button from '../components/buttons/Button';
 
 

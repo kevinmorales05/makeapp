@@ -296,5 +296,34 @@
       "success": "¡Registrado!",
       "error": "{error_msg}"
     }
+  },
+  "feedback_modal": {
+    "title": "Feedback",
+    "inputs": {
+      "relevance": {
+        "title": "¿Qué opinas de nuestra aplicación?",
+        "number": "{relevance, select, ONE{Terrible} TWO{Malo} THREE{Neutral} FOUR{Bueno} FIVE{Excelente} other{Sin Relevancia}}",
+        "error": "Por favor, proporciona una calificación"
+      },
+      "comment": {
+        "title": "¿Qué te gustaría compartir con nosotros?",
+        "text_area": "Buena Aplicación...",
+        "error": "Proporciona tus pensamientos"
+      },
+      "recommend": {
+        "title": "¿Qué tan probable es que nos recomiendes a tus amigos y colegas?",
+        "number": "{relevance, select, ONE{1} TWO{2} THREE{3} FOUR{4} FIVE{5} other{Sin número}}",
+        "error": "Por favor, proporciona una calificación de recomendación"
+      },
+      "email": {
+        "title": "Correo Electrónico (Opcional)"
+      },
+      "submit": "Enviar"
+    },
+    "promise": {
+      "loading": "Cargando...",
+      "success": "Gracias por tus comentarios.",
+      "error": "Ops, algo salió mal."
+    }
   }
 }

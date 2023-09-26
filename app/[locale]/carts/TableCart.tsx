@@ -1,9 +1,8 @@
 import React from 'react'
-import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, getKeyValue, Radio, RadioGroup, ChipProps, Tooltip, Chip, User, Button, ButtonGroup, Image, cn } from "@nextui-org/react";
-import { AiOutlineMinus, AiOutlinePlus, AiOutlineRest, AiOutlineShopping } from 'react-icons/ai';
+import { Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Tooltip, Button, ButtonGroup, Image, cn } from "@nextui-org/react";
+import { AiOutlineMinus, AiOutlinePlus } from 'react-icons/ai';
 import { TbMoodEmpty, TbTruckDelivery } from 'react-icons/tb';
 import useCheckoutModal from '../hooks/useCheckoutModal';
-import { IProductFormatted } from '../hooks/useProducts';
 import { ICartItemState, useCartStore } from '../hooks/useCart';
 import { SafeUser } from '../types';
 import { BsTrash3 } from 'react-icons/bs';

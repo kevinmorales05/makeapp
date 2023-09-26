@@ -36,7 +36,7 @@
         "btns": {
           "feedback": {
             "title": "Feedback",
-            "subtitle": "Help us improve to bring you the best"
+            "subtitle": "Help us be the best"
           }
         }
       }
@@ -300,6 +300,35 @@
     "toaster": {
       "success": "Registered!",
       "error": "{error_msg}"
+    }
+  },
+  "feedback_modal": {
+    "title": "Feedback",
+    "inputs": {
+      "relevance": {
+        "title": "What do you think of our app?",
+        "number": "{relevance, select, ONE{Terrible} TWO{Bad} THREE{Neutral} FOUR{Good} FIVE{Excellent} other{No Relevance}}",
+        "error": "Please provide a rate"
+      },
+      "comment": {
+        "title": "What would you like to share with us?",
+        "text_area": "Good Application..",
+        "error": "Provide your thoughts"
+      },
+      "recommend": {
+        "title": "How likely are you to recommend us to your friends and colleagues?",
+        "number": "{relevance, select, ONE{1} TWO{2} THREE{3} FOUR{4} FIVE{5} other{No number}}",
+        "error": "Please provide a recommend rate"
+      },
+      "email": {
+        "title": "Email (Optional)"
+      },
+      "submit": "Submit"
+    },
+    "promise": {
+      "loading": "Loading...",
+      "success": "Thank you for your feedback.",
+      "error": "Ops something went wrong."
     }
   }
 }

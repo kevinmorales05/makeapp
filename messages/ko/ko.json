@@ -295,5 +295,34 @@
       "success": "등록 완료!",
       "error": "{error_msg}"
     }
+  },
+  "feedback_modal": {
+    "title": "피드백",
+    "inputs": {
+      "relevance": {
+        "title": "우리 앱에 대한 의견을 어떻게 생각하세요?",
+        "number": "{relevance, select, ONE{최악} TWO{나쁨} THREE{중립} FOUR{좋음} FIVE{훌륭함} other{무관함}}",
+        "error": "평점을 제공해주세요"
+      },
+      "comment": {
+        "title": "우리와 공유하고 싶은 내용이 있나요?",
+        "text_area": "좋은 어플리케이션..",
+        "error": "의견을 제공해주세요"
+      },
+      "recommend": {
+        "title": "친구와 동료에게 우리를 얼마나 추천할 확률이 있나요?",
+        "number": "{relevance, select, ONE{1} TWO{2} THREE{3} FOUR{4} FIVE{5} other{추천 없음}}",
+        "error": "추천 평점을 제공해주세요"
+      },
+      "email": {
+        "title": "이메일 (선택 사항)"
+      },
+      "submit": "제출"
+    },
+    "promise": {
+      "loading": "로딩 중...",
+      "success": "피드백 주셔서 감사합니다.",
+      "error": "오류가 발생했습니다."
+    }
   }
 }

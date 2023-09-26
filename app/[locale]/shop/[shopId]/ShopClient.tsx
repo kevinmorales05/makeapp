@@ -3,7 +3,6 @@
 import ClientOnly from "@/app/components/ClientOnly";
 import Container from "@/app/components/Container";
 import EmptyState from "@/app/components/EmptyState";
-import ListingProductImage from "./ProductImage";
 import { DescriptionProduct } from "./ProductInfo";
 import { IProductFormatted } from "@/app/hooks/useProducts";
 import { useCartStore } from "@/app/hooks/useCart";

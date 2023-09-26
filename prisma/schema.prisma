@@ -133,3 +133,28 @@ enum OrderStatus {
   REFUNDED // Pedido reembolsado
   COMPLETED // Pedido completado exitosamente
 }
+
+model Feedback {
+  id             String          @id @default(cuid())
+  userId         String?
+  relevance      Relevance
+  comment        String
+  wouldRecommend WouldRecommend
+  email          String?
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+}
+enum Relevance {
+  ONE
+  TWO
+  THREE
+  FOUR
+  FIVE
+}
+enum WouldRecommend {
+  ONE
+  TWO
+  THREE
+  FOUR
+  FIVE
+}

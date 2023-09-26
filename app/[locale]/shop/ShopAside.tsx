@@ -2,9 +2,9 @@
 
 import React from 'react'
 import HeadingAside from './HeadingAside'
-import { useLocale, useMessages, useTranslations } from 'next-intl'
+import { useLocale,  useTranslations } from 'next-intl'
 import Link from 'next-intl/link'
-import { Accordion, AccordionItem, Avatar, cn } from '@nextui-org/react'
+import { Accordion, AccordionItem, cn } from '@nextui-org/react'
 import { SubcategoryRouteKey, useCategories } from '../hooks/useCategories'
 
 interface CurrentParams {

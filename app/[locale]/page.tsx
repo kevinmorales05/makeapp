@@ -6,7 +6,7 @@ import getCurrentUser from "@/app/actions/getCurrentUser";
 import ClientOnly from "./components/ClientOnly";
 import Carousel from "./components/carousel/Carousel";
 import React from "react";
-import Breadcrumbs from "./components/Breadcrumbs";
+// import Breadcrumbs from "./components/Breadcrumbs";
 import ProductCarousel from "./components/carousel/ProductCarousel";
 import getItemsCarousel from "./actions/getItemsCarousel";
 import { formattedProducts } from "./hooks/useProducts";

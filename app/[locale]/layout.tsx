@@ -4,7 +4,6 @@ import './globals.css'
 
 
 import ClientOnly from './components/ClientOnly';
-import dynamic from 'next/dynamic';
 
 import Navbar from '@/app/components/navbar/Navbar';
 import Providers from './providers/Providers';

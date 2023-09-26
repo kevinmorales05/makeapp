@@ -1,14 +1,11 @@
 "use client";
 
-import { useCallback, useEffect, useState, Fragment, useRef } from "react";
+import { useCallback, useState, } from "react";
 import {
-  AiOutlineMenu,
   AiOutlineShoppingCart,
   AiOutlineHeart,
-  AiOutlineClose,
 } from "react-icons/ai";
-import { RiArrowDownSLine, RiArrowDropDownLine, RiFileSettingsFill, RiUserReceivedFill } from "react-icons/ri";
-import { LuIceCream, LuLogIn, LuLogOut, LuUserPlus } from "react-icons/lu";
+import { LuLogIn, LuLogOut, LuUserPlus } from "react-icons/lu";
 
 import { signOut } from "next-auth/react";
 import { useRouter } from 'next-intl/client';
@@ -18,7 +15,6 @@ import useRegisterModal from "@/app/hooks/useRegisterModal";
 import useRentModal from "@/app/hooks/useRentModal";
 import { SafeUser } from "@/app/types";
 
-import { BsHousesFill } from "react-icons/bs";
 
 import Dropdown, { IDropdownProps } from "../dropdowns/Dropdown";
 
@@ -29,6 +25,7 @@ import { ICON_CLASES_DROPDOWN } from "@/app/constants/client_constants";
 import { useCartStore } from "@/app/hooks/useCart";
 import { useFavoriteStore } from "@/app/hooks/useFavorite";
 import { TbFileInvoice } from "react-icons/tb";
+import useFeedbackModal from "@/app/hooks/useFeedbackModal";
 
 interface UserMenuProps {
   currentUser?: SafeUser | null;
@@ -46,7 +43,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
 
   const loginModal = useLoginModal();
   const registerModal = useRegisterModal();
-  const rentModal = useRentModal();
+  const feedbackModal = useFeedbackModal();
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -54,13 +51,13 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
     setIsOpen((value) => !value);
   }, []);
 
-  const onRent = useCallback(() => {
-    if (!currentUser) {
-      return loginModal.onOpen();
-    }
+  // const onRent = useCallback(() => {
+  //   if (!currentUser) {
+  //     return loginModal.onOpen();
+  //   }
 
-    rentModal.onOpen();
-  }, [loginModal, rentModal, currentUser]);
+  //   rentModal.onOpen();
+  // }, [loginModal, rentModal, currentUser]);
 
   const signOutAndClear = () => {
     useCartStore.persist.clearStorage()
@@ -132,7 +129,6 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
         xkey: "disvover_more",
         title: t("user_menu.section_feedback.title"),
         content: [
-
           // {
           //   xkey: "configurations",
           //   title: "Configurations",
@@ -146,10 +142,9 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             title: t("user_menu.section_feedback.btns.feedback.title"),
             description: t("user_menu.section_feedback.btns.feedback.subtitle"),
             color: "danger",
-            onClick: () => alert("help_and_feedback"),
+            onClick: () => feedbackModal.onOpen(),
             startContent: <Button size="sm" variant="light" startContent={<FaHandsHelping className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
           },
-
         ]
       }
     ]
@@ -179,6 +174,20 @@ const UserMenu: React.FC<UserMenuProps> = ({ currentUser }) => {
             color: "primary",
             onClick: () => registerModal.onOpen(),
             startContent: <Button size="sm" variant="light" startContent={<LuUserPlus className={iconClasses} />} isIconOnly />,
+          },
+        ]
+      },
+      {
+        xkey: "feedback",
+        title: t("user_menu.section_feedback.title"),
+        content: [
+          {
+            xkey: "feedback",
+            title: t("user_menu.section_feedback.btns.feedback.title"),
+            description: t("user_menu.section_feedback.btns.feedback.subtitle"),
+            color: "danger",
+            onClick: () => feedbackModal.onOpen(),
+            startContent: <Button size="sm" variant="light" startContent={<FaHandsHelping className={ICON_CLASES_DROPDOWN} />} isIconOnly />,
           },
         ]
       }
