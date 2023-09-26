@@ -131,7 +131,6 @@ const LoginModal = () => {
 
               console.log("ERRORES", result.error);
             } else {
-              alert("working")
               router.push('/' + 'es');
             }
           });

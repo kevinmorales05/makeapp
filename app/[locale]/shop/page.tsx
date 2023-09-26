@@ -53,8 +53,6 @@ export default async function ShopPage({
     const { products, pagination: { total } } = await getProducts(limit, skip_page, i18category, i18subCategory);
     const _formattedProducts = formattedProducts(products)
 
-    console.log("currentFormattedProducts", _formattedProducts.length, "total", total);
-
     const currentParams = { category: i18category, subCategory: i18subCategory, skip: skip_page, limit: limit, totalCount: total }
 
     return (

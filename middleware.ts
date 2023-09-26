@@ -9,10 +9,11 @@ const publicPages = [
     '/favorites',
     '/carts',
     '/shop',
-    '/shop/shopId',
-    '/orders',
-    // (/invoices requires auth)
+    `/shop/\\d+`
+    // /^\/shop\/(\d+)$/, // Utiliza /^ y $ para delimitar la expresión regular
+    // (/orders requires auth)
 ];
+
 const handleI18nRouting = createIntlMiddleware({
     locales,
     defaultLocale,
@@ -41,10 +42,14 @@ export default async function middleware(request: NextRequest) {
         `^(/(${locales.join('|')}))?(${publicPages.join('|')})?/?$`,
         'i'
     );
-    const isPublicPage = publicPathnameRegex.test(request.nextUrl.pathname);
+    const isPublic = publicPathnameRegex.test(request.nextUrl.pathname);
+
+    // const { pathname } = request.nextUrl;
+    // const isPublic: boolean = isPublicPage(pathname);
+    console.log("is", isPublic)
 
 
-    if (isPublicPage) {
+    if (isPublic) {
         const response = handleI18nRouting(request);
         return response
     } else {

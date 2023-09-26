@@ -12,7 +12,7 @@ export default async function getProducts(
     let query: any = {};
     let data;
 
-    console.log("let me know", query, "other", page_peer_size, skip_page)
+    // console.log("let me know", query, "other", page_peer_size, skip_page)
 
 
     if (i18category) {
@@ -27,7 +27,6 @@ export default async function getProducts(
 
 
     if (i18category !== "all") {
-      console.log("here")
       data = await prisma.$transaction([
         prisma.product.findMany({
           where: query,
